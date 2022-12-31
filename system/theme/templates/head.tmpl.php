@@ -23,6 +23,12 @@
 <meta name="description" content="<?= $content['summary'] ?>" />
 <?php endif ?>
 
+<?php foreach ($content['og-images'] as $image): ?>
+<meta property="og:image" content="<?= $image ?>" />
+<?php endforeach ?>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title><?= $content['title'] ?></title>
 
 <?php _X ('head-extras') ?>

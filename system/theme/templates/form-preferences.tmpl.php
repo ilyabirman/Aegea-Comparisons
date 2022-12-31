@@ -5,6 +5,20 @@
   method="post"
 >
 
+<input
+  type="hidden"
+  id="e2-blog-title-default"
+  name="blog-title-default"
+  value="<?= @$content['form-preferences']['blog-title-default'] ?>"
+/>
+
+<input
+  type="hidden"
+  id="e2-blog-author-default"
+  name="blog-author-default"
+  value="<?= @$content['form-preferences']['blog-author-default'] ?>"
+/>
+
 <input type="hidden"
   id="template"
   name="template"
@@ -12,6 +26,48 @@
 />
 
 <div class="form">
+
+<div class="form-control form-control-big">
+  <div class="form-label input-label"><label><?= _S ('ff--blog-title') ?></label></div>
+  <div class="form-element">
+    <input type="text"
+      class="text width-4"
+      autofocus="autofocus"
+      id="blog-title"
+      name="blog-title"
+      value="<?= $content['form-preferences']['blog-title'] ?>"
+    />
+    <?php if (!@$content['blog']['userpic-set']) { ?>
+    <div class="form-control-sublabel e2-set-userpic-by-dragging">
+      <?= _S ('ff--set-userpic-by-dragging') ?>
+    </div>
+    <?php } ?>
+  </div>
+</div>
+
+<div class="form-control">
+  <div class="form-label input-label"><label><?= _S ('ff--blog-description') ?></label></div>
+  <div class="form-element">
+    <textarea
+      class="width-4 e2-textarea-autosize"
+      style="height: 6.66em; min-height: 6.66em; overflow-x: hidden; overflow-y: visible"
+      id="blog-description"
+      name="blog-description"
+    ><?= @$content['form-preferences']['blog-description'] ?></textarea>
+  </div>
+</div>
+
+<div class="form-control">
+  <div class="form-label input-label"><label><?= _S ('ff--blog-author') ?></label></div>
+  <div class="form-element">
+    <input type="text"
+      class="text width-2"
+      id="blog-author"
+      name="blog-author"
+      value="<?= $content['form-preferences']['blog-author'] ?>"
+    />
+  </div>
+</div>
 
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--language') ?></label></div>
@@ -22,7 +78,7 @@
         <?= $lang['selected?']? 'selected="selected"':'' ?>
       ><?= $lang['display-name'] ?></option>
       <?php } ?>
-    </select>
+    </select><br />
   </div>
 </div>
 
@@ -63,7 +119,7 @@
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--posts') ?></label></div>
   <div class="form-element">
-    <label><?= _S ('ff--items-per-page-before') ?>&nbsp;<input type="text"
+    <label><input type="text"
       class="text"
       style="width: 2.33em"
       id="notes-per-page"
@@ -120,19 +176,6 @@
         <label class="checkbox">
         <input
           type="checkbox"
-          id="hot-block"
-          name="hot-block"
-          class="checkbox"
-          <?= @$content['form-preferences']['hot-block?']? ' checked="checked"' : ''?>
-        /> <?= _S ('ff--show-hot') ?>
-        </label><br />
-      </div>
-      <!--
-      -->
-      <div class="form-subcontrol-slave">
-        <label class="checkbox">
-        <input
-          type="checkbox"
           id="email-notify"
           name="email-notify"
           class="checkbox"
@@ -150,6 +193,20 @@
   </div>
   
 </div>
+
+<?php if (E2_EDITION) { ?>
+<div class="form-control">
+  <div class="form-label input-label"><label><?= _S ('ff--yandex-metrika') ?></label></div>
+  <div class="form-element">
+    <input type="text"
+      class="text width-4"
+      id="yandex-metrika"
+      name="yandex-metrika"
+      value="<?= $content['form-preferences']['yandex-metrika'] ?>"
+    />
+  </div>
+</div>
+<?php } ?>
 
 <div class="form-control submit-box">
   <div class="form-element">

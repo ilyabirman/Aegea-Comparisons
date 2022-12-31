@@ -3,6 +3,7 @@ License: http://blogengine.ru/license/
 To each copy of E2 applies the license which is the latest at the moment of installation or update.
 
 Thanks to
+Ilya Straykov for help with version 2.5 development, http://straykov.ru/
 Artem Polikarpov for brilliant Fotorama, http://fotorama.io/
 Ivan Sagalaev for Highlight.js, http://highlightjs.org/
 Murat Schidakov for help with tags entry UI implementation and support
@@ -18,6 +19,7 @@ Alexander Karpinsky, Artem Sapegin, Maxim Ilyahov, Dmitry Kirsanov, Evgeny Stepa
 К каждой инсталляции Е2 применима та лицензия, которая была самой свежей на момент установки или последнего обновления.
 
 Спасибо
+Илье Страйкову за помощь в разработке версии 2.5, http://straykov.ru/
 Артёму Поликарпову за прекрасную Фотораму, http://fotorama.io/
 Ивану Сагалаеву за Хайлайт, http://highlightjs.org/
 Мурату Шидакову за помощь с интерфейсом ввода тегов

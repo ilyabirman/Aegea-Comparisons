@@ -355,7 +355,7 @@ Copyright (c) 2011 by Harvest
         _w = this.search_container.siblings("li.search-choice").eq(_i).outerWidth(true);
       }
     }
-    this.search_container.css("width", this.search_choices.innerWidth() - _w - 4);
+    this.search_container.css("width", this.search_choices.innerWidth() - _w - 7);
     };
 
     AbstractChosen.prototype.generate_field_id = function() {
@@ -786,15 +786,16 @@ Copyright (c) 2011 by Harvest
 
       choice_id = this.container_id + "_c_" + item.array_index;
       this.choices += 1;
-      this.search_container.before('<li class="search-choice" id="' + choice_id + '"><span>' + item.html + '</span><a href="javascript:void(0)" class="search-choice-close" rel="' + item.array_index + '"></a></li>');
+      this.search_container.before('<li class="search-choice" id="' + choice_id + '"><span>' + item.html + '</span><a href="javascript:void(0)" class="search-choice-close" rel="' + item.array_index + '">×</a></li>');
       link = $('#' + choice_id).find("a").first();
+
       return link.click(function(evt) {
         return _this.choice_destroy_link_click(evt);
       });
     };
 
     Chosen.prototype.choice_destroy_link_click = function(evt) {
-      evt.preventDefault();
+     evt.preventDefault();
       if (!this.is_disabled) {
         this.pending_destroy_click = true;
         return this.choice_destroy($(evt.target));
@@ -806,9 +807,11 @@ Copyright (c) 2011 by Harvest
     Chosen.prototype.choice_destroy = function(link) {
       this.choices -= 1;
       this.show_search_field_default();
+
       if (this.is_multiple && this.choices > 0 && this.search_field.val().length < 1) {
         this.results_hide();
       }
+
       this.result_deselect(link.attr("rel"));
 // <schidakov>
     this.remove_virtual(link);

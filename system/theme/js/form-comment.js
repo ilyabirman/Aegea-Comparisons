@@ -1,16 +1,18 @@
 if ($) $ (function () {
+  var $mailMask = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i
+
 
   e2UpdateSubmittability = function () {
 
-	  shouldBeDisabled = (
-	    /^ *$/.test ($ ('#name').val ()) ||
-	    /^ *$/.test ($ ('#email').val ()) ||
-	    /^ *$/.test ($ ('#text').val ())
-    )
-	  if (shouldBeDisabled) {
-		  $ ('#submit-button').attr ('disabled', 'disabled')
-	  } else {
+	  shouldBeEnabled = (
+	    $ ('#name').val () &&
+		$mailMask.test ($ ('#email').val ()) &&
+	    $ ('#text').val ()
+      )
+	  if (shouldBeEnabled) {
 		  $ ('#submit-button').removeAttr ('disabled')
+	  } else {
+		  $ ('#submit-button').attr ('disabled', 'disabled')
 	  }
 
   }

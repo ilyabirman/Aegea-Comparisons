@@ -15,20 +15,18 @@
 <?php } elseif (array_key_exists ('heading', $content)) { ?>
   
   <div class="e2-heading">
-    
+
+    <span class="admin-links admin-links-floating admin-links-sticky">
+        <?php if (array_key_exists ('related-edit-href', $content)): ?>
+        <span class="admin-icon"><a href="<?= $content['related-edit-href'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span>
+        <?php endif ?>
+    </span>
+
     <?php if (array_key_exists ('superheading', $content)): ?>
     <div class="e2-heading-super"><?= $content['superheading'] ?></div>
     <?php endif ?>
     
-    <h2>
-
-      <?= $content['heading'] ?>
-      
-      <?php if (array_key_exists ('related-edit-href', $content)): ?>
-      <a href="<?= $content['related-edit-href'] ?>" class="nu"><span class="i-edit"></span></a>
-      <?php endif ?>
-    
-    </h2>
+    <h2><?= $content['heading'] ?></h2>
   
     <?php if (array_key_exists ('description', $content['tag'])): ?>
     <div class="e2-heading-description e2-text">

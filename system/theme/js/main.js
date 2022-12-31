@@ -98,7 +98,9 @@ if ($ ('#e2-visual-login').length) {
   $ ('#e2-visual-login').click (function () {
     $ ('#e2-visual-login').css ('visibility', 'hidden')
     $ ('#e2-login-sheet').addClass ('e2-show')
-    $ ('#e2-password').focus ()
+    setTimeout(function() {
+      $ ('#e2-password').focus ()
+    }, 100)
     return false
   })
 }
@@ -106,7 +108,7 @@ if ($ ('#e2-visual-login').length) {
 // hide login window
 document.$e2HideLoginWindow = function () {
   $ ('#e2-password').blur ()
-  $ ('#e2-login-sheet').removeClass ('e2-show') 
+  $ ('#e2-login-sheet').removeClass ('e2-show')
   $ ('#e2-visual-login').css ('visibility', 'visible')
 }
 
@@ -117,7 +119,7 @@ $ (document).keyup (function (event) {
   }
 })
 
-$ (document).click (function () {
+$ ('.e2-glass').on ('click tap', function () {
   if ($ ('#e2-login-sheet').hasClass ('e2-hideable')) {
     document.$e2HideLoginWindow ()
   }
@@ -135,6 +137,20 @@ $ ('#e2-search').submit (function () {
 })
 
 
+// search focus
+$ ('.e2-search-input-input').focusin(function () {
+  $ ('.e2-search-icon').addClass('e2-search-icon-focus')
+})
+
+$ ('.e2-search-input-input').focusout(function () {
+  $ ('.e2-search-icon').removeClass('e2-search-icon-focus')
+})
+
+$ ('.e2-search-icon').click(function () {
+  $ ('.e2-search-input-input').focus ()
+})
+
+
 // ctrl+enter sends forms
 $ (document).bind ('keydown keyup keypress', function (event) {
   if ((13 == event.keyCode) || (13 == event.which)) {
@@ -149,6 +165,15 @@ $ (document).bind ('keydown keyup keypress', function (event) {
         }
       }
       return false
+    }
+  }
+})
+
+// alt+e edits
+$ (document).bind ('keyup', function (event) {
+  if (((69 == event.keyCode) || (69 == event.which)) && event.altKey) {
+    if ($ ('.e2-edit-link').length == 1) {
+      location.href = $ ('.e2-edit-link').attr ('href')
     }
   }
 })
@@ -175,6 +200,29 @@ e2_ctrl_navi = function (event) {
   }
 
 }
+
+// autosize text fields
+e2AutosizeTextFields = function () {
+  var element = $ ('.e2-textarea-autosize')[0]
+  // this should be expanded to support multiple elements
+  if (element) {
+    var myHeight = parseInt (element.style.height)
+    if (element.scrollHeight > myHeight) {
+      element.style.height = (element.scrollHeight) + 'px';
+    } else {
+      while (element.scrollHeight == myHeight) {
+        myHeight -= 50
+        element.style.height = (myHeight) + 'px'
+        element.style.height = (element.scrollHeight) + 'px';
+      }
+    }
+  }
+}
+
+$ ('.e2-textarea-autosize').bind ('input resize', e2AutosizeTextFields)
+e2AutosizeTextFields ()
+
+
 if (document.addEventListener) {
   document.addEventListener ('keyup', e2_ctrl_navi, false)
 } else if (document.attachEvent) {

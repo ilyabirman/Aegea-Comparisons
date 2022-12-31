@@ -30,24 +30,26 @@
 <?php $comment = $content['comments']['only'] ?>
 
 <div class="form-control e2-comment-control-group">
-  <div class="form-label">
+  <div class="form-label input-label">
     <label>
       <span>
         <span class="e2-markable <?php if (@$comment['reply-important?']) echo 'e2-marked' ?>"><?= _S ('ff--text') ?></span>
       </span>
   
-      <span style="margin-right: 16px; white-space: nowrap">
-        <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="e2-important-toggle nu"><span class="i-important-<?= ($comment['reply-important?']? 'set' : 'unset') ?>"></span></a><?php endif ?>
+      <span class="e2-comment-actions admin-links">
+        <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a><?php endif ?>
+        <!--<?php if (array_key_exists ('ip-href', $comment)) { ?><small><a href="<?=$comment['ip-href']?>" class="e2-admin-link"><?=$comment['ip']?></small></a><?php } ?>-->
       </span>
+
       
     </label>
   </div>
   <div class="form-element">
     <textarea name="text"
-      class="required full-width"
+      class="required full-width e2-textarea-autosize"
       autofocus="autofocus"
       id="text"
-      style="height: 16.7em; overflow-x: hidden; overflow-y: visible"
+      style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
     ><?=$content['form-comment-reply']['reply-text']?></textarea>
   </div>
 </div>

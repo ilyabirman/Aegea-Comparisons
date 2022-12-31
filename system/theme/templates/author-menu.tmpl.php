@@ -9,86 +9,68 @@ if (
 
 ?>
 
-<div class="admin-menu admin-links" id="e2-author-menu">
-  <div class="admin-menu-writing-and-comments">
-    
-    <?php # NEW # ?>
-    
-    <?php if (_AT ($content['admin-hrefs']['new-note'])) { ?>
-      
-    <span class="admin-menu-new admin-menu-new-selected e2-admin-menu-new-selected"><b><span class="i-new"></span><?= _S ('ln--new-post') ?></b></span>
-    
-    <span class="admin-menu-new e2-admin-menu-new" style="display: none"><b><a href="<?= $content['admin-hrefs']['new-note'] ?>"><span class="i-new"></span><?= _S ('ln--new-post') ?></a></b></span>
-        
-    
-    <?php } else { ?>
-      
-    <span class="admin-menu-new"><b><a href="<?= $content['admin-hrefs']['new-note'] ?>"><span class="i-new"></span><?= _S ('ln--new-post') ?></a></b></span>
-        
-    <?php } ?>
+<span class="admin-menu admin-links" id="e2-author-menu">
 
-
-    <?php # DRAFTS # ?>
-    
-    <?php if (array_key_exists ('drafts', $content['admin-hrefs'])) { ?>
-      
-    &nbsp;&nbsp;&nbsp;
-
-    <span class="admin-menu-drafts" id="e2-drafts-item"
-       <?= ((
-         array_key_exists ('drafts-count', $content['blog']) and
-         $content['blog']['drafts-count'] > 0
-       )? '' : ' style="display: none"') ?>
-    >
-      <span id="e2-drafts">
-        <b><?=
-          _A (
-            '<a href="'. $content['admin-hrefs']['drafts'] .'">'. _S ('ln--drafts') .'</a>'
-          )
-        ?></b>
-        <span class="admin-menu-drafts-count" id="e2-drafts-count"><?= $content['blog']['drafts-count'] ?></span>
-      </span>
-    </span>
-    
-    <?php } ?>
-
-    &nbsp;&nbsp;&nbsp;
-
-    <?php # COMMENTS # ?>
-      
-    <?php if (array_key_exists ('new-comments', $content)) { ?>
-    <span class="admin-menu-comments">
-      <a class="nu" href="<?= @$content['new-comments']['href'] ?>"><span class="admin-menu-comments-tail"></span><span class="admin-menu-comments-balloon"><span class="admin-menu-comments-count">+<?= $content['new-comments']['count'] ?></span></span></a>
-    </span>
-    <?= @$content['new-comments']['texts'] ?>
-    <?php } ?>
-    
-  </div>
+  <?php # COMMENTS # ?>
+  <?php if (array_key_exists ('new-comments', $content)) { ?>
+  <span class="admin-icon admin-menu-comments">
+    <a class="nu admin-menu-comments-count" href="<?= @$content['new-comments']['href'] ?>"><?= (int) $content['new-comments']['count'] ?></a>
+  </span>
+  <?php } ?>
   
-  <div class="admin-menu-service">
-  
-    <span class="admin-menu-comments-fadeout"></span>
-    
-    <?php if (array_key_exists ('admin-hrefs', $content)): ?>
-    <span class="admin-links">
 
-    <?php # SETTINGS # ?>
+  <?php # NEW # ?>
+  <?php if (_AT ($content['admin-hrefs']['new-note'])) { ?>
+    
+  <span class="admin-icon e2-admin-menu-new-selected" title="<?= _S ('ln--new-post') ?>"><span class="e2-svgi"><?= _SVG ('new') ?></span></span>
+  
+  <span class="admin-icon e2-admin-menu-new" style="display: none" title="<?= _S ('ln--new-post') ?>"><a href="<?= $content['admin-hrefs']['new-note'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?></span></a></span>
       
-    <?php if (array_key_exists ('settings', $content['admin-hrefs'])) { ?>
-      <span class="admin-menu-service-item">
+  
+  <?php } else { ?>
+    
+  <span class="admin-icon" title="<?= _S ('ln--new-post') ?>"><a href="<?= $content['admin-hrefs']['new-note'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?></span></a></span>
+      
+  <?php } ?>
+
+
+  <?php # DRAFTS # ?>
+  <?php if (array_key_exists ('drafts', $content['admin-hrefs'])) { ?>
+    
+  <span class="admin-icon" id="e2-drafts-item"
+     <?= ((
+       array_key_exists ('drafts-count', $content['blog']) and
+       $content['blog']['drafts-count'] > 0
+     )? '' : ' style="display: none"') ?>
+  >
+    <span id="e2-drafts" title="<?= _S ('ln--drafts') ?> (<?= $content['blog']['drafts-count'] ?>)">
       <?=
         _A (
-          '<a href="'. $content['admin-hrefs']['settings'] .'" class="nu"><span class="i-settings"></span></a>'
+          '<a href="'. $content['admin-hrefs']['drafts'] .'" class="nu"><span class="e2-svgi">'.
+          _SVG ('drafts').
+          '</span></a>'
         )
       ?>
-      </span>
-    <?php } ?>
-    
     </span>
-    <?php endif ?>
-    
-  </div>
+  </span>
   
-</div>
+  <?php } ?>
+
+
+  <?php # SETTINGS # ?>
+  <?php if (array_key_exists ('settings', $content['admin-hrefs'])) { ?>
+    <span class="admin-icon">
+    <?=
+      _A (
+        '<a href="'. $content['admin-hrefs']['settings'] .'" class="nu"><span class="e2-svgi">'.
+        _SVG ('settings').
+        '</span></a>'
+      )
+    ?>
+    </span>
+  <?php } ?>
+  
+    
+</span>
 
 <?php endif ?>

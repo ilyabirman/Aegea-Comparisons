@@ -43,13 +43,13 @@
 .e2-tag-filter-slide-shaft,
 .e2-tag-filter-slider span {
   background: $c_link;
-  @include transition-property((background));
-  @include transition-duration($time);
-  @include transition-timing-function(ease-out);
+  transition-property: background;
+  transition-duration: $time;
+  transition-timing-function: ease-out;
 }
 
 .e2-tag-filter-slide-area:hover .e2-tag-filter-slide-shaft,
 .e2-tag-filter-slide-area:hover .e2-tag-filter-slider span {
   background: $c_hover;
-  @include transition(none);
-}
+  transition: none;
+}

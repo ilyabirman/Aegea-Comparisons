@@ -61,20 +61,6 @@
 </div>
 
 <div class="form-control">
-  <div class="form-label input-label">
-    <label><?= _S ('ff--db-prefix') ?></label>
-  </div>
-  <div class="form-element">
-    <input type="text"
-      name="db-prefix"
-      id="db-prefix"
-      class="text input-editable width-1"
-      value="<?= @$content['form-database']['db-prefix'] ?>"
-    />
-  </div>
-</div>
-
-<div class="form-control">
   <div class="form-element">
     <button type="submit" id="submit-button" class="button submit-button">
       <?= @$content['form-database']['submit-text'] ?>

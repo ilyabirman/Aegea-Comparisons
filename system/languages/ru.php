@@ -20,14 +20,15 @@ function e2l_load_strings () {
   'gs--and-reload-installer' => 'И перезагрузите установщик',
   'fb--begin' => 'Начать блог',
   'fb--retry' => 'Попробовать ещё раз',
+  'gs--db-parameters' => 'Параметры базы данных, которые предоставил хостер',
+  'gs--ask-hoster-how-to-create-db' => 'Уточните у хостера, как создать базу, если её нет',
   'er--double-check-db-params' => 'Перепроверьте реквизиты базы',
   'gs--instantiated-version' => 'Инстанциирована версия',
   'pt--installer-loading' => 'Загрузка...',
   'gs--database' => 'База данных',
-  'gs--password-for-blog' => 'Пароль для доступа к блогу',
-  'ff--just-connect' => 'Данные в моей базе уже есть, нужно просто подключиться к ней',
-  'ff--prefix-occupied' => 'уже занят',
-  'ff--tables-not-found' => 'таблиц не найдено',
+  'gs--password-for-blog' => 'Пароль, который хотите использовать для доступа к блогу',
+  'gs--data-exists' => 'В этой базе уже есть блог. Установщик просто подключится к ней.',
+  'er--db-data-incomplete' => 'В этой базе уже есть часть данных блога, но они неполные. Возможно, с ней использовалась другая версия Эгеи. Установите Эгею той версии, от которой данные в базе, а потом обновите, если нужно. Для чистой установки предоставьте чистую базу.',
 
   // diags
   'et--fix-permissions-on-server' => 'Настройте права на сервере',
@@ -71,6 +72,7 @@ function e2l_load_strings () {
   'ff--delete' => 'Удалить',
   'ff--will-get-address' => 'Получит адрес',
   'ff--is-at-address' => 'Опубликована по адресу',
+  'gs--no-notes' => 'Заметок нет.',
 
   'ff--gmt-offset' => 'Разница с Гринвичем',
   'ff--with-dst' => '+1 летом',
@@ -91,6 +93,7 @@ function e2l_load_strings () {
   'wd--draft' => 'черновик',
   'pt--draft-deletion' => 'Удаление черновика',
   'pt--edit-draft' => 'Правка черновика',
+  'gs--no-drafts' => 'Черновиков нет.',
   'gs--draft-will-be-deleted' => 'Черновик «$[draft]» будет удалён.',
   
   // comments
@@ -120,8 +123,7 @@ function e2l_load_strings () {
   'ff--email' => 'Эл. почта',
   'gs--email-wont-be-published' => 'адрес не будет опубликован',
   'gs--no-html' => 'ХТМЛ не работает',
-  'ff--subscribe-to-others-comments' => 'Получать комментарии других по почте',
-  'gs--comment-restore' => 'Вернуть',
+  'ff--subscribe-to-others-comments' => 'Получать комментарии других по почте',
   'ff--text-of-your-comment' => 'Текст вашего комментария',
   'gs--n-comments' => '$[number.cardinal]',
   'gs--no-comments' => 'нет комментариев',
@@ -137,8 +139,8 @@ function e2l_load_strings () {
   'pt--tag-edit' => 'Изменение тега',
   'pt--tag-delete' => 'Удаление тега',
   'pt--posts-without-tags' => 'Заметки без тегов',
+  'gs--no-tags' => 'Тегов нет.',
   'gs--no-posts-without-tags' => 'Заметок без тегов нет.',
-  'er--bad-tag-urlname' => 'Такой вид в адресной строке не может быть использован',
   'er--cannot-rename-tag' => 'Такое имя или вид в адресной строке уже используются другим тегом',
   'ff--tag-name' => 'Название',
   'ff--tag-urlname' => 'В адресной строке',
@@ -174,6 +176,7 @@ function e2l_load_strings () {
   'gs--found-for-query' => 'по запросу',
   'gs--search-query-empty' => 'Текст для поиска пуст, напишите что-нибудь',
   'gs--search-query-too-short' => 'Слишком короткий текст, напишите хотя бы 4 буквы.',
+  'gs--search-too-few-notes' => 'Поиск заработает, когда будет больше заметок.',
   'gs--nothing-found' => 'Ничего не найдено.',
   'gs--many-posts' => 'Много заметок',
   'pt--search-results' => 'Результаты поиска',
@@ -192,8 +195,8 @@ function e2l_load_strings () {
   'er--settings-not-saved' => 'Настройка не сохранена',
 
   'pt--sessions' => 'Открытые сессии',
-  'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
-  'gs--sessions-browser-or-device' => 'Браузер или устройство',
+  'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
+  'gs--sessions-browser-or-device' => 'Браузер или устройство',
   'gs--sessions-when' => 'Когда',
   'gs--sessions-from-where' => 'Откуда',
   'gs--locally' => 'локально',
@@ -214,20 +217,19 @@ function e2l_load_strings () {
   'ff--theme-how-to' => 'Как создать свою тему?',
   'ff--theme-selector-wants-js' => 'Для выбора темы оформления, включите в браузере поддержку скриптов (JavaScript).',
   'ff--posts' => 'Заметки',
-  'ff--items-per-page-before' => 'Показывать по',
   'ff--items-per-page-after' => 'на странице',
-  'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
+  'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
   'ff--comments' => 'Комментарии',
   'ff--comments-enable' => 'Разрешать',
   'ff--only-for-recent-posts' => 'только к свежим заметкам',
-  'ff--show-hot' => 'показывать блок «Обсуждаемое»',
   'ff--send-to-address' => 'присылать по почте на адрес:',
+  'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--administration' => 'Администрирование:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'соединение с базой',
 
-  'pt--name-and-author' => 'Название и автор',
   'ff--blog-title' => 'Название блога',
+  'ff--set-userpic-by-dragging' => 'Перетащите на место пунктирного кружка фотографию с рабочего стола',
   'ff--blog-description' => 'Коротко о блоге',
   'ff--blog-author' => 'Автор',
 
@@ -235,19 +237,16 @@ function e2l_load_strings () {
   'ff--db-host' => 'Сервер',
   'ff--db-username-and-password' => 'Имя пользователя и пароль',
   'ff--db-name' => 'Название базы',
-  'ff--db-prefix' => 'Префикс таблиц',
   'fb--connect-to-this-db' => 'Подключиться с этими параметрами',
   'er--cannot-save-data' => 'Не получается сохранить данные',
   
-  'pt--diagnostics' => 'Диагностика',
-
-  'ff--changing-sidebar' => 'Как изменить эту колонку?',
+  'gs--drag-userpic-here' => 'Перетащите сюда свою фотографию',
   
   // welcome
   'pt--welcome' => 'Готово!',
   'pt--welcome-text-pre' => 'Блог создан. ',
   'pt--welcome-text-href-write' => 'Напишите заметку',
-  'pt--welcome-text-or' => ' или ',
+  'pt--welcome-text-or' => ' или ',
   'pt--welcome-text-href-settings' => 'настройте что-нибудь',
   'pt--welcome-text-post' => '.',
 
@@ -262,7 +261,6 @@ function e2l_load_strings () {
   'gs--np-action-drafts' => 'открыть черновики',
   'gs--np-action-draft' => 'открыть этот черновик',
   'gs--np-action-tag-edit' => 'править этот тег',
-  'gs--np-action-name-and-author' => 'изменять название блога',
   'gs--np-action-settings' => 'настраивать блог',
   'gs--np-action-password' => 'изменять пароль',
   'gs--np-action-database' => 'изменять параметры базы данных',
@@ -278,7 +276,6 @@ function e2l_load_strings () {
   'fb--select' => 'Выбрать',
   'fb--apply' => 'Применить',
   'fb--delete' => 'Удалить',
-  'fb--edit' => 'Править',
   'fb--sign-in' => 'Войти',
   'fb--sign-out' => 'Выйти',
   
@@ -293,7 +290,9 @@ function e2l_load_strings () {
   'tt--minutes-ago' => '$[minutes.cardinal] назад',
   'tt--one-hour-ago' => 'Час назад',
   'tt--hours-ago' => '$[hours.cardinal] назад',
+  'tt--today' => 'Сегодня',
   'tt--today-at' => 'Сегодня в $[time]',
+  'tt--date' => '$[day] $[month.monthname.genitive]',
   'tt--date-and-time' => '$[day] $[month.monthname.genitive], $[time]',
   'tt--date-year-and-time' => '$[day] $[month.monthname.genitive] $[year], $[time]',
 
@@ -329,7 +328,9 @@ function e2l_load_strings () {
   // social networks
   'sn--twitter-verb' => 'Твитнуть',
   'sn--facebook-verb' => 'Поделиться',
+  'sn--gplus-verb' => 'Плюсануть',
   'sn--vkontakte-verb' => 'Поделиться',
+  'sn--telegram-verb' => 'Отправить',
   'sn--pinterest-verb' => 'Запинить',
 
   // umacros

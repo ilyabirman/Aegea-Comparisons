@@ -2,6 +2,7 @@ if ($) $ (function () {
 
   var prevTitle = $ ('#title').val ()
   var prevTags = $ ('#tags').val ()
+  prevTags = ((prevTags === null) ? '' : prevTags.join ())
   var prevText = $ ('#text').val ()
   var prevAlias = $ ('#alias').val ()
   var prevStamp = $ ('#stamp').val ()
@@ -11,13 +12,20 @@ if ($) $ (function () {
   var actionName = $ ('#action').val ()
   var liveSaving = false
 
+  var stampMask = /^ *(\d{1,2})\.(\d{1,2})\.(\d{2}|\d{4}) +(\d{1,2})\:(\d{1,2})\:(\d{1,2}) *$/
+
   
   $.ajaxSetup ({ type: "post", timeout: 10000 })
   
   e2UpdateSubmittability = function () {
-    shouldBeEnabled = (
+    var stampOk = true
+    if ($ ('#stamp').val ()) {
+      stampMask.test ($ ('#stamp').val ())
+    }
+    var shouldBeEnabled = (
       !/^ *$/.test ($ ('#title').val ()) &&
       !/^ *$/.test ($ ('#text').val ()) &&
+      stampOk &&
       !liveSaving
     )
 	  if (shouldBeEnabled) {
@@ -108,20 +116,29 @@ if ($) $ (function () {
     $ ('#alias').attr ('placeholder', '')
   })
   
-  $ ('#title').add ('#tags').add ('#text').add ('#alias').add ('stamp')
-   .bind ('change input keyup keydown keypress mouseup mousedown cut copy paste', function () {
+  $ ('#title').add ('#tags').add ('#text').add ('#alias').add ('#stamp')
+   .bind ('change input keyup keydown keypress mouseup mousedown cut copy paste blur', function () {
+      if ($ ('#stamp').val ()) {
+        $ ('#stamp').toggleClass (
+          'input-error',
+          ($ ('#stamp').val ().match (stampMask) === null)
+        )
+      }
       e2UpdateSubmittability ()
+      var newTags = $ ('#tags').val ()
+      newTags = ((newTags === null) ? '' : newTags.join ())
       if ($ ('#title').val () != prevTitle) edited = true
-      if ($ ('#tags').val ()  != prevTags) edited = true
-      if ($ ('#text').val ()  != prevText) edited = true
-      if ($ ('#alias').val ()  != prevAlias) edited = true
-      if ($ ('#stamp').val ()  != prevStamp) edited = true
+      if (newTags != prevTags) edited = true
+      if ($ ('#text').val () != prevText) edited = true
+      if ($ ('#alias').val () != prevAlias) edited = true
+      if ($ ('#stamp').val () != prevStamp) edited = true
       if (edited && ($ ('#text').val () != '')) {
         edited = false
         $ ('#livesaving').hide ()
         $ ('#livesave-button').fadeIn (333)
         prevTitle = $ ('#title').val ()
         prevTags = $ ('#tags').val ()
+        prevTags = ((prevTags === null) ? '' : prevTags.join ())
         prevText = $ ('#text').val ()
         prevAlias = $ ('#alias').val ()
         prevStamp = $ ('#stamp').val ()
@@ -131,7 +148,7 @@ if ($) $ (function () {
   $ ('#title').bind ('keydown', function (e) {
     if (e.keyCode == 13) $ ('#text').focus ()
   })
-  
+
   $ ('#livesave-button').click (function () { e2LiveSave (); return false })
     
   $ (document).bind ('keydown keyup keypress', function (event) {
@@ -194,13 +211,15 @@ if ($) $ (function () {
     field.focus ()
   }
   
-  $e2AddImage = function (imageThumb, imageFull) {
+  $e2AddImage = function (imageThumb, imageFull, imageWidth, imageHeight) {
     $newImage = $ ('#e2-uploaded-image-prototype').clone (true)
     $newImage.attr ('style', '')
     $newImage.css ('width', '')
     $newImage.find ('.e2-uploaded-image-preview img')
-      .attr ('src', imageThumb)
+      .attr ('src', imageThumb + '?' + new Date ().getTime ())
       .attr ('alt', imageFull)
+      .attr ('width', imageWidth)
+      .attr ('height', imageHeight)
     $newImage.find ('.e2-uploaded-image-remover')
       .data ('file', imageFull)
     return $newImage
@@ -238,10 +257,14 @@ if ($) $ (function () {
   })
   
   $ ('#e2-uploaded-images').children ().each (function () {
-    imageThumb = $ (this).find ('.e2-uploaded-image-preview img').attr ('src')
-    imageFull = $ (this).find ('.e2-uploaded-image-preview img').attr ('alt')
+    var $img = $ (this).find ('.e2-uploaded-image-preview img')
+    var imageThumb = $img.attr ('src')
+    var imageFull = $img.attr ('alt')
+    var imageWidth = $img.attr ('width')
+    var imageHeight = $img.attr ('height')
     $ (this).remove ()
-    $e2AddImage (imageThumb, imageFull).appendTo ($ ('#e2-uploaded-images')).show ()
+    $e2AddImage (imageThumb, imageFull, imageWidth, imageHeight)
+      .appendTo ($ ('#e2-uploaded-images')).show ()
   })
   
   var e2CanUploadThisFile = function (file) {
@@ -260,23 +283,51 @@ if ($) $ (function () {
   
   var e2DoneUploadingThisFileWithResponse = function (file, response) {
     if (response.substr (0, 6) == 'image|') {
-      image = response.substr (6).split ('|')
-      imageFull = image[0]
-      imageThumb = image[1]
-      e2PastePic (imageFull)
-      $e2AddImage (imageThumb, imageFull).appendTo ($ ('#e2-uploaded-images')).show (333, function () {
+      var image = response.substr (6).split ('|')
+      var imageFull = image[0]
+      var imageThumb = image[1]
+      var status = image[2]
+      var imageWidth = image[3]
+      var imageHeight = image[4]
+      if (status == 'new-file') {
+        e2PastePic (imageFull)
+        $e2AddImage (imageThumb, imageFull, imageWidth, imageHeight)
+          .appendTo ($ ('#e2-uploaded-images')).show (333, function () {
+            $ ('#e2-uploading').hide ()
+            $ ('#e2-upload-button').show ()
+          })
+      } else {
         $ ('#e2-uploading').hide ()
         $ ('#e2-upload-button').show ()
-      })
+        var thumbToUpdate = $ (
+          '#e2-uploaded-images img[src="' + imageThumb + '"], ' +
+          '#e2-uploaded-images img[src^="' + imageThumb + '?"]'
+        )[0]
+        thumbToUpdate.src = imageThumb + '?' + new Date ().getTime ()
+      }
     } else if (response.substr (0, 6) == 'audio|') {
-      audio = response.substr (6).split ('|')
-      audioFull = audio[0]
-      audioThumb = audio[1]
-      e2PastePic (audioFull)
-      $e2AddImage (audioThumb, audioFull).appendTo ($ ('#e2-uploaded-images')).show (333, function () {
+      var audio = response.substr (6).split ('|')
+      var audioFull = audio[0]
+      var audioThumb = audio[1]
+      var status = audio[2]
+      var audioWidth = audio[3]
+      var audioHeight = audio[4]
+      if (status == 'new-file') {
+        e2PastePic (audioFull)
+        $e2AddImage (audioThumb, audioFull, audioWidth, audioHeight)
+          .appendTo ($ ('#e2-uploaded-images')).show (333, function () {
+            $ ('#e2-uploading').hide ()
+            $ ('#e2-upload-button').show ()
+          })
+      } else {
         $ ('#e2-uploading').hide ()
         $ ('#e2-upload-button').show ()
-      })
+        var thumbToUpdate = $ (
+          '#e2-uploaded-images img[src="' + audioThumb + '"], ' +
+          '#e2-uploaded-images img[src^="' + audioThumb + '?"]'
+        )[0]
+        thumbToUpdate.src = audioThumb + '?' + new Date ().getTime ()
+      }
     } else if (response.substr (0, 6) == 'error|') {
       $ ('#e2-uploading').hide ()
       $ ('#e2-upload-button').show ()
@@ -300,17 +351,21 @@ if ($) $ (function () {
 
   e2ClearUploadBuffer = function () {
     if (filesToUpload.length) {
-      file = filesToUpload.shift ()
-      filename = file.name
+      var file = filesToUpload.shift ()
+      var filename = file.name
+      var url = $ ('#e2-file-upload-action').attr ('href')
+      if (file.e2AltKeyPressed) { url += '?overwrite' }
+
       if (e2CanUploadThisFile (filename)) {
         e2UploadFile (
           file,
-          $ ('#e2-file-upload-action').attr ('href'),
+          url,
           function (data, textStatus, jqHXR) {
             e2DoneUploadingThisFileWithResponse (filename, data)
           }
         )
       }
+
       return false
     } else {
       return true
@@ -324,6 +379,7 @@ if ($) $ (function () {
 
     var files = dt.files
     for (i = 0; i < files.length; i++) {
+      files[i].e2AltKeyPressed = e.altKey
       filesToUpload.push (files[i])
     }
 
@@ -333,7 +389,5 @@ if ($) $ (function () {
   }
   
   $ ('.e2-note-text-textarea').bind ('drop', e2DropPictures)
-
-
   
 })

@@ -54,6 +54,7 @@ class NeasdenGroup_audio implements NeasdenGroup {
   
         $player_html = '<a '.
           'class="jouele" '.
+          'data-space-control="true" '.
           'href="'. $href .'" '.
         '>'. $alt .'</a>'."\n";
         

@@ -11,6 +11,7 @@
 <?php _JS ('main') ?>
 
 <?php if ($content['sign-in']['done?']) { ?>
+<?php _LIB ('stickyfill') ?>
 <?php _CSS ('admin') ?>
 <?php _JS ('admin') ?>
 <?php } ?>
@@ -26,12 +27,10 @@
 <?php _T_FOR ('form-login') ?>
 
 <?php if ($content['engine']['installed?']): ?>
-<?php _T ('author-menu') ?>
 <?php _T ('layout'); ?>
-<?php if (!$content['sign-in']['done?'] and !$content['sign-in']['necessary?']) { ?>
-<a class="e2-visual-login nu" id="e2-visual-login" href="<?= $content['hrefs']['sign-in'] ?>" class="nu"><span class="i-login"></span></a>
-<?php } ?>
 <?php endif ?>
+
+<?= @$content['pre-body-end'] ?>
 
 </body>
 

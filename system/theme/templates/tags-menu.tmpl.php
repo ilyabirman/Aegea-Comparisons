@@ -1,37 +1,22 @@
-<?php // mui ?>
+<?php if ($content['class'] == 'frontpage' or $content['class'] == 'tag') { ?> 
 
 <?php if (array_key_exists ('tags', $content['hrefs'])) { ?> 
 
-<?php if ($content['tags-menu']['not-empty?']) { ?> 
+<?php if (count ($content['tags']['menu-each'])) { ?> 
 
-<?php if (_AT ($content['hrefs']['tags'])): ?> 
-<h2><?= _S ('gs--tags') ?> &rarr;</h2>
-<?php else: ?>
-<h2><a href="<?= $content['hrefs']['tags'] ?>"><?= _S ('gs--tags') ?></a></h2>
-<?php endif ?>
-
-<ul>
-<?php foreach ($content['tags-menu']['each'] as $tag): ?>
+<div class="e2-tags">
+<?php foreach ($content['tags']['menu-each'] as $tag): ?>
 <?php if ($tag['current?']) { ?>
-<li><?=$tag['tag']?>
-  <?php if ($tag['pinnable?']) { ?>
-  <span style="white-space: nowrap"><a href="<?=$tag['pinned-toggle-href']?>" class="e2-tag e2-pinned-toggle nu"><span class="i-pinned-<?= ($tag['pinned?']? 'set' : 'unset') ?>"></span></a></span>
-  <?php } ?>
-  &rarr;
-</li>
+<?php if ($tag['pinnable?']) { ?>
+<span style="white-space: nowrap"><span class="e2-tag"><?=@$tag['tag']?></span><a href="<?=$tag['pinned-toggle-href']?>" class="nu e2-tag e2-pinned-toggle <?= ($tag['pinned?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('pinned-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('pinned-on') ?></span></span></a></span>
+<?php } ?>
 <?php } else { ?>
-<li><a href="<?=@$tag['href']?>" class="e2-tag"><?=@$tag['tag']?></a></li>
+<a href="<?=@$tag['href']?>" class="e2-tag"><?=@$tag['tag']?></a>
 <?php } ?>
 <?php endforeach ?>
-</ul>
+</div>
 
-<?php } else { ?>
-
-<?php if (_AT ($content['hrefs']['tags'])): ?> 
-<p><?= _S ('gs--tags') ?> &rarr;</p>
-<?php else: ?>
-<p><a href="<?= $content['hrefs']['tags'] ?>"><?= _S ('gs--tags') ?></a></p>
-<?php endif ?>
+<?php } ?>
 
 <?php } ?>
 

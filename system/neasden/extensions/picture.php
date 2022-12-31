@@ -18,7 +18,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
   
   function render ($group, $myconf) {
     $p = false;
-  
+
     $result = '<div class="'. $myconf['css-class'] .'">'."\n";
     foreach ($group as $line) {
       @list ($filebasename, $alt) = explode (' ', $line['content'], 2);
@@ -48,46 +48,10 @@ class NeasdenGroup_picture implements NeasdenGroup {
   
         $filename_original = $filename;
         $width_original = $width;
-        $is_scaled = false;
-  
         // image too wide
         if ($width > $myconf['max-width']) {
-  
-          $is_scaled = true;
           $height = $height * ($myconf['max-width'] / $width);
-          $width = $myconf['max-width'];
-  
-          // if scaled down images are or should be provided
-          if (array_key_exists ('scaled-img-folder', $myconf)) {
-          
-            $scaled_filebasename = $filebasename;
-  
-            if (array_key_exists ('scaled-img-extension', $myconf)) {
-              $basename_elements = explode ('.', $scaled_filebasename);
-              if (count ($basename_elements) < 2) $basename_elements[] = '';
-              $ext = array_pop ($basename_elements);
-              $basename_elements[] = $myconf['scaled-img-extension'];
-              $basename = implode ('.', $basename_elements);
-              $path_elements[] = $basename;
-              $scaled_filebasename = implode ('/', $path_elements);
-            }
-          
-            $filename_scaled = $myconf['scaled-img-folder'] . $scaled_filebasename;
-            
-            if (is_file ($filename_scaled)) {
-              // use the scaled file
-              $filename = $filename_scaled;
-              $size = getimagesize ($filename);
-              list ($width, $height) = $size;
-            } elseif (array_key_exists ('scaled-img-provider', $myconf)) {
-              // call the provider
-              $filename = $myconf['scaled-img-provider'] . $filebasename;
-            }
-  
-            // otherwise leave the file as-is, browser will scale it
-            
-          }
-  
+          $width = $myconf['max-width'];  
         }
         
         $image_html = (
@@ -95,32 +59,22 @@ class NeasdenGroup_picture implements NeasdenGroup {
           'width="'. $width .'" height="'. $height.'" '.
           'alt="'. htmlspecialchars ($alt) .'" />'. "\n"
         );
-        
-        $cssc_zoomlink = $myconf['css-class'] .'-zoom-link';
-        $cssc_zoomicon = $myconf['css-class'] .'-zoom-icon';
-        $cssc_zoomable = $myconf['css-class'] .'-zoomable';
-        $cssc_zoomin   = $myconf['css-class'] .'-zoom-in';
-        $cssc_link     = $myconf['css-class'] .'-link';
   
-        // wrap into a link to zoomed version if needed
-        if (!$link and $myconf['scaled-img-link-to-original'] and $is_scaled) {
-          
-          $this->neasden->require_link (@$this->neasden->config['library']. 'jquery/jquery.js');
-          $this->neasden->require_link (@$this->neasden->config['library']. 'scaleimage/scaleimage.js');
-          
+        if (! $this->neasden->config['html.basic']) {
+          // wrap into upyachka fix
           $image_html = (
-            '<a href="'. $myconf['src-prefix'] . $filename_original .'" class="'. $cssc_zoomlink .'" width="'. $width_original .'">' ."\n".
-            '<div class="'. $cssc_zoomicon .'">'.
-            '<div class="'. $cssc_zoomable .'"></div>'.
-            '<div class="'. $cssc_zoomin .'"></div>'.
-            '</div>' ."\n".
-            $image_html .
-            '</a>'
+            '<div style="width: '. $width .'px; max-width: 100%">'.
+            '<div class="e2-text-picture-imgwrapper" style="'.
+            'padding-bottom: '. round ($height / $width * 100, 2).'%'.
+            '">'.
+            $image_html.
+            '</div>'.
+            '</div>'
           );
-          
         }
-  
+
         // wrap into a link to URL if needed
+        $cssc_link = $myconf['css-class'] .'-link';
         if ($link) {
           $image_html = (
             '<a href="'. $link .'" width="'. $width_original .'" class="'. $cssc_link .'">' ."\n".
@@ -128,7 +82,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
             '</a>'
           );
         }
-        
+
         $result .= $image_html;
         
       } else {

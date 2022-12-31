@@ -4,48 +4,31 @@
 
 <?php _X ('note-pre') ?>
 
-<div class="<?= array_key_exists ('only', $content['notes'])? 'e2-only ': '' ?>e2-note <?= $note['favourite?']? 'e2-note-favourite' : '' ?> <?= $note['visible?']? '' : 'e2-hidden' ?>">
+<div class="<?= array_key_exists ('only', $content['notes'])? 'e2-only ': '' ?>e2-note <?= $note['favourite?']? 'e2-note-favourite' : '' ?> <?= $note['visible?']? '' : 'e2-hidden' ?> <?= $note['playlist?']? 'jouele-playlist' : '' ?>">
 
-<?php // TITLE // ?>
-<h1 class="<?= ($note['published?'] and !$note['future?'])? 'e2-published' : 'e2-draft' ?> e2-smart-title"><?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?>
 
-<span style="white-space: nowrap">
-
-<?php if (array_key_exists ('favourite-toggle-href', $note)): ?>
-<a href="<?= $note['favourite-toggle-href'] ?>" class="e2-favourite-toggle nu">
-<span class="i-favourite-<?= ($note['favourite?']? 'set' : 'unset') ?>"></span></a>
-<?php else: ?>
-<?php if (@$note['favourite?']) { ?><span class="i-favourite"></span><?php } ?> 
-<?php endif ?>
-
-<?php if (@$note['published?']): ?>
+<span class="admin-links admin-links-floating admin-links-sticky">
 
 <?php if (array_key_exists ('edit-href', $note)): ?>
-<a href="<?= $note['edit-href'] ?>" class="nu"><span class="i-edit"></span></a>
-<?php endif ?>
 
-<?php if (array_key_exists ('delete-href', $note)): ?>
-<a href="<?= $note['delete-href'] ?>" class="nu"><span class="i-remove"></span></a>
-<?php endif ?>
-
+<?php if (array_key_exists ('favourite-toggle-href', $note)) { ?>
+<span class="admin-links admin-icon"><a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-favourite-toggle <?= ($note['favourite?']? 'e2-toggle-on' : '') ?>">
+<span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a></span>
+<?php } ?><span class="admin-icon"><a href="<?= $note['edit-href'] ?>" class="nu e2-edit-link"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span>
 <?php endif ?>
 
 </span>
 
-</h1>
+<article>
 
-
-<?php // DATE AND TIME // ?>
-
-<?php if (@$note['published?']) { ?>
-
-<div class="e2-note-date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></div>
-
+<?php // TITLE // ?>
+<h1 class="<?= ($note['published?'] and !$note['future?'])? 'e2-published' : 'e2-draft' ?> e2-smart-title">
+<?php if (@$note['favourite?'] and !$content['sign-in']['done?']) { ?>
+<?= _A ('<a href="'. $note['href']. '"><span class="favourite">'. $note['title']. '</span></a>') ?>
 <?php } else { ?>
-
-<div class="e2-note-date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?> (<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['last-modified'])?>)"><?=_DT ('j {month-g} Y, H:i', @$note['time'])?></div>
-
+<?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?>
 <?php } ?>
+</h1>
 
 
 
@@ -55,6 +38,7 @@
 <?=@$note['text']?>
 </div>
 
+</article>
 
 <?php // LIKES // ?>
 
@@ -96,6 +80,7 @@
 
 <?php if (array_key_exists ('tags', $note)): ?>
 <div class="e2-note-tags">
+<span class="e2-timestamp" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
 <?php 
 $tags = array ();
 foreach ($note['tags'] as $tag) {
@@ -128,20 +113,6 @@ echo implode (' &nbsp; ', $tags)
 
 <?php _X ('note-post') ?>
 
-<?php if (!@$note['published?']): ?>
-<div class="e2-toolbar">
-  <?php if (array_key_exists ('edit-href', $note)) { ?>
-    <a href="<?= @$note['edit-href'] ?>" class="nu"><button type="button" class="button">
-      <span class="i-edit"></span> <?= _S ('fb--edit') ?>
-    </button></a>
-  <?php } ?>
-</div>
-<?php endif ?>
-
 <?php endforeach ?>
-
-<?php if (@$content['no-notes-text']) { ?> 
-<p><?=@$content['no-notes-text']?></p>
-<?php } ?>
 
 <?php if (@$content['pages']['timeline?']) _T ('pages-earlier') ?>

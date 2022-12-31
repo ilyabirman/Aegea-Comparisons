@@ -6,12 +6,11 @@
 <div class="form">
 
 <div class="form-control">
-  <div class="form-element">
-    <div class="form-control-sublabel">
-      <p><?= _S ('gs--e2-stores-each-posts-timezone') ?></p>
-      <p><?= _S ('gs--e2-autodetects-timezone') ?></p>
-    </div>
-  </div>
+  <p><?= _S ('gs--e2-stores-each-posts-timezone') ?></p>
+</div>
+
+<div class="form-control">
+  <p><?= _S ('gs--e2-autodetects-timezone') ?></p>
 </div>
 
 <div class="form-control">

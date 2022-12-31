@@ -31,20 +31,15 @@ if ($) $ (function () {
 
     var completedCheckDBConfig, completedListDatabases
 
-    if (me) $ ('#' + (me.id) + '-checking').fadeIn (333)
+    if (me) $ ('.e2-ajax-loading').fadeIn (333)
     
     ajaxData = {
-      server: $ ('#db-server').val (),
-      user: $ ('#db-user').val (),
-      password: $ ('#db-password').val (),
-      database: $ ('#db-database').val (),
-      //exists: $ ('#db-exists').attr ('checked'),
-      exists: $ ('#db-exists').is (':checked'),
-      prefix: $ ('#db-prefix').val ()
+      'db-server': $ ('#db-server').val (),
+      'db-user': $ ('#db-user').val (),
+      'db-password': $ ('#db-password').val (),
+      'db-database': $ ('#db-database').val (),
     }
 
-    //alert (ajaxData.exists)
-    
     $.ajaxSetup ({
       type: "post",
       timeout: 10000,
@@ -55,7 +50,6 @@ if ($) $ (function () {
     $ ('#db-user').get (0).e2OldValue = $ ('#db-user').val ()
     $ ('#db-password').get (0).e2OldValue = $ ('#db-password').val ()
     $ ('#db-database').get (0).e2OldValue = $ ('#db-database').val ()
-    $ ('#db-prefix').get (0).e2OldValue = $ ('#db-prefix').val ()
     
     clearTimeout (document.e2TimeOut)
 
@@ -69,43 +63,41 @@ if ($) $ (function () {
         url: $ ('#e2-check-db-config-action').attr ('href'),
         
         success: function (msg) {
-          $ ('.livecheckable').removeClass ('verified')
-          
+
+          $ ('.db-everything-ok').removeClass ('e2-verified').addClass ('e2-wrong')
+
           if (msg == 'no-connect') {
           } else if (msg == 'server-responding') {
-            $ ('.db-server-ok').addClass ('verified')
+
             if (initialGlassCheck) $ ('#db-user').focus ()
+            $ ('.db-server-ok').removeClass ('e2-wrong').addClass ('e2-verified')
+
           } else if (msg == 'server-lets-in') {
-            $ ('.db-user-password-ok').addClass ('verified')
-          } else if (msg == 'prefix-occupied') {
-            $ ('.db-database-ok').addClass ('verified')
-            $ ('#db-prefix').addClass ('wrong')
-            $ ('#db-prefix-not-found').hide ()
-            $ ('#db-prefix-occupied').show ()
-            if (initialGlassCheck) $ ('#db-prefix').focus ()
-          } else if (msg == 'prefix-not-found') {
-            $ ('.db-database-ok').addClass ('verified')
-            $ ('#db-prefix').addClass ('wrong')
-            $ ('#db-prefix-not-found').show ()
-            $ ('#db-prefix-occupied').hide ()
-            if (initialGlassCheck) $ ('#db-prefix').focus ()
+
+            $ ('.db-user-password-ok').removeClass ('e2-wrong').addClass ('e2-verified')
+            $ ('.db-server-ok, db-user-password-ok').removeClass ('e2-wrong').addClass ('e2-verified')
+
+          } else if (msg == 'data-incomplete') {
+
+            $ ('#db-database-exists').slideUp (333)
+            $ ('#db-database-incomplete').slideDown (333)
+            $ ('.db-server-ok, db-user-password-ok').removeClass ('e2-wrong').addClass ('e2-verified')
+
+          } else if (msg == 'bingo-data-exists') {
+
+            $ ('#db-database-incomplete').slideUp (333)
+            $ ('#db-database-exists').slideDown (333)
+            $ ('.db-everything-ok').removeClass ('e2-wrong').addClass ('e2-verified')
+
           } else if (msg == 'bingo') {
+
+            $ ('#db-database-incomplete').slideUp (333)
+            $ ('#db-database-exists').slideUp (333)
             if (initialGlassCheck) $ ('#password').focus ()
-            $ ('.db-everything-ok').addClass ('verified')
+            $ ('.db-everything-ok').removeClass ('e2-wrong').addClass ('e2-verified')
+
           }
 
-          if ((msg != 'prefix-occupied') && (msg != 'prefix-not-found')) {
-            $ ('#db-prefix').removeClass ('wrong')
-          }
-          
-          if (msg != 'prefix-occupied') {
-            $ ('#db-prefix-occupied').hide ()
-          }
-          
-          if (msg != 'prefix-not-found') {
-            $ ('#db-prefix-not-found').hide ()
-          }
-          
           //if ((msg != 'no-connect') && (msg != 'server-responding')) {
           if (msg != 'no-connect') {
           
@@ -144,7 +136,7 @@ if ($) $ (function () {
                     .attr ('selected', 'selected')
                     
                   $ ('#db-database').val ($ ('#db-database-list option:selected').val ())
-                  $ ('#db-database-list').addClass ('verified')
+                  $ ('#db-database-list').addClass ('e2-verified')
                   if (valBefore != $ ('#db-database').val ()) {
                     e2CheckDbConfig ()
                   }
@@ -158,7 +150,6 @@ if ($) $ (function () {
               complete: function (xhr) {
                 completedListDatabases = true
                 if (completedCheckDBConfig && completedListDatabases) e2AllCompleted ()
-                if (initialGlassCheck) $ ('#db-prefix').focus ()
               }
               
             })
@@ -167,7 +158,7 @@ if ($) $ (function () {
             completedListDatabases = true
           }
           
-          bingo = (msg == 'bingo')
+          bingo = ((msg == 'bingo-data-exists') || (msg == 'bingo'))
           e2UpdateSubmittability ()
           
         },
@@ -188,7 +179,7 @@ if ($) $ (function () {
           if (completedCheckDBConfig && completedListDatabases) e2AllCompleted ()
           $ ('#e2-console').html (xhr.responseText)
           //if (me) $ ('#' + (me.id) + '-checking').fadeOut (333)
-          $ ('.ajaxload').fadeOut (333)
+          $ ('.e2-ajax-loading').fadeOut (333)
         }
         
       })
@@ -204,27 +195,21 @@ if ($) $ (function () {
   $ ('.input-editable').bind ('input', function () {
   })
   
-  $ ('.livecheckable').bind ('input', function () {
+  $ ('.e2-livecheckable').bind ('input', function () {
     bingo = false
+    $ ('.db-everything-ok').removeClass ('e2-verified').removeClass ('e2-wrong')
     e2UpdateSubmittability ()
   })
 
-  $ ('.livecheckable').bind ('input blur', function () {
-    if (!this.e2OldValue || ($ (this).val () != this.e2OldValue)) {
-      $ (this).removeClass ('verified').removeClass ('wrong')
+  $ ('.e2-livecheckable').bind ('blur', function () {
+    if ((typeof this.e2OldValue == 'undefined') || ($ (this).val () != this.e2OldValue)) {
+      $ (this).removeClass ('e2-verified').removeClass ('e2-wrong')
       e2CheckDbConfig (this)
     }
   })
   
   $ ('#db-database-list').bind ('change', function () {
     $ ('#db-database').val ($ ('#db-database-list').val ())
-    e2CheckDbConfig (this)
-  })
-  
-  $ ('#db-exists').bind ('change', function () {
-    $ ('#db-prefix').removeClass ('verified').removeClass ('wrong')
-    $ ('#db-prefix-occupied').hide ()
-    $ ('#db-prefix-not-found').hide ()
     e2CheckDbConfig (this)
   })
   

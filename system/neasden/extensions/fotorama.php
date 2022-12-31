@@ -51,7 +51,7 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
         $image_html = (
           '<img src="'. $myconf['src-prefix'] . $filename .'" '.
           'width="'. $width .'" height="'. $height.'" '.
-          'data-caption="'. $alt.'" '.
+          // 'data-caption="'. $alt.'" '.
           'alt="'. $alt .'" />'. "\n"
         );
         

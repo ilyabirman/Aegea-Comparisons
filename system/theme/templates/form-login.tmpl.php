@@ -51,7 +51,7 @@
 </div>
 
 <tr valign="middle">
-	<td style="padding: 4px 10px"><span class="i-lock"></span></td>
+	<td style="padding: 4px"><span class="e2-svgi e2-svgi-double"><?= _SVG ('lock') ?></span></td>
 	<td class="form-control">
     <div>
       <input type="password" name="password" id="e2-password" class="text big input-disableable" autofocus="autofocus" style="width: 100%" />
@@ -76,7 +76,7 @@
       <?= _S ('fb--sign-in') ?>
     </button>
     &nbsp;&nbsp;&nbsp;
-    <span id="password-checking" class="i-loading" style="display: none"></span><span id="password-correct" class="i-tick" style="display: none"></span>
+    <span id="password-checking" class="i-loading" style="display: none"></span><span id="password-correct" class="e2-svgi" style="display: none"><?= _SVG ('tick') ?></span>
 	</td>
 </tr>
 

@@ -1,3 +1,4 @@
+<?php _T ('author-menu') ?>
 <div style="margin: 20px 60px">
 
 
@@ -14,24 +15,12 @@
 
 <h1>
   <?= _A ('<a href="'. $content['blog']['href']. '"><span id="e2-blog-title">'. $content['blog']['title']. '</span></a>') ?> 
-  <?php 
-    if (
-      array_key_exists ('admin-hrefs', $content)
-      and array_key_exists ('name-and-author', $content['admin-hrefs'])
-      and !_AT ($content['admin-hrefs']['name-and-author'] )
-    ) { 
-  ?>
-    <a href="<?= $content['admin-hrefs']['name-and-author'] ?>" class="nu"><span class="i-edit-small"></span></a>
-  <?php } ?>
 </h1>
 
 <?php if ($content['frontpage?']) {?>
-<p><span id="e2-blog-description"><?= $content['blog']['description'] ?></span></p>
+<p><?= $content['blog']['description'] ?></p>
 <?php } ?>
 
-<?php _T_FOR ('tags-menu') ?>
-<?php _T_FOR ('favourites') ?>
-<?php _T_FOR ('most-commented') ?>
 <?php _T_FOR ('search') ?>
 <a class="e2-rss" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
@@ -62,10 +51,12 @@
 <?php _T ('drafts') ?>
 <?php _T ('notes-list') ?>
 <?php _T ('tags') ?>
+<?php _T ('nothing') ?>
 <?php _T ('sessions') ?>
 <?php _T ('pages') ?>
 <?php _T ('comments') ?>
 <?php _T ('popular') ?>
+<?php _T ('tags-menu') ?>
 <?php _T ('unsubscribe') ?>
 <?php _T ('form') ?>
 

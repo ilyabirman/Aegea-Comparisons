@@ -1,5 +1,6 @@
 if ($) $ (function () {
 
+
 $ ('#e2-template-selector').show ()
 
 e2SelectTemplate = function (me, template) {
@@ -19,6 +20,18 @@ e2UpdateRelatedCheckboxes = function () {
       .parent ().addClass ('disabled');
 	}
 }
+
+$ ('#blog-title').bind ('input blur cut copy paste keypress', function () {
+  if ($ ('#e2-blog-title')) $ ('#e2-blog-title').text (
+    this.value? this.value : $ ('#e2-blog-title-default').val ()
+  )
+})
+
+$ ('#blog-author').bind ('input blur cut copy paste keypress', function () {
+  if ($ ('#e2-blog-author')) $ ('#e2-blog-author').text (
+    this.value? this.value : $ ('#e2-blog-author-default').val ()
+  )
+})
 
 $ ('#notes-per-page').bind ('change blur', function () {
   if (isNaN (this.value)) this.value = 10

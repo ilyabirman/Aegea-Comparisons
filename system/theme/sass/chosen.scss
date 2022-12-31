@@ -1,9 +1,8 @@
-@import 'compass';
-
 @import 'var';
 
 .chzn-container {
-  background: #fff;
+  background: $c_input;
+  border-radius: 4px;
 }
 
 .chzn-container * {
@@ -12,7 +11,7 @@
 
 .chzn-container .chzn-drop {
   margin-top: 2px;
-  border-radius: 3px;
+  border-radius: 2px;
   border: none;
   box-shadow: 0 2px 20px rgba(0, 0, 0, .1);
   padding: 1px 0 0 0;
@@ -25,23 +24,23 @@
 
 .chzn-container-multi .chzn-choices .search-choice {
   display: inline-block;
-  border-radius: 3px;
+  border-radius: 2px;
   -moz-background-clip   : padding;
   -webkit-background-clip: padding-box;
   background-clip        : padding-box;
   color: #000;
-  padding: 4px 18px 4px 6px;
+  padding: 4px 6px;
   margin: 0 4px 4px 0;
-  background: $c_light;
-  border: 1px $c_light solid;
+  background: $c_tag;
+  border: 1px $c_tag solid;
   box-shadow: none;
   text-shadow: none;
 }
 
 .chzn-container-multi .chzn-choices .search-field input {
   height: 100%;
-  padding: 4px 0 4px 0;
-  margin: 0 0 4px 0;
+  padding: 6px 0;
+  margin: 0;
 }
 
 .chzn-container .chzn-results .highlighted,
@@ -52,7 +51,7 @@
 }
 
 .chzn-container .chzn-results .highlighted {
-  border-radius: 3px;
+  border-radius: 2px;
   background-color: Highlight;
   background-image: none;
   color: HighlightText;
@@ -69,15 +68,20 @@
 }
 
 .chzn-container-multi .chzn-choices {
-  border-radius: 3px;
-  border: 1px $c_border solid;
+  border-radius: 4px;
+  border: none;
+  // border: 1px $c_border solid;
   background: transparent;
   box-shadow: none;
   text-shadow: none;
 }
 
-.chzn-container-multi .search-choice-close {
+.chzn-container-multi .chzn-choices .search-choice .search-choice-close {
+  color: #000;
   border: none;
+}
+.chzn-container-multi .chzn-choices .search-choice .search-choice-close:hover {
+  color: $c_hover;
 }
 
 .chzn-container-multi .chzn-choices .search-choice-focus {
@@ -85,15 +89,4 @@
   border: 1px Highlight solid;
   box-shadow: none;
   text-shadow: none;
-}
-
-.chzn-container-multi .chzn-choices .search-choice .search-choice-close,
-.chzn-container .chzn-results-scroll-down span,
-.chzn-container .chzn-results-scroll-up span {
-  background-image: image-url('chosen-sprite.png');
-  @include transition(none);  
-}
-
-.chzn-container-active .chzn-choices {
-  border-color: $c_focus;
 }

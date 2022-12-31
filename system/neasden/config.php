@@ -1,12 +1,20 @@
 <?php
 
-global $settings, $full_blog_url;
+global $settings, $full_blog_url, $_lang;
 
 return array (
 
   '__overload' => 'user/neasden/',
   
   '__profiles' => array (
+    'full-rss' => array (
+      'html.on' => true,
+      'html.basic' => true,
+      'groups.on' => true,
+      'typography.markup' => true,
+      'typography.autohref' => true,
+      'banned-groups' => array (),
+    ),
     'full' => array (
       'html.on' => true,
       'groups.on' => true,
@@ -14,12 +22,21 @@ return array (
       'typography.autohref' => true,
       'banned-groups' => array (),
     ),
+    'simple-rss' => array (
+      'html.on' => false,
+      'html.basic' => true,
+      'groups.on' => true,
+      'typography.markup' => true,
+      'typography.autohref' => true,
+      'banned-groups' => array (
+        'picture', 'fotorama', 'audio', 'youtube', 'vimeo'
+      ),
+    ),
     'simple' => array (
       'html.on' => false,
       'groups.on' => true,
       'typography.markup' => true,
       'typography.autohref' => true,
-      'typography.nofollowhrefs' => true,
       'banned-groups' => array (
         'picture', 'fotorama', 'audio', 'youtube', 'vimeo'
       ),
@@ -33,17 +50,21 @@ return array (
     ),
  ),
     
-  'library' => 'system/library/',
+  'library' => SYSTEM_LIBRARY_FOLDER,
   
-  'language' => 'ru',
+  'language' => $_lang,
   
   'html.on' => true,
   'html.elements.opaque' => 'div p ul ol li blockquote table pre textarea',
   'html.elements.sacred' => 'object embed iframe head link script style code',
+  'html.basic' => false,
 
   'html.code.on' => true,
   'html.code.wrap' => array ('<pre class="e2-text-code"><code>', '</code></pre>'),  
   'html.code.highlightjs' => true,
+
+  'html.img.prefix' => PICTURES_FOLDER,
+  'html.img.detect' => true,
 
   'groups.on' => true,
   'groups.headings.char'  => '#',
@@ -55,32 +76,22 @@ return array (
     'picture' => array (
       'src-prefix' => $full_blog_url .'/',
       'folder' => PICTURES_FOLDER,
-      'css-class' => 'e2-text-picture', // see also var csscPrefix in scaleimage.js
+      'css-class' => 'e2-text-picture', 
       'max-width' => $settings['max-image-width'],
-      'scaled-img-folder' => SCALED_IMAGES_FOLDER,
-      'scaled-img-provider' => '?go=@scale-image:',
-      'scaled-img-extension' => 'scaled.jpg',
-      'scaled-img-link-to-original' => true,
-      'scaled-img-link-to-original-class' => 'link-to-big-picture',
     ),
     'fotorama' => array (
       'src-prefix' => $full_blog_url .'/',
       'folder' => PICTURES_FOLDER,
-      'css-class' => 'e2-text-picture', // see also var csscPrefix in scaleimage.js
+      'css-class' => 'e2-text-picture',
       'max-width' => $settings['max-image-width'],
     ),
     'table' => array (
       'css-class' => 'e2-text-table',
     ),
-    'youtube' => array (
+    'onlinevideo' => array (
       'css-class' => 'e2-text-video',
-      'width' => $settings['max-image-width'],
-      'height' => round ($settings['max-image-width'] / 1.6),
-    ),
-    'vimeo' => array (
-      'css-class' => 'e2-text-video',
-      'width' => $settings['max-image-width'],
-      'height' => round ($settings['max-image-width'] / 1.6),
+      'max-width' => $settings['max-image-width'],
+      'ratio' => 16/9,
     ),
     'audio' => array (
       'css-class' => 'e2-text-audio',
@@ -92,7 +103,6 @@ return array (
   'typography.on' => true,
   'typography.markup' => true,
   'typography.autohref' => true,
-  'typography.nofollowhrefs' => false,
   'typography.cleanup' => array (
     '&nbsp;' => ' ',
     '&laquo;' => '«',

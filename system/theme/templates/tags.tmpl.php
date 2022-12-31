@@ -1,4 +1,4 @@
-<?php if (array_key_exists ('tags', $content)) { ?>
+<?php if (array_key_exists ('tags', $content) and $content['class'] == 'tags') { ?>
 
 <?php if ($content['tags']['many?']) { ?>
 

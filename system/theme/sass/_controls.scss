@@ -1,10 +1,20 @@
 input.text, textarea, select, button {
-  border: 1px #d0d0d0 solid;
-  border-radius: 3px;
-  padding: 4px;
-  @include transition-property((border-color, background));
-  @include transition-duration(.33s);
-  @include transition-timing-function(ease-out);
+  border: none;
+  padding: 6px;
+  box-shadow: none;
+  transition-property: background, border-color, box-shadow, fill;
+  transition-duration: .33s;
+  transition-timing-function: ease-out;
+}
+
+input.text, textarea, select {
+  border: none;
+  background: $c_input;
+  border-radius: 4px;
+}
+
+button {
+  text-align: center;
 }
 
 select {
@@ -15,18 +25,27 @@ input.text:focus,
 textarea:focus,
 select:focus,
 button:focus {
-  border-color: $c_focus;
-  @include transition(none);
+  transition: none;
 }
 
 select {
   padding-right: 19px;
-  background: image-url('chevron-down.png') right center no-repeat !important;
+  background: $c_input resolve('chevron-down.svg') right center no-repeat !important;
 }
 
 select > button {
   display: none;
 }
+
+// installer
+.e2-input-remark { margin-left: 1em }
+
+.e2-livecheckable { color: #000 }
+
+.e2-verified { color: #090 }
+
+.e2-wrong { color: #900 }
+
 
 .form,
 .form-part,
@@ -34,6 +53,11 @@ select > button {
 .form-subcontrol {
   float: left;
   width: 100%;
+}
+
+.form:after {
+  content: ' ';
+  clear: both;
 }
 
 .form-part,
@@ -47,6 +71,8 @@ select > button {
   float: left;
   width: 17.07%;
   padding: 0 20px 0 0;
+  line-height: 18px;
+  margin-top: 2px;
 }
 
 .form-element {
@@ -54,18 +80,27 @@ select > button {
   width: 82.93%;
 }
 
+.form-control-sublabel {
+  margin: 0 0 8px;
+  width: 82.93%;
+  font-size: 13px;
+  line-height: 16px;
+}
+
 
 .form-part { width: 100%; margin: 0 0 24px 0 }
 
 .form-control { width: 100%; margin: 0 0 12px 0  }
 
-.form-control .input-label { margin-top: 5px /* 4px of input padding + 1px of input border */ }
+.form-control .input-label { margin-top: 8px }
 .form-control .input-error { background: #ffece0 }
 .form-control input.text { margin-bottom: 8px }
-.form-control input.big { font-size: 24px; margin-bottom: 8px }
 .form-control select,
 .form-control textarea { margin-bottom: 8px }
 .form-control .disabled { color: #999; }
+
+.form-control-big .input-label { margin-top: 16px }
+.form-control-big input { font-size: 24px; margin-bottom: 8px }
 
 .form-subcontrol { width: 100%; margin: 0 0 8px 0 }
 .form-subcontrol-master { margin: 0 0 0 0 }
@@ -79,39 +114,29 @@ select > button {
 
 .form-control .icon {
   position: relative;
-  left: -.5em;
+  left: -.33em;
   width: 0;
 }
 
-.form-control .icon span.i-lock-mini,
-.form-control .icon span.i-loading {
+.form-control .icon span.e2-svgi {
   position: absolute;
   right: 0;
-  top: 4px;
+  top: 6px;
 }
-
-// comment under input i.e. “separate by commas”
-.form-control-sublabel {
-  width: 75%;
-  font-size: 12px;
-}
-
 
 .submit-box, .delete-box {
-  /* border-top: #f0c040 1px solid; */
-  padding: 0 0 40px 0;
-  border-radius: 3px;
+  border-radius: 8px;  
 }
 
 .submit-box p {
   font-size: 13px;
+  line-height: 18px;
   color: #665;
 }
 
 .delete-box {
-  border: 0;
-  background: #e05030;
-  padding-top: 20px;
+  background: #ec6040;
+  padding: 20px 0 40px 0;
   color: #fff;
 }
 
@@ -120,67 +145,60 @@ select > button {
 }
 
 .button {
-  display: inline;
   display: inline-block;
-  outline: none;
-  padding: 4px 10px;
-  background: #f0f0f0;
-  border: 1px #e0e0e0 solid;
-  border-radius: 3px;
+  padding: 6px 12px;
+  background: #eae4d8;
+  background: linear-gradient(to bottom, #f4f0e8 0%, #e0d8c8 100%);
+  box-shadow: none;
   font-size: 13px;
+  line-height: 18px;
   font-weight: normal;
   font-family: sans-serif;
   cursor: hand;
   cursor: pointer;
   color: #000;
+  border-radius: 4px;  
 }
 
 .button:visited {
   color: #000;
-  border-color: #e0e0e0;
 }
 
 .submit-box .button {
-  background: #ffe060;
-  border-color: #f0c040;
+  background: #ec6040;
+  background: linear-gradient(to bottom, #f88040 0%, #e04040 100%);
+  color: #fff;
 }
 
 .delete-box .button {
-  background: #ffe4e0;
-  border-color: #d04000;
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
 }
 
 .button:disabled {
-  color: rgba(0, 0, 0, .25);
+  color: rgba(#000, .2);
   cursor: default;
   pointer-events: none;
 }
 
 .button:active:hover {
-  box-shadow: inset 0 1px 4px rgba(0,0,0,.2)
+  box-shadow: inset 0 0 100px rgba(#000,.16);
 }
 
-.button:hover,
-.button.hover {
-  background: #f6f6f6;
-  @include transition(none);
+.button:hover, .button.hover {
+  box-shadow: inset 0 0 100px rgba(#000,.08);
+  transition: none;
+  fill: $c_hover;
 }
 
-.button:focus { border-color: #c0c0c0 }
-
-.submit-box .button:hover { background: #ffe86c }
-.submit-box .button:focus { border-color: #c08000 }
-
-.delete-box .button:hover { background: #fff0ec }
-.delete-box .button:focus { border-color: #802000 }
-
-.button * {
-  vertical-align: absmiddle;
+.button:focus {
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
 }
 
 .submit-button {
   font-size: 16px;
-  padding: 10px 1.33em;
+  line-height: 22px;
+  padding: 12px 24px;
   font-weight: bold;
 }
 
@@ -191,7 +209,7 @@ select > button {
 
 .e2-keyboard-shortcut {
   background: #f0f0c0;
-  color: #a64;
+  color: rgba(0,0,0,.4);
   padding: 0 .33em;
   border-radius: 3px;
   text-decoration: none;
@@ -200,9 +218,8 @@ select > button {
 
 .submit-box .e2-keyboard-shortcut {
   background: transparent;
-  border: none;
   margin-left: .67em;
-  color: #a06040;
+  color: rgba(0,0,0,.4);
   font-weight: normal;
   font-size: 85%;
 }
@@ -212,7 +229,7 @@ select > button {
 }
 
 .input-remark {
-  margin-left: 1em;
+  margin: 0 .67em;
 }
 
 

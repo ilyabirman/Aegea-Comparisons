@@ -32,6 +32,10 @@
   value="<?= @$content['form-comment']['.already-subscribed?'] ?>"
 />
 
+<!--
+<?= @$content['form-comment']['ip-href'] ?> 
+-->
+
 <div class="form">
 
 <div class="form-control">
@@ -52,17 +56,16 @@
   <div class="form-element">
     <div style="position: relative">
       <?php /* a pot full of honey for spammers: */ ?>
-      <div style="position: absolute; z-index: 0; left: 0; top: 0">
+      <div style="position: absolute; z-index: 0; left: 0; top: 0; width: 100%; height: 0; overflow: hidden;">
       <input type="text"
         class="text width-2"
-        style="outline: none"
         tabindex="-1"
         name="email"
         autocomplete="off"
         value=""
       />
       </div>
-      <div style="position: relative; z-index: 1; left: 0; top: 0">
+      <div style="position: relative; z-index: 1; left: 0; top: 0; width: 100%;">
       <?php /* real input */ ?>
       <input type="text"
         class="text required width-2"
@@ -80,15 +83,15 @@
 </div>
 
 <div class="form-control">
-  <div class="form-label">
+  <div class="form-label input-label">
     <p><label><?= _S ('ff--text') ?></label></p>
   </div>
   <div class="form-element">
     <textarea name="text"
-      class="required full-width"
+      class="required full-width e2-textarea-autosize"
       id="text"
       tabindex="3"
-      style="height: 16.7em; overflow-x: hidden; overflow-y: visible"
+      style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
     ><?=$content['form-comment']['text']?></textarea>
     <div class="form-control-sublabel">
       <?= $content['form-comment']['create:edit?']? (_S ('gs--no-html') .'<br />') : ''?>

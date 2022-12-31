@@ -39,7 +39,7 @@ $_config['list_system_theme'] = false;
 $_config['ignore_missing_template_files'] = true; /* bool */
 
 // default maximum image width
-$_config['max_image_width'] = 768; /* pixels */
+$_config['max_image_width'] = 2560; /* pixels */
 
 
 
@@ -73,12 +73,15 @@ $_config['uploaded_files_mode'] = 0777;
 // whois service (URL to append IP address to)
 $_config['whois_service'] = 'https://www.nic.ru/whois/?ip=';
 
+// access rights to use for uploaded files
+$_config['db_table_prefix'] = 'e2Blog';
+
 
 
 // SOCIAL NETWORKS
 
 // which networks to share to
-$_config['share_to'] = 'twitter, facebook, vkontakte, pinterest';
+$_config['share_to'] = 'twitter, facebook, vkontakte, telegram, pinterest';
 
 // via whom to share to Twitter
 $_config['share_to_twitter_via'] = '';
