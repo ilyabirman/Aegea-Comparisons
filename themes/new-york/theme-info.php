@@ -1,4 +1,4 @@
-<? return array (
+<?php return array (
 
   'display_name' => array (
     'en' => 'New York',
@@ -6,5 +6,7 @@
   ),
 
   'max_image_width' => '768',
+  
+  //'based_on' => 'classical',
 
 ); ?>

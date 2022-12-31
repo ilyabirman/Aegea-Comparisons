@@ -1,4 +1,4 @@
-<? // mui ?>
+<?php // mui ?>
 
 <form
   action="<?= @$content['form-tag-delete']['form-action'] ?>"
@@ -14,18 +14,25 @@
 
 <div class="form">
 
-<div class="delete-box">
+<div class="form-control delete-box">
+  <div class="form-element e2-text">
+    <p><?= @$content['form-tag-delete']['caution-text'] ?></p>
+  </div>
 
-<p><?= @$content['form-tag-delete']['caution-text'] ?></p>
-
-<div>
-  <button type="submit" id="submit-button" class="button submit-button">
-    <?= @$content['form-tag-delete']['submit-text'] ?>
-  </button>
-</div>
+  <div class="form-element">
+    <button type="submit" id="submit-button" class="button submit-button">
+      <?= @$content['form-tag-delete']['submit-text'] ?>
+    </button>
+  </div>
 
 </div>
 
 </div>
 
 </form>
+
+
+
+
+
+

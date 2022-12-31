@@ -1,4 +1,4 @@
-<? // mui
+<?php // mui
 
 // display_name = English
 
@@ -13,15 +13,13 @@ function e2l_load_strings () {
   'e2--default-blog-author' => 'Blog author',
   
   // installer
-  'pt--install' => 'Install',
+  'pt--install' => 'Install Aegea',
   'gs--user-fixes-needed' => 'OK, something has to be fixed.',
   'gs--following-folders-missing' => 'The following folders are missing from the package:',
   'gs--could-not-create-them-automatically' => 'Could not create them automatically due to denied access. Please upload the whole package to the server.',
-  'gs--let-scripts-write-to-following-folders' => 'Please allow the following folders for write access:',
   'gs--and-reload-installer' => 'And reload the installer',
-  'fb--begin' => 'Begin',
-  'er--no-password-entered' => 'You have not entered the password',
-  'er--file-write-failed-blame-rights' => 'Some files could not be written, permission problems possible',
+  'fb--begin' => 'Start blogging',
+  'fb--retry' => 'Try again',
   'er--double-check-db-params' => 'Please double check database parameters',
   'gs--instantiated-version' => 'Instantiated version',
   'pt--installer-loading' => 'Loading...',
@@ -30,11 +28,14 @@ function e2l_load_strings () {
   'ff--just-connect' => 'I have data in my database, just connect to it',
   'ff--prefix-occupied' => 'already occupied',
   'ff--tables-not-found' => 'tables not found',
-  
+
+  // diags
+  'et--fix-permissions-on-server' => 'Fix the permissions on server',
+  'gs--enable-write-permissions-for-the-following' => 'Please enable write permissions here:',
   
   // sign in
   'pt--sign-in' => 'Sign in',
-  'er--cannot-write-auth-data' => 'Cannot save authentication data, probably insufficient permissions to write the file auth.psa',
+  'er--cannot-write-auth-data' => 'Cannot write authentication data',
 
   // archive
   'pt--nth-year' => 'The year $[year]',
@@ -52,14 +53,12 @@ function e2l_load_strings () {
   'pt--new-post' => 'New post',
   'pt--edit-post' => 'Edit post',
   'er--post-must-have-title-and-text' => 'A post must have a title and a text',
-  'er--error-publishing-post' => 'Error publishing this post',
   'er--error-updating-post' => 'Error updating this post',
   'er--error-deleting-post-tag-info' => 'Error deleting this post’s tag information',
-  'er--error-deleting-post' => 'Error deleting this post',
   'er--wrong-datetime-format' => 'Wrong date & time format. Must be “dd.mm.yyyy hh:mm:ss”',
   'er--cannot-get-post-from-db' => 'Couldn’t get the post from the database',
   'er--images-only-supported' => 'Only images are supported',
-  'er--cannot-create-thumbnail' => 'Can’t create thumbnail (probably can’t access /pictures/thumbs/)',
+  'er--cannot-create-thumbnail' => 'Can’t create thumbnail',
   'er--cannot-upload' => 'Can’t upload file',
   'ff--title' => 'Title',
   'ff--text' => 'Text',
@@ -113,11 +112,8 @@ function e2l_load_strings () {
   'gs--comment-spam-suspect' => 'Comment looks like spam',
   'gs--comment-spam-suspect-description' => 'Sorry, our robot has decided that this comment is spam, and it was not posted.',
   'gs--you-are-already-subscribed' => 'You are subscribed to comments. The link to unsubscribe is available in every mail with a new comment.',
-  'er--error-removing-comment' => 'Error removing comment',
-  'er--error-removing-comment-reply' => 'Error removing comment reply',
   'er--post-not-commentable' => 'This post cannot be commented',
   'er--name-email-text-required' => 'Name, e-mail and comment text are all required',
-  'er--error-editing-comment-reply' => 'Error updating comment reply',
   'ff--notify-subscribers' => 'Notify sender and other subscribers by email',
   'gs--your-comment' => 'Your comment',
   'ff--full-name' => 'Full name',
@@ -143,9 +139,7 @@ function e2l_load_strings () {
   'pt--posts-without-tags' => 'Posts without tags',
   'gs--no-posts-without-tags' => 'There are no posts without tags.',
   'er--bad-tag-urlname' => 'Chosen URL name cannot be used',
-  'er--error-updating-tag' => 'Error updating tag',
   'er--cannot-rename-tag' => 'This name or URL name are already in use by another tag',
-  'er--error-deleting-tag' => 'Error deleting tag',
   'ff--tag-name' => 'Display name',
   'ff--tag-urlname' => 'Name in URL',
   'ff--tag-description' => 'Description',
@@ -158,6 +152,8 @@ function e2l_load_strings () {
   // most commented and favourites
   'pt--most-commented' => 'Most commented $[period.periodname]',
   'nm--most-commented' => 'Hot',
+  'pt--most-read' => 'Popular',
+  'nm--most-read' => 'Popular',
   'pt--favourites' => 'Selected',
   'nm--favourites' => 'Selected',
   'gs--no-favourites' => 'There are no selected posts.',
@@ -185,11 +181,15 @@ function e2l_load_strings () {
   // password, sessions, settings
   'pt--password' => 'Password',
   'pt--password-for-blog' => 'Password for the blog',
+  'ff--old-password' => 'Old password',
+  'ff--new-password' => 'New password',
   'fb--change' => 'Change',
   'gs--password-changed' => 'Password has been changed',
   'er--could-not-change-password' => 'Could not change password',
+  'er--no-password-entered' => 'You have not entered a password',
   'er--wrong-password' => 'Wrong password',
   'ff--displayed-as-plain-text' => 'displayed in plain text',
+  'er--settings-not-saved' => 'Settings not saved',
   
   'pt--sessions' => 'Open sessions',
   'gs--sessions-description' => 'When you sign in using your password on multiple devices or with multiple browsers, this page shows list of all these sessions. If any of them seems suspicious, end all sessions but this, then change your password.',
@@ -216,13 +216,13 @@ function e2l_load_strings () {
   'ff--posts' => 'Posts',
   'ff--items-per-page-before' => 'Display',
   'ff--items-per-page-after' => 'per page',
-  'ff--show-favourites' => 'Show a list of selected posts',
+  'ff--show-sharing-buttons' => 'Show social sharing buttons',
   'ff--comments' => 'Comments',
   'ff--comments-enable' => 'Enable',
   'ff--only-for-recent-posts' => 'only for recent posts',
-  'ff--show-hot' => 'and show list of hot posts',
-  'ff--send-to-address' => 'and send by email to',
-  'ff--administration' => 'Administration :',
+  'ff--show-hot' => 'show list of hot posts',
+  'ff--send-to-address' => 'send by email to',
+  'ff--administration' => 'Administration:',
   'gs--password' => 'password',
   'gs--db-connection' => 'database connection',
   
@@ -236,15 +236,25 @@ function e2l_load_strings () {
   'ff--db-username-and-password' => 'User and password',
   'ff--db-name' => 'Database name',
   'ff--db-prefix' => 'Table prefix',
-  'fb--connect-to-this-db' => 'Connect using this parameters',
+  'fb--connect-to-this-db' => 'Connect using these parameters',
   'er--cannot-save-data' => 'Couldn’t save data',
 
+  'pt--diagnostics' => 'Diagnostics',
+
   'ff--changing-sidebar' => 'How to change this column?',
-  
+
+  // welcome
+  'pt--welcome' => 'Created!',
+  'pt--welcome-text-pre' => 'Your blog has been created. ',
+  'pt--welcome-text-href-write' => 'Write a post',
+  'pt--welcome-text-or' => ' or ',
+  'pt--welcome-text-href-settings' => 'set the things up',
+  'pt--welcome-text-post' => '.',
+
   // need for password
   'gs--need-password' => 'Please enter your password',
   'ff--public-computer' => 'Public computer',
-  'gs--need-password-for-action' => 'In order to $[action]<br />please enter your password',
+  'gs--need-password-for-action' => 'To $[action], please enter your password',
   'gs--np-action-write' => 'write a note',
   'gs--np-action-note-edit' => 'edit the note',
   'gs--np-action-comment-edit' => 'edit the comment',
@@ -289,6 +299,12 @@ function e2l_load_strings () {
   'gs--posts-tagged' => 'posts tagged',
   'gs--search-results' => 'search results',
   
+  // social networks
+  'sn--twitter-verb' => 'Tweet',
+  'sn--facebook-verb' => 'Share',
+  'sn--vkontakte-verb' => 'Share',
+  'sn--pinterest-verb' => 'Pin',
+
   // time
   'pt--default-timezone' => 'Default timezone',
   'gs--e2-stores-each-posts-timezone' => 'Е2 stores timezone of each post separately.',
@@ -336,9 +352,8 @@ function e2l_load_strings () {
   'gs--updated-successfully' => 'Updated successfully from version $[from] to version $[to]',
   'gs--pgt' => 'Generation time',
   'gs--seconds-contraction' => 's',
-  'gs--preview-of-future-blog' => 'Here’s what it will look like after you’ve written something:',
   'gs--good-blogs' => 'Good blogs and sites',
-  
+
   );
 
 }

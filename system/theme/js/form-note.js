@@ -6,6 +6,7 @@ if ($) $ (function () {
   var prevAlias = $ ('#alias').val ()
   var prevStamp = $ ('#stamp').val ()
   var edited = false
+  var filesToUpload = []
   
   var actionName = $ ('#action').val ()
   var liveSaving = false
@@ -45,6 +46,7 @@ if ($) $ (function () {
       if ((x = generatedTitle.indexOf ('.')) >= 0) generatedTitle = generatedTitle.substr (0, x)
       if ((x = generatedTitle.indexOf (';')) >= 0) generatedTitle = generatedTitle.substr (0, x)
       if ((x = generatedTitle.indexOf (',')) >= 0) generatedTitle = generatedTitle.substr (0, x)
+      if ((x = generatedTitle.indexOf (')')) >= 0) generatedTitle = generatedTitle.substr (0, x)
       if (generatedTitle.indexOf ('((') == 0) generatedTitle = generatedTitle.substr (2)
       generatedTitle = generatedTitle.substr (0, 1).toUpperCase () + generatedTitle.substr (1)
       $ ('#title').val (generatedTitle)
@@ -103,11 +105,10 @@ if ($) $ (function () {
   }
   
   $ ('#title').bind ('input', function () {
-    document.$e2UpdateTitle (this)
     $ ('#alias').attr ('placeholder', '')
   })
   
-  $ ('#title').add ('#tags').add ('#text').add('#alias').add('stamp')
+  $ ('#title').add ('#tags').add ('#text').add ('#alias').add ('stamp')
    .bind ('change input keyup keydown keypress mouseup mousedown cut copy paste', function () {
       e2UpdateSubmittability ()
       if ($ ('#title').val () != prevTitle) edited = true
@@ -126,6 +127,10 @@ if ($) $ (function () {
         prevStamp = $ ('#stamp').val ()
       }
     })
+
+  $ ('#title').bind ('keydown', function (e) {
+    if (e.keyCode == 13) $ ('#text').focus ()
+  })
   
   $ ('#livesave-button').click (function () { e2LiveSave (); return false })
     
@@ -181,10 +186,11 @@ if ($) $ (function () {
       
       field.selectionStart = // selStart
       field.selectionEnd = selStart + textToPaste.length - 2
-      
+
     } else {
       field.value += '\r\n\r\n' + text
     }
+    e2UpdateSubmittability ()
     field.focus ()
   }
   
@@ -253,9 +259,6 @@ if ($) $ (function () {
   }
   
   var e2DoneUploadingThisFileWithResponse = function (file, response) {
-    //alert (response);
-    $ ('#e2-uploading').hide ()
-    $ ('#e2-upload-button').show ()
     if (response.substr (0, 6) == 'image|') {
       image = response.substr (6).split ('|')
       imageFull = image[0]
@@ -275,12 +278,15 @@ if ($) $ (function () {
         $ ('#e2-upload-button').show ()
       })
     } else if (response.substr (0, 6) == 'error|') {
+      $ ('#e2-uploading').hide ()
+      $ ('#e2-upload-button').show ()
       if (response.substr (6) == 'could-not-create-thumbnail') {
         $ ('#e2-upload-error-cannot-create-thumbnail').slideDown (333)
       } else {
         $ ('#e2-upload-error-cannot-upload').slideDown (333)
       }
     }
+    e2ClearUploadBuffer ()
   }
   
   new AjaxUpload ('e2-upload-button', {
@@ -290,19 +296,12 @@ if ($) $ (function () {
  		onComplete: e2DoneUploadingThisFileWithResponse,
   })
 
-  //if (!document.e2.iosdevice) 
   $ ('#e2-upload-controls').show ()
-  
-  
-  e2DropPicture = function (e) {
-    dt = e.originalEvent.dataTransfer
-    if (!dt && !dt.files) return
 
-    var files = dt.files
-    for (i = 0; i < files.length; i++) {
-      file = files[i]
+  e2ClearUploadBuffer = function () {
+    if (filesToUpload.length) {
+      file = filesToUpload.shift ()
       filename = file.name
-
       if (e2CanUploadThisFile (filename)) {
         e2UploadFile (
           file,
@@ -312,13 +311,28 @@ if ($) $ (function () {
           }
         )
       }
-      
+      return false
+    } else {
+      return true
     }
+  }
+  
+  
+  e2DropPictures = function (e) {
+    dt = e.originalEvent.dataTransfer
+    if (!dt && !dt.files) return
+
+    var files = dt.files
+    for (i = 0; i < files.length; i++) {
+      filesToUpload.push (files[i])
+    }
+
+    e2ClearUploadBuffer ()
 
     return false
   }
   
-  $ ('.e2-note-text-textarea').bind ('drop', e2DropPicture)
+  $ ('.e2-note-text-textarea').bind ('drop', e2DropPictures)
 
 
   

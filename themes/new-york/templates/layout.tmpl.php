@@ -1,51 +1,113 @@
-<? // mui ?>
-
-<? _T ('author-menu') ?>
-
 <div class="common">
 
-<? _T ('header') ?>
 
-<? if ($content['content-page?'] and !$content['blog']['virgin?']) _T ('sidebar') ?>
 
-<? _T_FOR ('message') ?>
 
-<div class="main-content">
+<div class="level">
+<div class="header">
 
-<? if (array_key_exists ('superheading', $content)): ?>
-<div class="super-h"><?= $content['superheading'] ?></div>
-<? endif ?>
+  <?php _X ('header-pre') ?>
 
-<? if (array_key_exists ('heading', $content)): ?>
-<h2 id="e2-page-heading">
+  <div class="title">
+  <h1>
+    <?= _A ('<a href="'. $content['blog']['href']. '"><span id="e2-blog-title">'. $content['blog']['title']. '</span></a>') ?> 
+    <?php 
+      if (
+        array_key_exists ('admin-hrefs', $content)
+        and array_key_exists ('name-and-author', $content['admin-hrefs'])
+        and !_AT ($content['admin-hrefs']['name-and-author'] )
+      ) { 
+    ?>
+      <a href="<?= $content['admin-hrefs']['name-and-author'] ?>" class="nu"><span class="i-edit-small"></span></a>
+    <?php } ?>
+  </h1>
+  </div>
+
+  <div class="intro">
+    <span id="e2-blog-description"><?= $content['blog']['description'] ?></span>
+  </div>
+
+  <?php if ($content['frontpage?']) {?><?php } ?>
   
-  <?= $content['heading'] ?>
-  <? if (array_key_exists ('related-edit-href', $content)): ?>
-  <a href="<?= $content['related-edit-href'] ?>" class="nu"><span class="i-edit"></span></a>
-  <? endif ?>
-  <? if (array_key_exists ('related-rss-href', $content)): ?>
-  <a class="rss-link" href="<?=$content['related-rss-href']?>"><?= _S ('gs--rss')?></a>
-  <? endif ?>
-
-</h2>
-<? endif ?>
-
-<? if (array_key_exists ('search-related-tag', $content)) { ?> 
-<p class="tags"><small><?= _S ('gs--see-also-tag') ?> <a href="<?=$content['search-related-tag']['href']?>"><?=$content['search-related-tag']['name']?></a>.</small></p>
-<? } ?>
-
-<? _T_FOR ('tag') ?>
-<? _T_FOR ('error-404-description') ?>
-
-<? _T_FOR ('year-months') ?>
-<? _T_FOR ('month-days') ?>
-
-<? _T ('content') ?>
+  <?php _X ('header-post') ?>
 
 </div>
+</div>
 
-<div class="clear"></div>
 
-<? _T ('footer') ?>
+
+
+<div class="level">
+<?php if ($content['notes']) { ?>
+<div class="sidebar">
+  
+<div class="handle"></div>
+
+<?php _X ('sidebar-pre') ?>
+
+<div class="widget">
+<?php _T_FOR ('tags-menu') ?>
+</div>
+
+<div class="widget">
+<?php _T_FOR ('favourites') ?>
+</div>
+
+<div class="widget">
+<?php _T_FOR ('most-commented') ?>
+</div>
+
+<?php if ($content['class'] != 'found') { ?>
+<div class="widget">
+  <div class="spotlight">
+    <?php _T_FOR ('search') ?>
+  </div>
+</div>
+<?php } ?>
+
+<a class="e2-rss" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
+
+<?php _X ('sidebar-post') ?>
+
+</div>
+<?php } ?>
+<div class="content">
+
+<?php _T ('message') ?>
+<?php _T ('heading') ?>
+
+<?php _T ('welcome') ?>
+<?php _T ('notes') ?>
+<?php _T ('drafts') ?>
+<?php _T ('notes-list') ?>
+<?php _T ('tags') ?>
+<?php _T ('sessions') ?>
+<?php _T ('pages') ?>
+<?php _T ('comments') ?>
+<?php _T ('unsubscribe') ?>
+<?php _T ('form') ?>
+
+</div>
+</div>
+
+<div class="level">
+<div class="footer">
+<?php _X ('footer-pre') ?>
+© <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?> 
+<?php # please do not remove: #?>
+<div class="engine">
+<?=$content['engine']['about']?>
+<?php if ($content['sign-in']['done?']) { ?>
+&nbsp;&nbsp;&nbsp;
+<span title="<?= _S ('gs--pgt') ?>"><?=$content['engine']['pgt']?> <?= _S ('gs--seconds-contraction') ?></span>
+<?php } ?>
+</div>
+
+<?php _X ('footer-post') ?>
+</div>
+</div>
+
+
+
 
 </div>

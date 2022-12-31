@@ -1,51 +1,14 @@
 body {
-  background: #faf8f0;
-  font-family: "Georgia";
-}
-
-input, textarea {
-  outline-color: #c9c099;
+  background: #faf6f0;
 }
 
 input[type='search'] {
   outline: none;
 }
 
-a          { color: #06b }
-a:visited  { color: #537 }
-
-a.dashed, a.dashed:visited  { color: #06b; border-color: #06b }
-
-.help a { color: #999; }
-.tags a { color: #567; }
-
 h1, h2, h3 { 
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color: #301800;
-}
-
-.keyboard-shortcut,
-.submit-box,
-.tags-filter-slide-area {
-  background: #ece8d8;
-  border: 1px solid;
-  border-color: #dbd4b8 #ece8d8 #fff;
-}
-
-.top-line, .bottom-line {
-  border-top: 1px #dbd4b8 solid;
-  border-bottom: 1px #fff solid;
-}
-
-.tags-filter-slide-shaft {
-  border-top-color: #613808;
-}
-
-.sidebar {
-  background: transparent;
-  outline: 1px rgba(96, 64, 0, .33) solid;
-  border-radius: 0;
-  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 .sidebar h2 {
@@ -56,101 +19,14 @@ h1, h2, h3 {
   margin-right: -.17em;
 }
 
-.header h1,
-.header h1 a,
-.sidebar h2 a,
-.main-content h2,
-.main-content h3,
-.note h1,
-.note h1 a,
-.note h2,
-.comments-heading {
-  color: #603000;
-  border-bottom-color: rgba(96, 64, 0, .33);
-  text-shadow: 0 1px 0 #fff;
+.e2-text {
+  font-family: "Georgia";
 }
-
-.note .date {
-  font-family: "Helvetica", "Arial", sans-serif;
-}
-
-.note .comments-link {
-  font-family: "Helvetica", "Arial", sans-serif;
-}
-
-.reply .comment-content-area {
-  background: #ece8d8;
-  border: 1px solid;
-  border-color: #dbd4b8 #ece8d8 #fff;
-}
-
-.reply .comment-meta-area,
-.reply .comment-control-area {
-  border-top-color: #faf8f0;
-}
-
-.button {
-  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,232,216,1) 85%, rgba(255,255,255,.33) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)),  color-stop(85%,rgba(236,232,216,1)), color-stop(100%,rgba(255,255,255,.33))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,232,216,1) 85%, rgba(255,255,255,.33) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,232,216,1) 85%, rgba(255,255,255,.33) 100%); /* Opera11.10+ */
-  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,232,216,1) 85%, rgba(255,255,255,.33) 100%); /* IE10+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ece8d8',GradientType=0 ); /* IE6-9 */
-  background: linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,232,216,1) 85%, rgba(255,255,255,.33) 100%); /* W3C */
-  box-shadow: 0 1px 2px #777;
-}
-
-
-.submit-box .button {
-  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(214,207,180,1) 85%, rgba(255,255,255,.33) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)),  color-stop(85%,rgba(214,207,180,1)), color-stop(100%,rgba(255,255,255,.33))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(214,207,180,1) 85%, rgba(255,255,255,.33) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(214,207,180,1) 85%, rgba(255,255,255,.33) 100%); /* Opera11.10+ */
-  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(214,207,180,1) 85%, rgba(255,255,255,.33) 100%); /* IE10+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d6cfb4',GradientType=0 ); /* IE6-9 */
-  background: linear-gradient(top, rgba(255,255,255,1) 0%, rgba(214,207,180,1) 85%, rgba(255,255,255,.33) 100%); /* W3C */
-  box-shadow: 0 1px 2px #777;
-}
-
-.button:hover { box-shadow: 0 2px 4px #777 }
-.button:focus { border-color: #ece8d8 }
-.button:active:hover,
-.button:disabled:hover { border-color: #fff; box-shadow: 0 1px 2px #777 }
-
-.submit-box .button:hover { box-shadow: 0 2px 4px #777 }
-.submit-box .button:focus { border-color: #d6cfb4 }
-.submit-box .button:disabled { color: #c0b8a0 }
-.submit-box .button:active:hover,
-.submit-box .button:disabled:hover { border-color: #fff; box-shadow: 0 1px 2px #777 }
-
-
-
-.engine-info,
-.engine-info a { color: #aaa8a0; }
 
 .e2-marked {
   background: #e5cfef;
 }
 
-
 .i-important-unset {
   background-image: url('../images/marker.png');
-  _background-image: url('../images/marker.png');
-}
-
-.reply .comment-content-area-tail {
-  background-image: url('../images/tail.png');
-  _background-image: url('../images/tail.png');
-}
-
-.e2-marked .l {
-  background-image: url('../images/hgl-left.png');
-}
-
-.e2-marked .r {
-  background-image: url('../images/hgl-right.png');
-}
-
-.e2-marked .c {
-  background-image: url('../images/hgl-bg.png');
 }

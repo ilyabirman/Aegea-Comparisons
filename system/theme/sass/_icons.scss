@@ -1,7 +1,3 @@
-.i-lemon {
-  @include icon('e2-lemon-icon.jpg', 'e2-lemon-icon.jpg');
-}
-
 .i-loading {
   @include icon('loading-spinner.gif', 'loading-spinner.gif', 1, 1);
   top: -2px;
@@ -22,7 +18,11 @@
 }
 
 .i-lock {
-  @include icon('lock.gif', 'lock.gif', 1, 1);
+  @include icon('lock.png', 'lock.png', 1, 1);
+}
+
+.i-lock-mini {
+  @include icon('lock-mini.png', 'lock-mini.png', 1, 1);
 }
 
 .i-tick {
@@ -76,17 +76,17 @@
 }
 
 .i-pinned-set {
-  @include icon('pinned.gif', 'pinned.gif');
+  @include icon('pinned.png', 'pinned.png');
   top: -2px;
 }
 
 .i-pinned-unset {
-  @include icon('pin.gif', 'pin.gif');
+  @include icon('pin.png', 'pin.png');
   top: -2px;
 }
 
 .i-reply {
-  @include icon('reply.gif', 'reply.gif');
+  @include icon('reply.png', 'reply.png');
   top: -2px;
 }
 
@@ -103,5 +103,14 @@
 .i-no-comments {
   @include icon('no-comments.png', 'no-comments.png');
   top: -2px;
+}
+
+.i-enter {
+  @include icon('enter.png', 'enter.png', 1, 2);
+  margin: 0 0 2px 0;
+}
+:hover>.i-enter {
+  @include icon('enter.png', 'enter.png', 2, 2);
+  margin: 0 0 2px 0;
 }
 

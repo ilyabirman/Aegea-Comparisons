@@ -15,8 +15,6 @@ document.e2 = {
   opera: /Opera/.test (navigator.userAgent)
 }
 
-document.e2DefaultTitle = document.title
-
 // update a hrefs with link redirects
 $ ('a').each (function () {
   if (redir = $ (this).attr ('linkredir')) {
@@ -98,8 +96,8 @@ if ($ ('#e2-visual-login').length) {
     $ ('#e2-visual-login').css ('opacity', 0.25 + (1-l) * 0.75)
   })
   $ ('#e2-visual-login').click (function () {
-    $ ('#e2-visual-login').hide ()
-    $ ('#form-login').fadeIn (333)
+    $ ('#e2-visual-login').css ('visibility', 'hidden')
+    $ ('#e2-login-sheet').addClass ('e2-show')
     $ ('#e2-password').focus ()
     return false
   })
@@ -108,91 +106,34 @@ if ($ ('#e2-visual-login').length) {
 // hide login window
 document.$e2HideLoginWindow = function () {
   $ ('#e2-password').blur ()
-  $ ('#form-login').hide ()
-  $ ('#e2-visual-login').show ()
+  $ ('#e2-login-sheet').removeClass ('e2-show') 
+  $ ('#e2-visual-login').css ('visibility', 'visible')
 }
 
 $ (document).keyup (function (event) {
   // hide login window on esc
-  if ((27 == event.keyCode) && $ ('#form-login').hasClass ('e2-hideable')) {
+  if ((27 == event.keyCode) && $ ('#e2-login-sheet').hasClass ('e2-hideable')) {
     document.$e2HideLoginWindow ()
   }
 })
 
 $ (document).click (function () {
-  document.$e2HideLoginWindow ()
+  if ($ ('#e2-login-sheet').hasClass ('e2-hideable')) {
+    document.$e2HideLoginWindow ()
+  }
 })
 
-$ ('#form-login').click (function (event) {
+$ ('.e2-login-sheet-guts').click (function (event) {
   event.stopPropagation ()
 })
 
 
 
-// live updates window title
-document.$e2UpdateTitle = function (title) {
-  if (title.value) document.title = title.value
-  else if (document.e2DefaultTitle) document.title = document.e2DefaultTitle
-}
-
-// makes beautiful textmarker marks
-document.$e2Mark = function () {
-  if ($.browser.msie && $.browser.version <= 7) return
-
-  var $l = $ ('<span></span>').addClass ('l').css (
-    'nbackground-image', 'url(\'' + $ ('#e2-i-mark-hgl-left').attr ('href') + '\')'
-  )
-  var $r = $ ('<span></span>').addClass ('r').css (
-    'nbackground-image', 'url(\'' + $ ('#e2-i-mark-hgl-right').attr ('href') + '\')'
-  )
-  var $c = $ ('<span></span>').addClass ('c').css (
-    'nbackground-image', 'url(\'' + $ ('#e2-i-mark-hgl-bg').attr ('href') + '\')'
-  )
-  $ ('.e2-marked-js').each (function () {
-    if (!$ (this).hasClass ('e2-marked')) {
-      $ (this).removeClass ('e2-marked-js')
-      $ (this).html ($ (this).text ())
-    }
-  })
-  $ ('.e2-marked').each (function () {
-    if (!$ (this).hasClass ('e2-marked-js')) {
-      $ (this).addClass ('e2-marked-js')
-      $ (this).css ('background', 'transparent')
-      html = $ (this).html ().split (' ')
-      for (i in html) {
-        $w = $ ('<span></span>')
-        $w.append ($l)
-        $w.append ($r)
-        $cc = $c.clone ().append (html[i])
-        $w.append ($cc)
-        html[i] = '<span class="w">' + $w.html () + '</span>'
-      }
-      $ (this).html (html.join (' '))
-    }
-  })
-}
-document.$e2Mark ()
-
 // don't search empty string
-$ ('#e2-form-search').submit (function () {
+$ ('#e2-search').submit (function () {
   if (/^ *$/.test ($ ('#query').val ())) return false
 })
 
-// retitle on scrolling
-document.$e2UpdateScrollTitle = function () {
-  var y = $ (window).scrollTop ()
-  var title = ''
-  $ ('.e2-smart-title').each (function () {
-    if ($ (this).position ().top > y + window.innerHeight) return false
-    title = $ (this).text ()
-    if ($ (this).position ().top > y) return false
-  })
-  if (title) document.title = title
-}
-if ($ ('.e2-smart-title').length > 1) {
-  $ (window).bind ('scroll', document.$e2UpdateScrollTitle)
-  document.$e2UpdateScrollTitle ()
-}
 
 // ctrl+enter sends forms
 $ (document).bind ('keydown keyup keypress', function (event) {

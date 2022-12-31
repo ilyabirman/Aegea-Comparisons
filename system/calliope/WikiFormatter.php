@@ -118,7 +118,7 @@
      function makeSafeHref ($string) {
        #$string = str_replace ('\'', '&apos;', $string);
        #$string = str_replace ('"', '&quot;', $string);
-       $string = htmlspecialchars ($string);
+       $string = htmlspecialchars ($string, ENT_COMPAT | ENT_HTML401, 'cp1251');
        foreach (array ('http', 'https', 'ftp', 'ftps') as $protocol) {
          $protocol .= '://';
          if (strcasecmp ($protocol, substr ($string, 0, strlen ($protocol))) === 0) {
@@ -174,7 +174,7 @@
          }
          if ($found[2]) $alt = $this->implodeArray(array_splice($found, 2));
          if (empty ($alt)) $alt = '';
-         $compiledTag = '<img src="'.$img.'" alt="'.@htmlspecialchars ($alt).'"'.@$imageInfo['size'].' />';
+         $compiledTag = '<img src="'.$img.'" alt="'.@htmlspecialchars ($alt, ENT_COMPAT | ENT_HTML401, 'cp1251').'"'.@$imageInfo['size'].' />';
          
          
          
@@ -183,7 +183,7 @@
            $compiledTag = '<div class="txt-picture">'.
            '<a href="'. $imageInfo['href-original'] .'" class="txt-picture-zoom-link" width="'. $imageInfo['width-original'] .'">'.
            '<div class="txt-picture-zoom-icon"><div class="txt-picture-zoomable"></div><div class="txt-picture-zoom-in"></div></div>'.
-           '<img src="'.$imageInfo['href'].'" alt="'.@htmlspecialchars ($alt).'"'.@$imageInfo['size'].' />'.
+           '<img src="'.$imageInfo['href'].'" alt="'.@htmlspecialchars ($alt, ENT_COMPAT | ENT_HTML401, 'cp1251').'"'.@$imageInfo['size'].' />'.
            '</a></div>';
          }
          
@@ -219,7 +219,7 @@
            if ($this->settings['mode'] == WF_SIMPLE_MODE) $relnofollow = ' rel="nofollow"';
 
            #/ILYABIRMAN:
-           $compiledTag = '<a href="'.$found[1].'"'.@$relnofollow.'><img src="'.$img.'" border="0" alt="'.@htmlspecialchars ($alt).'"'.@$imageInfo['size'].' /></a>';
+           $compiledTag = '<a href="'.$found[1].'"'.@$relnofollow.'><img src="'.$img.'" border="0" alt="'.@htmlspecialchars ($alt, ENT_COMPAT | ENT_HTML401, 'cp1251').'"'.@$imageInfo['size'].' /></a>';
          } else
          { 
 #return $found[1];           
@@ -324,7 +324,7 @@
     function saveASIS($found)
     {
       global $asisTagStack;
-      $asisTagStack[] = htmlspecialchars ($found[2], ENT_NOQUOTES);
+      $asisTagStack[] = htmlspecialchars ($found[2], ENT_NOQUOTES, 'cp1251');
       return(substr($found[1],2)."\x2_".(sizeof($asisTagStack)-1)."_\x2".substr($found[3],2));
     }
 
@@ -346,7 +346,7 @@
           //print_r ($found[3]);
           $tag = $found[3];
         } else {
-          $tag = htmlspecialchars ($found[0], ENT_NOQUOTES);
+          $tag = htmlspecialchars ($found[0], ENT_NOQUOTES, 'cp1251');
         }
       }
       $htmlTagStack[] = $tag;
@@ -359,7 +359,7 @@
     function saveCodes($found)
     {
       global $codeTagStack;
-      $found[2] = htmlspecialchars ($found[2], ENT_NOQUOTES);
+      $found[2] = htmlspecialchars ($found[2], ENT_NOQUOTES, 'cp1251');
       $found[2] = str_replace(' ','&nbsp;', $found[2]);
       $found[2] = str_replace("\r\n",'<br />', $found[2]);
       $found[2] = str_replace("\n",'<br />', $found[2]);
@@ -509,9 +509,7 @@
 
 
        # Kill remaining HTML
-       $content = htmlspecialchars ($content, ENT_NOQUOTES);
-
-       
+       $content = htmlspecialchars ($content, ENT_NOQUOTES, 'cp1251');
 
        $content = preg_replace_callback(
 

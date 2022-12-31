@@ -1,5 +1,3 @@
-<? // mui ?>
-
 <form
   action="<?= @$content['form-note-publish']['form-action'] ?>"
   method="post"
@@ -25,14 +23,10 @@ document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
 
 <div class="form">
 
-<div class="form-control">
-
-  <div class="submit-box">
-    <button type="submit" id="submit-button" class="button submit-button">
-      <?= @$content['form-note-publish']['submit-text'] ?>
-    </button>
-  </div>
-
+<div class="form-control submit-box">
+  <button type="submit" id="submit-button" class="button submit-button">
+    <?= @$content['form-note-publish']['submit-text'] ?>
+  </button>
 </div>
 
 </div>

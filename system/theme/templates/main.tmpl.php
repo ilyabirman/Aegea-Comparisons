@@ -3,35 +3,38 @@
 
 <head>
 
-<? _LIB ('jquery') ?>
-<? _LIB ('pseudohover') ?>
+<?php _LIB ('jquery') ?>
+<?php _LIB ('pseudohover') ?>
+<?php _LIB ('smart-title') ?>
 
-<? _CSS ('main') ?>
-<? _JS ('main') ?>
+<?php _CSS ('main') ?>
+<?php _JS ('main') ?>
 
-<? if ($content['sign-in']['done?']) { ?>
-<? _CSS ('admin') ?>
-<? _JS ('admin') ?>
-<? } ?>
+<?php if ($content['sign-in']['done?']) { ?>
+<?php _CSS ('admin') ?>
+<?php _JS ('admin') ?>
+<?php } ?>
 
 <e2:head-data />
+<e2:scripts-data />
 
 </head>
 
 <body>
 
-<?#= _GUIDES (array (3, 11, 19, 27, 35, 43, 51, 59, 67, 75, 83, 91, 99)) ?>
-<?#= _GUIDES (array (12, 20, 28, 36, 44, 52, 60, 68, 76, 84, 92)) ?>
+<?php _T_FOR ('form-install') ?>
+<?php _T_FOR ('form-login') ?>
 
-<? _T_FOR ('short-message') ?>
-<? _T_FOR ('form-install') ?>
-<? _T_FOR ('form-login') ?>
-
-<? if ($content['engine']['installed?']): ?>
-<? _T ('layout'); ?>
-<? endif ?>
-
+<?php if ($content['engine']['installed?']): ?>
+<?php _T ('author-menu') ?>
+<?php _T ('layout'); ?>
+<?php if (!$content['sign-in']['done?'] and !$content['sign-in']['necessary?']) { ?>
+<a class="e2-visual-login nu" id="e2-visual-login" href="<?= $content['hrefs']['sign-in'] ?>" class="nu"><span class="i-login"></span></a>
+<?php } ?>
+<?php endif ?>
 
 </body>
 
 </html>
+
+<!-- <?=$content['engine']['version-description']?> -->

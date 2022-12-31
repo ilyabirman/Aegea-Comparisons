@@ -1,10 +1,14 @@
-<? // mui ?>
+<?php if (array_key_exists ('notes-list', $content)) { ?>
 
-<? foreach ($content['notes-list'] as $note): ?>
+<div class="e2-note-list e2-text">
+<?php foreach ($content['notes-list'] as $note): ?>
 <p>
   <a href="<?= $note['href'] ?>" title=""><?= $note['title']?></a>
-  <? if (array_key_exists ('text-fragment', $note)) { ?>
+  <?php if (array_key_exists ('text-fragment', $note)) { ?>
   &nbsp; <?= $note['text-fragment']?>
-  <? } ?>
+  <?php } ?>
 </p>
-<? endforeach; ?>
+<?php endforeach; ?>
+</div>
+
+<?php } ?>

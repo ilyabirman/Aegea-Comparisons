@@ -1,24 +1,18 @@
-$f_main: "Helvetica", "Arial", sans-serif;
-$f_mono: "Consolas", "Courier New", monospace;
+$c_bg:          #ffffff;
+$c_link:        #0000a0;
+$c_visited:     #8000a0;
+$c_hover:       #d04000;
+$c_focus:       #a0a0a0;
+$c_focus:       #60a0ff;
+$c_grey:        #999999;
+$c_border:      #d0d0d0;
+$c_light:       #e8e8e8;
+$c_blue:        #0070ff;
+$c_marker:      #fff8b8;
 
-$h_line: 1.5em;
+$c_error:       #ff0000;
+$c_admin:       #009030;
 
-$w_left_pad: 40px;
+$thin:          0.85;
 
-$c_bg:      #fff;
-
-$c_link:    #009;
-$c_visited: #609;
-$c_hover:   #d04000;
-$c_grey:    #999;
-$c_rss:     #803000;
-
-$g_left:      3%;
-$g_content:  19%;
-$g_right:    99%;
-$g_sidebar:  15%;
-
-$g_left:      2%;
-$g_content:  16%;
-$g_right:    99%;
-$g_sidebar:  10%;
+$time:          .5s;

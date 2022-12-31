@@ -1,18 +1,15 @@
-<? // mui ?>
+<div class="e2-month-days">
 
-<p class="month-days">
+<?php foreach ($content['month-days'] as $day): ?>
 
-<? foreach ($content['month-days'] as $day): ?>
-<? if ($day['this?']): ?>
-<span class="month-day current"><?= _DT ('j', $day['start-time']) ?></span>
-<? elseif ($day['fruitful?']): ?>
-<span class="month-day"><a href="<?= $day['href'] ?>"><?= _DT ('j', $day['start-time']) ?></a></span>
-<? elseif ($day['real?']): ?>
-<span class="month-day"><?= _DT ('j', $day['start-time']) ?></span>
-<? else: ?>
-<span class="month-day unexistent"><?= _DT ('j', $day['start-time']) ?></span>
-<? endif; ?>
+<?php if ($day['this?']): ?>
+<span class="e2-month-day e2-month-day-current"><?= _DT ('j', $day['start-time']) ?></span>
+<?php elseif ($day['fruitful?']): ?>
+<span class="e2-month-day"><a href="<?= $day['href'] ?>"><?= _DT ('j', $day['start-time']) ?></a></span>
+<?php else: ?>
+<span class="e2-month-day e2-period-unavailable"><?= _DT ('j', $day['start-time']) ?></span>
+<?php endif; ?>
 
-<? endforeach ?>
+<?php endforeach ?>
 
-</p>
+</div>

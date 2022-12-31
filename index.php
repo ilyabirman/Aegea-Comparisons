@@ -1,1 +1,1 @@
-<? require 'system/core.php'; e2 (); ?>
+<?php require 'system/core.php'; e2 (); ?>

@@ -8,7 +8,7 @@
 <description><?= $content['description'] ?></description>
 <generator><?= $content['generator'] ?></generator>
 
-<?# _T_FOR ('items') ?>
+<?php # _T_FOR ('items') ?>
 <?= $content['items'] ?>
 
 </channel>

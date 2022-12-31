@@ -1,4 +1,4 @@
-<?
+<?php 
 
 // display_name = Русский
 
@@ -13,15 +13,13 @@ function e2l_load_strings () {
   'e2--default-blog-author' => 'Автор блога',
   
   // installer
-  'pt--install' => 'Установка',
+  'pt--install' => 'Установка Эгеи',
   'gs--user-fixes-needed' => 'Так, нужно кое-что поправить.',
   'gs--following-folders-missing' => 'Не найдены следующие папки из дистрибутива движка:',
   'gs--could-not-create-them-automatically' => 'Создать их автоматически не удалось из-за недостатка прав. Загрузите на сервер полный дистрибутив.',
-  'gs--let-scripts-write-to-following-folders' => 'Дайте скриптам права на запись в папках:',
   'gs--and-reload-installer' => 'И перезагрузите установщик',
-  'fb--begin' => 'Начать',
-  'er--no-password-entered' => 'Вы не ввели пароль',
-  'er--file-write-failed-blame-rights' => 'Возникли проблемы при записи файлов, возможно недостаточно прав доступа',
+  'fb--begin' => 'Начать блог',
+  'fb--retry' => 'Попробовать ещё раз',
   'er--double-check-db-params' => 'Перепроверьте реквизиты базы',
   'gs--instantiated-version' => 'Инстанциирована версия',
   'pt--installer-loading' => 'Загрузка...',
@@ -31,10 +29,13 @@ function e2l_load_strings () {
   'ff--prefix-occupied' => 'уже занят',
   'ff--tables-not-found' => 'таблиц не найдено',
 
+  // diags
+  'et--fix-permissions-on-server' => 'Настройте права на сервере',
+  'gs--enable-write-permissions-for-the-following' => 'Пожалуйста, дайте права на запись здесь:',
   
   // sign in
   'pt--sign-in' => 'Вход',
-  'er--cannot-write-auth-data' => 'Не удаётся сохранить данные аутентификации, возможно недостаточно прав для записи файла auth.psa',
+  'er--cannot-write-auth-data' => 'Не удаётся записать данные аутентификации',
 
   // archive
   'pt--nth-year' => '$[year]-й год',
@@ -52,14 +53,12 @@ function e2l_load_strings () {
   'pt--new-post' => 'Новая заметка',
   'pt--edit-post' => 'Правка заметки',
   'er--post-must-have-title-and-text' => 'У заметки должны быть название и текст',
-  'er--error-publishing-post' => 'Ошибка при публикации заметки',
   'er--error-updating-post' => 'Ошибка при изменении заметки',
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
-  'er--error-deleting-post' => 'Ошибка при удалении заметки',
   'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
   'er--cannot-get-post-from-db' => 'Не удалось извлечь заметку из базы',
   'er--images-only-supported' => 'Поддерживаются только изображения',
-  'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение (возможно, нет доступа к папке /pictures/thumbs/)',
+  'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload' => 'Не удалось загрузить файл',
   'ff--title' => 'Название',
   'ff--text' => 'Текст',
@@ -113,11 +112,8 @@ function e2l_load_strings () {
   'gs--comment-spam-suspect' => 'Комментарий похож на спам',
   'gs--comment-spam-suspect-description' => 'Простите, но робот решил, что это спам, поэтому комментарий не был отправлен.',
   'gs--you-are-already-subscribed' => 'Вы подписаны на комментарии. Ссылка для отписки приходит в каждом письме с новым комментарием.',
-  'er--error-removing-comment' => 'Ошибка при удалении комментария',
-  'er--error-removing-comment-reply' => 'Ошибка при удалении ответа на комментарий',
   'er--post-not-commentable' => 'Эту заметку нельзя комментировать',
   'er--name-email-text-required' => 'И имя, и эл. адрес, и текст комментария обязательны',
-  'er--error-editing-comment-reply' => 'Ошибка при изменении ответа на комментарий',
   'ff--notify-subscribers' => 'Отправить по почте комментатору и другим подписчикам',
   'gs--your-comment' => 'Ваш комментарий',
   'ff--full-name' => 'Имя и фамилия',
@@ -143,9 +139,7 @@ function e2l_load_strings () {
   'pt--posts-without-tags' => 'Заметки без тегов',
   'gs--no-posts-without-tags' => 'Заметок без тегов нет.',
   'er--bad-tag-urlname' => 'Такой вид в адресной строке не может быть использован',
-  'er--error-updating-tag' => 'Ошибка при обновлении тега',
   'er--cannot-rename-tag' => 'Такое имя или вид в адресной строке уже используются другим тегом',
-  'er--error-deleting-tag' => 'Ошибка при удалении тега',
   'ff--tag-name' => 'Название',
   'ff--tag-urlname' => 'В адресной строке',
   'ff--tag-description' => 'Описание',
@@ -158,6 +152,8 @@ function e2l_load_strings () {
   // most commented and favourites
   'pt--most-commented' => 'Самые комментируемые за $[period.periodname]',
   'nm--most-commented' => 'Обсуждаемое',
+  'pt--most-read' => 'Самые читаемые за $[period.periodname]',
+  'nm--most-read' => 'Популярное',
   'pt--favourites' => 'Избранное',
   'nm--favourites' => 'Избранное',
   'gs--no-favourites' => 'Избранного нет.',
@@ -185,11 +181,15 @@ function e2l_load_strings () {
   // password, sessions, settings
   'pt--password' => 'Пароль',
   'pt--password-for-blog' => 'Пароль для доступа к блогу',
+  'ff--old-password' => 'Старый пароль',
+  'ff--new-password' => 'Новый пароль',
   'fb--change' => 'Поменять',
   'gs--password-changed' => 'Пароль изменён',
   'er--could-not-change-password' => 'Не получилось изменить пароль',
+  'er--no-password-entered' => 'Вы не ввели пароль',
   'er--wrong-password' => 'Неправильный пароль',
   'ff--displayed-as-plain-text' => 'отображается при вводе',
+  'er--settings-not-saved' => 'Настройка не сохранена',
 
   'pt--sessions' => 'Открытые сессии',
   'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
@@ -216,12 +216,12 @@ function e2l_load_strings () {
   'ff--posts' => 'Заметки',
   'ff--items-per-page-before' => 'Показывать по',
   'ff--items-per-page-after' => 'на странице',
-  'ff--show-favourites' => 'Показывать блок «Избранное»',
+  'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
   'ff--comments' => 'Комментарии',
   'ff--comments-enable' => 'Разрешать',
   'ff--only-for-recent-posts' => 'только к свежим заметкам',
-  'ff--show-hot' => 'и показывать блок «Обсуждаемое»',
-  'ff--send-to-address' => 'и присылать по почте на адрес:',
+  'ff--show-hot' => 'показывать блок «Обсуждаемое»',
+  'ff--send-to-address' => 'присылать по почте на адрес:',
   'ff--administration' => 'Администрирование:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'соединение с базой',
@@ -239,12 +239,22 @@ function e2l_load_strings () {
   'fb--connect-to-this-db' => 'Подключиться с этими параметрами',
   'er--cannot-save-data' => 'Не получается сохранить данные',
   
+  'pt--diagnostics' => 'Диагностика',
+
   'ff--changing-sidebar' => 'Как изменить эту колонку?',
   
+  // welcome
+  'pt--welcome' => 'Готово!',
+  'pt--welcome-text-pre' => 'Блог создан. ',
+  'pt--welcome-text-href-write' => 'Напишите заметку',
+  'pt--welcome-text-or' => ' или ',
+  'pt--welcome-text-href-settings' => 'настройте что-нибудь',
+  'pt--welcome-text-post' => '.',
+
   // need for password
   'gs--need-password' => 'Зайдите под своим паролем',
   'ff--public-computer' => 'Чужой компьютер',
-  'gs--need-password-for-action' => 'Чтобы $[action]<br />зайдите под своим паролем',
+  'gs--need-password-for-action' => 'Чтобы $[action], зайдите под своим паролем',
   'gs--np-action-write' => 'написать заметку',
   'gs--np-action-note-edit' => 'править заметку',
   'gs--np-action-comment-edit' => 'править этот комментарий',
@@ -315,6 +325,12 @@ function e2l_load_strings () {
   'gs--comment-on-post' => 'комментарий к заметке',
   'gs--posts-tagged' => 'заметки с тегом',
   'gs--search-results' => 'результаты поиска',
+  
+  // social networks
+  'sn--twitter-verb' => 'Твитнуть',
+  'sn--facebook-verb' => 'Поделиться',
+  'sn--vkontakte-verb' => 'Поделиться',
+  'sn--pinterest-verb' => 'Запинить',
 
   // umacros
   'um--month' => '$[month.monthname]',
@@ -336,7 +352,6 @@ function e2l_load_strings () {
   'gs--pgt' => 'Время генерации',
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выполнено обновление с версии $[from] до версии $[to]',
-  'gs--preview-of-future-blog' => 'Так будет выглядеть движок изнутри после того как вы напишете что-нибудь:',
   'gs--good-blogs' => 'Хорошие блоги и сайты',
   
   );

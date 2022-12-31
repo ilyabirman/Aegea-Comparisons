@@ -22,7 +22,7 @@ if ($) $ (function () {
     if (Boolean (dbCount) == ($ ('#db-database-list').css ('display') == 'none')) {
       $ ('#db-database-list').add ('#db-database').toggle ()
     }
-    $ ('.sunglass').fadeOut (333)
+    $ ('.e2-glass').fadeOut (333)
     initialGlassCheck = false
   }
 
@@ -116,36 +116,38 @@ if ($) $ (function () {
               url: $ ('#e2-list-databases-action').attr ('href'),
               
               success: function (msg) {
-                var dbs = msg.split ('|')
-                valBefore = $ ('#db-database').val ()
-                if ($ ('#db-database').val () == '') {
-                  $ ('#db-database').val (dbs[0])
-                } else {
-										for (var i in dbs) {
-										if (dbs[i].match (RegExp ('^' + $ ('#db-database').val () + ''))) {
-										  $ ('#db-database').val (dbs[i])
-										  break
-                    }
-									}
-                }
-                $ ('#db-database-list').empty ()
-                for (var i in dbs) {
-                  ++ dbCount
-                  $ ('#db-database-list')
-                    .append (
-                    '<option id="db-database-option-' + dbs[i] + '">' +
-                    dbs[i] +
-                    '<' + '/option>'
-                    )
-                }
+                if (msg) {
+                  var dbs = msg.split ('|')
+                  valBefore = $ ('#db-database').val ()
+                  if ($ ('#db-database').val () == '') {
+                    $ ('#db-database').val (dbs[0])
+                  } else {
+  										for (var i in dbs) {
+  										if (dbs[i].match (RegExp ('^' + $ ('#db-database').val () + ''))) {
+  										  $ ('#db-database').val (dbs[i])
+  										  break
+                      }
+  									}
+                  }
+                  $ ('#db-database-list').empty ()
+                  for (var i in dbs) {
+                    ++ dbCount
+                    $ ('#db-database-list')
+                      .append (
+                      '<option id="db-database-option-' + dbs[i] + '">' +
+                      dbs[i] +
+                      '<' + '/option>'
+                      )
+                  }
 
-                $ ('#db-database-list #db-database-option-' + $ ('#db-database').val ())
-                  .attr ('selected', 'selected')
-                  
-                $ ('#db-database').val ($ ('#db-database-list option:selected').val ())
-                $ ('#db-database-list').addClass ('verified')
-                if (valBefore != $ ('#db-database').val ()) {
-                  e2CheckDbConfig ()
+                  $ ('#db-database-list #db-database-option-' + $ ('#db-database').val ())
+                    .attr ('selected', 'selected')
+                    
+                  $ ('#db-database').val ($ ('#db-database-list option:selected').val ())
+                  $ ('#db-database-list').addClass ('verified')
+                  if (valBefore != $ ('#db-database').val ()) {
+                    e2CheckDbConfig ()
+                  }
                 }
               },
               
@@ -175,7 +177,7 @@ if ($) $ (function () {
             $ ('.input-editable').removeAttr ('disabled')
             $ ('#db-server').add ('#db-user').add ('#db-password').add ('#db-database').val ('')
             $ ('#db-server').focus ()
-            setTimeout (function () { $ ('.sunglass').fadeOut (333) }, 333)
+            setTimeout (function () { $ ('.e2-glass').fadeOut (333) }, 333)
             initialGlassCheck = false
           }
         },

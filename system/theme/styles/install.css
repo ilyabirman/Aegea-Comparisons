@@ -1,51 +1,32 @@
-.installer-picture {
-  float: left;
-  width: 23%;
-  margin: 0 1% 0 3%;
-  text-align: center;
+.installer {
+  margin: 64px 2% 32px 16%;
+  width: 82%;
 }
 
-.installer-title {
-  margin: 50px 25% 50px 27%;
-  width: 48%;
-}
-
-.installer-title h1 {
-  font-size: 160%;
+.installer h1 {
+  margin: -5px 0 32px 0;
   font-weight: normal;
+  font-size: 36px;
+  line-height: 48px;
+  color: #000;
 }
 
-.form-control .label {
-  float: left;
-  margin: 0.33em 0 0 -27.78%;
-  width: 27.78%;
-  padding-right: 24px;
+.installer h3 {
+  font-weight: bold;
 }
 
-.main-content {
-  margin: 1em 1% 0 27%;
-  width: 72%;
-  min-height: 320px;
-}
-
-.engine-info {
-  float: left;
-  margin: 0 1% 0 27%;
-  width: 48%;
-  font-size: 85%;
-}
-
-.message-bar {
-  background: #fff;
-  border: 1px #fb2 solid;
-  margin: 1em 1% 1em 25%;
-  padding: .5em 0 1em 2%;
+.input-remark {
+  margin-left: 1em;
 }
 
 .livecheckable {
-  color: #999;
+  color: #000;
 }
 
 .verified {
   color: #090;
+}
+
+.e2-wrong {
+  color: #900;
 }

@@ -1,6 +1,6 @@
 if ($) $ (function () {
   
-  var csscPrefix = 'txt-picture'
+  var csscPrefix = 'e2-text-picture'
   
   var imageAnimateWidthTo = function ($img, width) {
     
@@ -10,46 +10,41 @@ if ($) $ (function () {
     
     return false
     
-  }
+  }  
+  
+  var imageToggleSize = function () {
+  
+    this.blur ()
+    
+    var $this = $ (this)
+    var $img = $ ('img', $this)
 
+    if ($this.hasClass (csscPrefix + '-zoomed')) {
+    
+      var newWidth = $img.data ('previewWidth')
+
+    } else {
+
+      var newWidth = $this.attr ('width') // full width
+
+      $img.data ({ 'previewWidth': $img.width () })
+
+      // full picture src is a's href
+      fullSrc = this.href
+      
+      bigImg = new Image ()
+      $ (bigImg).attr ('src', fullSrc);
+      $ (bigImg).bind ('load', function () {
+        $img.attr ('src', fullSrc)
+      })
+      
+    }
+    
+    $this.toggleClass (csscPrefix + '-zoomed')
+    return imageAnimateWidthTo ($img, newWidth)
   
-  var imageShowRealSize = function () {
-  
-    this.blur ()
-    $ (this).addClass (csscPrefix + '-zoomed')
-    
-    var $img = $ ('img', $ (this))
-    
-    $img.data ({ 'previewWidth': $img.width () })
-  
-    fullWidth = $ (this).attr ('width')
-  
-    // full picture src is a's href
-    fullSrc = this.href
-    
-    bigImg = new Image ()
-    $ (bigImg).attr ('src', fullSrc);
-    $ (bigImg).bind ('load', function () {
-      $img.attr ('src', fullSrc)
-    })
-    
-    return imageAnimateWidthTo ($img, fullWidth)
-    
   }
   
-  var imageShowPreviewSize = function () {
-  
-    this.blur ()
-    $ (this).removeClass (csscPrefix + '-zoomed')
-    
-    var $img = $ ('img', $ (this))
-    
-    previewWidth = $img.data ('previewWidth')
-    
-    return imageAnimateWidthTo ($img, previewWidth)
-    
-  }
-  
-  $ ('a.' + csscPrefix + '-zoom-link').toggle (imageShowRealSize, imageShowPreviewSize)
+  $ ('a.' + csscPrefix + '-zoom-link').click (imageToggleSize)
 
 })

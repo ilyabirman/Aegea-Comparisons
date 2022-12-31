@@ -1,115 +1,147 @@
-<? // mui ?>
+<?php if (@$content['pages']['timeline?']) _T ('pages-later') ?>
 
-<? if (@$content['pages']['timeline?']) _T ('pages-later') ?>
+<?php foreach ($content['notes'] as $note): ?>
 
-<? foreach ($content['notes'] as $note): ?>
+<?php _X ('note-pre') ?>
 
-<? _X ('note-pre') ?>
+<div class="<?= array_key_exists ('only', $content['notes'])? 'e2-only ': '' ?>e2-note <?= $note['favourite?']? 'e2-note-favourite' : '' ?> <?= $note['visible?']? '' : 'e2-hidden' ?>">
 
-<div class="<?= array_key_exists ('only', $content['notes'])? 'only ': '' ?>note <?= $note['favourite?']? 'e2-note-favourite' : '' ?>">
+<?php // TITLE // ?>
+<h1 class="<?= ($note['published?'] and !$note['future?'])? 'e2-published' : 'e2-draft' ?> e2-smart-title"><?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?>
 
-<? // TITLE // ?>
-<h1 class="<?= ($note['published?'] and !$note['future?'])? 'published' : 'draft' ?> <?= $note['visible?']? 'visible' : 'hidden' ?> e2-smart-title"><?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?>
+<span style="white-space: nowrap">
 
-<span class="icons">
-
-<? if (array_key_exists ('favourite-toggle-href', $note)): ?>
+<?php if (array_key_exists ('favourite-toggle-href', $note)): ?>
 <a href="<?= $note['favourite-toggle-href'] ?>" class="e2-favourite-toggle nu">
 <span class="i-favourite-<?= ($note['favourite?']? 'set' : 'unset') ?>"></span></a>
-<? else: ?>
-<? if (@$note['favourite?']) { ?><span class="i-favourite"></span><? } ?> 
-<? endif ?>
+<?php else: ?>
+<?php if (@$note['favourite?']) { ?><span class="i-favourite"></span><?php } ?> 
+<?php endif ?>
 
-<? if (@$note['published?']): ?>
+<?php if (@$note['published?']): ?>
 
-<? if (array_key_exists ('edit-href', $note)): ?>
+<?php if (array_key_exists ('edit-href', $note)): ?>
 <a href="<?= $note['edit-href'] ?>" class="nu"><span class="i-edit"></span></a>
-<? endif ?>
+<?php endif ?>
 
-<? if (array_key_exists ('delete-href', $note)): ?>
+<?php if (array_key_exists ('delete-href', $note)): ?>
 <a href="<?= $note['delete-href'] ?>" class="nu"><span class="i-remove"></span></a>
-<? endif ?>
+<?php endif ?>
 
-<? endif ?>
+<?php endif ?>
 
 </span>
 
 </h1>
 
 
-<? // DATE AND TIME // ?>
+<?php // DATE AND TIME // ?>
 
-<? if (@$note['published?']) { ?>
+<?php if (@$note['published?']) { ?>
 
-<p class="date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></p>
+<div class="e2-note-date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></div>
 
-<? } else { ?>
+<?php } else { ?>
 
-<p class="date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?> (<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['last-modified'])?>)"><?=_DT ('j {month-g} Y, H:i', @$note['time'])?></p>
+<div class="e2-note-date" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?> (<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['last-modified'])?>)"><?=_DT ('j {month-g} Y, H:i', @$note['time'])?></div>
 
-<? } ?>
+<?php } ?>
 
 
 
-<? // TEXT // ?>
+<?php // TEXT // ?>
 
-<div class="text <?= $note['published?']? 'published' : 'draft' ?> <?= $note['visible?']? 'visible' : 'hidden' ?>">
+<div class="e2-note-text e2-text <?= $note['published?']? 'e2-published' : 'e2-draft' ?>">
 <?=@$note['text']?>
 </div>
 
 
+<?php // LIKES // ?>
 
-<? // LIST OF KEYWORDS // ?>
+<?php if (array_key_exists ('only', $content['notes'])) { ?>
+<?php if ($note['shareable?']) { ?> 
+<?php if ($note['published?'] and !$note['future?']) { ?> 
 
-<? if (array_key_exists ('only', $content['notes']) and array_key_exists ('tags', $note)): ?>
-<div class="tags">
-<?
+<?php _LIB ('likely') ?>
+<div class="e2-note-likes">
+<div class="likely" data-url="<?= $note['href-original'] ?>" data-title="<?= strip_tags ($note['title']) ?>">
+
+<?php foreach ($note['share-to'] as $network => $network_info) { ?>
+<?php if ($network_info['share?']) { ?>
+<?php 
+  $additional = '';
+  if ($network_info['data']) {
+    foreach ($network_info['data'] as $k => $v) {
+      $additional .= ' data-'. $k .'="'. $v .'"';
+    }
+  }
+?>
+
+<div class="<?= $network ?>" <?= $additional ?>><?= _S ('sn--'. $network .'-verb') ?></div>
+
+<?php } ?>
+<?php } ?>
+
+</div>
+</div>
+
+<?php } ?>
+<?php } ?>
+<?php } ?>
+
+
+
+
+<?php // LIST OF KEYWORDS // ?>
+
+<?php if (array_key_exists ('tags', $note)): ?>
+<div class="e2-note-tags">
+<?php 
 $tags = array ();
 foreach ($note['tags'] as $tag) {
   if ($tag['current?']) {
-    $tags[] = '<span class="e2-marked">'. $tag['name'] .'</span>';
+    $tags[] = '<span class="e2-tag e2-marked">'. $tag['name'] .'</span>';
   } else {
-    $tags[] = '<a href="'. $tag['href'] .'">'. $tag['name'] .'</a>';
+    $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
   }
 }
 echo implode (' &nbsp; ', $tags)
 
 ?>
 </div>
-<? endif; ?>
+<?php endif; ?>
 
 
-<? if ($note['comments-link?']): ?>
-<div class="comments-link"><span class="comments-link-icon"></span>
-<? if ($note['comments-count']) { ?>
-<a href="<?= $note['href'] ?>"><b><?= $note['comments-count-text'] ?></b></a><? if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>
- (<?= _S ('gs--comments-all-one-new') ?>)
-<? } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>
- (<?= _S ('gs--comments-all-new') ?>)
-<? } elseif ($note['new-comments-count']) { ?>
- <span class="admin-links"> (<a href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a>)</span>
-<? } ?>
-<? } else { ?>
-<a href="<?= $note['href'] ?>"><b><?= _S ('gs--no-comments') ?></b></a>
-<? } ?>
+<?php // COMMENTS LINK // ?>
+
+<?php if ($note['comments-link?']): ?>
+<div class="e2-note-comments-link">
+<?php if ($note['comments-count']) { ?><a href="<?= $note['href'] ?>"><?= $note['comments-count-text'] ?></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
+<?php } ?>
+<?php } else { ?>
+<a href="<?= $note['href'] ?>"><?= _S ('gs--no-comments') ?></a>
+<?php } ?>
 </div>
-<? endif ?>
+<?php endif ?>
 
-<? if (!@$note['published?']): ?>
-<div class="toolbar">
-  <? if (array_key_exists ('edit-href', $note)) { ?>
+</div>
+
+<?php _X ('note-post') ?>
+
+<?php if (!@$note['published?']): ?>
+<div class="e2-toolbar">
+  <?php if (array_key_exists ('edit-href', $note)) { ?>
     <a href="<?= @$note['edit-href'] ?>" class="nu"><button type="button" class="button">
       <span class="i-edit"></span> <?= _S ('fb--edit') ?>
     </button></a>
-  <? } ?>
-  <div class="toolbar-end"></div>
+  <?php } ?>
 </div>
-<? endif ?>
+<?php endif ?>
 
-</div>
+<?php endforeach ?>
 
-<? _X ('note-post') ?>
+<?php if (@$content['no-notes-text']) { ?> 
+<p><?=@$content['no-notes-text']?></p>
+<?php } ?>
 
-<? endforeach ?>
-
-<? if (@$content['pages']['timeline?']) _T ('pages-earlier') ?>
+<?php if (@$content['pages']['timeline?']) _T ('pages-earlier') ?>

@@ -59,7 +59,7 @@ if (document.getElementById ('id-' + n).style.display == 'none') {
 <p><b>Structure and contents of $content</b></p>
 <p></p>
 
-<?
+<?php 
 
   $_global_flipid = 0;
   

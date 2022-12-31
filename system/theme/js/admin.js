@@ -112,7 +112,7 @@ if ($) $ (function () {
   $ ('.e2-removed-toggle').click (function (event) {
     var me = this
     //var cc = $ ('#e2-comments-count').text ().split (' ')[0]
-    var $ct = $ (me).parents ('.comment').eq (0)
+    var $ct = $ (me).parents ('.e2-comment').eq (0)
     $ct.find ('.e2-comment-actions').hide ()
     $ct.find ('.e2-removed-toggling').css ('opacity', 0).show ().fadeTo (333, 1)
     return e2ToggleClick (
@@ -122,10 +122,10 @@ if ($) $ (function () {
           $ct.find ('.e2-comment-actions').show ()
         })
         $ct.find ('.e2-comment-actions').show ()
-        $ct.find ('.comment-actions-removed').hide ()
-        $ct.find ('.comment-content').slideDown (333)
-        $ct.find ('.comment-meta').slideDown (333)
-        $ct.find ('.comment-author').removeClass ('comment-author-removed')
+        $ct.find ('.e2-comment-actions-removed').hide ()
+        $ct.find ('.e2-comment-content').slideDown (333)
+        $ct.find ('.e2-comment-meta').slideDown (333)
+        $ct.find ('.e2-comment-author').removeClass ('e2-comment-author-removed')
         $ct.find ('.e2-removed-toggle').attr ('href', href)
         $ (me).fadeTo (333, 1)
         if (!$ (me).parents ('.comment').is ('.reply')) {
@@ -140,15 +140,15 @@ if ($) $ (function () {
       function (href) {
         $ct.find ('.e2-removed-toggling').fadeTo (1, 0)
         $ct.find ('.e2-comment-actions').hide ()
-        $ct.find ('.comment-meta').slideUp (333)
-        $ct.find ('.comment-content').slideUp (333, function () {
-          $ct.find ('.comment-actions-removed').slideDown (333)
+        $ct.find ('.e2-comment-meta').slideUp (333)
+        $ct.find ('.e2-comment-content').slideUp (333, function () {
+          $ct.find ('.e2-comment-actions-removed').slideDown (333)
         })
-        $ct.find ('.comment-author').addClass ('comment-author-removed')
+        $ct.find ('.e2-comment-author').addClass ('e2-comment-author-removed')
         $ct.find ('.e2-removed-toggle').attr ('href', href)
         $ (me).fadeTo (333, 1)
-        if (!$ (me).parents ('.comment').is ('.reply')) {
-          $ (me).parents ('.comment-and-reply').find ('.reply').slideUp (333)
+        if (!$ (me).parents ('.e2-comment').is ('.e2-reply')) {
+          $ (me).parents ('.e2-comment-and-reply').find ('.e2-reply').slideUp (333)
         }
         /*
         $ ('#e2-comments-count').text (
@@ -191,7 +191,7 @@ if ($) $ (function () {
     
     //Chrome
     if (dt.types.indexOf && dt.types.indexOf ('Files') == -1) return
-	  if ($.browser.webkit) dt.dropEffect = 'copy'
+	  if (dt.dropEffect) dt.dropEffect = 'copy'
 	 
 	  $ (this).addClass ('e2-external-drop-target-dragover')
     return false
@@ -215,11 +215,11 @@ if ($) $ (function () {
 
   // userpic
 
-  $picContainer = $ ('.e2-user-picture')
+  $picContainer = $ ('.e2-user-picture-container')
   $pic = $picContainer.find ('img')
   
   e2UnfadeUserpic = function () {
-    $picContainer.removeClass ('e2-user-picture-uploading')
+    $picContainer.removeClass ('e2-user-picture-container-uploading')
     $picContainer.stop ()
     $pic.stop ()
     $picContainer.animate ({ 'height': $pic.height () + 2 }, 333, function () {
@@ -236,7 +236,7 @@ if ($) $ (function () {
     if (files.length == 1) {
       file = files[0]
 
-  	  $picContainer.addClass ('e2-user-picture-uploading')
+  	  $picContainer.addClass ('e2-user-picture-container-uploading')
 
       e2UploadFile (
         file,

@@ -1,20 +1,21 @@
-<? // mui ?>
+<?php if ($content['class'] == 'frontpage' and $content['blog']['virgin?']) { ?>
 
-<? if ($content['sign-in']['done?']): ?>
+<?php if ($content['sign-in']['done?']): ?>
 
-<div class="center">
-  <p><?= _S ('gs--preview-of-future-blog') ?></p>
-  
-  <p><img src="<?= _IMGSRC ('screenshot.jpg') ?>" width="569" height="548" style="margin: 0 -20px" /></p>
+<div class="e2-heading">
+  <h2><?= _S ('pt--welcome') ?></h2>
 </div>
 
-<? else: ?>
+<div class="e2-text">
+  <p class="admin-links"><?= _S ('pt--welcome-text-pre') ?><a href="<?= $content['admin-hrefs']['new-note'] ?>"><?= _S ('pt--welcome-text-href-write') ?></a><?= _S ('pt--welcome-text-or') ?><a href="<?= $content['admin-hrefs']['settings'] ?>"><?= _S ('pt--welcome-text-href-settings') ?></a><?= _S ('pt--welcome-text-post') ?></p>
+</div>
 
-<div class="center">
-  <!--
-  <span class="i-nothing"></span>
-  -->
+<?php else: ?>
+
+<div style="text-align: center">
   <img src="<?= _IMGSRC ('nothing.png')?>" alt="" width="300" height="300" />
 </div>
 
-<? endif ?>
+<?php endif ?>
+
+<?php } ?>

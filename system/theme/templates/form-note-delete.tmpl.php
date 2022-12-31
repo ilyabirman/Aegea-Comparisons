@@ -1,5 +1,3 @@
-<? // mui ?>
-
 <form
   action="<?= @$content['form-note-delete']['form-action'] ?>"
   method="post"
@@ -19,16 +17,15 @@
 
 <div class="form">
 
-<div class="delete-box">
-
-<p><?= @$content['form-note-delete']['caution-text'] ?></p>
-
-<div>
-  <button type="submit" id="submit-button" class="button submit-button">
-    <?= @$content['form-note-delete']['submit-text'] ?>
-  </button>
-</div>
-
+<div class="form-control delete-box">
+  <div class="form-element e2-text">
+    <p><?= @$content['form-note-delete']['caution-text'] ?></p>
+  </div>
+  <div class="form-element">
+    <button type="submit" id="submit-button" class="button submit-button">
+      <?= @$content['form-note-delete']['submit-text'] ?>
+    </button>
+  </div>
 </div>
 
 </div>

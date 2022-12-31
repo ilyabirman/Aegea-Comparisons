@@ -1,28 +1,23 @@
-<? // mui ?>
+<?php if (_AT ($content['favourites']['href'])): ?>
 
-<?# if there's a list, show it #?>
-<? if (array_key_exists ('each', $content['favourites'])): ?> 
+  <h2><?=$content['favourites']['title']?> &#9733; →</h2>
 
-<? if (_AT ($content['favourites']['href'])): ?>
-<h2><?=$content['favourites']['title']?> <span class="i-favourites"></span> &rarr;</h2>
-<? else: ?>
-<h2><a href="<?= $content['favourites']['href'] ?>"><?=$content['favourites']['title']?></a> &#9733;</h2>
-<? endif ?>
+<?php else: ?>
+
+  <h2><a href="<?= $content['favourites']['href'] ?>" class="nu"><u><?=$content['favourites']['title']?></u> &#9733;</a></h2>
+
+<?php endif ?>
+
+
+<?php # if there's a list, show it #?>
+<?php if (array_key_exists ('each', $content['favourites'])): ?> 
 
 <ul class="links-list">
-<? foreach ($content['favourites']['each'] as $item) { ?>
-<li><? if ($item['current?']) { ?><?= $item['title'] ?> &rarr;<? } else { ?><a href="<?= $item['href'] ?>" title="<?=_DT ('j {month-g} Y, H:i', $item['time'])?>"><?= $item['title'] ?></a><? } ?></li>
-<? } ?>
+
+  <?php foreach ($content['favourites']['each'] as $item) { ?>
+    <li><?php if ($item['current?']) { ?><?= $item['title'] ?> →<?php } else { ?><a href="<?= $item['href'] ?>" title="<?=_DT ('j {month-g} Y, H:i', $item['time'])?>"><?= $item['title'] ?></a><?php } ?></li>
+  <?php } ?>
+
 </ul>
 
-
-<?# else just show a link #?>
-<? else: ?>
-
-<? if (_AT ($content['favourites']['href'])): ?>
-<h2><?=$content['favourites']['title']?> &#9733; &rarr;</h2>
-<? else: ?>
-<h2><a href="<?= $content['favourites']['href'] ?>"><?=$content['favourites']['title']?></a> &#9733;</h2>
-<? endif ?>
-
-<? endif ?>
+<?php endif ?>

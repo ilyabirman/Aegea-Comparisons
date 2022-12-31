@@ -1,60 +1,93 @@
-<? // mui ?>
-
-<? _T ('author-menu') ?>
-
-<div class="common">
-
-<? if ($content['content-page?'] and !$content['blog']['virgin?']) _T ('sidebar') ?>
-
-<? _T ('header') ?>
-
-<? _T_FOR ('message') ?>
-
-<div class="main-content">
+<div style="margin: 20px 60px">
 
 
-<? if ($content['class'] == 'found') { ?>
-
-<div class="search-heading">
-<? _T_FOR ('form-search') ?>
-</div>
-
-<? } else { ?>
-
-<? if (array_key_exists ('superheading', $content)): ?>
-<div class="super-h"><?= $content['superheading'] ?></div>
-<? endif ?>
-
-<? if (array_key_exists ('heading', $content)): ?>
-<h2 id="e2-page-heading">
-  
-  <?= $content['heading'] ?>
-  <? if (array_key_exists ('related-edit-href', $content)): ?>
-  <a href="<?= $content['related-edit-href'] ?>" class="nu"><span class="i-edit"></span></a>
-  <? endif ?>
-
-</h2>
-<? endif ?>
-
-<? } ?>
 
 
-<? if (array_key_exists ('search-related-tag', $content)) { ?> 
-<p class="tags"><?= _S ('gs--see-also-tag') ?> <a href="<?=$content['search-related-tag']['href']?>"><?=$content['search-related-tag']['name']?></a>.</p>
-<? } ?>
+<br /><br /><br />
 
-<? _T_FOR ('tag') ?>
-<? _T_FOR ('error-404-description') ?>
 
-<? _T_FOR ('year-months') ?>
-<? _T_FOR ('month-days') ?>
 
-<? _T ('content') ?>
 
-</div>
+<?php _X ('header-pre') ?>
+<?php _X ('sidebar-pre') ?>
+<?php _T ('user-picture') ?>
 
-<div class="clear"></div>
+<h1>
+  <?= _A ('<a href="'. $content['blog']['href']. '"><span id="e2-blog-title">'. $content['blog']['title']. '</span></a>') ?> 
+  <?php 
+    if (
+      array_key_exists ('admin-hrefs', $content)
+      and array_key_exists ('name-and-author', $content['admin-hrefs'])
+      and !_AT ($content['admin-hrefs']['name-and-author'] )
+    ) { 
+  ?>
+    <a href="<?= $content['admin-hrefs']['name-and-author'] ?>" class="nu"><span class="i-edit-small"></span></a>
+  <?php } ?>
+</h1>
 
-<? _T ('footer') ?>
+<?php if ($content['frontpage?']) {?>
+<p><span id="e2-blog-description"><?= $content['blog']['description'] ?></span></p>
+<?php } ?>
+
+<?php _T_FOR ('tags-menu') ?>
+<?php _T_FOR ('favourites') ?>
+<?php _T_FOR ('most-commented') ?>
+<?php _T_FOR ('search') ?>
+<a class="e2-rss" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
+
+<?php _X ('sidebar-post') ?>
+<?php _X ('header-post') ?>
+
+
+
+
+<br /><br /><br />
+
+
+
+
+<?php _T ('message') ?>
+<?php _T ('heading') ?>
+
+
+
+
+<br /><br /><br />
+
+
+
+
+<?php _T ('welcome') ?>
+<?php _T ('notes') ?>
+<?php _T ('drafts') ?>
+<?php _T ('notes-list') ?>
+<?php _T ('tags') ?>
+<?php _T ('sessions') ?>
+<?php _T ('pages') ?>
+<?php _T ('comments') ?>
+<?php _T ('popular') ?>
+<?php _T ('unsubscribe') ?>
+<?php _T ('form') ?>
+
+
+
+
+<br /><br /><br />
+
+
+
+
+<?php _X ('footer-pre') ?>
+© <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?> 
+<?=$content['engine']['about']?>
+<?php if ($content['sign-in']['done?']) { ?>
+&nbsp;&nbsp;&nbsp;
+<span title="<?= _S ('gs--pgt') ?>"><?=$content['engine']['pgt']?> <?= _S ('gs--seconds-contraction') ?></span>
+<?php } ?>
+
+<?php _X ('footer-post') ?>
+
+
+
 
 </div>

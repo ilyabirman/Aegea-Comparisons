@@ -1,11 +1,11 @@
 /*
 .fake-a{
-	cursor: pointer;
-//	cursor: hand;
-	text-decoration: underline;
+  cursor: pointer;
+//  cursor: hand;
+  text-decoration: underline;
 }
 .fake-a:HOVER{
-	color: Gray;
+  color: Gray;
 }
 */
 /* @group Base */
@@ -14,7 +14,7 @@
   display: inline-block;
   zoom: 1;
   *display: inline;
-	font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+  font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 .chzn-container .chzn-drop {
   background: #fff;
@@ -178,6 +178,7 @@
   -moz-box-shadow   : none;
   -o-box-shadow     : none;
   box-shadow        : none;
+  width: 100%;
 }
 .chzn-container-multi .chzn-choices .search-field .default {
   color: #999;
@@ -358,6 +359,7 @@
 .chzn-container-active .chzn-choices .search-field input {
   color: #111 !important;
 }
+
 /* @end */
 
 /* @group Disabled Support */

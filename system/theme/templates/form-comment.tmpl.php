@@ -1,6 +1,4 @@
-<? // mui ?>
-
-<? _JS ('form-comment') ?>
+<?php _JS ('form-comment') ?>
 
 <form
   action="<?=$content['form-comment']['form-action']?>"
@@ -37,96 +35,98 @@
 <div class="form">
 
 <div class="form-control">
-  <div class="label input-label"><label><?= _S ('ff--full-name') ?></label></div>
-  <input type="text"
-    class="text required width-2"
-    tabindex="1"
-    id="name"
-    name="name"
-    value="<?= @$content['form-comment']['name'] ?>"
-  />
-</div>
-
-<div class="form-control">
-  <div class="label input-label"><label><?= _S ('ff--email') ?></label></div>
-  <div style="position: relative">
-    <?/* a pot full of honey for spammers: */?>
-    <div style="position: absolute; z-index: 0; left: 0; top: 0">
-    <input type="text"
-      class="text width-2"
-      style="outline: none"
-      tabindex="-1"
-      name="email"
-      autocomplete="off"
-      value=""
-    />
-    </div>
-    <div style="position: relative; z-index: 1; left: 0; top: 0">
-    <?/* real input */?>
+  <div class="form-label input-label"><label><?= _S ('ff--full-name') ?></label></div>
+  <div class="form-element">
     <input type="text"
       class="text required width-2"
-      tabindex="2"
-      id="email"
-      name="<?= $content['form-comment']['email-field-name'] ?>"
-      value="<?= @$content['form-comment']['email'] ?>"
+      tabindex="1"
+      id="name"
+      name="name"
+      value="<?= @$content['form-comment']['name'] ?>"
     />
+  </div>
+</div>
+
+<div class="form-control">
+  <div class="form-label input-label"><label><?= _S ('ff--email') ?></label></div>
+  <div class="form-element">
+    <div style="position: relative">
+      <?php /* a pot full of honey for spammers: */ ?>
+      <div style="position: absolute; z-index: 0; left: 0; top: 0">
+      <input type="text"
+        class="text width-2"
+        style="outline: none"
+        tabindex="-1"
+        name="email"
+        autocomplete="off"
+        value=""
+      />
+      </div>
+      <div style="position: relative; z-index: 1; left: 0; top: 0">
+      <?php /* real input */ ?>
+      <input type="text"
+        class="text required width-2"
+        tabindex="2"
+        id="email"
+        name="<?= $content['form-comment']['email-field-name'] ?>"
+        value="<?= @$content['form-comment']['email'] ?>"
+      />
+      </div>
+    </div>
+    <div class="form-control-sublabel">
+      <?= $content['form-comment']['create:edit?']? (_S ('gs--email-wont-be-published') .'<br />') : ''?>
     </div>
   </div>
-  <p class="small baseline">
-    <?= $content['form-comment']['create:edit?']? (_S ('gs--email-wont-be-published') .'<br />') : ''?>
-  </p>
 </div>
 
 <div class="form-control">
-  <div class="label"><p><label><?= _S ('ff--text') ?></label></p>
+  <div class="form-label">
+    <p><label><?= _S ('ff--text') ?></label></p>
   </div>
-  <textarea name="text"
-    class="required full-width"
-    id="text"
-    tabindex="3"
-    style="height: 16.7em; overflow-x: hidden; overflow-y: visible"
-  ><?=$content['form-comment']['text']?></textarea>
-  <p class="small baseline">
-    <?= $content['form-comment']['create:edit?']? (_S ('gs--no-html') .'<br />') : ''?>
-  </p>
+  <div class="form-element">
+    <textarea name="text"
+      class="required full-width"
+      id="text"
+      tabindex="3"
+      style="height: 16.7em; overflow-x: hidden; overflow-y: visible"
+    ><?=$content['form-comment']['text']?></textarea>
+    <div class="form-control-sublabel">
+      <?= $content['form-comment']['create:edit?']? (_S ('gs--no-html') .'<br />') : ''?>
+    </div>
+  </div>
 </div>
 
-<? if ($content['form-comment']['show-subscribe?']) { ?>
+<?php if ($content['form-comment']['show-subscribe?']) { ?>
 <div class="form-control">
-  <label class="checkbox">
-  <input
-    type="checkbox"
-    name="subscribe"
-    class="checkbox"
-    tabindex="4"
-    <?= @$content['form-comment']['subscribe?']? ' checked="checked"' : ''?>
-  />&nbsp;<?= _S ('ff--subscribe-to-others-comments') ?>
-  </label><br />
+  <div class="form-element">
+    <label class="checkbox">
+    <input
+      type="checkbox"
+      name="subscribe"
+      class="checkbox"
+      tabindex="4"
+      <?= @$content['form-comment']['subscribe?']? ' checked="checked"' : ''?>
+    />&nbsp;<?= _S ('ff--subscribe-to-others-comments') ?>
+    </label><br />
+  </div>
 </div>
-<? } ?> 
+<?php } ?> 
 
-<? if (array_key_exists ('subscription-status', $content['form-comment'])) { ?>
+<?php if (array_key_exists ('subscription-status', $content['form-comment'])) { ?>
 <div class="form-control">
-  <p><?= $content['form-comment']['subscription-status'] ?></p>
+  <div class="form-element">
+    <p><?= $content['form-comment']['subscription-status'] ?></p>
+  </div>
 </div>
-<? } ?>
+<?php } ?>
 
 
-<div class="submit-box">
-<div>
+<div class="form-control submit-box">
+  <div class="form-element">
   <button type="submit" id="submit-button" class="button submit-button" tabindex="5">
     <?= @$content['form-comment']['submit-text'] ?>
-  </button><span class="keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
-  <!--
-  <input
-    type="submit"
-    id="submit-button"
-    class="submit-button"
-    tabindex="5"
-    value="<?= @$content['form-comment']['submit-text'] ?>"
-  /><span class="keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
-  -->
-</div>
+  </button><span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
+  </div>
 </div>
 
 </div>

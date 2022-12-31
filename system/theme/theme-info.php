@@ -1,8 +1,8 @@
-<? return array (
+<?php return array (
 
   'display_name' => array (
-    'en' => 'Classical',
-    'ru' => 'Классика',
+    'en' => 'System',
+    'ru' => 'Системная',
   ),
 
   'max_image_width' => '768',
