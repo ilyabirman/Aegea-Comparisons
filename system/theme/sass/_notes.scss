@@ -1,0 +1,72 @@
+.note {
+
+  margin-bottom: 48px;
+
+  h1 {
+
+    margin: 0;
+    color: #000;
+    font-size: 20px;
+    line-height: 1.5em;
+    @include transition-property((font-size));
+    @include transition-duration(.33s);
+    @include transition-timing-function(ease-out);
+    font-weight: bold;
+    &.draft { font-style: italic }
+    position: relative;
+    
+    .icons {
+      white-space: nowrap;
+    }
+
+  }
+  
+  h2 {
+
+    color: #000;
+    font-size: 100%;
+    font-weight: bold;
+    margin: $h_line 0 $h_line/4 0;
+    &:first-child { margin-top: 0; }
+
+  }
+  
+  .date {
+  
+    font-size: 10px;
+    color: #333;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    
+  }
+  
+  .text { font-size: 15px; margin: 0 0 $h_line/4 0 }
+  
+  .tags { font-size: 13px; margin: 0 0 $h_line/4 0 }
+  
+  .comments-link {
+  
+    margin: $h_line/4 0 $h_line/2 $w_left_pad;
+    font-size: 15px;
+    position: relative;
+    
+    .comments-link-icon {
+      @include icon('comments.gif', 'comments.gif');
+      position: absolute;
+      left: -22px;
+      top: 4px;
+    }
+    
+  }
+    
+}
+
+.e2-note-favourite h1 {
+  font-size: 30px;
+}
+
+
+// IE 7
+*+html .note {
+  zoom: 1;
+}

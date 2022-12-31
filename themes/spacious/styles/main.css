@@ -1,0 +1,160 @@
+* {
+  line-height: 1.67em;
+}
+
+.common {
+  margin: 48px 0;
+}
+
+.form {
+  width: 80%;
+  margin-left: 20%;
+}
+
+.form-control .label { margin-left: -25%; width: 22.5% }
+.form-control .width-4 { width: 100%; }
+.form-control .width-3 { width: 75%; }
+.form-control .width-2 { width: 50%; }
+.form-control .width-1 { width: 25%; }
+
+.form-login td {
+  padding: default; ///
+}
+
+.submit-box, .delete-box {
+  width: 75%;
+  background: #e0e8f0;
+  margin-left: -5%;
+  padding-left: 5%;
+}
+
+.delete-box {
+  background: #e05030;
+}
+
+.pages {
+  width: 85%;
+  font-size: 14px;
+}
+
+.top-line, .bottom-line {
+  display: none;
+}
+
+.header {
+  margin: 32px 0 48px;
+}
+
+.header h1 {
+  font-size: 48px;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 30px 0 12px 0;
+}
+
+.header p {
+  font-size: 14px;
+}
+
+.header .blog-menu {
+  margin-bottom: 24px;
+}
+
+.header .form-search {
+  margin: 0;
+  float: right;
+}
+
+.header,
+.main-content,
+.footer {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 920px;
+}
+
+.main-content h3,
+.main-content .note h1 {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 1em;
+  margin-bottom: 8px;
+}
+
+.main-content .e2-note-favourite h1 {
+  font-size: 36px;
+}
+
+.main-content .center {
+  width: 100%;
+}
+
+.note .tags {
+  margin-top: 0;
+}
+
+.note .meta {
+  margin-top: 0;
+}
+
+.note .date {
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.note .comments-link {
+  margin-top: 0;
+}
+
+.note-spacer {
+  margin-bottom: 2em;
+}
+
+.comments-heading {
+  width: 75%;
+}
+
+.comment-and-reply {
+  margin-bottom: 1.33em;
+}
+
+.footer {
+  margin-top: 48px;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.copyrights {
+  float: none;
+  margin: 0;
+}
+
+.engine-info {
+  float: none;
+  position: relative;
+  margin: 0;
+}
+
+.rss {
+  color: #803000;
+  border: 1px solid;
+  padding: 1px 1px 1px 2px;
+  border-color: rgba(128, 48, 0, 0.33);
+  border-radius: 3px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.rss:hover {
+  color: #d04000;
+  border-bottom-color: rgba(208, 64, 0, 0.33);
+}
+
+
+.visual-login {
+  float: none;
+  position: absolute;
+  left: -40px;
+}

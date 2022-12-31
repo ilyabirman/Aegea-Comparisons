@@ -1,0 +1,256 @@
+.common {
+  margin: 32px auto;
+  max-width: 1140px;
+  min-width: 820px;
+  //min-width: 540px;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1% 0 $g_left;
+  padding: 0 0 24px 0;
+  width: $g_sidebar;
+  min-width: 96px + 12px;
+  font-size: 13px;
+  
+  // background: #e8ebee;
+  background: #efeddd;
+
+  position: relative;
+  left: -6px;
+  top: -6px;
+  padding: 6px;
+
+  border-radius: 3px;
+    
+  h2             { font-size: 13px; margin: 4px 0 0 0 }
+  h2:first-child { margin-top: 0 }
+
+  h2 a           { color: #000; border-bottom-color: transparentize(#000, .67) }
+  h2 a:hover     { color: $c_hover }
+
+  .links-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 11px;
+
+    a { padding-top: .3em; }
+    li { margin: 0 0 .5em 0; text-indent: 0; }
+    li:before { content: ''; margin: 0 }
+    
+  }
+  
+  .sidebar-element {
+    clear: left;
+    margin-bottom: 24px;
+  }
+}
+
+.rss {
+  color: $c_rss;
+  border: 1px solid;
+  padding: 1px 1px 1px 2px;
+  border-color: transparentize($c_rss, 0.67);
+  border-radius: 3px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.rss:hover {
+  color: $c_hover;
+  border-color: transparentize($c_hover, .67)
+}
+
+
+
+
+.header {
+  margin: 0 (100%-$g_right) 24px $g_content;
+  width: (($g_right)-($g_content));
+  padding: 0 0 12px 0;
+  
+  .form-search {
+    float: right;
+    text-align: right;
+    margin: -8px (100%-($g_right)) 32px 40px;
+    input.text { width: 10em; }
+  }
+
+}
+
+.header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #000;
+  line-height: 42px;
+  position: relative;
+  top: -13px;
+  margin: 0 0 -5px 0;
+  max-width: 600px;
+  *         { line-height: 20px; }
+  a         { color: #000; border-color: transparentize(#000, 0.67) }
+  a:visited { color: #000; border-color: transparentize(#000, 0.67) }
+  a:hover   { color: $c_hover; border-color: transparentize($c_hover, 0.67) }
+}
+
+.header-end {
+  clear: right;
+}
+
+.blog-description {
+  font-size: 15px;
+  max-width: 600px;
+}
+
+.form-search {
+  white-space: nowrap;
+
+  .i-loupe {
+    @include icon('loupe.png', 'loupe.png', 1, 1);
+    margin: 0 0 2px 0;
+  }
+  .i-enter {
+    @include icon('enter.png', 'enter.png', 1, 2);
+    margin: 0 0 2px 0;
+  }
+  button:hover .i-enter {
+    @include icon('enter.png', 'enter.png', 2, 2);
+    margin: 0 0 2px 0;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    cursor: hand;
+  }
+
+}
+
+.search-heading {
+  input.text {
+    font-size: 16px;
+    width: 20em;
+  }
+  margin: 0 0 24px -22px;
+}
+
+
+.message-bar {
+  color: #d04000;
+  margin: 0 (100%-$g_right) 24px $g_content;
+  width: (($g_right)-($g_content));
+  padding: 12px 0 24px 0;
+  ul { padding: 0; list-style-type: none }
+}
+
+
+
+.main-content {
+  margin: 12px (100%-$g_right) 0 $g_content;
+  width: (($g_right)-($g_content));
+  min-height: 320px;
+}
+
+
+.main-content h2 {
+  font-size: 20px;
+}
+
+.main-content h3 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0;
+  color: #000;
+}
+
+.main-content .text {
+  max-width: 800px;
+}
+
+.main-content .center {
+  text-align: center;
+  width: (($g_right)-($g_content));
+}
+
+.external-html {
+  font-size: 13px;
+  width: (($g_right)-($g_content));
+  padding: .75em 2em 1.5em 1em;
+  margin: .75em -2em 1.5em -1em;
+  background: #e8ece8;
+  border-radius: 12px;
+ -moz-border-radius: 12px;
+ -webkit-border-radius: 12px;
+}
+
+.year-months,
+.month-days { 
+  font-size: 11px;
+  margin-bottom: 2em;
+}
+
+.year-month,
+.month-day { 
+  padding: 0 .33em;
+}
+
+.pages { margin: 0 0 2.25em; font-size: 13px }
+.pages td { padding: 0 }
+
+
+.footer {
+  margin: 0 0 24px 0;
+}
+
+.footer-end {
+  clear: left;
+}
+
+.visual-login,
+.copyrights,
+.engine-info {
+  float: left;
+  font-size: 13px;
+}
+
+.visual-login {
+  margin: 1.5em 0 0 $g_left;
+  padding: 0 1em 0 0;
+  width: ($g_content)-($g_left);
+}
+
+.visual-login a {
+  opacity: .25;
+ -moz-opacity: .25;
+ -webkit-opacity: .25;
+}
+
+.copyrights {
+  margin: 1.5em 0 0 0;
+  padding: 0 1em 0 0;
+  width: (($g_right)-($g_content))*3/4;
+}
+
+.engine-info {
+  margin: 1.5em 0 0 0;
+  padding: 0 1em 0 0;
+  width: (($g_right)-($g_content))*1/4;
+}
+
+.engine-info {
+  color: $c_grey;
+  a {
+    color: $c_grey;
+    border-color: transparentize($c_grey, 0.67)
+  }
+  a:hover {
+    color: $c_hover;
+    border-color: transparentize($c_hover, 0.67)
+  }
+}

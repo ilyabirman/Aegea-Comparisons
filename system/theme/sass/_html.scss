@@ -1,0 +1,219 @@
+* {
+  line-height: $h_line;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: $c_bg;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  font-family: $f_main;
+  font-size: 13px;
+}
+
+
+
+// LINKS (and U)
+
+a, a u {
+  text-decoration: none;
+  border-bottom: 1px transparentize($c_link, 0.67) solid;
+}
+
+a, a u {
+  color: $c_link;
+  border-color: transparentize($c_link, 0.67)
+}
+
+a:visited, a:visited u {
+  color: $c_visited;
+  border-color: transparentize($c_visited, 0.67)
+}
+
+a:hover,
+a:hover u
+a:visited:hover,
+a:visited:hover u,
+a.hover,
+a.hover u,
+a:visited.hover,
+a:visited.hover u,
+.clickable-keyboard-shortcut:hover {
+  color: $c_hover;
+  border-color: transparentize($c_hover, 0.67)
+}
+
+
+
+// HEADINGS AND PARAGPRAHS
+
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  color: #000;
+  line-height: 20px;
+  *         { line-height: 20px; }
+  a         { color: #000; border-color: transparentize(#000, 0.67) }
+  a:visited { color: #000; border-color: transparentize(#000, 0.67) }
+  a:hover   { color: $c_hover; border-color: transparentize($c_hover, 0.67) }
+}
+
+h2 {
+  font-size: 16px;
+  margin: 12px 0 8px 0; 
+  font-size: 30px;
+  line-height: 30px;
+  * { line-height: 30px; }
+  margin: 0 0 24px 0; 
+  font-weight: bold;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 2px 0; 
+}
+
+p {
+  margin: 0 0 12px 0;
+  max-width: 800px;
+}
+
+
+
+// LISTS
+
+p+ul, p+ol {
+  margin-top: -12px;
+}
+
+ul, ol {
+  margin: 0 0 12px 0;
+  padding: 0 0 0 $w_left_pad;
+}
+
+ul li {
+  list-style-type: none;
+  text-indent: -1.5em;
+  behavior: expression(!this.before? this.before = this.innerHTML = '&mdash;<span class="ensp"></span>' + this.innerHTML : '');
+}
+
+ul li:before {
+  content: '\2014';
+  margin-right: 0.5em;
+}
+
+li { margin: 0 0 8px 0; }
+
+
+
+// TABLES
+
+table {
+  font-size: 100%;
+  empty-cells: show;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 0 0 12px 0; 
+}
+
+td {
+  padding: 0 1em 8px 0;
+  vertical-align: top;
+}
+
+th {
+  font-weight: bold;
+  padding-bottom: 8px;
+}
+
+
+
+
+// BLOCKQUOTES
+
+blockquote {
+  margin: 0 0 12px 0;
+  padding: 0 0 0 $w_left_pad;
+}
+
+
+
+// THE REST
+
+img {
+  border: 0;
+  box-sizing: content-box;
+}
+
+
+sup, sub {
+  position: relative;
+  vertical-align: middle;
+  font-size: 75%;
+  font-weight: normal; 
+}
+
+sup { bottom: $h_line/3; }
+
+sub { top: $h_line/3; }
+
+
+
+small { font-size: 85%; }
+
+
+
+pre, tt, code {
+  font-family: $f_mono;
+  font-size: 100%;
+}
+
+form {
+  display: inline;
+  margin: 0;
+}
+
+input.text,
+textarea {
+  font-family: $f_main; 
+  font-size: 15px;
+  margin: 0;
+  outline: none;
+  border: 1px #ccc solid;
+  padding: 4px;
+  border-radius: 4px;
+  border-color: #bbb #ccc #ddd;
+  box-shadow: 0 1px 1px #ddd inset;
+}
+
+select {
+  font-family: $f_main; 
+  font-size: 15px;
+  margin: 0;
+}
+
+button {
+  font-family: $f_main; 
+  font-size: 15px;
+  margin: 0;
+  border: 0;
+  box-shadow: 0;
+}
+
+input.text,
+textarea {
+  padding: 4px;
+}
+
+input.text:focus,
+textarea:focus {
+  border-color: #777 #999 #bbb;
+  box-shadow: 0 1px 3px #bbb inset;
+}

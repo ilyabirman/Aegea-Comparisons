@@ -1,0 +1,53 @@
+.clear { clear: both }
+
+.tsp { margin-right: -.167em }
+.hsp { margin-right: -.25em }
+
+.small { font-size: 85%; }
+
+.help { font-size: 11px; }
+.help a { color: #999; border-color: transparentize(#999, 0.67) }
+.help a:hover { color: $c_hover; border-color: transparentize($c_hover, 0.67) }
+
+.dashed { 
+  text-decoration: none; 
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+}
+
+.dashed, .dashed:visited {
+  color: $c_link;
+  border-color: transparentize($c_link, 0.67);
+}
+
+.nu {
+  text-decoration: none;
+  border-bottom-width: 0;
+  u { 
+    text-decoration: none;
+    border-bottom-width: 1px;
+  }
+}
+
+.ellipsis {
+  margin-left: 1px;
+  letter-spacing: 1px;
+}
+
+.count,
+.count-new { 
+  font-size: 85%;
+  position: relative;
+}
+
+.count {
+  top: .5em;
+  color: #000;
+}
+
+.hidden,
+.hidden a { color: #98a098; }
+
+.icons {
+  white-space: nowrap;
+}

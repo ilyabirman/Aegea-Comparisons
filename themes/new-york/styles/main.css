@@ -1,0 +1,183 @@
+body {
+  font-family: "Georgia";
+  font-size: 13px;
+  color: #202020;
+}
+
+a { color: #004276; }
+a:visited { color: #420076; }
+help a { color: #999; }
+.tags a { color: #567; }
+
+
+h1, h2, h3 { 
+  font-family: "Georgia";
+}
+
+.header {
+  margin: 8px 3% 24px 3%;
+  padding: 8px 0 24px;
+  text-align: center;
+  width: 94%;
+  border-bottom: 1px #d04000 solid;
+}
+
+.header .blog-description {
+  text-align: center;
+  margin: 0 12%;
+  width: 76%;
+  font-size: 13px;
+  line-height: 18px;
+  max-width: none;
+}
+
+.header .blog-description * {
+  line-height: 18px;
+}
+
+.e2-user-picture {
+  float: none;
+  width: 80%;
+}
+
+.form-search {
+  text-align: left;
+  float: none;
+  width: 80%;
+  margin: 0;
+}
+
+.form-search input.text {
+  width: 100%;
+}
+
+.form-search .i-loupe {
+  display: none;
+}
+
+.header h1 {
+  font-size: 48px;
+  margin: 0;
+  max-width: none;
+}
+
+.header * {
+  line-height: 56px;
+}
+
+.note h1 {
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.e2-note-favourite h1 {
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.main-content h3,
+.note h2 {
+  font-size: 16px;
+}
+
+.sidebar {
+  background: transparent;
+}
+
+.sidebar h2 {
+  font-size: 16px;
+}
+
+.note .comments-link {
+  margin: 0;
+}
+
+.note .comments-link  .comments-link-icon {
+  display: none;
+}
+
+.super-h, .rss-link, .note .date {
+  text-transform: uppercase;
+  letter-spacing: .17em;
+  font-family: "PT Sans Caption", "Verdana";
+  color: #d04000;
+}
+
+.note .date {
+  ffont-weight: bold;
+}
+
+.super-h {
+  font-size: 9px;
+}
+
+.header h1 .rss-link {
+  color: #d04000;
+  top: -1.5em;
+}
+
+.sidebar,
+.visual-login {
+  width: 16%;
+  width: 14%;
+  padding-right: 1em;
+  margin: 0 2% 0 3%;
+}
+
+.sidebar {
+  padding-top: 0;
+  vborder-right: 1px #ccc solid;
+}
+
+.sidebar .links-list {
+  font-family: "PT Sans Caption", "Verdana";
+}
+
+.main-content,
+.copyrights,
+.engine-info {
+  margin-left: 21%;
+  width: 76%;
+}
+
+.copyrights,
+.engine-info {
+  float: none;
+  width: 40%;
+  margin-top: 0;
+}
+
+.submit-box, .delete-box {
+  border-radius: 0;
+ -moz-border-radius: 0;
+ -webkit-border-radius: 0;
+}
+
+.submit-box, .keyboard-shortcut {
+  background: #e8e4e0;
+}
+
+.button {
+  border-radius: 0;
+ -moz-border-radius: 0;
+ -webkit-border-radius: 0;
+}
+
+.submit-box .button {
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(231,227,223,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)),  color-stop(100%,rgba(231,227,223,.33))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(231,227,223,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(231,227,223,1) 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(231,227,223,1) 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e7e3df',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, rgba(255,255,255,1) 0%, rgba(231,227,223,1) 100%); /* W3C */
+  box-shadow: 0 1px 2px #777;
+}
+
+.submit-box .button:hover { box-shadow: 0 2px 4px #777 }
+.submit-box .button:focus { border: 1px #e7e3df solid }
+.submit-box .button:disabled { color: #c0bcb8 }
+.submit-box .button:active:hover,
+.submit-box .button:disabled:hover { border-color: #fff; box-shadow: 0 1px 2px #777 }

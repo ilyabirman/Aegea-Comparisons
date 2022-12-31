@@ -1,0 +1,43 @@
+.installer-picture {
+  float: left;
+  width: 23%;
+  margin: 0 1% 0 3%;
+  text-align: center;
+}
+
+
+.installer-title {
+  margin: 50px 25% 50px 27%;
+  width: 48%;
+}
+
+.installer-title h1 {
+  font-size: 160%;
+  font-weight: normal;
+}
+
+.form-control .label { float: left; margin: .33em 0 0 -27.78%; width: 27.78%; padding-right: 24px; }
+
+.main-content {
+  margin: 1em 1% 0 27%;
+  width: 72%;
+  min-height: 320px;
+}
+
+.engine-info {
+  float: left;
+  margin: 0 1% 0 27%;
+  width: 48%;
+  font-size: 85%;
+}
+
+.message-bar {
+  background: #fff;
+  border: 1px #fb2 solid;
+  margin: 1em 1% 1em 25%;
+  padding: .5em 0 1em 2%;
+}
+
+.livecheckable { color: #999 }
+
+.verified { color: #090 }

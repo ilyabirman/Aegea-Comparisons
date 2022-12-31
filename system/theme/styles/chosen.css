@@ -1,0 +1,89 @@
+.chzn-container {
+  background: #fff;
+}
+
+.chzn-container .chzn-drop {
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px #999 solid;
+  border-color: #ddd #ccc #bbb;
+  padding: 1px 0 0 0;
+}
+
+.chzn-container-multi .chzn-choices .search-field input {
+  height: 100%;
+}
+
+.chzn-container-multi .chzn-choices .search-choice {
+  border-radius: 6px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  color: #000;
+  border: 1px #ccc solid;
+  line-height: 1em;
+  padding: 1px 20px 1px 5px;
+  margin: 4px 0 4px 5px;
+  background: #fcfaf2;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(4%, #fcfaf2), color-stop(100%, #e4e2da));
+  background: -webkit-linear-gradient(#ffffff 0%, #fcfaf2 4%, #e4e2da);
+  background: -moz-linear-gradient(#ffffff 0%, #fcfaf2 4%, #e4e2da);
+  background: -o-linear-gradient(#ffffff 0%, #fcfaf2 4%, #e4e2da);
+  background: linear-gradient(#ffffff 0%, #fcfaf2 4%, #e4e2da);
+  box-shadow: 0 1px 0 #f0f0f0;
+  border-color: #e8e8e8 #d4d4d4 #c0c0c0;
+  text-shadow: 0 1px 0 #fcfaf2;
+}
+
+.chzn-container .chzn-results .highlighted,
+.chzn-container .chzn-results li,
+.chzn-container .chzn-results li em,
+.chzn-container .chzn-results .highlighted em {
+  line-height: 13px;
+}
+
+.chzn-container .chzn-results .highlighted {
+  border-radius: 3px;
+  background-color: Highlight;
+  background-image: none;
+  color: HighlightText;
+}
+
+.chzn-container .chzn-results li em {
+  background: transparent;
+  font-style: normal;
+  border-bottom: 1px #999 solid;
+}
+
+.chzn-container .chzn-results .highlighted em {
+  background: transparent;
+  border-bottom: 1px Highlight solid;
+}
+
+.chzn-container-multi .chzn-choices {
+  border: 1px #ccc solid;
+  border-radius: 4px;
+  border-color: #bbb #ccc #ddd;
+  box-shadow: 0 1px 1px #ddd inset;
+  background: transparent;
+}
+
+.chzn-container-multi .search-choice-close {
+  border: none;
+}
+
+.chzn-container-multi .chzn-choices .search-choice-focus {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d1d9e1), color-stop(4%, #b8c9da), color-stop(96%, #78a1ca));
+  background: -webkit-linear-gradient(#d1d9e1 0%, #b8c9da 4%, #78a1ca 96%);
+  background: -moz-linear-gradient(#d1d9e1 0%, #b8c9da 4%, #78a1ca 96%);
+  background: -o-linear-gradient(#d1d9e1 0%, #b8c9da 4%, #78a1ca 96%);
+  background: linear-gradient(#d1d9e1 0%, #b8c9da 4%, #78a1ca 96%);
+  border-color: #96b2d0 #81a3cb #739bc8;
+  text-shadow: 0 1px 0 #b0d0ff;
+}
+
+.chzn-container-multi .chzn-choices .search-choice .search-choice-close,
+.chzn-container .chzn-results-scroll-down span,
+.chzn-container .chzn-results-scroll-up span {
+  background-image: url("../images/chosen-sprite.png");
+}
