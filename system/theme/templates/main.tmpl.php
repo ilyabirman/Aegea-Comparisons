@@ -19,6 +19,8 @@
   <?php } ?>
 >
 
+<?php _T_FOR ('rose-debug-info') ?>
+
 <?php _T_FOR ('form-install') ?>
 <?php _T_FOR ('form-login') ?>
 

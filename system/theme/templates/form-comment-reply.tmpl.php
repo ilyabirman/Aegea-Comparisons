@@ -25,16 +25,22 @@
   value="<?= @$content['form-comment-reply']['.reply-action'] ?>"
 />
 
+<input
+  type="hidden"
+  id="token"
+  name="token"
+  value="<?= @$content['form-comment-reply']['.token'] ?>"
+/>
+
 <div class="form">
 
 <?php $comment = $content['comments']['each']['only'] ?>
 
 <div class="form-control">
   <textarea name="text"
-    class="required width-4 e2-textarea-autosize"
+    class="required width-4 height-16 e2-textarea-autosize"
     autofocus="autofocus"
     id="text"
-    style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
   ><?=$content['form-comment-reply']['reply-text']?></textarea>
 </div>
 
@@ -55,6 +61,7 @@
 </div>
 
 
+<?php if ($content['form-comment-reply']['emailing-possible?']) { ?>
 <div class="form-control">
   <label class="checkbox">
   <input
@@ -65,6 +72,7 @@
   />&nbsp;<?= _S ('ff--notify-subscribers') ?>
   </label><br />
 </div>
+<?php } ?>
 
 
 <div class="form-control">

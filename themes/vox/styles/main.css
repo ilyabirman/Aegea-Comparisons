@@ -2,7 +2,7 @@
     
   --backgroundColor:             rgb( 241, 243, 242      );
   --backgroundTransparentColor: rgba( 241, 243, 242, .8  );
-  --sheetBackgroundColor:       rgba( 227, 224, 211, .8  );
+  --sheetBackgroundColor:       rgba( 215, 224, 221, .8  );
 
   --foregroundColor:             rgb(  76,  78,  77      );
   --thinRuleColor:              rgba(  76,  78,  77, .3  );
@@ -19,8 +19,8 @@
   --hoverUnderlineColor:        rgba( 135,  23,  25, .3  );
   /* --tagColor */
   /* --tagUnderlineColor */
-  /* --adminColor */
-  /* --adminUnderlineColor */
+  --adminColor:                  rgb( 112, 192,  32);
+  --adminUnderlineColor:        rgba( 112, 192,  32, .12 );
   --engineTextColor:             rgb(  86,  85, 103      );
   --engineTextUnderlineColor:   rgba(  86,  85, 103, .3 );
 
@@ -35,7 +35,7 @@
   /* --activeColor */
   /* --errorColor */
   /* --currentItemBackgroundColor */
-  /* --windowBackgroundColor */
+  --windowBackgroundColor:       rgb( 233, 239, 237      );
   /* --unsavedIndicatorColor */
   
   /* to match .likely */
@@ -65,11 +65,11 @@
   --blogTitleFontSize: 28px;
   --blogTitleLineHeight: 32px;
   --pageHeadingFontSize: 36px;
-  --pageHeadingLineHeight: 42px;
-  --noteTitleFontSize: 28px;
-  --noteTitleLineHeight: 32px;
-  --noteTitleFavouriteFontSize: 40px;
-  --noteTitleFavouriteLineHeight: 48px;
+  --pageHeadingLineHeight: 40px;
+  --noteTitleFontSize: 36px;
+  --noteTitleLineHeight: 40px;
+  --noteTitleFavouriteFontSize: 36px;
+  --noteTitleFavouriteLineHeight: 40px;
   --noteTextFontSize: 20px;
   --noteTextLineHeight: 28px;
 
@@ -83,14 +83,7 @@
 
 .e2-text .lead {
   font-family: var(--mainFontFamily);
-  font-size: var(--noteTextFontSize);
-  line-height: var(--noteTextLineHeight);
   margin: 0 0 28px;
-}
-
-.e2-note-favourite .e2-text .lead {
-  font-size: var(--noteTitleFontSize);
-  line-height: var(--noteTitleLineHeight);
 }
 
 .e2-text .loud {
