@@ -32,9 +32,7 @@
 <div class="form-control e2-comment-control-group">
   <div class="form-label form-label-sticky input-label">
     <label>
-      <span>
-        <span class="e2-markable <?php if (@$comment['reply-important?']) echo 'e2-marked' ?>"><?= _S ('ff--text') ?></span>
-      </span>
+      <span class="e2-comment-piece-markable <?php if (@$comment['reply-important?']) echo 'e2-comment-piece-marked' ?>"><?= _S ('ff--text') ?></span>
   
       <span class="e2-comment-actions admin-links">
         <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['reply-important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a><?php endif ?>

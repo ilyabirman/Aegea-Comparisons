@@ -126,7 +126,6 @@ function e2l_load_strings () {
   'ff--full-name' => 'Имя и фамилия',
   'ff--email' => 'Эл. почта',
   'gs--email-wont-be-published' => 'адрес не будет опубликован',
-  'gs--no-html' => 'ХТМЛ не работает',
   'ff--subscribe-to-others-comments' => 'Получать комментарии других по почте',
   'ff--text-of-your-comment' => 'Текст вашего комментария',
   'gs--n-comments' => '$[number.cardinal]',
@@ -217,9 +216,10 @@ function e2l_load_strings () {
 
   'pt--settings' => 'Настройка',
   'ff--language' => 'Язык',
-  'ff--theme' => 'Оформление',
+  'ff--theme' => 'Тема',
   'ff--theme-how-to' => 'Как создать свою тему?',
   'ff--theme-selector-wants-js' => 'Для выбора темы оформления, включите в браузере поддержку скриптов (JavaScript).',
+  'gs--theme-preview' => 'Предпросмотр',
   'ff--posts' => 'Заметки',
   'ff--items-per-page-after' => 'на странице',
   'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
@@ -232,6 +232,11 @@ function e2l_load_strings () {
   'ff--administration' => 'Администрирование:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'соединение с базой',
+  'gs--get-backup' => 'скачать последний бекап',
+  'gs--used' => 'Занято $[used] из $[total] МБ ($[percent]%)',
+  'gs--used-all' => 'Занято всё место: $[total] МБ',
+  
+  // '$[hours.cardinal] назад',
 
   'ff--blog-title' => 'Название блога',
   'ff--set-userpic-by-dragging' => 'Перетащите на место пунктирного кружка фотографию с рабочего стола',
@@ -312,12 +317,8 @@ function e2l_load_strings () {
   'em--comment-replied-at' => 'Комментарий, на который ответил автор',
   
   // rss
-  'nf--comments-on-this-post' => 'Комментарии к этой заметке',
-  'gs--comments-on-post' => 'комментарии к заметке',
-  'gs--comment-on-post' => 'комментарий к заметке',
   'gs--posts-tagged' => 'заметки с тегом',
-  'gs--search-results' => 'результаты поиска',
-  
+
   'gs--subscribe-to-blog' => 'Подписаться на блог',
 
   // social networks
@@ -327,6 +328,7 @@ function e2l_load_strings () {
   'sn--gplus-verb' => 'Плюсануть',
   'sn--vkontakte-verb' => 'Поделиться',
   'sn--telegram-verb' => 'Отправить',
+  'sn--whatsapp-verb' => 'Отправить',
   'sn--pinterest-verb' => 'Запинить',
 
   // umacros
@@ -352,6 +354,8 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выполнено обновление с версии $[from] до версии $[to]',
   'gs--good-blogs' => 'Хорошие блоги и сайты',
+
+  '--secondary-language' => 'en',
   
   );
   

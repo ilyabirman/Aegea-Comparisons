@@ -2,7 +2,8 @@ if ($) $ (function () {
 
 $ ('a').hover (
   function () {
-    if (($ (this).attr ('href') != '') && ($ (this).attr ('href') != '#')) {
+    var h = $ (this).attr ('href')
+    if (h && (h != '#') && (!h.match(/^javascript\:/))) {
       $ ('a[href="' + $ (this).attr ('href') + '"]').addClass ('hover')
     }
   },

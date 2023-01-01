@@ -1,3 +1,17 @@
+a.e2-tag,
+a:link.e2-tag,
+a:visited.e2-tag {
+  color: var(--tagColor);
+  border-color: var(--tagUnderlineColor);
+}
+
+a:hover.e2-tag,
+a.hover.e2-tag,
+a:active.e2-tag {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+}
+
 .e2-tags {
   line-height: 2.25em;
   margin-bottom: 48px;
@@ -13,24 +27,10 @@
 
 .e2-tag-filter-slide-shaft,
 .e2-tag-filter-slider span {
-  background: $c_tag;
+  background: var(--tagColor);
 }
 
 .e2-tag-filter-slide-area:hover .e2-tag-filter-slide-shaft,
 .e2-tag-filter-slide-area:hover .e2-tag-filter-slider span {
-  background: $c_hover;
-}
-
-a.e2-tag,
-a:link.e2-tag,
-a:visited.e2-tag {
-  color: $c_tag;
-  border-color: transparentize($c_tag, $thin);
-}
-
-a:hover.e2-tag,
-a.hover.e2-tag,
-a:active.e2-tag {
-  color: $c_hover;
-  border-color: transparentize($c_hover, $thin);
+  background: var(--hoverColor);
 }

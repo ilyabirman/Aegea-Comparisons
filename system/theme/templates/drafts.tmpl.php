@@ -13,7 +13,17 @@
     <?php if ($thumb = $draft['thumbs'][0]) { ?>
       <img src="<?= $thumb['href']?>" width="<?= $thumb['width']?>" height="<?= $thumb['height']?>" alt="" />
     <?php } ?>
+
+    <?php if (array_key_exists ('userpic-href', $draft)) { ?>
+    <div class="e2-draft-preview-author-picture">
+      <img src="<?= $draft['userpic-href'] ?>" alt="<?= @$draft['source'] ?>" />
+    </div>
+    <?php } ?>
+  
     <div class="e2-draft-preview-text">
+      <?php if (array_key_exists ('author', $draft)) { ?>
+      <b><?= @$draft['author'] ?></b><br />
+      <?php } ?>
       <?= $draft['text-fragment']?>
     </div>
     </div>

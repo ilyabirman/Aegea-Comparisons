@@ -47,6 +47,8 @@ class NeasdenGroup_picture implements NeasdenGroup {
           if ($xmlget) {
             $xmlattributes = $xmlget->attributes ();
             list ($width, $height) = array ((string) $xmlattributes -> width, (string) $xmlattributes -> height);
+            if (!$width) $width = $myconf['max-width'];
+            if (!$height) $height = $myconf['max-width'];
           }
         } elseif ($size = @getimagesize ($filename)) {
           list ($width, $height) = $size;
@@ -68,7 +70,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
         if ($width) $ratio = $height / $width;
         
         $image_html = (
-          '<img src="'. $myconf['src-prefix'] . $filename .'" '.
+          '<img src="'. $myconf['src-prefix'] . $filebasename .'" '.
           'width="'. $width .'" height="'. $height.'" '.
           'alt="'. htmlspecialchars ($alt) .'" />'. "\n"
         );

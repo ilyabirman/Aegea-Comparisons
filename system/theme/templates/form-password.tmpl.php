@@ -1,5 +1,3 @@
-<?php _JS ('form-password') ?>
-
 <form
   action="<?= @$content['form-password']['form-action'] ?>"
   method="post"

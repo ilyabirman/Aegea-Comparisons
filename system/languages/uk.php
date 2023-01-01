@@ -126,7 +126,6 @@ function e2l_load_strings () {
   'ff--full-name' => 'Імʼя та прізвище',
   'ff--email' => 'Ел. адреса',
   'gs--email-wont-be-published' => 'адресу не буде опубліковано',
-  'gs--no-html' => 'ХТМЛ не працює',
   'ff--subscribe-to-others-comments' => 'Отримувати коментарі інших поштою',
   'ff--text-of-your-comment' => 'Текст вашого коментаря',
   'gs--n-comments' => '$[number.cardinal]',
@@ -219,6 +218,7 @@ function e2l_load_strings () {
   'ff--theme' => 'Оформлення',
   'ff--theme-how-to' => 'Як створити свою тему?',
   'ff--theme-selector-wants-js' => 'Щоб вибрати тему, увімкніть у браузері підтримку скриптів (JavaScript).',
+  'gs--theme-preview' => 'Перегляд',
   'ff--posts' => 'Дописи',
   'ff--items-per-page-after' => 'на сторінку',
   'ff--show-sharing-buttons' => 'Показувати кнопки поширення в соцмережах',
@@ -231,6 +231,9 @@ function e2l_load_strings () {
   'ff--administration' => 'Адміністрування:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'з’єднання з базою',
+  'gs--get-backup' => 'завантажити останній бекап',
+  'gs--used' => 'Зайнято $[used] з $[total] МБ ($[percent]%)',
+  'gs--used-all' => 'Зайнято все місце: $[total] МБ',
 
   'ff--blog-title' => 'Назва блогу',
   'ff--set-userpic-by-dragging' => 'Перетягніть на місце пунктирного кола фотографію з робочого столу',
@@ -311,11 +314,7 @@ function e2l_load_strings () {
   'em--comment-replied-at' => 'Коментар, на який відповів автор',
   
   // rss
-  'nf--comments-on-this-post' => 'Коментарі до цього допису',
-  'gs--comments-on-post' => 'коментарі до допису',
-  'gs--comment-on-post' => 'коментар до допису',
   'gs--posts-tagged' => 'дописи з тегом',
-  'gs--search-results' => 'результати пошуку',
 
   'gs--subscribe-to-blog' => 'Підписатися на блог',
   
@@ -326,6 +325,7 @@ function e2l_load_strings () {
   'sn--gplus-verb' => 'Плюсанути',
   'sn--vkontakte-verb' => 'Поділитись',
   'sn--telegram-verb' => 'Надіслати',
+  'sn--whatsapp-verb' => 'Надіслати',
   'sn--pinterest-verb' => 'Запінити',
 
   // umacros
@@ -351,6 +351,8 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Виконано оновлення з версії $[from] до версії $[to]',
   'gs--good-blogs' => 'Хороші блоги та сайти',
+
+  '--secondary-language' => 'ru',
   
   );
   
@@ -400,7 +402,5 @@ function e2lstr_cardinal ($number, $modifier = '', $string_id) {
   return e2_decline_for_number ($what);
   
 }
-
-
 
 ?>

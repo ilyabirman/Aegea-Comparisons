@@ -1,23 +1,16 @@
-if ($) $ (function () {
+if ($('#form-tag').length) {
+  $.ajaxSetup({ type: 'post', timeout: 10000 })
 
-  $.ajaxSetup ({ type: "post", timeout: 10000 })
+  $('.required').bind('input blur cut copy paste keypress', updateSubmittability)
+  updateSubmittability()
+}
 
-  function e2UpdateSubmittability () {
+function updateSubmittability () {
+  const shouldBeDisabled = /^ *$/.test($('#tag').val()) || /^ *$/.test($('#urlname').val())
 
-	  shouldBeDisabled = (
-	    /^ *$/.test ($ ('#tag').val ()) ||
-	    /^ *$/.test ($ ('#urlname').val ())
-    )
-	  if (shouldBeDisabled) {
-		  $ ('#submit-button').attr ('disabled', 'disabled')
-	  } else {
-		  $ ('#submit-button').removeAttr ('disabled')
-	  }
-	  
+  if (shouldBeDisabled) {
+    $('#submit-button').attr('disabled', 'disabled')
+  } else {
+    $('#submit-button').removeAttr('disabled')
   }
-  
-  e2UpdateSubmittability ()
- 
-  $ ('.required').bind ('input blur cut copy paste keypress', e2UpdateSubmittability)
-  
-})
+}

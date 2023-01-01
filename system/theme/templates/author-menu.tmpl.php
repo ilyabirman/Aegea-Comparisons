@@ -20,6 +20,7 @@ if (
 
 
   <?php # NEW # ?>
+  <?php if (array_key_exists ('new-note', $content['admin-hrefs'])) { ?>
   <?php if (_AT ($content['admin-hrefs']['new-note'])) { ?>
 
   <span class="admin-icon e2-admin-menu-new-selected" title="<?= _S ('ln--new-post') ?>"><span class="e2-svgi"><?= _SVG ('new') ?></span></span>
@@ -32,7 +33,8 @@ if (
   <span class="admin-icon e2-new-note-item" title="<?= _S ('ln--new-post') ?>" id="e2-new-note-item"><a href="<?= $content['admin-hrefs']['new-note'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?><span class="e2-unsaved-led" style="display: none"></span></span></a></span>
 
   <?php } ?>
-
+  <?php } ?>
+  
 
   <?php # DRAFTS # ?>
   <?php if (array_key_exists ('drafts', $content['admin-hrefs'])) { ?>

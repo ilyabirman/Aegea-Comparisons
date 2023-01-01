@@ -5,9 +5,7 @@
 <defs>
 </defs>
 <g>
-  <g>
-    <path d="M4,0v4H0v9h13V9h4V0H4z M4,12H1V9h3V12z M4,8H1V5h3V8z M8,12H5V9h3V12z M8,8H5V5h3V8z M8,4H5V1h3V4z M12,12H9V9h3V12z M12,8H9V5h3V8z M12,4H9V1h3V4z M16,8h-3V5h3V8z M16,4h-3V1h3V4z"/>
-  </g>
+  <path d="M4,0v4H0v9h13V9h4V0H4z M4,12H1V9h3V12z M4,8H1V5h3V8z M8,12H5V9h3V12z M8,8H5V5h3V8z M8,4H5V1h3V4z M12,12H9V9h3V12z M12,8H9V5h3V8z M12,4H9V1h3V4z M16,8h-3V5h3V8z M16,4h-3V1h3V4z"/>
 </g>
 <rect x="0" y="0" fill-rule="evenodd" clip-rule="evenodd" fill="none" width="17" height="13"/>
 </svg>

@@ -12,8 +12,6 @@
   <?php //= $content['sign-in']['necessary?']? '' : 'style="visibility: hidden"' ?>
 >
 
-<!-- <div class="e2-glass"></div> -->
-
 <div class="e2-login-window" id="e2-login-window">
   <div class="e2-login-window-col">
     <form
@@ -36,7 +34,7 @@
       <?php endif ?>
 
       <div class="e2-login-window-input-wrapper">
-        <span class="e2-svgi e2-svgi-double e2-login-window-icon"><?= _SVG ('lock') ?></span>
+        <span class="e2-login-window-icon"><?= _SVG ('lock') ?></span>
         <input type="password" name="password" id="e2-password" class="text big input-disableable e2-login-window-input" autofocus="autofocus"/>
       </div>
         

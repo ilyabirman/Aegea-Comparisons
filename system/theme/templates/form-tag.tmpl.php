@@ -1,8 +1,7 @@
 <?php _LIB ('ajaxupload') ?>
-<?php _JS ('form-tag') ?>
-<?php _JS ('text-with-file-upload') ?>
 
 <form
+  id="form-tag"
   action="<?= @$content['form-tag']['form-action'] ?>"
   method="post"
 >                                   
@@ -18,12 +17,6 @@
   id="formatter-id"
   name="formatter-id"
   value="<?= @$content['form-tag']['.formatter-id'] ?>"
-/>
-
-<input
-  type="hidden"
-  name="preserved-uploads"
-  value="<?= @$content['form-tag']['.preserved-uploads'] ?>"
 />
 
 <input
@@ -96,14 +89,23 @@
       <?php foreach ($content['form-tag']['uploads'] as $image) { ?><div class="e2-uploaded-image"><span class="e2-uploaded-image-preview"><img src="<?= $image['href'] ?>" alt="<?= $image['original-filename'] ?>" width="<?= $image['width'] ?>" height="<?= $image['height'] ?>" /></span></div><?php } ?>
       </div>
 
-      <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
+      <?php if (@$content['form-tag']['uploads-enabled?']) { ?>
+        <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
 
-      <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
-      <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
-      <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
+        <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
+        <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
+        <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
+      <?php } ?>
+
     </div>
 
   </div>
+
+  <?php if (@$content['form-tag']['space-usage']) { ?>
+  <div class="form-subcontrol">
+    <div class="form-element"><?= $content['form-tag']['space-usage'] ?></div>
+  </div>
+  <?php } ?>
 
 </div>
 
@@ -119,4 +121,3 @@
 </div>
 
 </form>
-

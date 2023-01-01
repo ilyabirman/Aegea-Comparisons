@@ -1,10 +1,7 @@
 <?php _LIB ('ajaxupload') ?>
 <?php _LIB ('goodyear') ?>
 <?php _LIB ('textarea-caret-position') ?>
-<?php _JS ('form-note-local-copy') ?>
 <?php _LIB ('chosen') ?>
-<?php _JS ('form-note') ?>
-<?php _JS ('text-with-file-upload') ?>
 
 <form
   id="form-note"
@@ -63,22 +60,9 @@
 
 <input
   type="hidden"
-  name="preserved-uploads"
-  value="<?= @$content['form-note']['.preserved-uploads'] ?>"
-/>
-
-<input
-  type="hidden"
   id="action"
   name="action"
   value="<?= @$content['form-note']['.action'] ?>"
-/>
-
-<input
-  type="hidden"
-  id="instant-publish"
-  name="instant-publish"
-  value="<?= @$content['form-note']['.instant-publish'] ?>"
 />
 
 <input
@@ -121,12 +105,12 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
     <div class="form-label form-label-sticky input-label">
       <label>
         <?= _S ('ff--text') ?>
-        <a href="http://blogengine.ru/help/text/" target="_blank" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('help') ?></span></a>
+        <a href="http://<?= _S ('e2--website-host') ?>/help/text/" target="_blank" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('help') ?></span></a>
       </label>
 
       <div class="form-label-saveinfo">
         <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>... <span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
-        <span id="livesave-button" class="keyboard-shortcut e2-admin-link e2-clickable-keyboard-shortcut" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
+        <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
         <span class="e2-unsaved-led" style="display: none"></span>
         <span id="livesave-error" class="e2-save-error" style="display: none;">!</span><br />
       </div>
@@ -135,15 +119,15 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 
     <div class="form-element">
       <textarea name="text"
-        class="required e2-text-textarea e2-textarea-autosize e2-external-drop-target e2-external-drop-target-textarea e2-external-drop-target-altable full-width"
+        class="required e2-text-textarea e2-textarea-autosize full-width<?php if (@$content['form-note']['uploads-enabled?']) { ?> e2-external-drop-target e2-external-drop-target-textarea e2-external-drop-target-altable<?php } ?>"
         id="text"
-        autocomplete="off"
         tabindex="2"
         style="height: 25.2em; min-height: 25.2em"
       ><?=$content['form-note']['text']?></textarea>
     </div>
 
   </div>
+
   <div class="form-subcontrol">
 
     <div class="form-element">
@@ -159,15 +143,25 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       <?php foreach ($content['form-note']['uploads'] as $image) { ?><div class="e2-uploaded-image"><span class="e2-uploaded-image-preview"><img src="<?= $image['href'] ?>" alt="<?= $image['original-filename'] ?>" width="<?= $image['width'] ?>" height="<?= $image['height'] ?>" /></span></div><?php } ?>
       </div>
 
-      <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
+      <?php if (@$content['form-note']['uploads-enabled?']) { ?>
+        <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
 
-      <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
-      <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
-      <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
+        <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
+        <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
+        <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
+      <?php } ?>
+      
 
     </div>
 
   </div>
+  
+  <?php if (@$content['form-note']['space-usage']) { ?>
+  <div class="form-subcontrol">
+    <div class="form-element"><?= $content['form-note']['space-usage'] ?></div>
+  </div>
+  <?php } ?>
+
 </div>
 
 
@@ -262,5 +256,3 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 
 
 </form>
-
-

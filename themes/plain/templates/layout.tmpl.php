@@ -2,37 +2,50 @@
 
 
 
-
-
 <div class="flag">
-<?php _X ('header-pre') ?>
+  <?php _X ('header-pre') ?>
 
-<div class="spotlight">
+  <div class="header-content">
 
-<span class="admin-links admin-links-floating">
-<?php _T ('author-menu') ?>
-</span>
+    <div class="header-description">
 
-<?php if ($content['class'] != 'found') { ?>
-  <?php _T_FOR ('search') ?>
-<?php } ?>
+      <div class="title">
 
-</div>
+        <div class="title-inner">
 
-<div class="logo">
-<?php _T ('user-picture') ?>
-</div>
+          <div class="logo-marginal">
+            <?php _T ('user-picture') ?>
+          </div>
 
-<div class="title">
-<h1>
-  <?= _A ('<a href="'. $content['blog']['href']. '"><span id="e2-blog-title">'. $content['blog']['title']. '</span></a>') ?> 
-</h1>
-<?php if ($content['class'] == 'frontpage') { ?>
-<div id="e2-blog-description"><?= $content['blog']['description'] ?></div>
-<?php } ?>
-</div>
+          <div class="logo">
+            <?php _T ('user-picture') ?>
+          </div>
 
-<?php _X ('header-post') ?>
+          <h1>
+            <?= _A ('<a href="' . $content['blog']['href'] . '"><span id="e2-blog-title">' . $content['blog']['title'] . '</span></a>') ?>
+          </h1>
+
+        </div>
+
+        <?php if ($content['class'] == 'frontpage') { ?>
+          <div id="e2-blog-description"><?= $content['blog']['description'] ?></div>
+        <?php } ?>
+      </div>
+    </div>
+
+    <div class="spotlight">
+      <span class="admin-links admin-links-floating">
+        <?php _T ('author-menu') ?>
+      </span>
+
+      <?php if ($content['class'] != 'found') { ?>
+        <?php _T_FOR ('search') ?>
+      <?php } ?> 
+    </div>
+
+  </div>
+
+  <?php _X ('header-post') ?>
 </div>
 
 
@@ -40,6 +53,7 @@
 <div class="content">
 
 <?php _T ('heading') ?>
+<?php _T ('theme-preview') ?>
 <?php _T ('message') ?>
 <?php _T ('welcome') ?>
 <?php _T ('drafts') ?>
@@ -62,9 +76,9 @@
 
 <div class="footer">
 <?php _X ('footer-pre') ?>
-© <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?> 
+© <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?>
 
-<a class="e2-rss" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
+<a class="e2-rss-button" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
 <?php # please do not remove: #?>
 <div class="engine">

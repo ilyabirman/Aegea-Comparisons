@@ -1,169 +1,164 @@
-if ($) $ (function () {
-  document.e2 = document.e2 || {}
+document.e2 = document.e2 || {}
+const localStorage = window.localStorage
 
-  document.e2.isLocalStorageAvailable = (function () {
-    try {
-      localStorage.setItem ('test', 'test')
-      localStorage.removeItem ('test')
+document.e2.isLocalStorageAvailable = (() => {
+  try {
+    localStorage.setItem('test', 'test')
+    localStorage.removeItem('test')
 
-      return true
-    } catch (e) {
-      return false
-    }
-  })()
+    return true
+  } catch (e) {
+    return false
+  }
+})()
 
-  if (document.e2.isLocalStorageAvailable) {
-    document.e2.localCopies = {
-      _lsKey: 'copies-info',
-      _lsPrefix: 'copy-',
-      _cookieName: document.e2.cookiePrefix + 'local_copies',
+if (document.e2.isLocalStorageAvailable) {
+  document.e2.localCopies = {
+    _lsKey: 'copies-info',
+    _lsPrefix: 'copy-',
+    _cookieName: document.e2.cookiePrefix + 'local_copies',
 
-      getListName: function() {
-        return this._lsKey
-      },
+    getListName () {
+      return this._lsKey
+    },
 
-      getPrefix: function() {
-        return this._lsPrefix
-      },
+    getPrefix () {
+      return this._lsPrefix
+    },
 
-      getName: function(id) {
-        return this._lsPrefix + id
-      },
+    getName (id) {
+      return this._lsPrefix + id
+    },
 
-      save: function(id, copy) {
-        localStorage.setItem (this.getName (id), JSON.stringify (copy))
-        this.addToList (id, copy)
-      },
+    save (id, copy) {
+      localStorage.setItem(this.getName(id), JSON.stringify(copy))
+      this.addToList(id, copy)
+    },
 
-      remove: function(id) {
-        localStorage.removeItem (this.getName (id))
-        this.removeFromList (id)
-      },
+    remove (id) {
+      localStorage.removeItem(this.getName(id))
+      this.removeFromList(id)
+    },
 
-      get: function(id, draftTime, serverTime) {
-        var copy = false;
+    get (id, draftTime, serverTime) {
+      let copy = false
 
-        try {
-          copy = JSON.parse (localStorage.getItem (this.getName (id)))
+      try {
+        copy = JSON.parse(localStorage.getItem(this.getName(id)))
 
-          if (!copy) return false
-        } catch (e) {
+        if (!copy) return false
+      } catch (e) {
+        return false
+      }
+
+      if (!serverTime || !draftTime) {
+        return copy
+      } else {
+        if (this.isCopyOutdated(copy, draftTime, serverTime)) {
+          this.remove(id)
           return false
         }
 
-        if (!serverTime || !draftTime) {
-          return copy
-        } else {
-          if (this.isCopyOutdated(copy, draftTime, serverTime)) {
-            this.remove (id)
-            return false
-          }
+        return copy
+      }
+    },
 
-          return copy
-        }
-      },
+    getList () {
+      try {
+        return JSON.parse(localStorage.getItem(this._lsKey)) || {}
+      } catch (e) {
+        return {}
+      }
+    },
 
-      getList: function() {
-        try {
-          return JSON.parse (localStorage.getItem (this._lsKey)) || {}
-        } catch (e) {
-          return {}
-        }
-      },
+    addToList (id, copy) {
+      const list = this.getList()
 
-      addToList: function (id, copy) {
-        var list = this.getList ()
+      if (!list.hasOwnProperty(id)) {
+        list[id] = { isPublished: copy.isPublished, timestamp: copy.timestamp }
+        localStorage.setItem(this._lsKey, JSON.stringify(list))
+        this.updateCookie(list)
+      }
+    },
 
-        if (!list.hasOwnProperty(id)) {
-          list[id] = { isPublished: copy.isPublished, timestamp: copy.timestamp }
-          localStorage.setItem (this._lsKey, JSON.stringify (list))
-          this.updateCookie(list)
-        }
-      },
+    removeFromList (id) {
+      const list = this.getList()
 
-      removeFromList: function(id) {
-        var list = this.getList ()
+      if (list.hasOwnProperty(id)) {
+        delete list[id]
+        localStorage.setItem(this._lsKey, JSON.stringify(list))
+        this.updateCookie(list)
+      }
+    },
 
-        if (list.hasOwnProperty(id)) {
-          delete list[id]
-          localStorage.setItem (this._lsKey, JSON.stringify (list))
-          this.updateCookie(list)
-        }
-      },
+    doesCopyExist (id) {
+      return localStorage.hasOwnProperty(this.getName(id))
+    },
 
-      doesCopyExist: function(id) {
-        return localStorage.hasOwnProperty (this.getName(id))
-      },
+    // returns local copy if it is not outdated, else removes this copy (if it exists) and returns false
+    isCopyOutdated (copy, draftTime, serverTime) {
+      if (!draftTime || !serverTime) return false
 
-      // returns local copy if it is not outdated, else removes this copy (if it exists) and returns false
-      isCopyOutdated: function(copy, draftTime, serverTime) {
-        if (!draftTime || !serverTime) return false
+      const copyTime = +copy.timestamp
+      const localTime = (new Date()).getTime()
+      const diffTime = serverTime - localTime
 
-        var copyTime = +copy.timestamp
-        var localTime = (new Date ()).getTime ()
-        var diffTime = serverTime - localTime
+      if (Math.abs(diffTime) > 3600 * 60 * 1000) {
+        // if diff time more than 3 mins then we decide that server in another timezone
+        draftTime -= diffTime
+      }
 
-        if (Math.abs(diffTime) > 3600 * 60 * 1000) {
-          // if diff time more than 3 mins then we decide that server in another timezone
-          draftTime -= diffTime;
-        }
+      return copyTime <= draftTime
+    },
 
-        return copyTime <= draftTime
-      },
+    checkOutdatedCopies () {
+      const serverNotes = document.e2.noteLastModifiedsById || {}
+      const list = this.getList()
 
-      checkOutdatedCopies: function() {
-        var serverNotes = document.e2.noteLastModifiedsById || {};
-
-        var list = this.getList ()
-
-        for (var key in list) {
-          if (key === 'new') continue
-          if (!serverNotes.hasOwnProperty(key)) {
-            this.remove (key)
-            continue
-          }
-
-          if (this.isCopyOutdated(list[key], serverNotes[key] * 1000, document.e2.serverTime * 1000)) {
-            this.remove (key)
-          }
-        }
-      },
-
-      generateCookie: function() {
-        if (!getCookie(this._cookieName)) this.updateCookie ()
-      },
-
-      updateCookie: function(list) {
-        list = list || this.getList ()
-
-        var ids = [];
-
-        for (var key in list) {
-          if (key === 'new') continue
-
-          ids.push (key)
+      for (let key in list) {
+        if (key === 'new') continue
+        if (!serverNotes.hasOwnProperty(key)) {
+          this.remove(key)
+          continue
         }
 
-        if (ids.length) {
-          document.cookie = this._cookieName + '=' + ids.join(',') + ';path=/'
-        } else {
-          var d = new Date();
-          d.setTime(d.getTime() - 1);
-          document.cookie = this._cookieName + '="";path=/;expires=' + d.toUTCString()
+        if (this.isCopyOutdated(list[key], serverNotes[key] * 1000, document.e2.serverTime * 1000)) {
+          this.remove(key)
         }
       }
-    }
+    },
 
-    document.e2.localCopies.checkOutdatedCopies ()
+    generateCookie () {
+      const matches = document.cookie.match(new RegExp(
+        '(?:^|; )' + this._cookieName.replace(/([.$?*|{}()[]\\\/\+^])/g, '\\$1') + '=([^;]*)'
+      ))
 
-    // let's create cookie if it was removed
-    document.e2.localCopies.generateCookie ()
+      if (!matches) this.updateCookie()
+    },
 
-    function getCookie(name) {
-      var matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-      ));
-      return matches ? decodeURIComponent(matches[1]) : undefined;
+    updateCookie (list) {
+      list = list || this.getList()
+
+      const ids = []
+
+      for (let key in list) {
+        if (key === 'new') continue
+
+        ids.push(key)
+      }
+
+      if (ids.length) {
+        document.cookie = this._cookieName + '=' + ids.join(',') + ';path=/'
+      } else {
+        const d = new Date()
+        d.setTime(d.getTime() - 1)
+        document.cookie = this._cookieName + '="";path=/;expires=' + d.toUTCString()
+      }
     }
   }
-})
+
+  document.e2.localCopies.checkOutdatedCopies()
+
+  // let's create cookie if it was removed
+  document.e2.localCopies.generateCookie()
+}

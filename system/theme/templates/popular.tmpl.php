@@ -1,6 +1,6 @@
 <?php if (array_key_exists ('popular', $content)) { ?>
 <?php if (array_key_exists ('each', $content['popular'])) { ?> 
-<?php if ($content['class'] == 'note') { ?>
+<?php if ($content['class'] == 'note' or $content['class'] == 'themepreview') { ?>
 
 <div class="e2-section-heading">
   <?=$content['popular']['title']?>

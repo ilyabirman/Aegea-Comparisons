@@ -126,7 +126,6 @@ function e2l_load_strings () {
   'ff--full-name' => 'Full name',
   'ff--email' => 'Email',
   'gs--email-wont-be-published' => 'won’t be published',
-  'gs--no-html' => 'HTML will not work',
   'ff--subscribe-to-others-comments' => 'Get other comments by email',
   'ff--text-of-your-comment' => 'Text of your comment',
   'gs--n-comments' => '$[number.cardinal]',
@@ -220,6 +219,7 @@ function e2l_load_strings () {
   'ff--theme' => 'Theme',
   'ff--theme-how-to' => 'How to create a theme?',
   'ff--theme-selector-wants-js' => 'To select a theme please enable JavaScript.',
+  'gs--theme-preview' => 'Preview',
   'ff--posts' => 'Posts',
   'ff--items-per-page-after' => 'per page',
   'ff--show-sharing-buttons' => 'Show social sharing buttons',
@@ -232,6 +232,9 @@ function e2l_load_strings () {
   'ff--administration' => 'Administration:',
   'gs--password' => 'password',
   'gs--db-connection' => 'database connection',
+  'gs--get-backup' => 'get latest backup',
+  'gs--used' => 'Used $[used] out of $[total] MB ($[percent]%)',
+  'gs--used-all' => 'All space is used: $[total] MB',
   
   'ff--blog-title' => 'Blog title',
   'ff--set-userpic-by-dragging' => 'Drag your photo from the desktop to the dashed circle',
@@ -283,11 +286,7 @@ function e2l_load_strings () {
   'em--comment-replied-at' => 'Comment replied at',
 
   // rss
-  'nf--comments-on-this-post' => 'Comments on this post',
-  'gs--comments-on-post' => 'comments on the post' ,
-  'gs--comment-on-post' => 'comment on the post' ,
   'gs--posts-tagged' => 'posts tagged',
-  'gs--search-results' => 'search results',
   
   'gs--subscribe-to-blog' => 'Subscribe to this blog',
 
@@ -298,6 +297,7 @@ function e2l_load_strings () {
   'sn--gplus-verb' => 'Plus',
   'sn--vkontakte-verb' => 'Share',
   'sn--telegram-verb' => 'Send',
+  'sn--whatsapp-verb' => 'Send',
   'sn--pinterest-verb' => 'Pin',
 
   // time

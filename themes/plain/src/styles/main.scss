@@ -1,16 +1,5 @@
-@import "components/variables";
+@import "variables";
+@import "components/html";
 @import "components/layout";
-
-// Components
-@import "components/search";
-@import "components/notes";
-@import "components/subscribe";
-@import "components/likes";
-@import "components/comments";
-@import "components/pages";
-@import "components/typography";
-@import "components/tags";
-@import "components/popular";
-@import "components/forms";
-@import "components/controls";
-@import "components/sheets";
+@import "components/text-p-classes";
+@import "embeddables";

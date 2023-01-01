@@ -126,7 +126,6 @@ function e2l_load_strings () {
   'ff--full-name' => 'Імя і прозвішча',
   'ff--email' => 'Эл. пошта',
   'gs--email-wont-be-published' => 'адрас ня будзе апублікаваны',
-  'gs--no-html' => 'ХТМЛ не працуе',
   'ff--subscribe-to-others-comments' => 'Атрымоўваць каментары іншых па пошце',
   'ff--text-of-your-comment' => 'Тэкст вашага каментара',
   'gs--n-comments' => '$[number.cardinal]',
@@ -219,6 +218,7 @@ function e2l_load_strings () {
   'ff--theme' => 'Выгляд',
   'ff--theme-how-to' => 'Як стварыць сваю тэму?',
   'ff--theme-selector-wants-js' => 'Каб выбраць тэму выгляду, уключыце ў браўзеры падтрымку скрыптоў (JavaScript).',
+  'gs--theme-preview' => 'Прадпрагляд',
   'ff--posts' => 'Нататкі',
   'ff--items-per-page-after' => 'на старонцы',
   'ff--show-sharing-buttons' => 'Паказваць кнопкі адсылання ў соцсеткі',
@@ -231,6 +231,9 @@ function e2l_load_strings () {
   'ff--administration' => 'Адміністраванне:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'злучэнне з базай',
+  'gs--get-backup' => 'спампаваць апошні бэкапу',
+  'gs--used' => 'Занята $[used] з $[total] МБ ($[percent]%)',
+  'gs--used-all' => 'Занята ўсе месца: $[total] МБ',
 
   'ff--blog-title' => 'Назва блогу',
   'ff--set-userpic-by-dragging' => 'Перацягнiце на месца пункцiрнага кружка здымак з працоÿнага стала',
@@ -311,11 +314,7 @@ function e2l_load_strings () {
   'em--comment-replied-at' => 'каментар, на які адказаў аўтар',
 
   // rss
-  'nf--comments-on-this-post' => 'каментары да гэтай нататкі',
-  'gs--comments-on-post' => 'каментары да нататкі',
-  'gs--comment-on-post' => 'каментар да нататкі',
   'gs--posts-tagged' => 'нататкі з тэгам',
-  'gs--search-results' => 'вынікі пошуку',
 
   'gs--subscribe-to-blog' => 'Падпісацца на блог',
   
@@ -326,6 +325,7 @@ function e2l_load_strings () {
   'sn--gplus-verb' => 'Плюсануць',
   'sn--vkontakte-verb' => 'Падзяліцца',
   'sn--telegram-verb' => 'Адаслаць',
+  'sn--whatsapp-verb' => 'Адаслаць',
   'sn--pinterest-verb' => 'Запініць',
 
   // umacros
@@ -351,6 +351,8 @@ function e2l_load_strings () {
   'gs--seconds-contraction' => 'с',
   'gs--updated-successfully' => 'Выканана абнаўленне з версіі $[from] да версіі $[to]',
   'gs--good-blogs' => 'Добрыя блогі ды сайты',
+
+  '--secondary-language' => 'ru',
 
   );
 

@@ -1,1 +1,0 @@
-$&&$(function(){function t(){shouldBeDisabled=/^ *$/.test($("#tag").val())||/^ *$/.test($("#urlname").val()),shouldBeDisabled?$("#submit-button").attr("disabled","disabled"):$("#submit-button").removeAttr("disabled")}$.ajaxSetup({type:"post",timeout:1e4}),t(),$(".required").bind("input blur cut copy paste keypress",t)});

@@ -13,7 +13,7 @@
 <?php _T ('user-picture') ?>
 
 <h1>
-  <?= _A ('<a href="'. $content['blog']['href']. '"><span id="e2-blog-title">'. $content['blog']['title']. '</span></a>') ?> 
+  <?= _A ('<a href="'. $content['blog']['href']. '"><span id="e2-blog-title">'. $content['blog']['title']. '</span></a>') ?>
 </h1>
 
 <?php if ($content['frontpage?']) {?>
@@ -21,7 +21,7 @@
 <?php } ?>
 
 <?php _T_FOR ('search') ?>
-<a class="e2-rss" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
+<a class="e2-rss-button" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
 <?php _X ('header-post') ?>
 
@@ -67,7 +67,7 @@
 
 
 <?php _X ('footer-pre') ?>
-© <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?> 
+© <span id="e2-blog-author"><?= @$content['blog']['author'] ?></span>, <?=$content['blog']['years-range']?>
 <?=$content['engine']['about']?>
 <?php if ($content['sign-in']['done?']) { ?>
 &nbsp;&nbsp;&nbsp;

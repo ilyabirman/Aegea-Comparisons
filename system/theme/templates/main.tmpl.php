@@ -11,9 +11,6 @@
 <e2:head-data />
 
 <?php _T ('init-script') ?>
-<?php if ($content['sign-in']['done?']) { ?>
-<?php _JS ('local-copies') ?>
-<?php } ?>
 
 <e2:scripts-data />
 
@@ -21,7 +18,7 @@
 
 </head>
 
-<body <?php if (@$content[$content['form']]['form-file-upload-action']) { ?>class="e2-external-drop-target e2-external-drop-target-body e2-external-drop-target-altable"<?php } ?>>
+<body <?php if (@$content['body-uploads-enabled?']) { ?>class="e2-external-drop-target e2-external-drop-target-body e2-external-drop-target-altable"<?php } ?>>
 
 <?php _T_FOR ('form-install') ?>
 <?php _T_FOR ('form-login') ?>
@@ -46,7 +43,7 @@
 <?php _JS ('admin') ?>
 <?php } ?>
 
-
+<?php _CSS ('overrides') ?>
 
 </html>
 

@@ -3,14 +3,22 @@
 
 <channel>
 
-<title><?= $content['title'] ?></title>
-<link><?= $content['link'] ?></link>
-<description><?= $content['description'] ?></description>
-<generator><?= $content['generator'] ?></generator>
+<title><?= htmlspecialchars ($content['title'], ENT_NOQUOTES, HSC_ENC); ?></title>
+<link><?= $content['home_page_url'] ?></link>
+<description></description>
+<generator><?= $content['_e2_ua_string'] ?></generator>
 
-<?php # _T_FOR ('items') ?>
-<?= $content['items'] ?>
+<?php foreach ($content['items'] as $item) { ?>
+<item>
+<title><?= htmlspecialchars ($item['title'], ENT_NOQUOTES, HSC_ENC); ?></title>
+<guid isPermaLink="<?= $item['_rss_guid_is_permalink'] ?>"><?= $item['_rss_guid'] ?></guid>
+<link><?= $item['url'] ?></link>
+<comments><?= $item['url'] ?></comments>
+<description><?= htmlspecialchars ($item['content_html'], ENT_NOQUOTES, HSC_ENC) ?></description>
+<pubDate><?= $item['_date_published_rfc2822'] ?></pubDate>
+</item>
+
+<?php } ?>
 
 </channel>
-
 </rss>

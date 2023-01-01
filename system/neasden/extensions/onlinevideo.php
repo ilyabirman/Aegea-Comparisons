@@ -82,6 +82,8 @@ class NeasdenGroup_onlinevideo implements NeasdenGroup {
       
     }
   
+    if ($p) $result .= '</div>'."\n";
+
     $result .= '</div>'."\n";
   
     return $result;

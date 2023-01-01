@@ -1,4 +1,11 @@
-input.text, textarea, select, button, .e2-button {
+input[type="text"],
+input[type="password"],
+textarea,
+select,
+button,
+.e2-button {
+  font-family: inherit;
+  font-size: inherit;
   border: none;
   padding: 6px;
   box-shadow: none;
@@ -7,9 +14,14 @@ input.text, textarea, select, button, .e2-button {
   transition-timing-function: ease-out;
 }
 
-input.text, textarea, select {
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+  vertical-align: baseline;
   border: none;
-  background: $c_input;
+  background: var(--inputBackgroundColor);
+  color: var(--inputTextColor);
   border-radius: 4px;
 }
 
@@ -17,17 +29,17 @@ select {
   -webkit-appearance: none;
 }
 
-input.text:focus,
+input[type="checkbox"], input[type="radio"] {
+  margin: 0;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
 textarea:focus,
 select:focus,
 button:focus,
 .e2-button:focus {
   transition: none;
-}
-
-select {
-  padding-right: 19px;
-  background: $c_input url('../images/chevron-down.svg') right center no-repeat !important;
 }
 
 select > button,
@@ -43,8 +55,8 @@ button,
   background: #eae4d8;
   background: linear-gradient(to bottom, #f4f0e8 0%, #e0d8c8 100%);
   box-shadow: none;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: normal;
   white-space: nowrap;
   text-align: center;
@@ -113,7 +125,6 @@ button:hover,
 button.hover,
 .e2-button.hover {
   transition: none;
-  fill: $c_hover;
 }
 
 button:focus,
@@ -129,11 +140,12 @@ button:focus.hover,
 }
 
 .e2-keyboard-shortcut {
-  color: rgba(0,0,0,.4);
-  padding: 0 .33em;
+  padding: 0 .5em;
   border-radius: 3px;
   text-decoration: none;
-  font-size: 85%;
+  font-family: var(--smallFontFamily);
+  font-size: 12px;
+  line-height: 16px;
 }
 
 button+.e2-keyboard-shortcut,
@@ -144,4 +156,44 @@ button+.e2-keyboard-shortcut,
 
 .e2-keyboard-shortcut:empty {
   display: none;
+}
+
+.e2-clickable-keyboard-shortcut {
+  opacity: 1;
+  padding-left: 0;
+  text-decoration: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: inherit;
+  border-bottom-style: dashed;
+  color: var(--adminColor);
+  border-color: var(--linkUnderlineColor);
+  transition-property: (border-bottom, border-color, background, color, fill);
+  transition-duration: var(--time);
+  transition-timing-function: ease-out;
+}
+
+.e2-clickable-keyboard-shortcut:hover,
+.e2-clickable-keyboard-shortcut.hover {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
+  transition: none;
+}
+
+.e2-clickable-keyboard-shortcut {
+  cursor: pointer;
+}
+
+.e2-pseudolink {
+  text-decoration: none;
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+}
+
+// adjust system colors to match the theme
+.e2-upload-error { color: var(--errorColor) }
+
+.e2-visual-login {
+  display: inline-block;
+  margin: 4px 0;
 }

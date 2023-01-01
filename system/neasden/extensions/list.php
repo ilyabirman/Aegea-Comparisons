@@ -14,7 +14,7 @@ class NeasdenGroup_list implements NeasdenGroup {
     }
     $ul_item_regex = implode ('|', $ul_item_regex);
     
-    $neasden->define_line_class ('ol-item', '[1234567890]+\.(?:$| +.*)');
+    $neasden->define_line_class ('ol-item', '([1234567890]+)\.(?:$| +.*)');
     $neasden->define_line_class ('ul-item', $ul_item_regex);
     
     $neasden->define_group ('list', '(((-ol-item-)|(-ul-item-))(-p-)*)+');
@@ -34,12 +34,14 @@ class NeasdenGroup_list implements NeasdenGroup {
     
     // at each depth level we track list kind:
     $is_ordered_list[0] = ($group[0]['class'] == 'ol-item');
-    
-    if ($is_ordered_list[0]) {
-      $result .= '<ol>'."\n";
-    } else {
-      $result .= '<ul>'."\n";
+
+    $start = $group[0]['class-data'][1];
+    if ($start_number = $group[0]['class-data'][1]) {
+      $start = ' start="'. $start_number .'"';
     }
+    
+    $list_tag = ($is_ordered_list[0] ? ('ol'. $start) : 'ul');
+    $result .= "<". $list_tag .">\n";
     
     foreach ($group as $line_number => $line) {
       $depth = max (0, $line['depth'] - $basedepth);
@@ -60,8 +62,13 @@ class NeasdenGroup_list implements NeasdenGroup {
         if ($depth > $prevdepth) {
           $is_ordered_list[$depth] = ($line['class'] == 'ol-item');
         }
+
+        $start = '';
+        if ($start_number = $line['class-data'][1]) {
+          $start = ' start="'. $start_number .'"';
+        }
     
-        $list_tag = ($is_ordered_list[$depth] ? 'ol' : 'ul');
+        $list_tag = ($is_ordered_list[$depth] ? ('ol'. $start) : 'ul');
         if ($depth > $prevdepth) $result .= "\n<". $list_tag .">\n";
     
         $list_tag = ($is_ordered_list[$prevdepth] ? 'ol' : 'ul');

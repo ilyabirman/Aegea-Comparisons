@@ -1,5 +1,3 @@
-<?php _JS ('notes') ?>
-
 <?php if (@$content['rose-debug-info']) { ?>
 <pre style="display: none; background: #404040; color: #fff; padding: 20px; margin-bottom: 2em; font-size: 12px">
 Rose debug info
@@ -18,27 +16,23 @@ Rose debug info
 <div id="e2-note-<?= $note['_']['_id'] ?>" class="<?= array_key_exists ('only', $content['notes'])? 'e2-only ': '' ?>e2-note <?= $note['favourite?']? 'e2-note-favourite' : '' ?> <?= $note['visible?']? '' : 'e2-hidden' ?> <?= $note['playlist?']? 'jouele-playlist' : '' ?>">
 
 
-<span class="admin-links admin-links-floating admin-links-sticky">
-
 <?php if (array_key_exists ('edit-href', $note)): ?>
-
+<span class="admin-links admin-links-floating admin-links-sticky">
 <?php if (array_key_exists ('favourite-toggle-href', $note)) { ?>
-<span class="admin-links admin-icon"><a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-favourite-toggle <?= ($note['favourite?']? 'e2-toggle-on' : '') ?> e-2-toggle-thinking">
+<span class="admin-links admin-icon"><a href="<?= $note['favourite-toggle-href'] ?>" class="nu e2-favourite-toggle <?= ($note['favourite?']? 'e2-toggle-on' : '') ?>">
 <span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a></span>
-<?php } ?><span class="admin-icon"><a href="<?= $note['edit-href'] ?>" class="nu <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>"><span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></a></span></span></span>
-<?php endif ?>
+<?php } ?><span class="admin-icon"><a href="<?= $note['edit-href'] ?>" class="nu <?php if (array_key_exists ('only', $content['notes'])) {?>e2-edit-link<?php } ?>"><span class="e2-svgi"><?= _SVG ('edit') ?><span class="e2-unsaved-led" style="display: none"></span></a></span></span></span></span><?php endif ?>
 
-</span>
 
 <article>
 
-<?php if (array_key_exists ('userpic-href', $note)) { ?>
+<?php if (@$note['userpic-href']) { ?>
 <div class="e2-note-author-picture">
   <img src="<?= $note['userpic-href'] ?>" alt="<?= @$note['source'] ?>" />
 </div>
 <?php } ?>
 
-<?php if (array_key_exists ('author', $note)) { ?>
+<?php if (@$note['author']) { ?>
 <div class="e2-note-author-name">
 <?= @$note['author'] ?>
 </div>
@@ -68,7 +62,7 @@ Rose debug info
 
 <?php if (array_key_exists ('thumbs', $note) and (count ($note['thumbs']))) { ?>
 <a href="<?= $note['href'] ?>" class="nu">
-<?php foreach ($note['thumbs'] as $x) { ?><img src="<?= $x['href'] ?>" width="<?= $x['width'] ?>" height="<?= $x['height'] ?>" class="e2-search-results-image <?php if ($x['highlighted?']) { ?>e2-search-results-image-highlighed<?php } ?> <?php if ($note['has-highlighted-thumbs?'] and !$x['highlighted?']) { ?>e2-search-results-image-dimmed<?php } ?>" /><?php } ?>
+<?php foreach ($note['thumbs'] as $x) { ?><div class="e2-search-results-image"><?php if ($x['highlighted?']) { ?><mark><?php } ?><img src="<?= $x['href'] ?>" width="<?= $x['width'] ?>" height="<?= $x['height'] ?>" class="<?php if ($note['has-highlighted-thumbs?'] and !$x['highlighted?']) { ?>e2-search-results-image-dimmed<?php } ?>" /><?php if ($x['highlighted?']) { ?></mark><?php } ?></div><?php } ?>
 </a>
 <?php } ?>
 
@@ -87,7 +81,7 @@ Rose debug info
 
 <?php _LIB ('likely') ?>
 
-<div class="likely" data-url="<?= $note['href-original'] ?>" data-title="<?= strip_tags ($note['title']) ?>">
+<div class="likely <?= $content['template']['use-likely-light?']? 'likely-light':'' ?>" data-url="<?= $note['href-original'] ?>" data-title="<?= strip_tags ($note['title']) ?>">
 
 <?php foreach ($note['share-to'] as $network => $network_info) { ?>
 <?php if ($network_info['share?']) { ?>
@@ -122,10 +116,13 @@ Rose debug info
 <div class="e2-note-tags">
 <span class="e2-timestamp" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
 <?php
+  #if ($note['hit-count']) echo '👁 '. $note['hit-count'] .' &nbsp ';
+?>
+<?php
 $tags = array ();
 foreach ($note['tags'] as $tag) {
   if ($tag['current?']) {
-    $tags[] = '<span class="e2-tag e2-marked">'. $tag['name'] .'</span>';
+    $tags[] = '<mark class="e2-tag">'. $tag['name'] .'</mark>';
   } else {
     $tags[] = '<a href="'. $tag['href'] .'" class="e2-tag">'. $tag['name'] .'</a>';
   }

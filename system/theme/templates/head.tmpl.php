@@ -1,14 +1,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?= $content['output-charset'] ?>" />
 
 <base href="<?= $content['base-href'] ?>" />
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="shortcut icon" type="<?= $content['blog']['favicon-type'] ?>" href="<?= $content['blog']['favicon-href'] ?>" />
 
 <?php foreach ($content['stylesheets'] as $stylesheet): ?>
 <link rel="stylesheet" type="text/css" href="<?= $stylesheet ?>" />
 <?php endforeach ?>
 
 <?php foreach ($content['newsfeeds'] as $newsfeed): ?>
-<link rel="alternate" type="application/rss+xml" title="<?= $newsfeed['title'] ?>" href="<?= $newsfeed['href'] ?>" />
+<link rel="alternate" type="<?= $newsfeed['type'] ?>" title="<?= $newsfeed['title'] ?>" href="<?= $newsfeed['href'] ?>" />
 <?php endforeach ?>
 
 <?php foreach ($content['navigation-links'] as $link): ?>
@@ -21,15 +21,21 @@
 
 <?php if (array_key_exists ('summary', $content)): ?>
 <meta name="description" content="<?= $content['summary'] ?>" />
+<meta name="og:description" content="<?= $content['summary'] ?>" />
 <?php endif ?>
 
 <?php foreach ($content['og-images'] as $image): ?>
 <meta property="og:image" content="<?= $image ?>" />
 <?php endforeach ?>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="<?= $content['twitter-card'] ?>" />
+
+<meta name="viewport" content="<?= $content['meta-viewport'] ?>">
 
 <title><?= $content['title'] ?></title>
+<meta name="og:title" content="<?= $content['title'] ?>" />
+
+<meta name="og:url" content="<?= $content['current-href'] ?>" />
 
 <?php _X ('head-extras') ?>
 

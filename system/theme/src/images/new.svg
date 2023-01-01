@@ -4,10 +4,5 @@
    x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
 <defs>
 </defs>
-<rect fill-rule="evenodd" clip-rule="evenodd" fill="none" width="16" height="16"/>
-<g>
-  <g>
-    <polygon fill-rule="evenodd" clip-rule="evenodd" points="14,7 9,7 9,2 7,2 7,7 2,7 2,9 7,9 7,14 9,14 9,9 14,9    "/>
-  </g>
-</g>
+<polygon points="14,7 9,7 9,2 7,2 7,7 2,7 2,9 7,9 7,14 9,14 9,9 14,9" stroke="none" />
 </svg>

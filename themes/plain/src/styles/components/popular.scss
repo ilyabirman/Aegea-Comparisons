@@ -9,15 +9,6 @@
   margin: 0 0 24px 0;
 }
 
-@media #{$mobile} {
-  .e2-popular {
-    max-width: none;
-    -webkit-columns: 1;
-    -moz-columns: 1;
-    columns: 1;
-  }
-}
-
 .e2-popular p {
   display: inline-block;
   overflow: hidden;
@@ -28,3 +19,13 @@
 .e2-popular a {
   padding-top: 4px;
 }
+
+@media #{$ArePopularVertical} {
+  .e2-popular {
+    max-width: none;
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
+  }
+}
+

@@ -1,6 +1,5 @@
-<?php _JS ('form-preferences') ?>
-
 <form
+  id="form-preferences"
   action="<?= @$content['form-preferences']['form-action'] ?>"
   method="post"
 >
@@ -27,6 +26,8 @@
 
 <div class="form">
 
+<div class="form-part">
+  
 <div class="form-control form-control-big">
   <div class="form-label input-label"><label><?= _S ('ff--blog-title') ?></label></div>
   <div class="form-element">
@@ -72,7 +73,7 @@
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--language') ?></label></div>
   <div class="form-element">
-    <select name="language" size="1">
+    <select class="e2-select" name="language" size="1">
       <?php foreach ($content['form-preferences']['languages'] as $value => $lang) { ?>
       <option value="<?= $value ?>"
         <?= $lang['selected?']? 'selected="selected"':'' ?>
@@ -87,6 +88,11 @@
 <div class="form-control">
   <div class="form-label">
     <p><label><?= _S ('ff--theme') ?></label></p>
+    <? if (array_key_exists ('theme-preview', $content['admin-hrefs'])) { ?>
+    <p class="admin-links">
+      <a class="e2-template-preview-link" href="<?= @$content['admin-hrefs']['theme-preview'] ?>" target="_blank"><?= _S ('gs--theme-preview') ?> <span class="e2-svgi"><?= _SVG ('blank-window') ?></span></a>
+    </p>
+    <? } ?>
   </div>
   <div class="form-element">
     
@@ -100,11 +106,19 @@
     <?php foreach ($content['form-preferences']['templates'] as $template) { ?>
     <div class="
       e2-template-preview<?php if ($template['current?']) echo ' e2-current-template-preview' ?>
-    " value="<?= $template['name'] ?>"
+    " value="<?= $template['name'] ?>" data-preview-url="<?= $template['preview-url'] ?>"
     >
-      <img src="<?= $template['preview'] ?>" alt="<?= $template['display-name'] ?>" 
-        width="100" height="120"
-      /><br />
+      <div class="e2-template-preview-image" style="background: <?= $template['colors']['background'] ?>">
+        <div class="e2-template-preview-image-heading" style="color: <?= $template['colors']['headings'] ?>"></div>
+        <div class="e2-template-preview-image-text" style="color: <?= $template['colors']['text'] ?>">
+          <div class="e2-template-preview-image-text-line"></div>
+          <div class="e2-template-preview-image-text-line"></div>
+          <div class="e2-template-preview-image-text-line"></div>
+          <div class="e2-template-preview-image-text-line"></div>
+          <div class="e2-template-preview-image-text-line"></div>
+        </div>
+        <div class="e2-template-preview-image-link" style="color: <?= $template['colors']['link'] ?>"></div>
+      </div>
       <span class="e2-template-name">
         <a class="e2-pseudolink e2-admin-link" onclick="return false"><?= $template['display-name'] ?></a>
       </span>
@@ -115,6 +129,9 @@
 </div>
 <?php } ?>
 
+</div>
+
+<div class="form-part">
 
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--posts') ?></label></div>
@@ -196,7 +213,11 @@
   
 </div>
 
+</div>
+
 <?php if (@$content['form-preferences']['includes-yandex-metrika?']) { ?>
+<div class="form-part">
+
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--yandex-metrika') ?></label></div>
   <div class="form-element">
@@ -219,6 +240,8 @@
     ><?= $content['form-preferences']['google-analytics'] ?></textarea>
   </div>
 </div>
+
+</div>
 <?php } ?>
 
 <div class="form-control">
@@ -230,16 +253,18 @@
   </div>
 </div>
 
+
 </div>
 
 </form>
 
+<?php if (@$content['form-preferences']['space-usage']) { ?>
+<div class="e2-text">
+  <p><?= $content['form-preferences']['space-usage'] ?></p>
+</div>
+<?php } ?>
+
 <p class="admin-links"><?= _S ('ff--administration') ?>&nbsp;
-<a href="<?= @$content['admin-hrefs']['password'] ?>"><?= _S ('gs--password') ?></a>,&nbsp;
-<a href="<?= @$content['admin-hrefs']['database'] ?>"><?= _S ('gs--db-connection') ?></a></p>
-
-<br />
-
-<?php if (array_key_exists ('logout', $content['admin-hrefs'])): ?>
-  <form action="<?= $content['admin-hrefs']['logout'] ?>" method="post" style="display: inline-block"><button type="submit"><?= _S ('fb--sign-out') ?></button></form>
-<?php endif ?>
+<a href="<?= @$content['admin-hrefs']['password'] ?>"><?= _S ('gs--password') ?></a><? if (array_key_exists ('database', $content['admin-hrefs'])) { ?>,&nbsp;
+<a href="<?= @$content['admin-hrefs']['database'] ?>"><?= _S ('gs--db-connection') ?></a><? } ?><? if (array_key_exists ('get-backup', $content['admin-hrefs'])) { ?>,&nbsp;
+<a href="<?= @$content['admin-hrefs']['get-backup'] ?>"><?= _S ('gs--get-backup') ?></a><? } ?></p>

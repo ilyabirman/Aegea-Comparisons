@@ -1,59 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #fff;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-body, input, textarea, select, button,
-pre, tt, code, pre *, tt *, code * {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-body, input, textarea, select, button {
-  font-family: "SF UI Text_", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-}
-
-pre, tt, code, pre *, tt *, code * {
-  font-family: "Consolas", "Courier New", monospace;
-}
-
-pre {
-  white-space: pre-wrap;
-}
-
-sup, sub {
-  position: relative;
-  vertical-align: middle;
-  font-size: 75%;
-  font-weight: normal;
-}
-
-sup { bottom: 0.5em; }
-
-sub { top: 0.5em; }
-
-a {
-  color: $c_link;
-  border-color: transparentize($c_link, $thin);
-}
-
-a:visited {
-  color: $c_visited;
-  border-color: transparentize($c_visited, $thin)
-}
-
-a:hover,
-a.hover {
-  color: $c_hover;
-  border-color: transparentize($c_hover, $thin);
-}
-
 .common {
   margin: 0 auto;
   max-width: 1280px;
@@ -62,135 +6,138 @@ a.hover {
 .flag {
   position: relative;
   width: 100%;
-  padding: 48px 0 60px;
+  padding: var(--marginTop) 0 60px;
 }
 
-@media #{$tablet} {
+@media #{$IsCompact} {
   .flag {
-    padding: 16px 0 48px;
+    padding: var(--marginTopCompact) 0 48px;
+  }
+}
+
+.header-content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: calc(100% - var(--marginRight) - var(--marginLeft));
+  margin: 0 auto;
+
+  @media #{$IsCompact} {
+    margin: 0 var(--marginRightCompact) 0 var(--marginLeftCompact);
+    max-width: calc(100% - var(--marginRightCompact) - var(--marginLeftCompact));
+  }
+}
+
+.header-description {
+  max-width: calc(100% - var(--marginRight) - var(--marginLeft));
+}
+
+.spotlight {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  display: flex;
+  white-space: nowrap;
+
+  @media #{$IsCompact} {
+    margin-top: 8px;
+  }
+}
+
+.logo-marginal {
+  --logoMarginalHrzOffset: 20px;
+
+  display: var(--displayLogoMarginal);
+  position: absolute;
+  left: calc(-1 * (var(--logoSize) + var(--logoMarginalHrzOffset) * 2));
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--logoSize);
+  height: var(--logoSize);
+  margin: 0 var(--logoMarginalHrzOffset) 0;
+
+  @media #{$IsCompact} {
+    display: none;
   }
 }
 
 .logo {
-  position: absolute;
-  right: 91%;
-  top: 28px;
-  width: 40px;
-  height: 40px;
-  margin: 10px 20px 0;
-}
+  display: var(--displayLogo);
+  margin-bottom: 2px;
 
-@media #{$tablet} {
-  .logo {
-    position: relative;
-    top: 0;
-    right: 0;
-    margin: 0 0 8px 4%;
-    width: 40px;
-    height: 40px;
+  @media #{$IsCompact} {
+    display: var(--displayLogoCompact);
   }
-}
-
-.logo img {
-  // why? this is already specified in _e2_drag
-  border-radius: 20px;
 }
 
 .title {
-  margin: 0 9% 0 9%;
-  width: 82%;
   max-width: 480px;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--blogTitleFontSize);
+  line-height: var(--blogTitleLineHeight);
 }
 
-@media #{$tablet} {
+@media #{$IsCompact} {
   .title {
-    margin: 0 4%;
-    width: 92%;
-    max-width: 480px;
+    max-width: none;
   }
 }
 
+.title-inner {
+  position: relative;
+}
+
 .title h1 {
+  margin: 0;
   font-weight: bold;
   font-size: inherit;
   line-height: inherit;
-  color: #000;
+  color: var(--headingsColor);
 }
 
 .title h1 a,
 .title h1 a:visited {
-  color: #000;
-  border-color: transparentize(#000, $thin)
+  color: var(--headingsColor);
+  border-color: var(--headingsUnderlineColor);
 }
 
 .title h1 a:hover,
 .title h1 a.hover {
-  color: $c_hover;
-  border-color: transparentize($c_hover, $thin)
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
 }
 
 .title p {
   margin: 0 0 10px 0;
 }
 
-.engine {
-  color: $c_grey;
-}
-
-.engine a, .engine a:link, .engine a:visited {
-  color: $c_grey;
-  border-color: transparentize($c_grey, $thin)
-}
-
-.engine a:hover, .engine a:active {
-  color: $c_hover;
-  border-color: transparentize($c_hover, $thin)
-}
-
-.spotlight {
-  position: absolute;
-  top: 48px;
-  right: 9%;
-  white-space: nowrap;
-  text-align: right;
-}
-
-@media #{$tablet} {
-  .spotlight {
-    top: 20px;
-    right: 4%;
-    // position: static;
-    // float: right;
-    // margin-right: 9%;
-  }
-}
-
 .content, .footer {
-  margin: 0 9% 40px 9%;
-  width: 82%;
+  margin: 0 var(--marginRight) 40px var(--marginLeft);
+  width: calc(100% - var(--marginRight) - var(--marginLeft));
 }
 
 .content {
   min-height: 320px;
+  max-width: 100%;
 }
 
-@media #{$tablet} {
-  .admin-icon {
-    margin: 0 8px;
+@media #{$IsCompact} {
+  .content, .footer {
+    margin: 0 var(--marginRightCompact) 40px var(--marginLeftCompact);
+    width: calc(100% - var(--marginRightCompact) - var(--marginLeftCompact));
   }
+}
 
-  .content {
-    margin: 0 4% 40px;
-    width: 92%;
-    max-width: 100%;
-  }
+.engine {
+  color: var(--engineTextColor);
+}
 
-  .footer {
-    margin: 0 4% 40px;
-    width: 92%;
-    max-width: 100%;
-  }
+.engine a, .engine a:link, .engine a:visited {
+  color: var(--engineTextColor);
+  border-color: var(--engineTextUnderlineColor);
+}
 
+.engine a:hover, .engine a:active {
+  color: var(--hoverColor);
+  border-color: var(--hoverUnderlineColor);
 }

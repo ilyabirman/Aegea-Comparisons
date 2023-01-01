@@ -1,19 +1,14 @@
-if ($) $ (function () {
+if ($('#password').length) {
+  $('.required').bind('input blur cut copy paste keypress', updateSubmittability)
+  updateSubmittability()
+}
 
-  e2UpdateSubmittability = function () {
+function updateSubmittability () {
+  const shouldBeDisabled = /^ *$/.test($('#password').val())
 
-	  shouldBeDisabled = /^ *$/.test ($ ('#password').val ())
-
-	  if (shouldBeDisabled) {
-		  $ ('#submit-button').attr ('disabled', 'disabled')
-	  } else {
-		  $ ('#submit-button').removeAttr ('disabled')
-	  }
-
+  if (shouldBeDisabled) {
+    $('#submit-button').attr('disabled', 'disabled')
+  } else {
+    $('#submit-button').removeAttr('disabled')
   }
-  
-  e2UpdateSubmittability ()
- 
-  $ ('.required').bind ('input blur cut copy paste keypress', e2UpdateSubmittability)
-  
-})
+}

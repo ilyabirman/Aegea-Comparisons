@@ -134,26 +134,23 @@ class SnippetBuilder
 	}
 
 	/**
-	 * @param array  $foundPositionsByWords
+	 * @param array  $foundPositionsByStems
 	 * @param string $content
 	 * @param string $highlightTemplate
 	 *
 	 * @return Snippet
 	 */
-	public function buildSnippet($foundPositionsByWords, $content, $highlightTemplate)
+	public function buildSnippet($foundPositionsByStems, $content, $highlightTemplate)
 	{
 		// Stems of the words found in the $id chapter
 		$stems        = array();
-		$fullWords    = array();
 		$foundWordNum = 0;
-		foreach ($foundPositionsByWords as $word => $positions) {
+		foreach ($foundPositionsByStems as $stem => $positions) {
 			if (empty($positions)) {
 				//  Not a fulltext search result (e.g. title from single keywords)
 				continue;
 			}
-			$stemmedWord             = $this->stemmer->stemWord($word);
-			$stems[]                 = $stemmedWord;
-			$fullWords[$stemmedWord] = $word;
+			$stems[] = $stem;
 			$foundWordNum++;
 		}
 
@@ -176,7 +173,7 @@ class SnippetBuilder
 		// Check the text for the query words
 		// TODO: Make sure the modifier S works correct on cyrillic
 		preg_match_all(
-			'#(?<=[^a-zа-я]|^)(' . $joinedStems . ')[a-zа-я]*#Ssui',
+			'#(?<=[^\\p{L}]|^)(' . $joinedStems . ')\\p{L}*#Ssui',
 			$content,
 			$matches,
 			PREG_OFFSET_CAPTURE
@@ -193,7 +190,7 @@ class SnippetBuilder
 			$stemmedWord    = $this->stemmer->stemWord($word);
 
 			// Ignore entry if the word stem differs from needed ones
-			if (!$stemEqualsWord && $stem != $stemmedWord && $stemmedWord != $fullWords[$stem]) {
+			if (!$stemEqualsWord && $stem != $stemmedWord) {
 				continue;
 			}
 

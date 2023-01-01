@@ -21,6 +21,7 @@ $_config['popular_period'] = 'month'; /* 'day', 'week', 'month', 'year', 'ever' 
 $_config['default_formatter'] = 'neasden'; /* 'raw', 'calliope', 'neasden' */
 
 
+
 // THEMES
 
 // show raw template data instead of using actual templates
@@ -28,9 +29,6 @@ $_config['raw_template_data'] = false;
   
 // show raw template date with ?raw parameter
 $_config['raw_template_data_with_param'] = false;
-
-// show system theme in settings
-$_config['list_system_theme'] = false;
 
 // when a template file is missing, treat it as if it were empty
 $_config['ignore_missing_template_files'] = true; /* bool */
@@ -70,6 +68,9 @@ $_config['index_follow_everything'] = true;
 // access rights to use for uploaded files
 $_config['uploaded_files_mode'] = 0777;
 
+// maximum size of all uploaded files in bytes (0 for no limit)
+$_config['files_total_size_limit'] = 0;
+
 // whois service (URL to append IP address to)
 $_config['whois_service'] = 'https://www.nic.ru/whois/?ip=';
 
@@ -79,14 +80,17 @@ $_config['db_table_prefix'] = 'e2Blog';
 // by default, Aegea reindexes databases for search on switch
 $_config['retain_search_indexes_on_db_switch'] = false;
 
-// read response from remote server
-$_config['fgets_broadcast'] = true;
+// url to ping when posts become available
+$_config['broadcast_url'] = 'http://blogengine.ru/blogs/@notify';
+
+// broadcast all blog notes during indexing
+$_config['broadcast_on_indexing'] = true;
 
 
 
 // SOCIAL NETWORKS
 
-// which networks to share to (also supported: linkedin)
+// which networks to share to (also supported: linkedin, whatsapp)
 $_config['share_to'] = 'twitter, facebook, vkontakte, telegram, pinterest';
 
 // via whom to share to Twitter

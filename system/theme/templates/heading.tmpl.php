@@ -1,17 +1,7 @@
 <?php if ($content['class'] == 'found') { ?>
 
-  <div class="e2-heading">
+  <?php _T ('search-heading') ?>
   
-  <?php _T_FOR ('search') ?>
-  
-  <?php if (array_key_exists ('search-related-tag', $content)) { ?> 
-  <div class="e2-heading-see-also">
-    <?= _S ('gs--see-also-tag') ?> <a href="<?=$content['search-related-tag']['href']?>" class="e2-tag"><?=$content['search-related-tag']['name']?></a>
-  </div>
-  <?php } ?>
-  
-  </div>
-
 <?php } elseif (array_key_exists ('heading', $content)) { ?>
   
   <div class="e2-heading">
@@ -25,6 +15,12 @@
       <?php if (array_key_exists ('related-delete-href', $content)) { ?>
       <span class="admin-icon"><a href="<?= @$content['related-delete-href'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('trash') ?></span></a></span>
       <?php } ?>
+
+      <?php if ($content['class'] == 'settings'): ?>
+      <?php if (array_key_exists ('logout', $content['admin-hrefs'])): ?>
+      <span class="admin-icon"><a href="<?= $content['admin-hrefs']['logout'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('exit') ?></span></a></span>
+      <?php endif ?>
+      <?php endif ?>
 
     </span>
 

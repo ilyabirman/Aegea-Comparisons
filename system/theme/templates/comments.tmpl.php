@@ -1,15 +1,16 @@
 <?php if (array_key_exists ('comments', $content)) { ?>
+<?php if (array_key_exists ('each', $content['comments'])) { ?>
 
 <div class="e2-comments">
 
-<?php if (!array_key_exists ('only', $content['comments'])) { ?>
+<?php if (!array_key_exists ('only', $content['comments']['each'])) { ?>
 <?php _T ('comments-heading'); ?>
 <?php } ?>
 
 
 <?php # THE COMMENTS # ?>
 
-<?php foreach ($content['comments'] as $comment): ?>
+<?php foreach ($content['comments']['each'] as $comment): ?>
 
 
 <?php if ($comment['first-new?']) { ?><a name="new"></a><?php } ?>
@@ -27,11 +28,9 @@
     <div class="e2-comment-meta-area">
       
       <span
-        class="e2-comment-author"
+        class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['important?']) echo 'e2-comment-piece-marked' ?>"
         title="<?= _DT ('j {month-g} Y, H:i, {zone}', $comment['time']) ?>"
-      >
-      <span class="e2-markable <?php if (@$comment['important?']) echo 'e2-marked' ?>"><?= @$comment['name'] ?></span>
-      </span>
+      ><?= @$comment['name'] ?></span>
     
       <span class="e2-comment-actions admin-links">
         <?php if (array_key_exists ('important-toggle-href', $comment)): ?><a href="<?= $comment['important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a><?php endif ?>
@@ -44,7 +43,7 @@
   
       <span class="e2-comment-actions-removed admin-links" style="display: none">  
         <?php if (array_key_exists ('removed-toggle-href', $comment)): ?>
-        <a href="<?= $comment['removed-toggle-href'] ?>" class="nu e2-removed-toggle e2-toggle-on e2-pseudolink"><span class="e2-svgi"><span class="e2-toggle-state-on"><?= _SVG ('replace') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a>
+        <a href="<?= $comment['removed-toggle-href'] ?>" class="nu e2-removed-toggle e2-toggle-on"><span class="e2-svgi"><span class="e2-toggle-state-on"><?= _SVG ('replace') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a>
         <?php endif; ?>
       </span>
       
@@ -75,11 +74,9 @@
       <div>
     
       <span
-        class="e2-comment-author"
+        class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['reply-important?']) echo 'e2-comment-piece-marked' ?>"
         title="<?= _DT ('j {month-g} Y, H:i, {zone}', @$comment['reply-time']) ?>"
-      >
-        <span class="e2-markable <?php if (@$comment['reply-important?']) echo 'e2-marked' ?>"><?= @$comment['author-name'] ?></span>
-      </span>
+      ><?= @$comment['author-name'] ?></span>
   
       <span class="e2-comment-actions admin-links">
         <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['reply-important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a><?php endif ?>
@@ -128,15 +125,16 @@
 </div> <!-- e2-comments -->
 
 <?php } ?>
+<?php } ?>
 
 
 
 
 <?php # OPEN / CLOSE # ?>
 
-<?php if (array_key_exists ('comments-toggle', $content)) { ?>
+<?php if (array_key_exists ('toggle', $content['comments'])) { ?>
 <div class="e2-comment-toggle">
-<a class="e2-button" href="<?=$content['comments-toggle']['href']?>"><?= $content['comments-toggle']['text'] ?></button></a>
+<a class="e2-button" href="<?=$content['comments']['toggle']['href']?>"><?= $content['comments']['toggle']['text'] ?></a>
 </div>
 <?php } ?>
 
@@ -144,15 +142,6 @@
 
 
 
-
-<?php if (array_key_exists ('notes', $content)) { ?>
-<?php if (array_key_exists ('only', $content['notes'])) { ?>
-<?php if ($content['notes']['only']['commentable-now?']) { ?>
-
-  <div class="e2-section-heading"><?= _S ('gs--your-comment') ?></div>
-
+<?php if ($content['comments']['commentable-now?']) { ?>
   <?php _T_FOR ('form-comment') ?>
-
-<?php } ?>
-<?php } ?>
 <?php } ?>

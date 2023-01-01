@@ -8,7 +8,7 @@
 .e2-comment,
 .e2-comment-toggle {
   width: 100%;
-   float: left;
+  float: left;
 }
 
 .e2-comment-and-reply {
@@ -23,7 +23,7 @@
   margin: 0 0 40px;
 }
 
-@media #{$mobile} {
+@media #{$AreCommentsVertical} {
   .e2-comment {
     margin: 0 0 40px;
   }
@@ -40,10 +40,10 @@
   float: left;
   width: 17.07%;
   min-height: 1px;
-  padding-right: $w_gut;
+  padding-right: var(--columnSpacing);
 }
 
-@media #{$mobile} {
+@media #{$AreCommentsVertical} {
   .e2-comment-meta-area {
     width: 100%;
     float: none;
@@ -56,10 +56,10 @@
   width: 65.86%;
   min-height: 1px;
   position: relative;
-  padding-right: $w_gut;
+  padding-right: var(--columnSpacing);
 }
 
-@media #{$mobile} {
+@media #{$AreCommentsVertical} {
   .e2-comment-content-area {
     width: 100%;
   }
@@ -89,10 +89,30 @@
   content: ' •';
 }
 
-@media #{$mobile} {
+.e2-comment-piece-marked {
+  background: var(--markedTextBackground);
+}
+
+@media #{$AreCommentsVertical} {
   .e2-comment-control-area {
     width: 100%;
     text-align: left;
     margin-left: -6px;
   }
+}
+
+.e2-comment-actions-disabled,
+.e2-comment-actions-disabled * {
+  color: var(--disabledColor);
+  cursor: default;
+  pointer-events: none;
+}
+
+.e2-comment-actions-disabled #e2-progress {
+  // must override currentColor here
+  stroke: var(--foregroundColor);
+}
+
+.e2-spam, .e2-spam * {
+  color: #b96;
 }

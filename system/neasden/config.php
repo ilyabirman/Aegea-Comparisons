@@ -75,14 +75,14 @@ return array (
   'groups.generic-css-class' => 'e2-text-generic-object',
   'groups.classes' => array (
     'picture' => array (
-      'src-prefix' => $full_blog_url .'/',
-      'folder' => PICTURES_FOLDER,
+      'src-prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
+      'folder' => MEDIA_ROOT_FOLDER . PICTURES_FOLDER,
       'css-class' => 'e2-text-picture', 
       'max-width' => $_template['max_image_width'],
     ),
     'fotorama' => array (
-      'src-prefix' => $full_blog_url .'/',
-      'folder' => PICTURES_FOLDER,
+      'src-prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
+      'folder' => MEDIA_ROOT_FOLDER . PICTURES_FOLDER,
       'css-class' => 'e2-text-picture',
       'max-width' => $_template['max_image_width'],
     ),
@@ -96,8 +96,11 @@ return array (
     ),
     'audio' => array (
       'css-class' => 'e2-text-audio',
-      'src-prefix' => $full_blog_url .'/',
-      'folder' => AUDIO_FOLDER,
+      'src-prefix' => $full_blog_url .'/'. AUDIO_FOLDER,
+      'folder' => MEDIA_ROOT_FOLDER . AUDIO_FOLDER,
+    ),
+    'tweet' => array (
+      'css-class' => 'e2-text-generic-object',
     ),
   ),
   

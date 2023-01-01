@@ -1,12 +1,13 @@
-<?php _JS ('form-comment') ?>
-
 <form
   action="<?=$content['form-comment']['form-action']?>"
   method="post"
   accept-charset="UTF-8"
   name="form-comment"
   id="form-comment"
+  style="display: none"
 >
+
+<div class="e2-section-heading"><?= _S ('gs--your-comment') ?></div>
 
 <input
   type="hidden"
@@ -31,6 +32,10 @@
   name="already-subscribed"
   value="<?= @$content['form-comment']['.already-subscribed?'] ?>"
 />
+
+<script type="text/javascript">
+  document.write('<in' +'put type="hid' + 'den" name="<?= @$content['form-comment']['nospam-field-name'] ?>" value="">');
+</script>
 
 <!--
 <?= @$content['form-comment']['ip-href'] ?> 
@@ -57,13 +62,13 @@
     <div style="position: relative">
       <?php /* a pot full of honey for spammers: */ ?>
       <div style="position: absolute; z-index: 0; left: 0; top: 0; width: 100%; height: 0; overflow: hidden;">
-      <input type="text"
-        class="text width-2"
-        tabindex="-1"
-        name="email"
-        autocomplete="off"
-        value=""
-      />
+        <input type="text"
+          class="text width-2"
+          tabindex="-1"
+          name="email"
+          autocomplete="off"
+          value=""
+        />
       </div>
       <div style="position: relative; z-index: 1; left: 0; top: 0; width: 100%;">
       <?php /* real input */ ?>
@@ -93,9 +98,6 @@
       tabindex="3"
       style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
     ><?=$content['form-comment']['text']?></textarea>
-    <div class="form-control-sublabel">
-      <?= $content['form-comment']['create:edit?']? (_S ('gs--no-html') .'<br />') : ''?>
-    </div>
   </div>
 </div>
 
@@ -115,7 +117,7 @@
 </div>
 <?php } ?> 
 
-<?php if (array_key_exists ('subscription-status', $content['form-comment'])) { ?>
+<?php if (@$content['form-comment']['subscription-status']) { ?>
 <div class="form-control">
   <div class="form-element">
     <p><?= $content['form-comment']['subscription-status'] ?></p>

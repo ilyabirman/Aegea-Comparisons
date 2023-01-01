@@ -2,8 +2,6 @@
 
 <?php if ($content['tags']['many?']) { ?>
 
-<?php _JS ('tags') ?>
-
 <?php /* js uses
     #e2-tag-slide - for the shaft
     #e2-tag-slider - for the lift
@@ -20,19 +18,17 @@
 <?php } ?>
 
 <?php /* js uses
-    .e2-tag-weight-X - for tags with specific weight
+    data-weight - for tags with specific weight
 */?>
 
-<div class="e2-tags">
+<div class="e2-tags" id="e2-tags">
 <?php foreach ($content['tags']['each'] as $tag): ?>
-<span class="e2-tag-weight-<?= 1 + (int) ($tag['weight'] * 99)?>">
 <a
   href="<?=@$tag['href']?>"
-  class="e2-tag"
+  class="e2-tag<?php if ($tag['weight'] == 0) { echo ' e2-tag-disused'; } ?>"
   style="opacity: <?= 0.2 + 0.8 * pow ($tag['weight'], 0.7) ?>"
-  <?php if ($tag['weight'] == 0): ?> class="e2-tag-disused" <?php endif ?>
+  data-weight="<?= 1 + (int) ($tag['weight'] * 99)?>"
 ><?=@$tag['tag']?></a>
-</span>
 <?php endforeach ?>
 </div>
 
