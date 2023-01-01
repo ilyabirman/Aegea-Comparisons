@@ -1,6 +1,6 @@
 <?php
 
-// Neasden v2.6
+// Neasden v2.73
 
 interface NeasdenGroup {
   function render ($group, $myconf);
@@ -124,14 +124,18 @@ class Neasden {
     
   
   function resource_detected ($resource) {
-    $this->resources_detected[] = $resource;
+    if (!in_array ($resource, $this->resources_detected)) {
+      $this->resources_detected[] = $resource;
+    }
   }
   
   
   function require_link ($link) {
-    $this->links_required[] = $link;
+    if (!in_array ($link, $this->links_required)) {
+      $this->links_required[] = $link;
+    }
   }
-  
+    
   
   function special_sequence ($index) {
     return self::RX_SPECIAL_CHAR . str_pad ($index, self::RX_SPECIAL_SEQUENCE_LENGTH, '0', STR_PAD_LEFT) . self::RX_SPECIAL_CHAR; // usafe
@@ -212,6 +216,7 @@ class Neasden {
   function smart_quotes ($text) {
   
     // echo '1350='. (self::stopwatch () - $this->stopwatch)."<br>";
+    if ($text === '') return '';
 
     $dumb = $this->language_data['quotes-dumb'];
     if (count ($dumb) == 0) return;
@@ -267,10 +272,10 @@ class Neasden {
 
         if ($scan == $quotes[0]) {
           ++ $qdepth;
-          if ($qdepth > 1) $text .= $quotes[1];
+          if ($qdepth > 1) $new_text .= $quotes[1];
           else $new_text .= $quotes[0];
         } elseif ($scan == $quotes[3]) {
-          if ($qdepth > 1) $text .= $quotes[2];
+          if ($qdepth > 1) $new_text .= $quotes[2];
           else $new_text .= $quotes[3];
           -- $qdepth;
         } elseif ($scan == $dumb[0]) {
@@ -388,7 +393,7 @@ class Neasden {
   
     if (@$this->config['typography.markup']) {
 
-      // double brackets
+      // double parentheses and brackets
       $chars = array ('\\(', '\\)', '\\[', '\\]');
       $text = preg_replace_callback ( // usafe
         '/'.
@@ -419,7 +424,7 @@ class Neasden {
         );
       }
 
-      // wiki stuff
+      // wiki stuff: italic, bold, strike through
       $duomap = array ('/' => 'i', '*' => 'b', '-' => 's');
       foreach ($duomap as $from => $to) {
         if (!@$t_in[$to]) $t_in[$to] = $this->isolate ('<'. $to .'>');
@@ -467,8 +472,8 @@ class Neasden {
   
     // unions and prepositions
     if (1) {
-      //die ($text);
       if ($nobreak_fw = $this->language_data['with-next']) {
+        $nobreak_fw = str_replace ('$', '\$', $nobreak_fw);
         $text = preg_replace ( // usafe
           "/".
           "(?<!\pL|\-)".    // not-a—Unicode-letter-or-dash lookbehind
@@ -482,6 +487,7 @@ class Neasden {
       }
   
       if ($nobreak_bw = $this->language_data['with-prev']) {
+        $nobreak_bw = str_replace ('$', '\$', $nobreak_bw);
         $text = preg_replace ( // usafe
           "/".
           " ".             // a space
@@ -880,8 +886,17 @@ class Neasden {
       }
     
       if (
-        ($state == 'text' or $state == 'code' or $state == 'tag') and
-        substr ($r, -6, 6) == '<code>'
+        substr ($r, -5, 5) == '<code'
+      ) {
+        if ($this->config['html.code.highlightjs']) {
+          $this->links_required[] = @$this->config['library']. 'highlight/highlight.js';
+          $this->links_required[] = @$this->config['library']. 'highlight/highlight.css';
+        }
+      }
+
+      if (
+        in_array ($state, ['text', 'code', 'tag']) and
+        preg_match ('/<code(?:\s+lang=([^> ]+)\s*)?>$/si', $r, $m)
       ) {
         if ($state == 'tag') {
           $prevstate = 'text'; // boy is this dirty
@@ -892,11 +907,12 @@ class Neasden {
           if ($thisfrag['content'] !== '') {
             $fragments[] = $thisfrag;
           }
-          $thisfrag = array (
+          $thisfrag = [
             'content' => '', // don’t put the very <code> tag here
             'strength' => self::FRAG_STRENGTH_SACRED,
-            'code' => 1
-          );
+            'code' => 1,
+            'lang' => isset($m[1]) ? trim($m[1], '"\'') : ''
+          ];
           $r = '';
         }
       }
@@ -1134,7 +1150,7 @@ class Neasden {
       if (array_key_exists ('code', $initial_fragment) and $initial_fragment['code']) {
         if ($this->config['html.code.on']) {
           $resulting_fragment['result'] = (
-            $this->config['html.code.wrap'][0] .
+            sprintf ($this->config['html.code.wrap'][0], $initial_fragment['lang']) .
             htmlspecialchars ($resulting_fragment['result']) .
             $this->config['html.code.wrap'][1]
           );
