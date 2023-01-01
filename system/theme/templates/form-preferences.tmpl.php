@@ -83,16 +83,19 @@
   </div>
 </div>
 
+</div>
+
+<div class="form-part">
 
 <?php if (count (@$content['form-preferences']['templates']) > 1) { ?>
 <div class="form-control">
   <div class="form-label">
     <p><label><?= _S ('ff--theme') ?></label></p>
-    <? if (array_key_exists ('theme-preview', $content['admin-hrefs'])) { ?>
+    <?php if (array_key_exists ('theme-preview', $content['admin-hrefs'])) { ?>
     <p class="admin-links">
       <a class="e2-template-preview-link" href="<?= @$content['admin-hrefs']['theme-preview'] ?>" target="_blank"><?= _S ('gs--theme-preview') ?> <span class="e2-svgi"><?= _SVG ('blank-window') ?></span></a>
     </p>
-    <? } ?>
+    <?php } ?>
   </div>
   <div class="form-element">
     
@@ -176,6 +179,19 @@
     </label><br />
 
   </div>
+  <div class="form-element">
+
+    <label class="checkbox">
+    <input
+      type="checkbox"
+      id="comments-require-gip"
+      name="comments-require-gip"
+      class="checkbox"
+      <?= @$content['form-preferences']['comments-require-gip?']? ' checked="checked"' : ''?>
+    /> <?= _S ('ff--comments-require-social-id') ?>
+    </label><br />
+
+  </div>
 
   <div class="form-element">
 
@@ -200,17 +216,24 @@
       name="email-notify"
       class="checkbox"
       <?= @$content['form-preferences']['email-notify?']? ' checked="checked"' : ''?>
-    /> <?= _S ('ff--send-to-address') ?>
+    /> <?= _S ('ff--send-by-email') ?>
     </label><br />
+
+  </div>
+
+</div>
+
+
+<div class="form-control">
+  <div class="form-label input-label"><label><?= _S ('ff--email') ?></label></div>
+  <div class="form-element">
     <input type="text"
       class="text width-2"
       id="email"
       name="email"
       value="<?= $content['form-preferences']['email'] ?>"
-    /><br />
-
+    />
   </div>
-  
 </div>
 
 </div>
@@ -265,6 +288,6 @@
 <?php } ?>
 
 <p class="admin-links"><?= _S ('ff--administration') ?>&nbsp;
-<a href="<?= @$content['admin-hrefs']['password'] ?>"><?= _S ('gs--password') ?></a><? if (array_key_exists ('database', $content['admin-hrefs'])) { ?>,&nbsp;
-<a href="<?= @$content['admin-hrefs']['database'] ?>"><?= _S ('gs--db-connection') ?></a><? } ?><? if (array_key_exists ('get-backup', $content['admin-hrefs'])) { ?>,&nbsp;
-<a href="<?= @$content['admin-hrefs']['get-backup'] ?>"><?= _S ('gs--get-backup') ?></a><? } ?></p>
+<a href="<?= @$content['admin-hrefs']['password'] ?>"><?= _S ('gs--password') ?></a><?php if (array_key_exists ('database', $content['admin-hrefs'])) { ?>,&nbsp;
+<a href="<?= @$content['admin-hrefs']['database'] ?>"><?= _S ('gs--db-connection') ?></a><?php } ?><?php if (array_key_exists ('get-backup', $content['admin-hrefs'])) { ?>,&nbsp;
+<a href="<?= @$content['admin-hrefs']['get-backup'] ?>"><?= _S ('gs--get-backup') ?></a><?php } ?></p>

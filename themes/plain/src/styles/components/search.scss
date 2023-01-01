@@ -25,6 +25,8 @@
 .e2-search-icon {
   position: absolute;
   color: var(--foregroundColor);
+  width: 16px;
+  height: 24px;
 
   &:hover {
     color: var(--hoverColor);

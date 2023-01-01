@@ -3,11 +3,15 @@
 <form
   id="form-tag"
   action="<?= @$content['form-tag']['form-action'] ?>"
+  enctype="multipart/form-data"
   method="post"
+  accept-charset="utf-8"
+  autocomplete="off"
 >                                   
 
 <input
   type="hidden"
+  id="tag-id"
   name="tag-id"
   value="<?= @$content['form-tag']['.tag-id'] ?>" 
 />
@@ -90,7 +94,7 @@
       </div>
 
       <?php if (@$content['form-tag']['uploads-enabled?']) { ?>
-        <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
+        <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span class="e2-uploading" id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
 
         <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
         <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>

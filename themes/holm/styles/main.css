@@ -9,6 +9,8 @@
   
   --headingsColor:               rgb( 255, 255, 255      );
   --headingsUnderlineColor:     rgba( 255, 255, 255, .25 );
+  --boldColor:                     var(--headingsColor);
+  --boldUnderlineColor:            var(--headingsUnderlineColor);
   --linkColor:                   rgb( 240, 106,  33      );
   --linkUnderlineColor:         rgba( 240, 106,  33, .25 );
   --linkColorVisited:           rgba( 240, 106,  33, .5  );
@@ -30,6 +32,7 @@
 
   --imageBorderColor:               #333;
   --disabledColor:               rgb(  87,  86,  85      );
+  --activeColor:                   var(--linkColor);
   --errorColor:                     #b03000;
   --currentItemBackgroundColor:     #333;
   --windowBackgroundColor:         var(--inputBackgroundColor);

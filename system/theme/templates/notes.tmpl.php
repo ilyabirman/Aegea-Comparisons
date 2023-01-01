@@ -9,11 +9,13 @@ Rose debug info
 
 <?php if (@$content['pages']['timeline?']) _T ('pages-later') ?>
 
+<a id="e2-note-read-href" href="read/"></a>
+
 <?php foreach ($content['notes'] as $note): ?>
 
 <?php _X ('note-pre') ?>
 
-<div id="e2-note-<?= $note['_']['_id'] ?>" class="<?= array_key_exists ('only', $content['notes'])? 'e2-only ': '' ?>e2-note <?= $note['favourite?']? 'e2-note-favourite' : '' ?> <?= $note['visible?']? '' : 'e2-hidden' ?> <?= $note['playlist?']? 'jouele-playlist' : '' ?>">
+<div id="e2-note-<?= $note['_']['_id'] ?>" class="<?= array_key_exists ('only', $content['notes'])? 'e2-only ': '' ?>e2-note <?= $note['favourite?']? 'e2-note-favourite' : '' ?> <?= $note['visible?']? '' : 'e2-hidden' ?>">
 
 
 <?php if (array_key_exists ('edit-href', $note)): ?>
@@ -45,7 +47,7 @@ Rose debug info
 <?php } else { ?>
 <?= _A ('<a href="'. $note['href']. '">'. $note['title']. '</a>') ?> 
 <?php } ?>
-<?php if (!$note['published?']) { ?><span class="e2-draft-label"><?= _S ('gs--not-published') ?></span><?php }?>
+<?php if (!$note['published?']) { ?><span class="e2-draft-label"><?= _S ('gs--not-published') ?></span><?php } elseif ($note['scheduled?']) { ?><span class="e2-draft-label"><?= _S (  'gs--will-be-published') ?> <?=_DT ('j {month-g} Y, H:i', @$note['time'])?></span><?php } ?>
 </h1>
 
 
@@ -69,7 +71,7 @@ Rose debug info
 <?php // LIKES // ?>
 
 <?php if (array_key_exists ('only', $content['notes'])) { ?>
-<?php if ($note['published?']) { ?>
+<?php if ($note['published?'] and !$note['scheduled?']) { ?>
 
 <div class="e2-note-likes">
 
@@ -113,11 +115,18 @@ Rose debug info
 <?php // LIST OF KEYWORDS // ?>
 
 <?php if (array_key_exists ('tags', $note)): ?>
-<div class="e2-note-tags">
-<span class="e2-timestamp" title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
-<?php
-  #if ($note['hit-count']) echo '👁 '. $note['hit-count'] .' &nbsp ';
-?>
+<div class="e2-note-meta">
+<?php if ($note['comments-link?']): ?>
+<?php if ($note['comments-count']) { ?><a href="<?= $note['href'] ?>#comments" class="nu"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <u><?= $note['comments-count-text'] ?></u></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
+<?php } ?>
+<?php } else { ?>
+<a href="<?= $note['href'] ?>#comments" class="nu"><span class="e2-svgi"><?= _SVG ('comments') ?></span> <u><?= _S ('gs--no-comments') ?></u></a>
+<?php } ?> &nbsp;
+<?php endif ?>
+
+<?php if ($note['read-count']) { ?><span class="e2-read-counter"><span class="e2-svgi"><?= _SVG ('read') ?></span> <?= $note['read-count'] ?></span> &nbsp;<?php } ?>
+
+<span title="<?=_DT ('j {month-g} Y, H:i, {zone}', @$note['time'])?>"><?= _AGO ($note['time']) ?></span> &nbsp;
 <?php
 $tags = array ();
 foreach ($note['tags'] as $tag) {
@@ -134,17 +143,30 @@ echo implode (' &nbsp; ', $tags)
 <?php endif; ?>
 
 
-<?php // COMMENTS LINK // ?>
+<?php if ($content['sign-in']['done?']) { ?>
+<?php if (array_key_exists ('source', $note)): ?>
+<div style="border: 1px rgba(0,0,0,0.1) solid; padding: .5em 1em" class="e2-text">
+<p>Source: <?= $note['source'] ?> (<?= $note['source-id'] ?> → <?= $note['source-true-id'] ?>) by <a href="<?= $note['author-href'] ?>"><?= $note['author'] ?></a><br />
+<?= $note['source-whitelisted?']? '':'Not ' ?>Whitelisted, <?= $note['source-trusted?']? '':'Not ' ?>Trusted<br /></p>
 
-<?php if ($note['comments-link?']): ?>
-<div class="e2-note-comments-link">
-<?php if ($note['comments-count']) { ?><a href="<?= $note['href'] ?>"><?= $note['comments-count-text'] ?></a><?php if ($note['new-comments-count'] == 1 and $note['comments-count'] == 1) { ?>, <?= _S ('gs--comments-all-one-new') ?><?php } elseif ($note['new-comments-count'] == $note['comments-count']) { ?>, <?= _S ('gs--comments-all-new') ?><?php } elseif ($note['new-comments-count']) { ?> · <span class="admin-links"><a href="<?=$note['href']?>#new"><?= $note['new-comments-count-text'] ?></a></span>
-<?php } ?>
-<?php } else { ?>
-<a href="<?= $note['href'] ?>"><?= _S ('gs--no-comments') ?></a>
-<?php } ?>
+<p>
+  <?php if (array_key_exists ('source-premoderate-url', $note)) { ?>
+  <a class="e2-button" href="<?= $note['source-premoderate-url'] ?>">Premoderate</a>   
+  <?php } ?>
+  <?php if (array_key_exists ('source-trust-url', $note)) { ?>
+  <a class="e2-button" href="<?= $note['source-trust-url'] ?>">Trust and publish all</a>   
+  <?php } ?>
+  <?php if (array_key_exists ('source-ban-url', $note)) { ?>
+  <a class="e2-button" href="<?= $note['source-ban-url'] ?>">Ban and delete all</a>   
+  <?php } ?>
+  <?php if (array_key_exists ('source-forget-url', $note)) { ?>
+  <a class="e2-button" href="<?= $note['source-forget-url'] ?>">Forget</a>   
+  <?php } ?>
+</p>
+
 </div>
-<?php endif ?>
+<?php endif; ?>
+<?php } ?>
 
 </div>
 

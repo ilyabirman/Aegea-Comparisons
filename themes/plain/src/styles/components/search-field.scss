@@ -1,4 +1,5 @@
 $iconWidth: 16px;
+$iconHeight: 16px;
 $inputFocusPadding: 24px;
 
 $labelInInputOffset: $inputFocusPadding - ($inputFocusPadding - $iconWidth) / 2;
@@ -62,10 +63,11 @@ $tagsInInputOffset: ($inputFocusPadding - $iconWidth) / 2;
 }
 
 .search-field__zoom-icon {
-  display: flex;
+  display: inline-block;
   width: $iconWidth;
+  height: $iconHeight;
   position: relative; // for show icon above the input
-  margin-top: 5px;
+  margin-top: 3px;
   color: var(--foregroundColor);
 
   &:hover {

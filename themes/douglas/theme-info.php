@@ -5,6 +5,7 @@
   'display_name' => array (
     'en' => 'Douglas',
     'ru' => 'Дуглас',
+    'uk' => 'Дуглас',
   ),
 
   'colors' => array (

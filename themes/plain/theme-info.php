@@ -5,6 +5,7 @@
   'display_name' => array (
     'en' => 'Plain',
     'ru' => 'Простая',
+    'uk' => 'Звичайна',
   ),
 
   'colors' => array (

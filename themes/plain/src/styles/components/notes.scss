@@ -14,6 +14,8 @@
   max-width: 720px;
   margin: 0 0 8px;
   padding-right: 25px;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .e2-note h1 a,
@@ -47,21 +49,13 @@
   line-height: var(--noteTitleFavouriteLineHeight);
 }
 
-.e2-note-favourite .favourite {
-  position: relative;
-}
-
 .e2-note-favourite .favourite:after {
-  content: '';
+  content: '★';
   position: absolute;
   display: inline-block;
-  bottom: 11px;
-  right: -26px;
-  width: 28px;
-  height: 16px;
-  background-image: url('../../../system/theme/images/favourite-on.svg');
-  background-position: top right;
-  background-repeat: no-repeat;
+  margin-left: .33em;
+  margin-top: .07em;
+  font-size: 80%;
 }
 
 .e2-note .admin-links-floating {
@@ -84,6 +78,7 @@
 .e2-note-author-name {
   font-size: var(--noteTextFontSize);
   line-height: var(--noteTextLineHeight);
+  color: var(--boldColor);
   font-weight: bold;
   margin: 0 0 4px 0;
 }
@@ -134,8 +129,7 @@
   display: inline-block;
 }
 
-.e2-note-tags,
-.e2-note-comments-link {
+.e2-note-meta {
   margin: 0 0 6px 0;
   font-size: 12px;
   line-height: 16px;

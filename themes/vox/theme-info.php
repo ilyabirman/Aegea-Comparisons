@@ -1,10 +1,11 @@
 <?php return array (
 
-  'index' => 11,
+  'index' => 12,
 
   'display_name' => array (
     'en' => 'Vox',
     'ru' => 'Вокс',
+    'uk' => 'Вокс',
   ),
 
   'colors' => array (

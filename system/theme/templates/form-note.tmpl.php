@@ -109,7 +109,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       </label>
 
       <div class="form-label-saveinfo">
-        <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>... <span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
+        <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?> <span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
         <span id="livesave-button" class="e2-keyboard-shortcut e2-clickable-keyboard-shortcut e2-admin-link" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
         <span class="e2-unsaved-led" style="display: none"></span>
         <span id="livesave-error" class="e2-save-error" style="display: none;">!</span><br />
@@ -144,7 +144,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       </div>
 
       <?php if (@$content['form-note']['uploads-enabled?']) { ?>
-        <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
+        <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span class="e2-uploading" id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
 
         <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
         <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
@@ -187,11 +187,11 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
   <div class="form-element">
 
     <div class="e2-note-time-and-url">
-      <a href="javascript: return false" onclick="$ ('.e2-note-time-and-url').slideToggle(333); return false" class="e2-pseudolink e2-admin-link"><?php if (@$content['form-note']['note']['published?']) { ?><?= _S ('ff--is-at-address') ?><?php } else { ?><?= _S ('ff--will-get-address') ?><?php } ?> <?php if (@$content['form-note']['alias']) { ?>
-      .../<?= @$content['form-note']['alias'] ?>/
+      <a href="javascript: return false" onclick="$ ('.e2-note-time-and-url').slideToggle(333); return false" class="e2-pseudolink e2-admin-link"><?php if (@$content['form-note']['note']['published?']) { ?><?= _S ('ff--is-published') ?><?php } else { ?><?= _S ('ff--will-be-published') ?><?php } ?> <?php if (@$content['form-note']['alias']) { ?>
+      <?= _S ('ff--at-address') ?> .../<?= @$content['form-note']['alias'] ?>/
       <?php } ?>
       <?php if (@$content['form-note']['time']) { ?>
-      <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $content['form-note']['time'])?>"><?= _DT ('j {month-g} Y, H:i,', $content['form-note']['time']) ?></span>
+      <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $content['form-note']['time'])?>"><?= _DT ('j {month-g} Y, H:i', $content['form-note']['time']) ?></span>
       <?php } ?>
       </a>
     </div>

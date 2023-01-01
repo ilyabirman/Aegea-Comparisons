@@ -20,17 +20,3 @@ a:active.e2-tag {
 .e2-tags .e2-tag {
   margin-right: 8px;
 }
-
-.e2-tag-filter {
-  margin-bottom: 12px;
-}
-
-.e2-tag-filter-slide-shaft,
-.e2-tag-filter-slider span {
-  background: var(--tagColor);
-}
-
-.e2-tag-filter-slide-area:hover .e2-tag-filter-slide-shaft,
-.e2-tag-filter-slide-area:hover .e2-tag-filter-slider span {
-  background: var(--hoverColor);
-}

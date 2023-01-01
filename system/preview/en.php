@@ -66,7 +66,6 @@
         <li>This is a long list item so that you see what it looks like spanning several lines. Make sure the spacing between the items is bigger than the line height.</li>
         <li>This is a short element.</li>
       </ul>
-      <p>Just below, there are the publish date and the tags wrapped in <tt>e2-note-tags</tt>.</p>
       ',
       // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
       // 'format-info' => array 2
@@ -90,8 +89,8 @@
          ),
       ),
       // 'playlist?' => true
+      'read-count' => 42,
       'comments-count' => 0,
-      // 'your-comment-href' => 'http://e2/all/muzlo/comment/',
       // 'commentable-now?' => true,
       // 'comments-count-text' => '1 comment',
       'href' => $self_href,
@@ -106,7 +105,7 @@
     array (
       'title' => 'Another sample post',
       'text' => '
-      <p>This is a second example to help you adjust the distance between the posts in a feed. This post is also not starred unlike the previous one. The title is not a link here — as if we were on the posts’ page. It also has a highlighed tag — as if we were on that tag’s page. And it has a comments link — as if it had comments.</p>
+      <p>This is a second example to help you adjust the distance between the posts in a feed. This post is also not starred unlike the previous one. The title is not a link here — as if we were on the posts’ page. It also has a highlighed tag — as if we were on that tag’s page.</p>
       ',
       // <div class="e2-text-block-loud">Here’s what an important quote, conclusion, or rule looks like</div>
       // <div class="e2-text-block-foot">Also it has a footnote.</div>
@@ -137,11 +136,11 @@
          ),
       ),
       // 'playlist?' => true
+      'read-count' => 147,
       'comments-count' => 5,
-      'your-comment-href' => $self_href,
       'commentable-now?' => true,
       'comments-count-text' => '5 comments',
-      'href' => $self_href,
+      // 'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
       'comments-link?' => true,
       // 'new-comments-count' => 2,
@@ -189,7 +188,6 @@
       ),
       // 'playlist?' => true
       // 'comments-count' => 5,
-      // 'your-comment-href' => 'http://e2/all/muzlo/comment/',
       // 'commentable-now?' => true,
       // 'comments-count-text' => '5 comments',
       'href' => $self_href,
@@ -230,16 +228,46 @@
   $return['comments'] = array (
     'each' => array (
       array (
-        'visible?' => true,
+        'gip-used?' => true,
+        'gip' => 'facebook',
+        'userpic-href' => 'system/theme/images/sample-face-1.jpg',
         'important?' => false,
         'name' => 'John Smith',
-        'text' => 'This is a sample comment.',
+        'text' => '<p>This is a sample comment. Some meaningless text follows. This text is put here so that you see what a multiline comment looks.</p><p>And one more paragraph, just in case.</p>',
+        'time' => array (
+          0 => strtotime ('21 May 2019, 11:21 +0300'),
+          1 => array (
+            'offset' => 10800,
+            'is_dst' => false,
+          ),
+        ),
+        'replied?' => true,
+        'reply-visible?' => true,
+        'reply-important?' => true,
+        'author-name' => 'William Sheakspeare',
+        'reply' => '<p>Author’s succinct response</p>',
+        'reply-time' => array (
+          0 => strtotime ('15 Jun 2019, 22:13 +0300'),
+          1 => array (
+            'offset' => 10800,
+            'is_dst' => false,
+          ),
+        ),
       ),
       array (
-        'visible?' => true,
+        'gip-used?' => true,
+        'gip' => 'twitter',
+        'userpic-href' => 'system/theme/images/sample-face-2.jpg',
         'important?' => false,
-        'name' => 'Wilhelm Conrad Roentgen',
-        'text' => 'A surprisingly short comment.',
+        'name' => 'Sabrina Irmgard Krankenschwarzdrossel',
+        'text' => '<p>A surprisingly short comment.</p>',
+        'time' => array (
+          0 => strtotime ('29 May 2019, 11:21 +0300'),
+          1 => array (
+            'offset' => 10800,
+            'is_dst' => false,
+          ),
+        ),
       ),
     ),
     // 'rss-href' => 'http://e2/all/muzlo/comments-rss/',
@@ -256,14 +284,16 @@
     // '.comment-id' => 'new',
     // '.already-subscribed?' => false,
     'create:edit?' => true,
+    'logged-in?' => true,
+    'logged-in-gip' => 'facebook',
+    'logout-url' => $self_href,
     // 'form-action' = 'http://e2/@actions/comment-process/',
     'submit-text' => 'Submit',
     'show-subscribe?' => true,
     'subscribe?' => false,
     'subscription-status' => '',
-    'visible?' => true,
     'email-field-name' => 'elton-john',
-    'name' => '',
+    'name' => 'John Smith',
     'email' => '',
     'text' => 'This is a sample comment form',
   );

@@ -66,7 +66,6 @@ $self_href = 'javascript:return false;';
         <li>это длинный элемент списка, чтобы посмотреть, как выглядит перенос на несколько строк — убедитесь что отступы между элементами списка больше, чем между строками одного элемента;</li>
         <li>а это — короткий элемент.</li>
       </ul>
-      <p>Чуть ниже — дата публикации и теги.</p>
       ',
       // 'summary' => '21 апреля сыграл техно в Студии Лебедева. Так',
       // 'format-info' => array 2
@@ -74,7 +73,7 @@ $self_href = 'javascript:return false;';
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
       // 'last-ip' => NULL,
       'published?' => true,
-      'commentable?' => false,
+      'commentable?' => true,
       'favourite?' => true,
       'visible?' => true,
       'tags' => array (
@@ -90,13 +89,13 @@ $self_href = 'javascript:return false;';
          ),
       ),
       // 'playlist?' => true
-      'comments-count' => 0,
-      // 'your-comment-href' => 'http://e2/all/muzlo/comment/',
-      // 'commentable-now?' => true,
-      // 'comments-count-text' => '1 comment',
+      'read-count' => 42,
+      'comments-count' => 5,
+      'commentable-now?' => true,
+      'comments-count-text' => '5 комментариев',
       'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
-      // 'comments-link?' => true,
+      'comments-link?' => true,
       'new-comments-count' => 0,
       'new-comments-count-text' => '0 new',
       // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
@@ -106,7 +105,7 @@ $self_href = 'javascript:return false;';
     array (
       'title' => 'Другая заметка-образец',
       'text' => '
-      <p>Это ещё один пример, чтобы вы настроили расстояние между заметками в ленте. Ещё это заметка без звезды, в отличие от предыдущей. Заголовок этой заметки не является ссылкой — как будто мы уже на её странице. Ещё один из тегов снизу подсвечен — как будто мы на его странице. И ещё у неё есть ссылка на комментарии — как будто у неё есть комментарии.</p>
+      <p>Это ещё один пример, чтобы вы настроили расстояние между заметками в ленте. Ещё это заметка без звезды, в отличие от предыдущей. Заголовок этой заметки не является ссылкой — как будто мы уже на её странице. Ещё один из тегов снизу подсвечен — как будто мы на его странице.</p>
       ',
       // <div class="e2-text-block-loud">Так оформляется важная цитата, вывод или правило</div>
       // <div class="e2-text-block-foot">А ещё у этой заметки есть сноска.</div>
@@ -116,7 +115,7 @@ $self_href = 'javascript:return false;';
       // 'last-modified' => e2 time 14 May 2017, 19:51, GMT+05:00
       // 'last-ip' => NULL,
       'published?' => true,
-      'commentable?' => true,
+      'commentable?' => false,
       'favourite?' => false,
       'visible?' => true,
       'tags' => array (
@@ -137,13 +136,13 @@ $self_href = 'javascript:return false;';
          ),
       ),
       // 'playlist?' => true
-      'comments-count' => 5,
-      'your-comment-href' => $self_href,
-      'commentable-now?' => true,
-      'comments-count-text' => '5 комментариев',
-      'href' => $self_href,
+      'read-count' => 147,
+      // 'comments-count' => 0,
+      // 'commentable-now?' => true,
+      // 'comments-count-text' => '5 комментариев',
+      // 'href' => $self_href,
       // 'href-original' => 'http://e2/all/muzlo/',
-      'comments-link?' => true,
+      // 'comments-link?' => true,
       // 'new-comments-count' => 2,
       // 'new-comments-count-text' => '2 new',
       // 'favourite-toggle-href' => 'http://e2/all/muzlo/favourite/',
@@ -189,7 +188,6 @@ $self_href = 'javascript:return false;';
       ),
       // 'playlist?' => true
       // 'comments-count' => 5,
-      // 'your-comment-href' => 'http://e2/all/muzlo/comment/',
       // 'commentable-now?' => true,
       // 'comments-count-text' => '5 comments',
       'href' => $self_href,
@@ -230,16 +228,46 @@ $self_href = 'javascript:return false;';
   $return['comments'] = array (
     'each' => array (
       array (
-        'visible?' => true,
+        'gip-used?' => true,
+        'gip' => 'twitter',
+        'userpic-href' => 'system/theme/images/sample-face-1.jpg',
         'important?' => false,
         'name' => 'Иван Петров',
-        'text' => 'Это комментарий для примера.',
+        'text' => '<p>Это комментарий для примера. Далее идёт бессмысленный текст. Этот текст нужен только чтобы вы могли увидеть, как выглядит многострочный комментарий.</p><p>И ещё один абзац на всякий случай.</p>',
+        'time' => array (
+          0 => strtotime ('21 May 2019, 11:21 +0300'),
+          1 => array (
+            'offset' => 10800,
+            'is_dst' => false,
+          ),
+        ),
+        'replied?' => true,
+        'reply-visible?' => true,
+        'reply-important?' => true,
+        'author-name' => 'Александр Пушкин',
+        'reply' => '<p>Ёмкий ответ автора.</p>',
+        'reply-time' => array (
+          0 => strtotime ('15 Jun 2019, 22:13 +0300'),
+          1 => array (
+            'offset' => 10800,
+            'is_dst' => false,
+          ),
+        ),
       ),
       array (
-        'visible?' => true,
+        'gip-used?' => true,
+        'gip' => 'facebook',
+        'userpic-href' => 'system/theme/images/sample-face-2.jpg',
         'important?' => false,
-        'name' => 'Константин Константинович Константинопольский',
-        'text' => 'Короткий комментарий.',
+        'name' => 'Констанция Константиновна Константинопольская',
+        'text' => '<p>Короткий комментарий.</p>',
+        'time' => array (
+          0 => strtotime ('29 May 2019, 11:21 +0300'),
+          1 => array (
+            'offset' => 10800,
+            'is_dst' => false,
+          ),
+        ),
       ),
     ),
     // 'rss-href' => 'http://e2/all/muzlo/comments-rss/',
@@ -256,14 +284,16 @@ $self_href = 'javascript:return false;';
     // '.comment-id' => 'new',
     // '.already-subscribed?' => false,
     'create:edit?' => true,
+    'logged-in?' => true,
+    'logged-in-gip' => 'facebook',
+    'logout-url' => $self_href,
     // 'form-action' = 'http://e2/@actions/comment-process/',
-    'submit-text' => 'Submit',
+    'submit-text' => 'Отправить',
     'show-subscribe?' => true,
     'subscribe?' => false,
     'subscription-status' => '',
-    'visible?' => true,
     'email-field-name' => 'elton-john',
-    'name' => '',
+    'name' => 'Иван Петров',
     'email' => '',
     'text' => 'Это пример формы комментариев',
   );

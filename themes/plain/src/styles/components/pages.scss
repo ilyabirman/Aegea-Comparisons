@@ -6,7 +6,7 @@
 }
 
 .e2-pages a {
-  padding-top: 4px;
+  padding-top: .4em;
 }
 
 .e2-page-unavailable {
@@ -26,6 +26,10 @@
 }
 
 .e2-pages-between {
-  padding: 0 1em;
   white-space: nowrap;
+}
+
+.e2-pages-prev + .e2-pages-between,
+.e2-pages-between + .e2-pages-next {
+  padding-left: 1em;
 }

@@ -9,6 +9,8 @@
 
   --headingsColor:                  black;
   --headingsUnderlineColor:     rgba(   0,   0,   0, 1   );
+  /* --boldColor */
+  /* --boldUnderlineColor */
   --linkColor:                   rgb(  61,  96, 119      );
   --linkUnderlineColor:         rgba(  61,  96, 119, .25 );
   --linkColorVisited:            rgb(  84, 121, 145      );
@@ -30,6 +32,7 @@
 
   /* --imageBorderColor */
   /* --disabledColor */
+  --activeColor: #1283ce;
   /* --errorColor */
   /* --currentItemBackgroundColor */
   /* --windowBackgroundColor */

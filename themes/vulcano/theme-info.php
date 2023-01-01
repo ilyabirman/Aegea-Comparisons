@@ -5,6 +5,7 @@
   'display_name' => array (
     'en' => 'Vulcano',
     'ru' => 'Вулькано',
+    'uk' => 'Вулькано',
   ),
 
   'colors' => array (

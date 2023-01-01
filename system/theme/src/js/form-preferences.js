@@ -25,8 +25,13 @@ function initForm () {
     this.value = Math.min(Math.max(this.value, 3), 100)
   })
 
+  $('#email-notify').bind('change', function () {
+    // if (!this.value)
+    $('#email').focus()
+  })
+
   $('#email').bind('input change blur', function () {
-    if (this.value) $('#email-notify').attr('checked', 'checked')
+    if (!this.value) $('#email-notify').removeAttr('checked')
   })
 
   $('.e2-template-preview').click(function () {
@@ -34,6 +39,6 @@ function initForm () {
     $('.e2-template-preview').attr('class', 'e2-template-preview')
     $this.addClass('e2-current-template-preview')
     $('#template').val($this.attr('value'))
-    $('.e2-template-preview-link').attr ('href', $this.data('preview-url'))
+    $('.e2-template-preview-link').attr('href', $this.data('preview-url'))
   })
 }

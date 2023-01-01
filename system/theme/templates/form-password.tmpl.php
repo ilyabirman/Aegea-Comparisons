@@ -6,6 +6,14 @@
 
 <div class="form">
 
+<input
+  type="hidden"
+  id="recovery-key"
+  name="recovery-key"
+  value="<?=@$content['form-password']['.recovery-key']?>"
+/>
+
+<?php if (!$content['form-password']['recovering?']) { ?>
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--old-password') ?></label></div>
   <div class="form-element">
@@ -18,7 +26,7 @@
     />
   </div>
 </div>
-
+<?php } ?>
 
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--new-password') ?></label></div>
@@ -26,6 +34,9 @@
     <input type="text"
       class="text required width-2"
       id="new-password"
+      <?php if ($content['form-password']['recovering?']) { ?>
+      autofocus="autofocus"
+      <?php } ?>
       name="new-password"
       value=""
     />

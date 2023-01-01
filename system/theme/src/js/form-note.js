@@ -1,4 +1,7 @@
+import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
+import { isLocalStorageAvailable } from './lib/local-storage'
 import { bindKeys } from './lib/keybindings'
+
 import detect from './detect'
 
 $(function () {
@@ -104,6 +107,7 @@ $(function () {
 
   function e2LiveSaveError (errmsg) {
     $('#e2-console').html(errmsg)
+    e2SpinningAnimationStartStop($('#livesaving'), 0)
     $('#livesaving').hide()
     $('#livesave-button, #livesave-button + .e2-unsaved-led').show()
     $('#livesave-error').show()
@@ -131,6 +135,7 @@ $(function () {
     }
     $('#livesave-button, #livesave-button + .e2-unsaved-led, #livesave-error').hide()
     $('#livesaving').fadeIn(333)
+    e2SpinningAnimationStartStop($('#livesaving'), 1)
 
     e2AjaxSave({
       onCreated: function () {
@@ -157,6 +162,7 @@ $(function () {
       },
       onError: e2LiveSaveError,
       onAjaxSuccess: function () {
+        e2SpinningAnimationStartStop($('#livesaving'), 0)
         $('#livesaving').fadeOut(333)
       },
       onAjaxError: e2LiveSaveError,
@@ -176,6 +182,7 @@ $(function () {
     liveSaving = true
     e2UpdateSubmittability()
     $('#submit-keyboard-shortcut, #note-save-error').hide()
+    e2SpinningAnimationStartStop($('#note-saving'), 1)
     $('#note-saving').show()
 
     e2AjaxSave({
@@ -191,6 +198,7 @@ $(function () {
 
     function goTo (ajaxresult) {
       initPO = currentPO
+      e2SpinningAnimationStartStop($('#note-saving'), 0)
       $('#note-saving').hide()
       $('#note-saved').fadeIn(333)
       window.location.href = ajaxresult['note-url']
@@ -198,6 +206,7 @@ $(function () {
 
     function handleError (msg) {
       $('#form-note').trigger('ajaxError')
+      e2SpinningAnimationStartStop($('#note-saving'), 0)
       $('#note-saving').hide()
       $('#submit-keyboard-shortcut').show()
       $('#note-save-error').show()
@@ -274,7 +283,7 @@ $(function () {
   e2UpdateSubmittability()
 
   function removeLocalCopy () {
-    if (!document.e2.isLocalStorageAvailable) return
+    if (!isLocalStorageAvailable) return
 
     if (initNoteId) {
       // if it's a new draft, it has id === 'new' before saving

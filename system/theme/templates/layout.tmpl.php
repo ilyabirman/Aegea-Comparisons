@@ -51,6 +51,7 @@
 <?php _T ('tags') ?>
 <?php _T ('nothing') ?>
 <?php _T ('sessions') ?>
+<?php _T ('sources') ?>
 <?php _T ('pages') ?>
 <?php _T ('comments') ?>
 <?php _T ('popular') ?>

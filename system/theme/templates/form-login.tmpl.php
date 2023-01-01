@@ -38,6 +38,8 @@
         <input type="password" name="password" id="e2-password" class="text big input-disableable e2-login-window-input" autofocus="autofocus"/>
       </div>
         
+      <label><a href="<?= $content['form-login']['reset-href'] ?>"><?= _S ('gs--i-forgot') ?></a></label>
+
       <label><input type="checkbox"
         class="checkbox input-disableable"
         name="is_public_pc"

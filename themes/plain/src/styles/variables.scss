@@ -32,6 +32,8 @@ $IsCompact: 'screen and (max-width: 1023px)';
 
   --headingsColor: $headingsColor;
   --headingsUnderlineColor: transparentize($headingsColor, $thin);
+  --boldColor: $headingsColor;
+  --boldUnderlineColor: transparentize($headingsColor, $thin);
   --linkColor: $linkColor;
   --linkUnderlineColor: transparentize($linkColor, $thin);
   --linkColorVisited: $linkColorVisited;
@@ -53,6 +55,7 @@ $IsCompact: 'screen and (max-width: 1023px)';
 
   --imageBorderColor: #e8e8e8;
   --disabledColor: #cccccc;
+  --activeColor: #ff3000;
   --errorColor: #b03000;
   --currentItemBackgroundColor: #e8e8e8;
   --windowBackgroundColor: #fff;

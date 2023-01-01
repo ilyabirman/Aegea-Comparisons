@@ -5,9 +5,13 @@
   name="form-comment"
   id="form-comment"
   style="display: none"
+  data-cookie="<?= @$content['form-comment']['cookie-name'] ?>"
+  data-cookie-value="<?= @$content['form-comment']['cookie-value'] ?>"
 >
 
+<?php if ($content['form-comment']['create:edit?']) { ?>
 <div class="e2-section-heading"><?= _S ('gs--your-comment') ?></div>
+<?php } ?>
 
 <input
   type="hidden"
@@ -23,6 +27,12 @@
 
 <input
   type="hidden"
+  name="comment-number"
+  value="<?= @$content['form-comment']['.comment-number'] ?>"
+/>
+
+<input
+  type="hidden"
   name="from"
   value="<?= @$content['form-comment']['.from'] ?>"
 />
@@ -33,15 +43,124 @@
   value="<?= @$content['form-comment']['.already-subscribed?'] ?>"
 />
 
+<input
+  type="hidden"
+  name="gip"
+  value="<?= @$content['form-comment']['.gip'] ?>"
+/>
+
+<input
+  type="hidden"
+  name="comment"
+  value="&amp;&#x2605;&copy;"
+/>
+
 <script type="text/javascript">
-  document.write('<in' +'put type="hid' + 'den" name="<?= @$content['form-comment']['nospam-field-name'] ?>" value="">');
+  document.write('<in' +'put type="hid' + 'den" name="<?= @$content['form-comment']['nospam-field-name-part-1'] ?>'+'<?= @$content['form-comment']['nospam-field-name-part-2'] ?>" value="">');
 </script>
 
-<!--
-<?= @$content['form-comment']['ip-href'] ?> 
--->
-
 <div class="form">
+
+<div class="form-control">
+  <textarea name="text"
+    class="required width-4 e2-textarea-autosize"
+    id="text"
+    tabindex="3"
+    style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
+  ><?=$content['form-comment']['text']?></textarea>
+</div>
+
+<?php $comment = $content['comments']['each']['only'] ?>
+
+<?php if ($content['form-comment']['create:edit?']) { ?>
+
+<?php
+  if (
+    $content['form-comment']['logged-in?']
+    or count ($content['form-comment']['gips'])
+  ) {
+?>
+
+<div class="form-control">
+  <div class="e2-gips e2-hide-on-login<?php if (!$content['form-comment']['logged-in?']) { ?> required<?php } ?>" style="display: <?= !$content['form-comment']['logged-in?'] ? 'block' : 'none' ?>">
+  
+    <?= _S ('gs--sign-in-via') ?> &nbsp;
+
+    <?php foreach ($content['form-comment']['gips'] as $provider => $href) { ?>
+    
+    <?php if (!empty ($provider)) { ?>
+      &nbsp; <a href="<?= $href ?>" target="gips" class="e2-service-color-<?= $provider ?> nu e2-gip-link">
+        <span class="e2-svgi"><?= _SVG ($provider)?></span>
+      </a>
+    <?php } ?>
+
+    <?php } ?>
+    
+    <?php if ($content['form-comment']['email-comments-enabled?']) { ?>
+      &nbsp; <a href="#" class="e2-service-color-email nu e2-email-fields-revealer">
+        <span class="e2-svgi"><?= _SVG ('email')?></span>
+      </a>
+    <?php } ?>
+  </div>
+
+
+  <div class="e2-gip-info" style="display: <?= $content['form-comment']['logged-in?'] ? 'block' : 'none' ?>">
+    <span class="e2-svgi e2-gip-icon"><?= _SVG ($content['form-comment']['logged-in-gip']) ?></span>
+    
+    <span class="name"><?= @$content['form-comment']['name'] ?></span>
+
+    &nbsp; <a href="<?= $content['form-comment']['logout-url'] ?>" class="nu e2-gip-logout-url">
+      <span class="e2-svgi"><?= _SVG ('exit') ?></span>
+    </a>
+  </div>
+  
+</div>
+
+<?php } ?>
+
+
+
+
+<?php } else { ?>
+
+<!-- editing. name and star under the text -->
+
+<div class="form-control">
+
+  <div class="e2-comment-form-meta-area">
+    <?php if ($comment['gip-used?']) { ?>
+      <span class="e2-comment-author e2-comment-piece-markable <?php if (@$comment['important?']) echo 'e2-comment-piece-marked' ?>"><a href="<?= $comment['name-href'] ?>" class="e2-service-color-neutral nu"><span class="e2-svgi e2-svgi-smaller"><?= _SVG ($comment['gip']) ?></span> </a><?= @$comment['name'] ?></span>
+    <?php } ?>
+
+    <span class="e2-comment-actions admin-links">
+      <?php if (array_key_exists ('important-toggle-href', $comment)): ?><a href="<?= $comment['important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a><?php endif ?>
+    </span>
+  </div>
+
+</div>
+
+<?php } ?>
+
+
+<?php
+  if (
+    (
+      $content['form-comment']['create:edit?']
+      and !$content['form-comment']['logged-in?']
+      and $content['form-comment']['email-comments-enabled?']
+    ) or (
+      !$content['form-comment']['create:edit?'] and !$comment['gip-used?']
+    )
+  ) {
+?>
+
+<div
+  class="e2-email-fields e2-hide-on-login"
+  style="display: <?=
+    ($content['form-comment']['create:edit?'] and !$content['form-comment']['email-comments-only?']) ?
+      'none' : 'block'
+  ?>"
+>
 
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--full-name') ?></label></div>
@@ -81,28 +200,9 @@
       />
       </div>
     </div>
-    <div class="form-control-sublabel">
-      <?= $content['form-comment']['create:edit?']? (_S ('gs--email-wont-be-published') .'<br />') : ''?>
-    </div>
   </div>
-</div>
 
-<div class="form-control">
-  <div class="form-label form-label-sticky input-label">
-    <p><label><?= _S ('ff--text') ?></label></p>
-  </div>
-  <div class="form-element">
-    <textarea name="text"
-      class="required full-width e2-textarea-autosize"
-      id="text"
-      tabindex="3"
-      style="height: 16.7em; min-height: 16.7em; overflow-x: hidden; overflow-y: visible"
-    ><?=$content['form-comment']['text']?></textarea>
-  </div>
-</div>
-
-<?php if ($content['form-comment']['show-subscribe?']) { ?>
-<div class="form-control">
+  <?php if ($content['form-comment']['show-subscribe?']) { ?>
   <div class="form-element">
     <label class="checkbox">
     <input
@@ -114,24 +214,23 @@
     />&nbsp;<?= _S ('ff--subscribe-to-others-comments') ?>
     </label><br />
   </div>
-</div>
-<?php } ?> 
+  <?php } ?> 
 
-<?php if (@$content['form-comment']['subscription-status']) { ?>
-<div class="form-control">
+  <?php if (@$content['form-comment']['subscription-status']) { ?>
   <div class="form-element">
     <p><?= $content['form-comment']['subscription-status'] ?></p>
   </div>
+  <?php } ?>
 </div>
+
+</div>
+
 <?php } ?>
 
-
 <div class="form-control">
-  <div class="form-element">
   <button type="submit" id="submit-button" class="e2-submit-button" tabindex="5">
     <?= @$content['form-comment']['submit-text'] ?>
   </button><span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
-  </div>
 </div>
 
 </div>

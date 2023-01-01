@@ -1,8 +1,12 @@
+import { isLocalStorageAvailable } from './lib/local-storage'
+import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
+
 import './local-copies'
 import './form-note-local-copy'
 import './notes'
 import './form-note'
 import './text-with-file-upload'
+import './form-note-publish'
 import './form-preferences'
 import './form-tag'
 
@@ -29,7 +33,7 @@ $('.e2-important-toggle').click(function () {
   const toggleFn = method => href => {
     $this
       .attr('href', href)
-      .closest('.e2-comment-meta-area')[method]('important')
+      .closest('.e2-comment, .e2-comment-form-meta-area')
       .find('.e2-comment-piece-markable')[method]('e2-comment-piece-marked')
   }
 
@@ -138,6 +142,8 @@ function toggleClick ($this, functionOn, functionOff) {
   $this.removeClass('e2-toggle-on')
   $this.addClass('e2-toggle-thinking')
 
+  e2SpinningAnimationStartStop($this, 1)
+
   $.ajax({
     type: 'post',
     timeout: 10000,
@@ -158,6 +164,7 @@ function toggleClick ($this, functionOn, functionOff) {
     },
     complete () {
       $this.removeClass('e2-toggle-thinking')
+      e2SpinningAnimationStartStop($this, 0)
     }
   })
 
@@ -214,6 +221,8 @@ function dropUserPic (e) {
     const progressNode = $('#e2-user-picture-uploading #e2-progress')[0] // TODO: two ids in selector? why?
     const uploadingClass = 'e2-user-picture-container-uploading'
 
+    e2SpinningAnimationStartStop($this, 1)
+
     $this.addClass(uploadingClass)
 
     uploadFile({
@@ -222,6 +231,7 @@ function dropUserPic (e) {
       progressCallback (e) { showUploadProgressInArc(progressNode, e.loaded / e.total) },
       doneCallback (data) {
         showUploadProgressInArc(progressNode, 0)
+        e2SpinningAnimationStartStop($this, 0)
 
         if (data.substr(0, 6) === 'image|') {
           const image = data.substr(6).split('|')[0]
@@ -240,7 +250,7 @@ function dropUserPic (e) {
 }
 
 function initLocalCopyIndicators () {
-  if (document.e2.isLocalStorageAvailable) {
+  if (isLocalStorageAvailable) {
     const $draftsLink = $('#e2-drafts-item')
     const $draftsUnsavedLed = $draftsLink.find('.e2-unsaved-led')
     const $newNoteUnsavedLed = $('#e2-new-note-item .e2-unsaved-led')

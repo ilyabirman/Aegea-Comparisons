@@ -1,3 +1,5 @@
+import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
+
 var dbCount = 0
 var bingo = false
 var initialGlassCheck = true
@@ -31,7 +33,10 @@ function e2CheckDbConfig (me) {
 
   var completedCheckDBConfig, completedListDatabases
 
-  if (me) $('.e2-ajax-loading').fadeIn(333)
+  if (me) {
+    e2SpinningAnimationStartStop($('.e2-ajax-loading'), 1)
+    $('.e2-ajax-loading').fadeIn(333)
+  }
 
   var ajaxData = {
     'db-server': $('#db-server').val(),
@@ -164,6 +169,7 @@ function e2CheckDbConfig (me) {
         if (completedCheckDBConfig && completedListDatabases) e2AllCompleted()
         $('#e2-console').html(xhr.responseText)
         // if (me) $ ('#' + (me.id) + '-checking').fadeOut (333)
+        e2SpinningAnimationStartStop($('.e2-ajax-loading'), 0)
         $('.e2-ajax-loading').fadeOut(333)
       }
 

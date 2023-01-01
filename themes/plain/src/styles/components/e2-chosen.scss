@@ -12,7 +12,7 @@
   margin-top: 2px;
   border-radius: 2px;
   border: none;
-  background: var(--inputBackgroundColor);
+  background: var(--windowBackgroundColor);
   box-shadow: 0 2px 20px rgba(0, 0, 0, .1);
   padding: 1px 0 0 0;
 }
@@ -28,7 +28,7 @@
   -moz-background-clip   : padding;
   -webkit-background-clip: padding-box;
   background-clip        : padding-box;
-  color: var(--inputTextColor);
+  color: var(--foregroundColor);
   padding: 4px 6px;
   margin: 0 4px 4px 0;
   background: var(--backgroundColor);
@@ -82,7 +82,7 @@
 }
 
 .chzn-container-multi .chzn-choices .search-choice .search-choice-close {
-  color: var(--inputTextColor);
+  color: var(--foregroundColor);
   border: none;
 }
 .chzn-container-multi .chzn-choices .search-choice .search-choice-close:hover {

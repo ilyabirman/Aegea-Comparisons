@@ -45,6 +45,7 @@
   width: 360px;
   margin: 0 -180px;
   label { font-size: 14px; } 
+  label+label { margin-left: 10px } 
 }
 
 .e2-login-window-col {
@@ -119,55 +120,8 @@
   font-weight: bold;
 }
 
-.e2-subscribe-twitter:link, .e2-subscribe-twitter:visited { 
-  color: #00b8f2;
-  border-color: transparentize(#00b8f2, $thin);
-}
-.e2-subscribe-facebook:link, .e2-subscribe-facebook:visited { 
-  color: #3850a1;
-  border-color: transparentize(#3850a1, $thin);
-}
-.e2-subscribe-vk:link, .e2-subscribe-vk:visited { 
-  color: #5b7ea1;
-  border-color: transparentize(#5b7ea1, $thin);
-}
-.e2-subscribe-telegram:link, .e2-subscribe-telegram:visited { 
-  color: #37a1d8;
-  border-color: transparentize(#37a1d8, $thin);
-}
-.e2-subscribe-gplus:link, .e2-subscribe-gplus:visited { 
-  color: #dd4241;
-  border-color: transparentize(#dd4241, $thin);
-}
-.e2-subscribe-linkedin:link, .e2-subscribe-linkedin:visited { 
-  color: #0077b5;
-  border-color: transparentize(#0077b5, $thin);
-}
-.e2-subscribe-odnoklassniki:link, .e2-subscribe-odnoklassniki:visited { 
-  color: #f6903b;
-  border-color: transparentize(#f6903b, $thin);
-}
-.e2-subscribe-pinterest:link, .e2-subscribe-pinterest:visited { 
-  color: #bd081c;
-  border-color: transparentize(#bd081c, $thin);
-}
-.e2-subscribe-rss:link, .e2-subscribe-rss:visited { 
-  color: #de601c;
-  border-color: transparentize(#de601c, $thin);
-}
-.e2-subscribe-jsonfeed:link, .e2-subscribe-jsonfeed:visited { 
-  color: #6cbf00;
-  border-color: transparentize(#6cbf00, $thin);
-}
-
 .e2-subscribe-window a {
   white-space: nowrap;
-}
-
-.e2-subscribe-window a:hover,
-.e2-subscribe-window a.hover {
-  color: var(--hoverColor);
-  border-color: var(--hoverUnderlineColor);
 }
 
 .e2-subscribe-element b { color: #466869 }

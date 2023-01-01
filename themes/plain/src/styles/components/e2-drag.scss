@@ -16,8 +16,11 @@
 .e2-user-picture-container .e2-user-picture-uploading {
   visibility: hidden;
   position: absolute;
+  font-size: 0; // fixes strange position bug
   left: 12px;
   top: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 .e2-user-picture-container-uploading .e2-user-picture-uploading {

@@ -1,6 +1,10 @@
+import { isLocalStorageAvailable } from './lib/local-storage'
+
 const $notes = $('.e2-note')
 
-if ($notes.length && document.e2.isLocalStorageAvailable) checkCopies($notes)
+if ($notes.length && isLocalStorageAvailable) {
+  checkCopies($notes)
+}
 
 function checkCopies ($notes) {
   for (let i = 0; i < $notes.length; i++) {

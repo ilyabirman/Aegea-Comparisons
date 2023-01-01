@@ -64,23 +64,25 @@ function e2l_load_strings () {
   'er--cannot-upload' => 'Can’t upload file',
   'ff--title' => 'Title',
   'ff--text' => 'Text',
-  'ff--saving' => 'Saving',
+  'ff--saving' => 'Saving...',
   'ff--save' => 'Save',
   'ff--tags' => 'Tags',
   'ff--alias' => 'Alias',
   'ff--change-time' => 'Change time',
   'ff--delete' => 'Delete',
   'fb--withdraw' => 'Convert back into draft',
-  'ff--will-get-address' => 'Will get address',
-  'ff--is-at-address' => 'Published at address',
+  'ff--will-be-published' => 'Will be published',
+  'ff--is-published' => 'Published',
+  'ff--at-address' => 'at address',
   'gs--no-notes' => 'There are no posts.',
+  'gs--will-be-published' => 'Will be published',
 
   'ff--gmt-offset' => 'GMT offset',
   'ff--with-dst' => '+1 in summer',
   'ff--post-time' => 'Post time',
   
   'pt--post-deletion' => 'Post deletion',
-  'gs--post-will-be-deleted' => 'The post «$[post]» will be deleted with all comments.',
+  'gs--post-will-be-deleted' => 'The post “$[post]” will be deleted with all comments.',
 
   // frontpage 
   'er--cannot-show-latest-notes' => 'Cannot show latest posts',
@@ -98,7 +100,7 @@ function e2l_load_strings () {
   'gs--no-drafts' => 'There are no drafts.',
   'gs--not-published' => 'Not published',
   'gs--secret-link' => 'Secret link',
-  'gs--draft-will-be-deleted' => 'The draft «$[draft]» will be deleted.',
+  'gs--draft-will-be-deleted' => 'The draft “$[draft]” will be deleted.',
   
   // comments
   'pt--new-comment' => 'New comment',
@@ -123,13 +125,13 @@ function e2l_load_strings () {
   'er--name-email-text-required' => 'Name, e-mail and comment text are all required',
   'ff--notify-subscribers' => 'Notify sender and other subscribers by email',
   'gs--your-comment' => 'Your comment',
+  'gs--sign-in-via' => 'Sign in via',
   'ff--full-name' => 'Full name',
   'ff--email' => 'Email',
-  'gs--email-wont-be-published' => 'won’t be published',
   'ff--subscribe-to-others-comments' => 'Get other comments by email',
   'ff--text-of-your-comment' => 'Text of your comment',
   'gs--n-comments' => '$[number.cardinal]',
-  'gs--no-comments' => 'no comments',
+  'gs--no-comments' => 'No comments',
   'gs--comments-all-one-new' => 'new',
   'gs--comments-all-new' => 'new',
   'gs--comments-n-new' => '$[number.cardinal]',
@@ -148,7 +150,7 @@ function e2l_load_strings () {
   'ff--tag-name' => 'Display name',
   'ff--tag-urlname' => 'Name in URL',
   'ff--tag-description' => 'Description',
-  'gs--tag-will-be-deleted-notes-remain' => 'The tag «$[tag]» will be deleted from posts, but the posts will remain.',
+  'gs--tag-will-be-deleted-notes-remain' => 'The tag “$[tag]” will be deleted from posts, but the posts will remain.',
   'gs--see-also-tag' => 'See also tag',
   'gs--tags-important' => 'important',
   'gs--tags-all' => 'all',
@@ -196,6 +198,14 @@ function e2l_load_strings () {
   'er--wrong-password' => 'Wrong password',
   'ff--displayed-as-plain-text' => 'displayed in plain text',
   'er--settings-not-saved' => 'Settings not saved',
+  'pt--password-reset' => 'Password reset',
+  'gs--password-reset-link-sent-maybe' => 'If the address was correct, the link to reset your password has been sent by email',
+  'gs--password-reset-link-saved' => 'The link to reset your password has been saved to /user/password-reset.psa in your blog’s server folder.',
+  'er--cannot-reset-password' => 'Cannot reset password: no email specified in Settings. Contact administrator.',
+  'er--cannot-send-link-email-empty' => 'Cannot send password reset link: no email specified',
+  'gs--i-forgot' => 'I forgot',
+  'em--password-reset-subject' => 'Reset Aegea password',
+  'em--follow-this-link' => 'Follow this link to reset your password:',
   
   'pt--sessions' => 'Open sessions',
   'gs--sessions-description' => 'When you sign in using your password on multiple devices or with multiple browsers, this page shows list of all these sessions. If any of them seems suspicious, end all sessions but this, then change your password.',
@@ -225,8 +235,9 @@ function e2l_load_strings () {
   'ff--show-sharing-buttons' => 'Show social sharing buttons',
   'ff--comments' => 'Comments',
   'ff--comments-enable-by-default' => 'allow by default',
+  'ff--comments-require-social-id' => 'require identification with a social network',
   'ff--only-for-recent-posts' => 'only for recent posts',
-  'ff--send-to-address' => 'send by email to',
+  'ff--send-by-email' => 'send by email',
   'ff--yandex-metrika' => 'Yandex.Metrika',
   'ff--google-analytics' => 'Google Analytics',
   'ff--administration' => 'Administration:',
@@ -247,7 +258,6 @@ function e2l_load_strings () {
   'ff--db-name' => 'Database name',
   'fb--connect-to-this-db' => 'Connect using these parameters',
   'er--cannot-save-data' => 'Couldn’t save data',
-
   'gs--drag-userpic-here' => 'Drag your photo here',
 
   // welcome
@@ -269,12 +279,52 @@ function e2l_load_strings () {
   'fb--save-and-preview' => 'Save and preview',
   'fb--publish' => 'Publish',
   'fb--publish-draft' => 'Publish the post',
+  'fb--schedule-note' => 'Schedule the post',
   'fb--select' => 'Select',
   'fb--apply' => 'Apply',
   'fb--delete' => 'Delete',
   'fb--sign-in' => 'Sign in',
   'fb--sign-out' => 'Sign out',
+  'fb--send-link-by-email' => 'Send the link at this address',
   
+  // time
+  'pt--default-timezone' => 'Default timezone',
+  'gs--e2-stores-each-posts-timezone' => 'Е2 stores timezone of each post separately.',
+  'gs--e2-autodetects-timezone' => 'When publishing a post, the timezone will usually be detected automatically. In case of failure the timezone selected here will be used.',
+
+  'tt--from-the-future' => 'From the future',
+  'tt--now' => 'now',
+  'tt--just-now' => 'Just now',
+  'tt--one-minute-ago' => 'A minute ago',
+  'tt--minutes-ago' => '$[minutes.cardinal] ago',
+  'tt--one-hour-ago' => 'An hour ago',
+  'tt--hours-ago' => '$[hours.cardinal] ago',
+  'tt--today' => 'Today',
+  'tt--today-at' => 'Today at $[time]',
+
+  'tt--seconds-short' => '$[value.cardinal]',
+  'tt--minutes-short' => '$[value.cardinal]',
+  'tt--hours-short' => '$[value.cardinal]',
+  'tt--days-short' => '$[value.cardinal]',
+  'tt--months-short' => '$[value.cardinal]',
+  'tt--years-short' => '$[value.cardinal]',
+
+  'tt--date' => '$[month.monthname.short] $[day]',
+  'tt--date-and-time' => '$[month.monthname.short] $[day], $[time]',
+  'tt--date-year-and-time' => '$[month.monthname.short] $[day], $[year], $[time]',
+
+  'tt--zone-pt' => 'Pacific Time',
+  'tt--zone-mt' => 'Mountain Time',
+  'tt--zone-ct' => 'Central Time',
+  'tt--zone-et' => 'East Coast Time',
+  'tt--zone-gmt' => 'Greenwich Mean Time',
+  'tt--zone-cet' => 'Central European Time',
+  'tt--zone-eet' => 'East European Time',
+  'tt--zone-msk' => 'Moscow Time',
+  'tt--zone-ekt' => 'Chelyabinsk Time',
+  'gs--timezone-offset-hours' => 'h',
+  'gs--timezone-offset-minutes' => 'min',
+
   // mail
   'em--comment-new-to-author-subject' => '$[commenter] comments $[note-title]',
   'em--comment-new-to-public-subject' => '$[commenter] comments $[note-title]',
@@ -300,35 +350,6 @@ function e2l_load_strings () {
   'sn--whatsapp-verb' => 'Send',
   'sn--pinterest-verb' => 'Pin',
 
-  // time
-  'pt--default-timezone' => 'Default timezone',
-  'gs--e2-stores-each-posts-timezone' => 'Е2 stores timezone of each post separately.',
-  'gs--e2-autodetects-timezone' => 'When publishing a post, the timezone will usually be detected automatically. In case of failure the timezone selected here will be used.',
-
-  'tt--from-the-future' => 'From the future',
-  'tt--just-now' => 'Just now',
-  'tt--one-minute-ago' => 'A minute ago',
-  'tt--minutes-ago' => '$[minutes.cardinal] ago',
-  'tt--one-hour-ago' => 'An hour ago',
-  'tt--hours-ago' => '$[hours.cardinal] ago',
-  'tt--today' => 'Today',
-  'tt--today-at' => 'Today at $[time]',
-  'tt--date' => '$[month.monthname.short] $[day]',
-  'tt--date-and-time' => '$[month.monthname.short] $[day], $[time]',
-  'tt--date-year-and-time' => '$[month.monthname.short] $[day], $[year], $[time]',
-
-  'tt--zone-pt' => 'Pacific Time',
-  'tt--zone-mt' => 'Mountain Time',
-  'tt--zone-ct' => 'Central Time',
-  'tt--zone-et' => 'East Coast Time',
-  'tt--zone-gmt' => 'Greenwich Mean Time',
-  'tt--zone-cet' => 'Central European Time',
-  'tt--zone-eet' => 'East European Time',
-  'tt--zone-msk' => 'Moscow Time',
-  'tt--zone-ekt' => 'Chelyabinsk Time',
-  'gs--timezone-offset-hours' => 'h',
-  'gs--timezone-offset-minutes' => 'min',
-
   // umacros
   'um--month' => '$[month.monthname]',
   'um--month-short' => '$[month.monthname.short]',
@@ -337,7 +358,7 @@ function e2l_load_strings () {
   // more strings
   'gs--subscribe' => 'Subscribe to this blog',
   
-  'gs--no-such-notes' => 'There are no such posts.',
+  'gs--no-such-notes' => 'There are no posts.',
   'pt--page-not-found' => 'Page not found',
   'gs--page-not-found' => 'Page not found.',
   
@@ -402,6 +423,13 @@ function e2lstr_cardinal ($number, $modifier = '', $string_id) {
   if ($string_id == 'tt--hours-ago') $result = $number .' hour'. ($s?'s':'');
   if ($string_id == 'gs--n-comments') $result = $number .' comment'. ($s?'s':'');
   if ($string_id == 'gs--comments-n-new') $result = $number .' new';
+
+  if ($string_id == 'tt--seconds-short') $result = $number .' s';
+  if ($string_id == 'tt--minutes-short') $result = $number .' min';
+  if ($string_id == 'tt--hours-short') $result = $number .' h';
+  if ($string_id == 'tt--days-short') $result = $number .' d';
+  if ($string_id == 'tt--months-short') $result = $number .' mon';
+  if ($string_id == 'tt--years-short') $result = $number .' y';
 
   return $result;
   

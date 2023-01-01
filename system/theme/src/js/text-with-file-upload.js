@@ -1,3 +1,5 @@
+import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
+
 $(function () {
   if (!$('#form-tag').length && !$('#form-note').length) return
 
@@ -110,9 +112,11 @@ $(function () {
       url = null
     }
     $.ajax({
+      type: 'POST',
       data: theData,
       timeout: 60000,
       url: url,
+      contentType: 'application/x-www-form-urlencoded',
       success: function (msg) {
         // alert (msg)
         if (msg.substr(0, 6) === 'error|') {
@@ -153,7 +157,9 @@ $(function () {
     var dot = file.lastIndexOf('.')
     if (dot !== -1) ext = file.substr(dot + 1)
     $('.e2-upload-error').slideUp(333)
+
     if (/^gif|jpe?g|png|svg|mp3$/i.test(ext)) {
+      e2SpinningAnimationStartStop($('#e2-uploading'), 1)
       $('#e2-uploading').show().css('opacity', 1)
       $('#e2-upload-button').hide()
       return true
@@ -170,6 +176,7 @@ $(function () {
       completedUploadSize += file.size
 
       if (response['overwrite']) {
+        e2SpinningAnimationStartStop($('#e2-uploading'), 0)
         $('#e2-uploading').hide()
         $('#e2-upload-button').show()
         var thumbToUpdate = $(
@@ -190,15 +197,18 @@ $(function () {
           $e2AddPasteableImage(
           response['thumb'], response['new-name'], response['width'], response['height']
         ).appendTo($('#e2-uploaded-images')).show(333, function () {
+          e2SpinningAnimationStartStop($('#e2-uploading'), 0)
           $('#e2-uploading').hide()
           $('#e2-upload-button').show()
         })
         } else {
+          e2SpinningAnimationStartStop($('#e2-uploading'), 0)
           $('#e2-uploading').hide()
           $('#e2-upload-button').show()
         }
       }
     } else {
+      e2SpinningAnimationStartStop($('#e2-uploading'), 0)
       $('#e2-uploading').hide()
       $('#e2-upload-button').show()
       if (response['error'] === 'could-not-create-thumbnail') {
@@ -237,9 +247,9 @@ $(function () {
       var file = filesToUpload.shift()
       var filename = file.name
       var url = $('#e2-file-upload-action').attr('href') + '?'
-      if ($('#form-note')) {
+      if (typeof $('#note-id').val() !== 'undefined') {
         url += 'entity=note&entity-id=' + $('#note-id').val()
-      } else if ($('#form-tag')) {
+      } else if (typeof $('#tag-id').val() !== 'undefined') {
         url += 'entity=tag&entity-id=' + $('#tag-id').val()
       } else {
         url = null

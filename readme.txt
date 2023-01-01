@@ -10,6 +10,7 @@ Artem Polikarpov for brilliant Fotorama, http://fotorama.io/
 Ivan Sagalaev for Highlight.js, http://highlightjs.org/
 Murat Schidakov for help with tags entry UI implementation and support
 Igor Vasilkovsky for the backup system implementation
+Ivan Scholokov and Victor Koreysha for integration social networks into comments
 
 and also to
 Alexander Karpinsky, Artem Sapegin, Maxim Ilyahov, Dmitry Kirsanov, Evgeny Stepanischev, Julia Shabunio, Dmitry Smirnov
@@ -28,6 +29,7 @@ Alexander Karpinsky, Artem Sapegin, Maxim Ilyahov, Dmitry Kirsanov, Evgeny Stepa
 Ивану Сагалаеву за Хайлайт, http://highlightjs.org/
 Мурату Шидакову за помощь с интерфейсом ввода тегов
 Игорю Васильковскому за реализацию системы бекапов
+Ивану Щолокову и Виктору Корейше за интеграцию с соцсетями в комментариях
 
 а также
 Саше Карпинскому, Артёму Сапегину, Максиму Ильяхову, Диме Кирсанову, Жене Степанищеву, Юлии Шабунио, Диме Смирнову

@@ -1,7 +1,9 @@
+import { isLocalStorageAvailable } from './lib/local-storage'
+
 $(function () {
   const $formNote = $('#form-note')
 
-  if (!document.e2.isLocalStorageAvailable || !$formNote) return
+  if (!isLocalStorageAvailable || !$formNote) return
 
   const $noteId = $('#note-id')
   const $isNotePublished = $('#is-note-published')

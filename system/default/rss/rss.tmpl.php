@@ -14,7 +14,12 @@
 <guid isPermaLink="<?= $item['_rss_guid_is_permalink'] ?>"><?= $item['_rss_guid'] ?></guid>
 <link><?= $item['url'] ?></link>
 <comments><?= $item['url'] ?></comments>
-<description><?= htmlspecialchars ($item['content_html'], ENT_NOQUOTES, HSC_ENC) ?></description>
+<description>
+<?php if ($item['author']) { ?>
+&lt;p&gt;&lt;a href="<?= $item['author']['url'] ?>"&gt;<?= $item['author']['name'] ?>&lt;/a&gt;:&lt;/p&gt;
+<?php } ?>
+<?= htmlspecialchars ($item['content_html'], ENT_NOQUOTES, HSC_ENC) ?>
+</description>
 <pubDate><?= $item['_date_published_rfc2822'] ?></pubDate>
 </item>
 

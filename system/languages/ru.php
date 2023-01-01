@@ -71,9 +71,11 @@ function e2l_load_strings () {
   'ff--change-time' => 'Изменить время',
   'ff--delete' => 'Удалить',
   'fb--withdraw' => 'Вернуть в черновики',
-  'ff--will-get-address' => 'Получит адрес',
-  'ff--is-at-address' => 'Опубликована по адресу',
+  'ff--will-be-published' => 'Опубликуется',
+  'ff--is-published' => 'Опубликована',
+  'ff--at-address' => 'по адресу',
   'gs--no-notes' => 'Заметок нет.',
+  'gs--will-be-published' => 'Опубликуется',
 
   'ff--gmt-offset' => 'Разница с Гринвичем',
   'ff--with-dst' => '+1 летом',
@@ -123,13 +125,13 @@ function e2l_load_strings () {
   'er--name-email-text-required' => 'И имя, и эл. адрес, и текст комментария обязательны',
   'ff--notify-subscribers' => 'Отправить по почте комментатору и другим подписчикам',
   'gs--your-comment' => 'Ваш комментарий',
+  'gs--sign-in-via' => 'Войти через',
   'ff--full-name' => 'Имя и фамилия',
   'ff--email' => 'Эл. почта',
-  'gs--email-wont-be-published' => 'адрес не будет опубликован',
   'ff--subscribe-to-others-comments' => 'Получать комментарии других по почте',
   'ff--text-of-your-comment' => 'Текст вашего комментария',
   'gs--n-comments' => '$[number.cardinal]',
-  'gs--no-comments' => 'нет комментариев',
+  'gs--no-comments' => 'Нет комментариев',
   'gs--comments-all-one-new' => 'новый',
   'gs--comments-all-new' => 'новые',
   'gs--comments-n-new' => '$[number.cardinal]',
@@ -196,6 +198,14 @@ function e2l_load_strings () {
   'er--wrong-password' => 'Неправильный пароль',
   'ff--displayed-as-plain-text' => 'отображается при вводе',
   'er--settings-not-saved' => 'Настройка не сохранена',
+  'pt--password-reset' => 'Сброс пароля',
+  'gs--password-reset-link-sent-maybe' => 'Если вы указали правильный адрес, ссылка сброса пароля отправлена по почте',
+  'gs--password-reset-link-saved' => 'Ссылка сброса пароля сохранена в файл /user/password-reset.psa в папке блога на сервере.',
+  'er--cannot-reset-password' => 'Невозможно сбросить пароль: в Настройке не указана почта. Свяжитесь с администрацией.',
+  'er--cannot-send-link-email-empty' => 'Невозможно отправить ссылку на сброс пароля: адрес не указан',
+  'gs--i-forgot' => 'Я забыл',
+  'em--password-reset-subject' => 'Сброс пароля в Эгее',
+  'em--follow-this-link' => 'Перейдите по этой ссылке, чтобы сбросить пароль:',
 
   'pt--sessions' => 'Открытые сессии',
   'gs--sessions-description' => 'Когда вы заходите под своим паролем на нескольких устройствах или с помощью нескольких браузеров, здесь показывается список всех таких сессий. Если какая-то из них вызывает подозрения, завершите все сессии кроме текущей, а потом смените пароль от блога.',
@@ -225,8 +235,9 @@ function e2l_load_strings () {
   'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
   'ff--comments' => 'Комментарии',
   'ff--comments-enable-by-default' => 'включать по умолчанию',
+  'ff--comments-require-social-id' => 'разрешать только при входе через соцсеть',
   'ff--only-for-recent-posts' => 'только к свежим заметкам',
-  'ff--send-to-address' => 'присылать по почте на адрес:',
+  'ff--send-by-email' => 'присылать по почте',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Администрирование:',
@@ -235,8 +246,6 @@ function e2l_load_strings () {
   'gs--get-backup' => 'скачать последний бекап',
   'gs--used' => 'Занято $[used] из $[total] МБ ($[percent]%)',
   'gs--used-all' => 'Занято всё место: $[total] МБ',
-  
-  // '$[hours.cardinal] назад',
 
   'ff--blog-title' => 'Название блога',
   'ff--set-userpic-by-dragging' => 'Перетащите на место пунктирного кружка фотографию с рабочего стола',
@@ -249,7 +258,6 @@ function e2l_load_strings () {
   'ff--db-name' => 'Название базы',
   'fb--connect-to-this-db' => 'Подключиться с этими параметрами',
   'er--cannot-save-data' => 'Не получается сохранить данные',
-  
   'gs--drag-userpic-here' => 'Перетащите сюда свою фотографию',
   
   // welcome
@@ -271,11 +279,13 @@ function e2l_load_strings () {
   'fb--save-and-preview' => 'Сохранить и посмотреть',
   'fb--publish' => 'Опубликовать',
   'fb--publish-draft' => 'Опубликовать заметку',
+  'fb--schedule-note' => 'Запланировать заметку',
   'fb--select' => 'Выбрать',
   'fb--apply' => 'Применить',
   'fb--delete' => 'Удалить',
   'fb--sign-in' => 'Войти',
   'fb--sign-out' => 'Выйти',
+  'fb--send-link-by-email' => 'Отправить ссылку по этому адресу',
   
   // time
   'pt--default-timezone' => 'Часовой пояс по умолчанию',
@@ -283,6 +293,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'При публикации часовой пояс обычно определяется автоматически. А в случае неудачи используется выбранный здесь часовой пояс.',
 
   'tt--from-the-future' => 'Из будущего',
+  'tt--now' => 'сейчас',
   'tt--just-now' => 'Только что',
   'tt--one-minute-ago' => 'Минуту назад',
   'tt--minutes-ago' => '$[minutes.cardinal] назад',
@@ -290,6 +301,14 @@ function e2l_load_strings () {
   'tt--hours-ago' => '$[hours.cardinal] назад',
   'tt--today' => 'Сегодня',
   'tt--today-at' => 'Сегодня в $[time]',
+  
+  'tt--seconds-short' => '$[value.cardinal]',
+  'tt--minutes-short' => '$[value.cardinal]',
+  'tt--hours-short' => '$[value.cardinal]',
+  'tt--days-short' => '$[value.cardinal]',
+  'tt--months-short' => '$[value.cardinal]',
+  'tt--years-short' => '$[value.cardinal]',
+
   'tt--date' => '$[day] $[month.monthname.genitive]',
   'tt--date-and-time' => '$[day] $[month.monthname.genitive], $[time]',
   'tt--date-year-and-time' => '$[day] $[month.monthname.genitive] $[year], $[time]',
@@ -339,7 +358,7 @@ function e2l_load_strings () {
   // more strings
   'gs--subscribe' => 'Подписка на блог',
   
-  'gs--no-such-notes' => 'Таких заметок нет.',
+  'gs--no-such-notes' => 'Заметок нет.',
   'pt--page-not-found' => 'Страница не найдена',
   'gs--page-not-found' => 'Страница не найдена.',
   
@@ -402,8 +421,15 @@ function e2lstr_cardinal ($number, $modifier = '', $string_id) {
   if ($string_id == 'gs--n-comments') $what = $number .' комментари(й,я,ев)';
   if ($string_id == 'gs--comments-n-new') $what = $number .' новы(й,х,х)';
 
+  if ($string_id == 'tt--seconds-short') $what = $number .' с';
+  if ($string_id == 'tt--minutes-short') $what = $number .' мин';
+  if ($string_id == 'tt--hours-short') $what = $number .' ч';
+  if ($string_id == 'tt--days-short') $what = $number .' (д,дн,дн)';
+  if ($string_id == 'tt--months-short') $what = $number .' мес';
+  if ($string_id == 'tt--years-short') $what = $number .' (год,года,лет)';
+
   return e2_decline_for_number ($what);
-  
+
 }
 
 

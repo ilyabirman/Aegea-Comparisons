@@ -4,7 +4,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  display: block;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   transform: scale(0.001) rotate(90deg);
   transition: opacity var(--time) ease-out, transform var(--time) ease-out;
 }
@@ -136,6 +138,7 @@
 }
 
 .e2-current-template-preview .e2-template-name {
+  color: var(--boldColor);
   font-weight: bold;
 }
 
@@ -145,7 +148,8 @@
 .e2-current-template-preview a:hover,
 .e2-current-template-preview.hover a,
 .e2-current-template-preview a.hover {
-  color: var(--foregroundColor);
+  color: var(--boldColor);
+  font-weight: bold;
   border-color: transparent;
   cursor: default;
   transition: none;
@@ -231,6 +235,12 @@
   padding: 0 .33em;
   color: var(--errorColor);
   font-weight: bold;
+}
+
+.e2-uploading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
 }
 
 .e2-upload-error {

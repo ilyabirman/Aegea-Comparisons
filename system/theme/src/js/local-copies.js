@@ -1,18 +1,8 @@
+import { localStorage, isLocalStorageAvailable } from './lib/local-storage'
+
 document.e2 = document.e2 || {}
-const localStorage = window.localStorage
 
-document.e2.isLocalStorageAvailable = (() => {
-  try {
-    localStorage.setItem('test', 'test')
-    localStorage.removeItem('test')
-
-    return true
-  } catch (e) {
-    return false
-  }
-})()
-
-if (document.e2.isLocalStorageAvailable) {
+if (isLocalStorageAvailable) {
   document.e2.localCopies = {
     _lsKey: 'copies-info',
     _lsPrefix: 'copy-',

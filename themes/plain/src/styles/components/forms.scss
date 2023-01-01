@@ -38,11 +38,12 @@
 
 .form-element {
   margin-left: 17.07%;
+  margin-bottom: 4px;
   width: 82.93%;
 }
 
 .form-control-sublabel {
-  margin: 0 0 8px;
+  margin: 6px 0 8px;
   width: 82.93%;
   font-size: 14px;
   line-height: 20px;
@@ -57,14 +58,10 @@
 .form-control .input-label { margin-top: 8px }
 .form-control .input-error { background: #ffece0 }
 
-.form-control input,
-.form-control label,
-.form-control select,
-.form-control textarea { margin-bottom: 8px }
 .form-control .disabled { color: #999; }
 
 .form-control-big .input-label { margin-top: 16px }
-.form-control-big input[type="text"] { font-size: 24px; margin-bottom: 8px }
+.form-control-big input[type="text"] { font-size: 24px }
 
 .form-subcontrol { width: 100%; margin: 0 0 8px 0 }
 .form-subcontrol-master { margin: 0 0 0 0 }
@@ -123,6 +120,7 @@
   }
 
   .form-label label {
+    color: var(--boldColor);
     font-weight: bold;
   }
 

@@ -15,6 +15,10 @@
 <link rel="<?= $link['rel'] ?>" id="<?= $link['id'] ?>" href="<?= $link['href'] ?>" />
 <?php endforeach ?>
 
+<?php if (array_key_exists ('manifest-href', $content)): ?>
+<link rel="manifest" href="<?= $content['manifest-href'] ?>">
+<?php endif ?>
+
 <?php if (array_key_exists ('robots', $content)): ?>
 <meta name="robots" content="<?= $content['robots'] ?>" />
 <?php endif ?>

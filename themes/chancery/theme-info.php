@@ -5,6 +5,7 @@
   'display_name' => array (
     'en' => 'Chancery',
     'ru' => 'Ченсери',
+    'uk' => 'Ченсері',
   ),
 
   'colors' => array (

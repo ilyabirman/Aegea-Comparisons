@@ -8,7 +8,7 @@ class NeasdenGroup_tweet implements NeasdenGroup {
   
     $neasden->define_line_class (
       'tweet',
-      'https?\:\/\/(?:www\.)?(?:twitter\.com\/(.+?)\/status\/)(.{18})([&#?].*)?'
+      'https?\:\/\/(?:www\.)?(?:twitter\.com\/(.+?)\/status\/)(.{16,20})([&#?].*)?'
     );
     $neasden->define_group ('tweet', '(-tweet-)');
   
@@ -33,24 +33,29 @@ class NeasdenGroup_tweet implements NeasdenGroup {
         $who = $line['class-data'][1];
         $id = $line['class-data'][2];
 
-        // here must be a javascript which will ajax twitter com to get the tweet contents
-        // and it even must cache the response
+        // make a regular link to tweet.
+        // we need to isolate it, otherwise typography.autohref
+        // will wrap the link into another a href:       
+
+        $link_to_tweet = $this->neasden->isolate (
+          '<p><a href="'. $line['class-data'][0] .'">'.
+          $line['class-data'][0].
+          '</a></p>'
+        );
+
+        // transform into live tweet with a script later
+
         if (! $this->neasden->config['html.basic']) {
           
-          $result .= '<div class="e2-embedded-tweet" data-tweet-id="'. $id .'"></div>';
-          
-        } else {
-
-          // we need to isolate it, otherwise typography.autohref
-          // will wrap the link into another a href:
-          
-          $result .= $this->neasden->isolate (
-            '<p><a href="'. $line['class-data'][0] .'">'.
-            $line['class-data'][0].
-            '</a></p>'
+          $link_to_tweet = (
+            '<div class="e2-embedded-tweet" data-tweet-id="'. $id .'">'.
+            $link_to_tweet .
+            '</div>'
           );
 
         }
+
+        $result .= $link_to_tweet;
         
       } 
       

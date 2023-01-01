@@ -5,6 +5,7 @@
   'display_name' => array (
     'en' => 'Kolomna',
     'ru' => 'Коломна',
+    'uk' => 'Коломна',
   ),
 
   'colors' => array (

@@ -40,7 +40,6 @@ class NeasdenGroup_picture implements NeasdenGroup {
         
         $width = $height = $ratio = 0;
 
-        // this will not work with SVGs
         if ($pathinfo['extension'] == 'svg') {
           // echo $filename;
           $xmlget = simplexml_load_string (file_get_contents ($filename));

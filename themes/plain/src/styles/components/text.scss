@@ -1,6 +1,7 @@
 /* text */
 .e2-text {
   word-break: break-word;
+  word-wrap: break-word;
 }
 
 .e2-text h2,
@@ -19,6 +20,10 @@
   border: none;
   border-top: 1px var(--thinRuleColor) solid;
   margin: 26px 0 16px 0;
+}
+
+.e2-text b {
+  color: var(--boldColor);
 }
 
 .e2-text h2+h3,

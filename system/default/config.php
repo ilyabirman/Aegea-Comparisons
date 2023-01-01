@@ -49,9 +49,6 @@ $_config['preferred_domain_name'] = null; /* null or string */
 // use beautiful (synthetic) or ?parametrised (real) urls
 $_config['url_composition'] = 'auto'; /* 'auto', 'real', 'synthetic' */
 
-// too hard to explain
-$_config['note_url_slidedown'] = true;
-
 // add “all/” in front of urls in case of 404
 $_config['try_redirect_to_all'] = false;
   
@@ -65,11 +62,17 @@ $_config['mail_from'] = 'blog@';
 // use 'index, follow' everywhere (otherwise will be only where necessary)
 $_config['index_follow_everything'] = true;
   
+// accept holborn notifications
+$_config['holborn'] = false;
+  
 // access rights to use for uploaded files
 $_config['uploaded_files_mode'] = 0777;
 
 // maximum size of all uploaded files in bytes (0 for no limit)
 $_config['files_total_size_limit'] = 0;
+
+// scale images bigger than this; 0 to disable
+$_config['fit_uploaded_images'] = 2560; /* pixels */
 
 // whois service (URL to append IP address to)
 $_config['whois_service'] = 'https://www.nic.ru/whois/?ip=';
@@ -109,7 +112,7 @@ $_config['comment_freshness_days'] = 14;
 // number of items in RSS feeds
 $_config['rss_items'] = 10;
 
-// number of items in RSS feeds
+// Rose
 $_config['search_favourites_boost'] = 2;
 
 

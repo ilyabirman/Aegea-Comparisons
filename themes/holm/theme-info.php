@@ -5,6 +5,7 @@
   'display_name' => array (
     'en' => 'Holm',
     'ru' => 'Холм',
+    'uk' => 'Холм',
   ),
 
   'colors' => array (

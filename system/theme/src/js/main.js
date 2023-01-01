@@ -1,8 +1,10 @@
+import { isLocalStorageAvailable } from './lib/local-storage'
 import cssVarsPolyfill from './lib/css-variables-polyfill'
-
+import viewCounter from './lib/view-counter'
+import e2SpinningAnimationStartStop from './lib/e2SpinningAnimationStartStop'
+import swing from './swing'
 import './form-comment'
 import './form-password'
-import './tags'
 
 import textEditorInit from './lib/text-editor'
 
@@ -104,24 +106,14 @@ if (detect.iosdevice) {
 if (document.getElementById('e2-login-sheet')) {
   $('#e2-password').focus()
 
-  var m = 0
-  var x = 0
-  var nahStepTimeOut
   var mustSubmit = false
-
-  var nahStep = function () {
-    if (nahStepTimeOut) clearTimeout(nahStepTimeOut)
-    var l = (1 / (Math.pow(x, 1.25) / 20 + 0.5) - 0.05) * Math.sin(x / 2)
-    document.getElementById('e2-login-window').style.transform = 'translateX(' + (m + l * 100) + 'px)'
-    x++
-    if (x < 82) { nahStepTimeOut = setTimeout(nahStep, 14) } else { document.getElementById('e2-login-window').style.transform = 'translateX(' + m + 'px)' }
-  }
 
   $('#form-login').submit(function () {
     if (mustSubmit) return true
     if ($) {
       $('.input-disableable').attr('disabled', 'disabled')
       $('#e2-password').blur()
+      e2SpinningAnimationStartStop($('#password-checking'), 1)
       $('#password-checking').fadeIn(333)
       $.ajax({
         url: $('#e2-check-password-action').attr('href'),
@@ -131,15 +123,16 @@ if (document.getElementById('e2-login-sheet')) {
         success: function (msg) {
           $('.input-disableable').removeAttr('disabled')
           if (msg === 'password-correct') {
+            e2SpinningAnimationStartStop($('#password-checking'), 0)
             $('#password-checking').hide()
             $('#password-correct').fadeIn(333)
             mustSubmit = true
             setTimeout(function () { $('#form-login').submit() }, 333)
           } else {
+            e2SpinningAnimationStartStop($('#password-checking'), 0)
             $('#password-checking').fadeOut(333)
             $('#e2-password').focus()
-            x = 0
-            nahStep()
+            swing(document.getElementById('e2-login-window'))
           }
         },
         error: function () {
@@ -324,4 +317,26 @@ if (document.addEventListener) {
   document.addEventListener('keyup', e2CtrlNavi, false)
 } else if (document.attachEvent) {
   document.attachEvent('onkeydown', e2CtrlNavi)
+}
+
+const $notes = $('.e2-note')
+
+if ($notes.length && isLocalStorageAvailable) {
+  const endpointSuffix = $('#e2-note-read-href').attr('href')
+  $notes.map((index, node) => {
+    const $note = $(node)
+    if ($note.find('.e2-published').length) {
+      initViewCounter({ $note, endpointSuffix })
+    }
+  })
+}
+
+function initViewCounter ({ $note, endpointSuffix }) {
+  const $link = $note.find('h1 a')
+
+  const noteId = $note.attr('id').replace('e2-note-', '')
+  const endpointBody = $link.length ? $link.attr('href') : (window.location.origin + window.location.pathname)
+  const endpointUrl = endpointBody + endpointSuffix
+
+  viewCounter({ noteId, endpointUrl })
 }

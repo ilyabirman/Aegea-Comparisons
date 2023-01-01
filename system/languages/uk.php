@@ -71,9 +71,11 @@ function e2l_load_strings () {
   'ff--change-time' => 'Змінити час',
   'ff--delete' => 'Видалити',
   'fb--withdraw' => 'Повернути в чернетки',
-  'ff--will-get-address' => 'Отримає адресу',
-  'ff--is-at-address' => 'Опублікований за адресою',
+  'ff--will-be-published' => 'Опублікується',
+  'ff--is-published' => 'Опублікований',
+  'ff--at-address' => 'за адресою',
   'gs--no-notes' => 'Дописів немає.',
+  'gs--will-be-published' => 'Опубліковуватиметься',
 
   'ff--gmt-offset' => 'Різниця з Гринвічем',
   'ff--with-dst' => '+1 влітку',
@@ -123,13 +125,13 @@ function e2l_load_strings () {
   'er--name-email-text-required' => 'Імʼя, ел. адреса та текст коментаря обовʼязкові',
   'ff--notify-subscribers' => 'Повідомити коментатора й інших підписників',
   'gs--your-comment' => 'Ваш коментар',
+  'gs--sign-in-via' => 'Увійти через',
   'ff--full-name' => 'Імʼя та прізвище',
   'ff--email' => 'Ел. адреса',
-  'gs--email-wont-be-published' => 'адресу не буде опубліковано',
   'ff--subscribe-to-others-comments' => 'Отримувати коментарі інших поштою',
   'ff--text-of-your-comment' => 'Текст вашого коментаря',
   'gs--n-comments' => '$[number.cardinal]',
-  'gs--no-comments' => 'немає коментарів',
+  'gs--no-comments' => 'Немає коментарів',
   'gs--comments-all-one-new' => 'новий',
   'gs--comments-all-new' => 'нові',
   'gs--comments-n-new' => '$[number.cardinal]',
@@ -179,6 +181,7 @@ function e2l_load_strings () {
   'gs--found-for-query' => 'за запитом',
   'gs--search-query-empty' => 'Напишіть що-небудь',
   'gs--search-query-too-short' => 'Закороткий запит, напишіть хоча б 4 літери.',
+  'gs--search-too-few-notes' => 'Пошук запрацює, коли буде більше дописів.',
   'gs--nothing-found' => 'Нічого не знайдено.',
   'gs--many-posts' => 'Багато дописів',
   'pt--search-results' => 'Результати пошуку',
@@ -195,6 +198,14 @@ function e2l_load_strings () {
   'er--wrong-password' => 'Неправильний пароль',
   'ff--displayed-as-plain-text' => 'відображається під час введення',
   'er--settings-not-saved' => 'Налаштування не збережено',
+  'pt--password-reset' => 'Відновлення пароля',
+  'gs--password-reset-link-sent-maybe' => 'Якщо ви вказали правильну адресу, посилання скидання пароля відправлена по пошті',
+  'gs--password-reset-link-saved' => 'Посилання скидання пароля збережена у файл /user/password-reset.psa у папці блогу на сервері.',
+  'er--cannot-reset-password' => 'Неможливо скинути пароль: у Налаштуванні не вказана пошта. Зв’яжіться з адміністрацією.',
+  'er--cannot-send-link-email-empty' => 'Неможливо надіслати посилання на скидання пароля: адреса не вказана',
+  'gs--i-forgot' => 'Я забув',
+  'em--password-reset-subject' => 'Скидання пароля в Эгее',
+  'em--follow-this-link' => 'Перейдіть за цим посиланням, щоб скинути пароль:',
 
   'pt--sessions' => 'Відкриті сесії',
   'gs--sessions-description' => 'Коли ви входите зі своїм паролем на кількох пристроях або в кількох браузерах, тут відображається список усіх цих сесій. Якщо якась із них здається вам підозрілою, завершіть усі сесії окрім поточної, а потім змініть свій пароль.',
@@ -223,9 +234,10 @@ function e2l_load_strings () {
   'ff--items-per-page-after' => 'на сторінку',
   'ff--show-sharing-buttons' => 'Показувати кнопки поширення в соцмережах',
   'ff--comments' => 'Коментарі',
-  'ff--comments-enable-by-default' => 'дозволяти за замовчуванням',
+  'ff--comments-enable-by-default' => 'включати за замовчуванням',
+  'ff--comments-require-social-id' => 'дозволяти тільки при вході через соцмережу',
   'ff--only-for-recent-posts' => 'тільки до нових дописів',
-  'ff--send-to-address' => 'надсилати на ел. адресу:',
+  'ff--send-by-email' => 'надсилати ел. поштою',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Адміністрування:',
@@ -246,7 +258,6 @@ function e2l_load_strings () {
   'ff--db-name' => 'Назва бази',
   'fb--connect-to-this-db' => 'Під’єднатися з цими параметрами',
   'er--cannot-save-data' => 'Не вдалося зберегти дані',
-  
   'gs--drag-userpic-here' => 'Перетягніть сюди своє фото',
   
   // welcome
@@ -268,11 +279,13 @@ function e2l_load_strings () {
   'fb--save-and-preview' => 'Зберегти та переглянути',
   'fb--publish' => 'Опублікувати',
   'fb--publish-draft' => 'Опублікувати допис',
+  'fb--schedule-note' => 'Запланувати допис',
   'fb--select' => 'Обрати',
   'fb--apply' => 'Застосувати',
   'fb--delete' => 'Видалити',
   'fb--sign-in' => 'Увійти',
   'fb--sign-out' => 'Вийти',
+  'fb--send-link-by-email' => 'Надіслати посилання за цією адресою',
   
   // time
   'pt--default-timezone' => 'Часовий пояс за замовчуванням',
@@ -280,6 +293,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'Під час публікації часовий пояс має визначитись автоматично, але якщо не вдасться, буде використано пояс за замовчуванням.',
 
   'tt--from-the-future' => 'Із майбутнього',
+  'tt--now' => 'зараз',
   'tt--just-now' => 'Щойно',
   'tt--one-minute-ago' => 'Хвилину тому',
   'tt--minutes-ago' => '$[minutes.cardinal] тому',
@@ -287,6 +301,14 @@ function e2l_load_strings () {
   'tt--hours-ago' => '$[hours.cardinal] тому',
   'tt--today' => 'Сьогодні',
   'tt--today-at' => 'Сьогодні о $[time]',
+
+  'tt--seconds-short' => '$[value.cardinal]',
+  'tt--minutes-short' => '$[value.cardinal]',
+  'tt--hours-short' => '$[value.cardinal]',
+  'tt--days-short' => '$[value.cardinal]',
+  'tt--months-short' => '$[value.cardinal]',
+  'tt--years-short' => '$[value.cardinal]',
+
   'tt--date' => '$[day] $[month.monthname.genitive]',
   'tt--date-and-time' => '$[day] $[month.monthname.genitive], $[time]',
   'tt--date-year-and-time' => '$[day] $[month.monthname.genitive] $[year], $[time]',
@@ -336,7 +358,7 @@ function e2l_load_strings () {
   // more strings
   'gs--subscribe' => 'Підписка на блозі',
 
-  'gs--no-such-notes' => 'Таких дописів немає.',
+  'gs--no-such-notes' => 'Дописів немає.',
   'pt--page-not-found' => 'Сторінку не знайдено',
   'gs--page-not-found' => 'Сторінку не знайдено.',
   
@@ -398,6 +420,13 @@ function e2lstr_cardinal ($number, $modifier = '', $string_id) {
   if ($string_id == 'tt--hours-ago') $what = $number .' годин(а,и,)';
   if ($string_id == 'gs--n-comments') $what = $number .' комента(р,рі,рів)';
   if ($string_id == 'gs--comments-n-new') $what = $number .' нови(й,х,х)';
+
+  if ($string_id == 'tt--seconds-short') $what = $number .' с';
+  if ($string_id == 'tt--minutes-short') $what = $number .' хв';
+  if ($string_id == 'tt--hours-short') $what = $number .' год';
+  if ($string_id == 'tt--days-short') $what = $number .' (д,дн,дн)';
+  if ($string_id == 'tt--months-short') $what = $number .' міс';
+  if ($string_id == 'tt--years-short') $what = $number .' (р,роки,рок)';
 
   return e2_decline_for_number ($what);
   

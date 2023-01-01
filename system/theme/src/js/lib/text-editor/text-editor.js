@@ -1,101 +1,115 @@
+// TODO: improve variable names. for example, 'str' for strings instead of value, text, line and all of them, that are used right now
+// TODO: maybe we need to unify api of parsers / wrappers / unwrappers if it's possible
 import { bindKeys, unbindKeys } from '../keybindings'
 
-// TODO: create function for search wrapped element by regex
+const inlineBinding = {
+  type: 'inline',
+  parse: inlineParse,
+  wrap: inlineWrap,
+  unwrap: inlineUnwrap,
+}
 
-const binding = [
+const blockBinding = {
+  type: 'block',
+  parse: blockParse,
+  wrap: blockWrap,
+  unwrap: blockUnwrap,
+}
+
+const bindings = [
   {
+    ...inlineBinding,
     name: 'bold',
-    type: 'inline',
     keys: 'Cmd+B',
-    isWrapped: doubleSymbolIsWrapped.bind(null, '*'),
-    wrap: doubleSymbolWrap.bind(null, '*'),
-    unwrap: doubleSymbolUnwrap.bind(null, '*')
+    regexp: /\*\*([^\s]{0,2}|[^\s].*?[^\s])\*\*/g,
+    prefix: '**',
+    suffix: '**',
   },
   {
+    ...inlineBinding,
     name: 'italic',
-    type: 'inline',
     keys: 'Cmd+I',
-    isWrapped: doubleSymbolIsWrapped.bind(null, '/'),
-    wrap: doubleSymbolWrap.bind(null, '/'),
-    unwrap: doubleSymbolUnwrap.bind(null, '/')
+    regexp: /\/\/([^\s]{0,2}|[^\s].*?[^\s])\/\//g,
+    prefix: '//',
+    suffix: '//',
   },
   {
+    ...inlineBinding,
     name: 'link',
-    type: 'inline',
     keys: 'Cmd+K',
-    isWrapped: linkIsWrapped,
+    regexp: /\(\(\s*(.*?)\s*\)\)/g,
+    prefix: '((',
+    suffix: '))',
     wrap: linkWrap,
-    unwrap: linkSelectUrl
+    unwrap: linkUnwrap,
   },
   {
+    ...blockBinding,
     name: 'header',
-    type: 'block',
     keys: 'Cmd+Alt+1',
-    isWrapped: eachLinePrefixIsWrapped.bind(null, '#'),
-    wrap: eachLinePrefixWrap.bind(null, '#'), // maybe we should detect if line starts from `> ` and paste `# ` **after** that
-    unwrap: eachLinePrefixUnwrap.bind(null, '#')
+    regexp: /^[^\S\n]*#[^\S\n]*([^#].*)$/g,
+    prefix: '# ',
   },
   {
+    ...blockBinding,
     name: 'subheader',
-    type: 'block',
     keys: 'Cmd+Alt+2',
-    isWrapped: eachLinePrefixIsWrapped.bind(null, '##'),
-    wrap: eachLinePrefixWrap.bind(null, '##'),
-    unwrap: eachLinePrefixUnwrap.bind(null, '##')
+    regexp: /^[^\S\n]*##[^\S\n]*([^#].*)$/g,
+    prefix: '## ',
   },
   {
+    ...blockBinding,
     name: 'remove headers',
-    type: 'block',
     keys: 'Cmd+Alt+0',
-    isWrapped: eachLinePrefixIsWrapped.bind(null, ['#', '##']),
-    wrap () {},
-    unwrap: eachLinePrefixUnwrap.bind(null, /^##\s?|^#\s?/)
+    regexp: /^[^\S\n]*#{1,2}[^\S\n]*([^#].*)$/g,
+    wrap: blockUnwrap,
   },
   {
+    ...blockBinding,
     name: 'increase quote level',
-    type: 'block',
     keys: 'Cmd+]',
-    isWrapped: eachLinePrefixIsWrapped.bind(null, '>'),
-    wrap: eachLinePrefixWrapWithoutChecking.bind(null, '>'),
-    unwrap: eachLinePrefixWrapWithoutChecking.bind(null, '>') // always wrap
+    regexp: /^[^\S\n]*>[^\S\n]*(.*)$/g,
+    prefix: '> ',
+    nextPrefix: '>',
+    unwrap: blockWrap,
   },
   {
+    ...blockBinding,
     name: 'decrease quote level',
-    type: 'block',
     keys: 'Cmd+[',
-    isWrapped: eachLinePrefixIsWrapped.bind(null, '>'),
-    wrap: eachLinePrefixUnwrap.bind(null, '>'), // always unwrap
-    unwrap: eachLinePrefixUnwrap.bind(null, '>')
+    regexp: /^[^\S\n]*>[^\S\n]*(.*)$/g,
+    prefix: '> ',
+    wrap () {}
   }
 ]
 
-const eachLineSymbolsRegex = {
-  '#': /(^\s*#\s*)([^#]+)/,
-  '##': /(^\s*##\s*)/,
-  '>': /^(\s*>\s*)/
-}
+const URL_REGEX = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/
 
-const urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/
+function textEditorInitNew (elem) {
+  const head = document.head || document.getElementsByTagName('head')[0]
+  const undoHandlerStyleNode = document.createElement('style')
 
-function textEditorInit (elem) {
-  binding.forEach(({ keys, name, type, isWrapped, unwrap, wrap }) => {
+  undoHandlerStyleNode.type = 'text/css'
+  undoHandlerStyleNode.appendChild(document.createTextNode('::selection { background: transparent; }'))
+
+  bindings.forEach(({ name, keys, type, regexp, parse, prefix, nextPrefix, suffix, wrap, unwrap }) => {
     bindKeys(keys, fn, { target: elem, prevent: true })
 
     function fn () {
-      // console.log(name, 'selectionStart', elem.selectionStart)
-      // console.log(name, 'selectionEnd', elem.selectionEnd)
-      // console.log(name, 'wrapped', isWrapped(elem, elem.selectionStart, elem.selectionEnd))
-
       const start = elem.selectionStart
       const end = elem.selectionEnd
       const undoKeys = ['Cmd+Z', 'Ctrl+Z']
 
       if (type === 'inline' && elem.value.substring(start, end).indexOf('\n') !== -1) return
 
-      if (isWrapped(elem, start, end)) {
-        unwrap(elem, start, end)
+      // TODO: why we dont use 'regexp' for pattern variable name?
+      const parsed = parse({ name, pattern: regexp, text: elem.value, start, end, isConsequent: true })
+      console.log(parsed)
+
+      if (parsed.isWrapped) {
+        unwrap({ name, pattern: regexp, elem, start, end, parsed, prefix, nextPrefix, suffix })
       } else {
-        wrap(elem, start, end)
+        wrap({ name, pattern: regexp, elem, start, end, parsed, prefix, nextPrefix, suffix })
       }
 
       bindKeys(undoKeys, handleUndo, { target: elem })
@@ -108,13 +122,7 @@ function textEditorInit (elem) {
         // here we change selection color, 'cause in Safari we can't beat whole text selection
         // and undo causes blinks of selection: cmd+Z → whole text selected → word selected ('cause we select it)
 
-        const css = '::selection { background: transparent; }'
-        const head = document.head || document.getElementsByTagName('head')[0]
-        const styleNode = document.createElement('style')
-
-        styleNode.type = 'text/css'
-        styleNode.appendChild(document.createTextNode(css))
-        head.appendChild(styleNode)
+        head.appendChild(undoHandlerStyleNode)
 
         setTimeout(resetUndoSelection, 10)
         unbindKeys(undoKeys, handleUndo, { target: elem })
@@ -123,441 +131,372 @@ function textEditorInit (elem) {
           elem.selectionStart = start
           elem.selectionEnd = end
 
-          head.removeChild(styleNode)
+          head.removeChild(undoHandlerStyleNode)
         }
       }
     }
   })
 }
 
-function insertText (elem, value) {
-  document.execCommand('insertText', false, value)
+function insertText ({ elem, text, start, end, nextStart, nextEnd }) {
+  elem.selectionStart = start
+  elem.selectionEnd = end
+
+  document.execCommand('insertText', false, text)
   $(elem).trigger('input')
+
+  elem.selectionStart = nextStart
+  elem.selectionEnd = nextEnd
 }
 
-function getWord (elem, origStart, origEnd) {
-  const value = elem.value
+function inlineParse ({ pattern, text, start, end, isConsequent }) {
+  const { value: line, start: lineStart } = getLineInfo({ text, start, end })
+  const res = getSubstrInfoByPatternAndCursorPosition({
+    text: line,
+    start: start - lineStart,
+    end: end - lineStart,
+    pattern,
+    isConsequent
+  })
 
-  let start = origStart
-  let end = origEnd
+  if (!res) return { isWrapped: false }
 
-  if (start === end || typeof end === 'undefined') {
-    start = start - 1 // -1 'cause we need to start from symbol on left from cursor
-    end = start
-
-    while (start > 0 && !/\s/.test(value[start])) start--
-
-    if (start <= 0) {
-      start = 0
-    } else {
-      start++
-    }
-
-    while (end < value.length && !/\s/.test(value[end])) end++
-
-    if (end >= value.length) {
-      end = value.length - 1
-    } else {
-      end--
-    }
-  } else {
-    end--
-  }
+  const affixes = res.value.split(res.unwrappedValue)
 
   return {
-    value: value.substring(start, end + 1),
-    start: start,
-    end: end
+    ...res,
+    isWrapped: true,
+    realStart: res.start + lineStart,
+    realEnd: res.end + lineStart,
+    prefixLength: affixes[0].length,
+    suffixLength: affixes[1].length,
   }
 }
 
-function linkIsWrapped (elem, start, end) {
-  const value = elem.value
-  const symbolsStart = ['[', '(']
-  const symbolsEnd = [']', ')']
+function inlineWrap ({ elem, start, end, prefix, suffix }) {
+  const word = getWordByCursorPosition({ elem, start, end })
 
-  if (start !== end) {
-    end = end - 1
-
-    return symbolsStart.indexOf(value[start]) > -1 && symbolsStart.indexOf(value[start + 1]) > -1 &&
-    symbolsEnd.indexOf(value[end]) > -1 && symbolsEnd.indexOf(value[end - 1]) > -1
-  }
-
-  return false // TODO it must check [[..]] or ((..))
+  insertText({
+    elem,
+    text: `${prefix}${word.value}${suffix}`,
+    start: word.start,
+    end: word.end,
+    nextStart: start + prefix.length,
+    nextEnd: end + prefix.length
+  })
 }
 
-function linkWrap (elem, start, end) {
-  const word = getWord(elem, start, end)
-  const value = elem.value
+function inlineUnwrap ({ elem, start, end, parsed: { realStart, realEnd, unwrappedValue, prefixLength, suffixLength } }) {
+  if (!unwrappedValue.length) {
+    insertText({
+      elem,
+      text: unwrappedValue,
+      start: realStart,
+      end: realEnd,
+      nextStart: realStart,
+      nextEnd: realStart,
+    })
 
-  let cursorPlace = 2 // length of '(('
-  let wrapped = value
+    return
+  }
 
-  start = word.start
-  end = word.end + 1
+  const unwrappedStart = realStart + prefixLength
+  const unwrappedEnd = realEnd - suffixLength
 
-  if (urlRegex.test(word.value)) {
-    wrapped = '((' + value.substring(start, end) + ' ))'
-    cursorPlace += end + 1 // +1 'cause of space before '))'
-  } else if (word.value.length === 0 || word.value === ' ') { // TODO getWord shouldn't return ' '
-    wrapped = '(( ))'
-    cursorPlace += start
+  let diffStart = start - unwrappedStart
+  let diffEnd = end - unwrappedEnd
+
+  if (diffStart < 0) {
+    diffEnd -= diffStart
+    diffStart = 0
+  }
+
+  if (diffEnd > 0) diffEnd = 0
+
+  const nextRealStart = realStart
+  const nextRealEnd = realStart + unwrappedValue.length
+
+  const nextStart = nextRealStart + diffStart
+  const nextEnd = nextRealEnd + diffEnd
+
+  insertText({
+    elem,
+    text: unwrappedValue,
+    start: realStart,
+    end: realEnd,
+    nextStart,
+    nextEnd,
+  })
+}
+
+function linkWrap ({ elem, start, end, prefix, suffix }) {
+  const word = getWordByCursorPosition({ elem, start, end })
+  let wrapped = word.value
+  let cursorPosition
+
+  if (!word.value) {
+    wrapped = `${prefix} ${suffix}`
+    cursorPosition = start + prefix.length
+  } else if (URL_REGEX.test(word.value)) {
+    wrapped = `${prefix}${word.value} ${suffix}`
+    cursorPosition = word.end + prefix.length + 1 // set cursor after the url; + 1 for space added after the url
   } else {
-    wrapped = '(( ' + value.substring(start, end) + '))'
-    cursorPlace += start
+    wrapped = `${prefix} ${word.value}${suffix}`
+    cursorPosition = word.start + prefix.length // set cursor after the prefix, because word isn't a url (and user wants to add it)
   }
 
-  elem.selectionStart = start
-  elem.selectionEnd = end
-
-  insertText(elem, wrapped)
-
-  elem.selectionStart = cursorPlace
-  elem.selectionEnd = cursorPlace
+  insertText({
+    elem,
+    text: wrapped,
+    start: word.start,
+    end: word.end,
+    nextStart: cursorPosition,
+    nextEnd: cursorPosition
+  })
 }
 
-function linkSelectUrl (elem, start, end) {
-  const word = getWord(elem, start, end)
-  const offset = 2 // 'cause of (( or [[
-  const wordParts = word.value.substr(offset).split(' ')
+function linkUnwrap ({ elem, start, end, parsed }) {
+  const { realStart, unwrappedValue, prefixLength } = parsed;
+  const valueParts = unwrappedValue.split(' ')
+  const startUrlPosition = realStart + prefixLength
 
-  start = word.start + offset
-
-  if (wordParts.length > 1 && urlRegex.test(wordParts[0])) {
-    elem.selectionStart = start
-    elem.selectionEnd = start + wordParts[0].length
+  if (valueParts.length > 1 && URL_REGEX.test(valueParts[0])) {
+    elem.selectionStart = startUrlPosition
+    elem.selectionEnd = startUrlPosition + valueParts[0].length
   } else {
-    elem.selectionStart = start
-    elem.selectionEnd = start
+    inlineUnwrap({ elem, start, end, parsed })
   }
 }
 
-function doubleSymbolIsWrapped (symbol, elem, start, end) {
-  const value = elem.value
+function blockParse ({ text, start, end, pattern}) {
+  const blockBindings = bindings.filter(x => x.type === 'block')
+  const parsed = text
+    .split('\n')
+    .reduce((acc, line) => {
+      const lineStart = acc.lastIndex
+      const lineEnd = lineStart + line.length
+      const isLineInSelection = lineStart <= start && lineEnd >= start || lineStart >= start && lineEnd <= end || lineStart <= end && lineEnd >= end
 
-  let symbolStart = symbol
-  let symbolEnd = symbol
+      if (!isLineInSelection) {
+        return {
+          ...acc,
+          lastIndex: lineEnd + 1
+        }
+      }
 
-  // TODO maybe after rewriting using getWord we won't need array support here
-  if (Array.isArray(symbol)) {
-    symbolStart = symbol[0]
-    symbolEnd = symbol[1]
-  }
+      const match = blockBindings.reduce((acc, binding) => {
+        if (acc) return acc
 
-  const testStrStart = symbolStart + symbolStart
-  const testStrEnd = symbolEnd + symbolEnd
+        binding.regexp.lastIndex = 0 // reset previous execs
+        const match = binding.regexp.exec(line)
 
-  if (start !== end) {
-    const pos = doubleSymbolGetEntitySelectionFromRange(symbol, elem, start, end)
-    return value.substr(pos.start - 2, 2) === testStrStart && value.substr(pos.end, 2) === testStrEnd
-  }
+        if (match) {
+          const value = match[0]
+          const unwrappedValue = match[1];
+          const startSubstr = match.index
+          const endSubstr = match.index + value.length
 
-  return (doubleSymbolGetSelectionFromPosition(symbol, elem, start)).wrapped
+          return {
+            value,
+            wrappedBy: binding.name,
+            unwrappedValue,
+            prefixLength: value.length - unwrappedValue.length,
+            start: startSubstr + lineStart,
+            end: endSubstr + lineStart
+          }
+        }
+      }, null)
+
+      const res = match ? match : {
+        value: line,
+        start: lineStart,
+        end: lineEnd,
+      };
+
+      pattern.lastIndex = 0
+
+      return {
+        lines: [
+          ...acc.lines,
+          res
+        ],
+        lastIndex: lineEnd + 1,
+        isWrapped: acc.isWrapped && pattern.test(res.value)
+      }
+    }, { lines: [], lastIndex: 0, isWrapped: true })
+
+  delete parsed.lastIndex
+
+  return parsed
 }
 
-function doubleSymbolWrap (symbol, elem, start, end) {
-  const value = elem.value
+function blockWrap({ elem, start, end, prefix, pattern, nextPrefix, parsed: { lines } }) {
+  const nextText = lines
+    .reduce((acc, line) => {
+      let nextValue = `${prefix}${line.value}`
 
-  let pos
+      pattern.lastIndex = 0
+      if (pattern.test(line.value) && nextPrefix) {
+        nextValue = `${nextPrefix}${line.value}`
+      } else if (line.unwrappedValue) {
+        nextValue = `${prefix}${line.unwrappedValue}`
+      }
 
-  if (start === end) {
-    pos = doubleSymbolGetSelectionFromPosition(symbol, elem, start)
+      return [
+        ...acc,
+        nextValue
+      ]
+    }, [])
+    .join('\n')
 
-    start = pos.wordStart
-    // wordStart === wordEnd means that we don't need to select anything
-    end = pos.wordStart === pos.wordEnd ? pos.wordEnd : pos.wordEnd + 1
-  } else {
-    pos = doubleSymbolGetEntitySelectionFromRange(symbol, elem, start, end)
+  const realStart = lines[0].start
+  const realEnd = lines[lines.length - 1].end
 
-    start = pos.start
-    end = pos.end
-  }
+  let diffStart = start - realStart
+  let diffEnd = end - realEnd
 
-  elem.selectionStart = start
-  elem.selectionEnd = end
+  if (diffEnd < (realStart - realEnd)) diffEnd += (realStart - realEnd - diffEnd)
 
-  insertText(elem, wrap(symbol, value, start, end))
+  const nextRealStart = realStart
+  const nextRealEnd = realStart + nextText.length
 
-  elem.selectionStart = start + 2
-  elem.selectionEnd = end + 2
+  const nextStart = nextRealStart + diffStart + prefix.length
+  const nextEnd = nextRealEnd + diffEnd
 
-  function wrap (symbol, value, start, end) {
-    const wrapStr = symbol + symbol
-    return wrapStr + value.substring(start, end) + wrapStr
-  }
+  insertText({
+    elem,
+    text: nextText,
+    start: realStart,
+    end: realEnd,
+    nextStart,
+    nextEnd,
+  })
 }
 
-function doubleSymbolUnwrap (symbol, elem, start, end) {
-  const value = elem.value
+function blockUnwrap({ elem, start, end, pattern, parsed: { lines } }) {
+  const nextText = lines
+    .reduce((acc, line) => {
+      pattern.lastIndex = 0
 
-  let pos
+      return [
+        ...acc,
+        pattern.test(line.value) ? line.unwrappedValue : line.value
+      ]
+    }, [])
+    .join('\n')
 
-  if (start === end) {
-    pos = doubleSymbolGetSelectionFromPosition(symbol, elem, start)
+  const realStart = lines[0].start
+  const realEnd = lines[lines.length - 1].end
 
-    /*
-     this function above returns start & end, where start is index of first [symbol] in wrapped word,
-     and end is index of last [symbol] in wrapped word, for instance:
+  // TODO: but what would happen if we started selection from unmatched lines?
+  // should we check it?
+  const unwrappedStart = realStart + lines[0].prefixLength
+  const unwrappedEnd = realEnd
 
-     0 **456** A
+  let diffStart = start - unwrappedStart
+  let diffEnd = end - unwrappedEnd
 
-     start == 2
-     end == 8
+  if (diffStart < 0) diffStart = 0
+  if (diffEnd < (unwrappedStart - unwrappedEnd)) diffEnd += (unwrappedStart - unwrappedEnd - diffEnd)
 
-     so if we want to get SELECTION (!) of '456', we need to add 2 to start and to subtract 1 from end
-    */
-    start = pos.start + 2
-    end = pos.end - 1
-  } else {
-    pos = doubleSymbolGetEntitySelectionFromRange(symbol, elem, start, end)
+  const nextRealStart = realStart
+  const nextRealEnd = realStart + nextText.length
 
-    start = pos.start
-    end = pos.end
-  }
+  const nextStart = nextRealStart + diffStart
+  const nextEnd = nextRealEnd + diffEnd
 
-  elem.selectionStart = start - 2
-  elem.selectionEnd = end + 2
-
-  insertText(elem, unwrap(value, start, end))
-
-  elem.selectionStart = start - 2
-  elem.selectionEnd = end - 2
-
-  function unwrap (value, start, end) {
-    return value.substring(start, end)
-  }
+  insertText({
+    elem,
+    text: nextText,
+    start: realStart,
+    end: realEnd,
+    nextStart,
+    nextEnd,
+  })
 }
 
-function doubleSymbolGetSelectionFromPosition (symbol, elem, pos) {
-  // TODO it must be improved
-  // break cases: __|**word**__, __*|*word**__, __**word*|*__, __**word**|__
-  // it seems like we need to change API. we need to use function `getWord` which will get { startSelection, endSelection } and will return { value, start, end }
-  // and then we will iterate over value and detect key symbols and their positions
-  const value = elem.value
+function getSubstrInfoByPatternAndCursorPosition({ text, start, end, pattern, isConsequent }) {
+  let match
+  let results = []
+  console.log(text, start, end)
 
-  let symbolStart = symbol
-  let symbolEnd = symbol
-  let start = null
-  let end = null
-  let wordStart = null
-  let wordEnd = null
-  let tmpStart = pos - 1 // -1 'cause we need to start from symbol on left from cursor
-  let tmpEnd = pos
-  let symbolCounter = 0
+  pattern.lastIndex = 0 // reset previous execs
 
-  if (Array.isArray(symbol)) {
-    symbolStart = symbol[0]
-    symbolEnd = symbol[1]
-  }
+  while ((match = pattern.exec(text)) !== null) {
+    console.log(match)
+    const value = match[0]
+    const unwrappedValue = match[1];
+    const startSubstr = match.index
+    const endSubstr = match.index + value.length
 
-  // if we are between two spaces or in the end of text (and previous symbol is space too), we just don't select anything
-  if (/\s/.test(value[tmpStart]) && (tmpEnd === value.length || /\s/.test(value[tmpEnd]))) {
-    return {
-      start,
-      end,
-      wordStart: tmpEnd,
-      wordEnd: tmpEnd,
-      wrapped: false
+    if (startSubstr <= start && endSubstr >= end) {
+      // if current cursor position is inside of matched value, let's save it to the array
+      // because it's possible that searched value is a smaller part in this value
+      results.push({
+        value,
+        unwrappedValue,
+        start: startSubstr,
+        end: endSubstr
+      })
+    }
+
+    // TODO: it does not smell good
+    if (isConsequent) {
+      // we need to start exact after founded value, because it's possible to get situation like this:
+      // str: ((http://google.com asdasd asd asdasd)) asd //asd// asd asd asdas
+      // regex: /\/\/([^\s]{0,2}|[^\s].*?[^\s])\/\//g,
+      // after first match we get `//google.com asdasd asd asdasd)) asd //asd//` and there is no second match,
+      // because next search will be started after founded value (i.e. after ...//asd//)
+      pattern.lastIndex = match.index + 1
     }
   }
 
-  while (!start && tmpStart >= 0) {
-    if (/\s/.test(value[tmpStart])) {
-      wordStart = tmpStart + 1 // 'cause we don't need start position of <space>, we need start position of the first letter of the word
-      break
-    }
-
-    if (value[tmpStart] === symbolStart) symbolCounter++
-
-    if (symbolCounter === 2) {
-      start = tmpStart
-    }
-
-    tmpStart--
+  if (results.length) {
+    results.sort((a, b) => a.value.length - b.value.length)
+    return results[0]
   }
 
-  // if word's letters is the first letters of value
-  if (!wordStart && tmpStart === 0) wordStart = tmpStart
-
-  if (!wordStart && start !== null) wordStart = start + 2
-
-  symbolCounter = 0
-
-  while (!end && tmpEnd < value.length) {
-    if (/\s/.test(value[tmpEnd])) {
-      wordEnd = tmpEnd - 1 // 'cause we need to point to the last letter in the word, not to the space after that
-      break
-    }
-
-    if (value[tmpEnd] === symbolEnd) symbolCounter++
-
-    if (symbolCounter === 2) {
-      end = tmpEnd
-    }
-
-    tmpEnd++
-  }
-
-  if (!wordEnd && tmpEnd === value.length) wordEnd = value.length - 1
-
-  if (!wordEnd && end !== null) wordEnd = end - 2
-
-  // console.log('start:', start, 'end:', end, 'wordStart:', wordStart, 'wordEnd:', wordEnd, 'wrapped:', start !== null && end !== null)
-
-  return {
-    start,
-    end,
-    wordStart: wordStart <= wordEnd ? wordStart : wordEnd,
-    wordEnd: wordEnd >= wordStart ? wordEnd : wordStart,
-    wrapped: start !== null && end !== null
-  }
+  return null
 }
 
-function doubleSymbolGetEntitySelectionFromRange (symbol, elem, start, end) {
-  const value = elem.value
-
-  let symbolStart = symbol
-  let symbolEnd = symbol
-
-  if (Array.isArray(symbol)) {
-    symbolStart = symbol[0]
-    symbolEnd = symbol[1]
-  }
-
-  while (value[end - 1] === symbolStart && start <= end - 1) end--
-  while (value[start] === symbolEnd && start <= end) start++
-
-  return {
-    start,
-    end
-  }
-}
-
-function eachLinePrefixGetSelectionFromRange (symbol, elem, start, end) {
-  const value = elem.value
-
+function getLineInfo({ text, start, end }) {
   start = start - 1 // start checking from previous symbol
 
-  while (value[start] !== '\n' && start > 0) start--
+  while (text[start] !== '\n' && start > 0) start--
 
-  if (start !== 0) start++ // start !== 0 means that value[start] === '\n', but we need to get the next symbol
+  if (start !== 0) start++ // start !== 0 means that text[start] === '\n', but we need to get the next symbol
 
-  while (value[end] !== '\n' && end < value.length) end++
+  while (text[end] !== '\n' && end < text.length) end++
 
-  return { start, end }
+  return { value: text.substring(start, end), start, end }
 }
 
-function eachLinePrefixIsWrapped (symbol, elem, start, end) {
-  function isWrapped (symbol) {
-    const value = elem.value
-    const pos = eachLinePrefixGetSelectionFromRange(symbol, elem, start, end)
+function getWordByCursorPosition ({ elem, start, end }) {
+  let realStart = start
+  let realEnd = end
+  let value = elem.value.substr(start, end - start)
 
-    return value.substring(pos.start, pos.end).split('\n').reduce(function (prev, cur) {
-      return prev || (cur.indexOf(symbol) === 0 && !Object.keys(eachLineSymbolsRegex).reduce(function (acc, x) {
-        return acc || (x !== symbol && eachLineSymbolsRegex[x].test(cur))
-      }, false))
-    }, false)
-  }
-
-  if (Array.isArray(symbol)) {
-    return symbol.reduce(function (acc, cur) {
-      return acc || isWrapped(cur)
-    }, false)
-  } else if (typeof symbol === 'string') {
-    return isWrapped(symbol)
-  } else {
-    return false
-  }
-}
-
-function eachLinePrefixWrap (symbol, elem, start, end, options) {
-  const value = elem.value
-  const prefix = symbol + ' '
-  const pos = eachLinePrefixGetSelectionFromRange(symbol, elem, start, end)
-
-  let selectionOffset = 0
-
-  options = options || {}
-
-  elem.selectionStart = pos.start
-  elem.selectionEnd = pos.end
-
-  insertText(elem, wrap(value, pos.start, pos.end))
-
-  elem.selectionStart = pos.start
-  elem.selectionEnd = pos.end + selectionOffset
-
-  function wrap (value, start, end) {
-    let lines = value.substring(start, end).split('\n')
-
-    lines = lines.map(line => {
-      if (!options.skipChecking) {
-        Object.keys(eachLineSymbolsRegex).forEach(function (x) {
-          if (x === symbol) return
-
-          const match = line.match(eachLineSymbolsRegex[x])
-
-          if (match) {
-            selectionOffset -= match[1].length
-            line = line.replace(match[1], '')
-          }
-        })
-      }
-
-      // if symbol already in the start of the line, just add symbol (for instance, for quote level increasing)
-      if (line.indexOf(symbol) === 0) {
-        selectionOffset += symbol.length
-        return symbol + line
-      }
-
-      selectionOffset += prefix.length // looks like side effect of the function
-      return prefix + line
+  if (start === end) {
+    const { value: line, start: lineStart } = getLineInfo({ text: elem.value, start, end })
+    const wordInfo = getSubstrInfoByPatternAndCursorPosition({
+      text: line,
+      start: start - lineStart,
+      end: end - lineStart,
+      pattern: /[^\s]+/g // TODO: we need to improve this; it hasn't to match )), ((, [[, ** and so on
     })
 
-    return lines.join('\n')
+    if (wordInfo) {
+      realStart = wordInfo.start + lineStart
+      realEnd = wordInfo.end + lineStart
+      value = wordInfo.value
+    }
+  }
+
+  return {
+    start: realStart,
+    end: realEnd,
+    value,
   }
 }
 
-function eachLinePrefixWrapWithoutChecking (symbol, elem, start, end) {
-  eachLinePrefixWrap(symbol, elem, start, end, { skipChecking: true })
-}
-
-function eachLinePrefixUnwrap (symbol, elem, start, end) {
-  const value = elem.value
-  const prefix = symbol + ' '
-  const pos = eachLinePrefixGetSelectionFromRange(symbol, elem, start, end)
-
-  let selectionOffset = 0
-
-  elem.selectionStart = pos.start
-  elem.selectionEnd = pos.end
-
-  insertText(elem, unwrap(value, pos.start, pos.end))
-
-  elem.selectionStart = pos.start // maybe we shouldn't select changed part
-  elem.selectionEnd = pos.end + selectionOffset
-
-  function unwrap (value, start, end) {
-    let lines = value.substring(start, end).split('\n')
-    let matches = null
-
-    lines = lines.map(line => {
-      if (symbol instanceof RegExp && (matches = line.match(symbol))) {
-        line = line.replace(matches[0], '')
-        selectionOffset -= matches[0].length // looks like side effect of the function
-      } else if (line.trim().indexOf(prefix) === 0) {
-        line = line.replace(prefix, '')
-        selectionOffset -= prefix.length // looks like side effect of the function
-      } else if (line.indexOf(symbol) > -1) {
-        line = line.replace(symbol, '')
-        selectionOffset -= symbol.length // looks like side effect of the function
-      }
-
-      return line
-    })
-
-    return lines.join('\n')
-  }
-}
-
-export default textEditorInit;
+export default textEditorInitNew

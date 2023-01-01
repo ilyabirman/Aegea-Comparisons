@@ -25,6 +25,10 @@ select {
   border-radius: 4px;
 }
 
+textarea {
+  resize: vertical;
+}
+
 select {
   -webkit-appearance: none;
 }

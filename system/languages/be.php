@@ -71,9 +71,11 @@ function e2l_load_strings () {
   'ff--change-time' => 'Змяніць час',
   'ff--delete' => 'Выдаліць',
   'fb--withdraw' => 'Вярнуць у чарнавікі',
-  'ff--will-get-address' => 'Атрымаць адрас',
-  'ff--is-at-address' => 'Апублікавана па адрасу',
+  'ff--will-be-published' => 'Апублікуецца',
+  'ff--is-published' => 'Апублікавана',
+  'ff--at-address' => 'па адрасу',
   'gs--no-notes' => 'Нататак няма.',
+  'gs--will-be-published' => 'Апублікуецца',
 
   'ff--gmt-offset' => 'Розніца з Грынвічам',
   'ff--with-dst' => '+1 летам',
@@ -123,13 +125,13 @@ function e2l_load_strings () {
   'er--name-email-text-required' => 'І імя, і эл. адрас, і тэкст каментара абавязковы',
   'ff--notify-subscribers' => 'Даслаць па пошце каментатару і іншым падпісчыкам',
   'gs--your-comment' => 'Ваш каментар',
+  'gs--sign-in-via' => 'Увайсці праз',
   'ff--full-name' => 'Імя і прозвішча',
   'ff--email' => 'Эл. пошта',
-  'gs--email-wont-be-published' => 'адрас ня будзе апублікаваны',
   'ff--subscribe-to-others-comments' => 'Атрымоўваць каментары іншых па пошце',
   'ff--text-of-your-comment' => 'Тэкст вашага каментара',
   'gs--n-comments' => '$[number.cardinal]',
-  'gs--no-comments' => 'няма каментароў',
+  'gs--no-comments' => 'Няма каментароў',
   'gs--comments-all-one-new' => 'новы',
   'gs--comments-all-new' => 'новыя',
   'gs--comments-n-new' => '$[number.cardinal]',
@@ -179,6 +181,7 @@ function e2l_load_strings () {
   'gs--found-for-query' => 'па запыту',
   'gs--search-query-empty' => 'Тэкст для пошуку пусты, напішыце што-небудзь',
   'gs--search-query-too-short' => 'Занадта кароткі тэкст, напішыце хоць 4 літары.',
+  'gs--search-too-few-notes' => 'Пошук запрацуе, калі будзе больш нататак.',
   'gs--nothing-found' => 'Нічога не знойдзена.',
   'gs--many-posts' => 'Шмат нататак',
   'pt--search-results' => 'Вынікі пошуку',
@@ -195,6 +198,14 @@ function e2l_load_strings () {
   'er--wrong-password' => 'Няправільны пароль',
   'ff--displayed-as-plain-text' => 'адлюстроўваецца пры ўводзе',
   'er--settings-not-saved' => 'Наладка не захавана',
+  'pt--password-reset' => 'Аднаўленне пароля',
+  'gs--password-reset-link-sent-maybe' => 'Калі вы паказалі правільны адрас, спасылка скіду пароля адпраўлена па пошце',
+  'gs--password-reset-link-saved' => 'Спасылка скіду пароля захавана ў файл /user/password-reset.psa у папкі блога на серверы.',
+  'er--cannot-reset-password' => 'Немагчыма скінуць пароль: у Наладаванне не паказаная пошта. Звяжыцеся з адміністрацыяй.',
+  'er--cannot-send-link-email-empty' => 'Немагчыма адправіць спасылку на скід пароля: адрас не паказаны',
+  'gs--i-forgot' => 'Я забыўся',
+  'em--password-reset-subject' => 'Скід пароля ў Эгее',
+  'em--follow-this-link' => 'Перайдзіце па гэтай спасылцы, каб скінуць пароль:',
 
   'pt--sessions' => 'Адкрытыя сесіі',
   'gs--sessions-description' => 'Калі вы заходзіце пад сваім паролем на некалькіх прыладах ці з дапамогай некалькіх браўзераў, тут адлюстроўваецца спіс усіх такіх сесій. Калі нейкая з іх выклікае падазрэнні, завяршыце ўсе сесіі акрамя бягучай, а потым змяніце пароль ад блогу.',
@@ -223,9 +234,10 @@ function e2l_load_strings () {
   'ff--items-per-page-after' => 'на старонцы',
   'ff--show-sharing-buttons' => 'Паказваць кнопкі адсылання ў соцсеткі',
   'ff--comments' => 'каментары',
-  'ff--comments-enable-by-default' => 'дазваляць па змаўчанні',
+  'ff--comments-enable-by-default' => 'уключаць па змаўчанні',
+  'ff--comments-require-social-id' => 'дазваляць толькі пры ўваходзе праз сацсетку',
   'ff--only-for-recent-posts' => 'толькі да новых нататак',
-  'ff--send-to-address' => 'дасылаць па пошце на адрас:',
+  'ff--send-by-email' => 'дасылаць па пошце',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
   'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Адміністраванне:',
@@ -246,7 +258,6 @@ function e2l_load_strings () {
   'ff--db-name' => 'Назва базы',
   'fb--connect-to-this-db' => 'Падключыцца з гэтымі параметрамі',
   'er--cannot-save-data' => 'Не атрымоўваецца захаваць дадзеныя',
-
   'gs--drag-userpic-here' => 'Перацягніце сюды сваю выяву',
 
   // welcome
@@ -268,11 +279,13 @@ function e2l_load_strings () {
   'fb--save-and-preview' => 'Захаваць і паглядзець',
   'fb--publish' => 'Апублікаваць',
   'fb--publish-draft' => 'Апублікаваць нататку',
+  'fb--schedule-note' => 'Запланаваць нататку',
   'fb--select' => 'Выбраць',
   'fb--apply' => 'Дапасаваць',
   'fb--delete' => 'Выдаліць',
   'fb--sign-in' => 'Увайсці',
   'fb--sign-out' => 'Выйсці',
+  'fb--send-link-by-email' => 'Адправіць спасылку па гэтым адрасе',
 
   // time
   'pt--default-timezone' => 'Часавы паяс па змаўчанні',
@@ -280,6 +293,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'Пры публікацыі часавы паяс звычайна вызначаецца аўтаматычна. А ў выпадку няўдачы выкарыстоўваецца абраны тут гадзінны паяс.',
 
   'tt--from-the-future' => 'З будучыні',
+  'tt--now' => 'зараз',
   'tt--just-now' => 'Толькі што',
   'tt--one-minute-ago' => 'Хвіліну таму',
   'tt--minutes-ago' => '$[minutes.cardinal] таму',
@@ -287,6 +301,14 @@ function e2l_load_strings () {
   'tt--hours-ago' => '$[hours.cardinal] таму',
   'tt--today' => 'Сёння',
   'tt--today-at' => 'Сёння ў $[time]',
+
+  'tt--seconds-short' => '$[value.cardinal]',
+  'tt--minutes-short' => '$[value.cardinal]',
+  'tt--hours-short' => '$[value.cardinal]',
+  'tt--days-short' => '$[value.cardinal]',
+  'tt--months-short' => '$[value.cardinal]',
+  'tt--years-short' => '$[value.cardinal]',
+
   'tt--date' => '$[day] $[month.monthname.genitive]',
   'tt--date-and-time' => '$[day] $[month.monthname.genitive], $[time]',
   'tt--date-year-and-time' => '$[day] $[month.monthname.genitive] $[year], $[time]',
@@ -336,7 +358,7 @@ function e2l_load_strings () {
   // more strings
   'gs--subscribe' => 'Падпіска на блог',
 
-  'gs--no-such-notes' => 'Такіх нататак няма.',
+  'gs--no-such-notes' => 'Нататак няма.',
   'pt--page-not-found' => 'Старонка не знойдзена',
   'gs--page-not-found' => 'Старонка не знойдзена.',
 
@@ -398,6 +420,13 @@ function e2lstr_cardinal ($number, $modifier = '', $string_id) {
   if ($string_id == 'tt--hours-ago') $what = $number .' гадзін(ы,)';
   if ($string_id == 'gs--n-comments') $what = $number .' каментар(,а,оў)';
   if ($string_id == 'gs--comments-n-new') $what = $number .' новы(,х,х)';
+
+  if ($string_id == 'tt--seconds-short') $what = $number .' с';
+  if ($string_id == 'tt--minutes-short') $what = $number .' хв';
+  if ($string_id == 'tt--hours-short') $what = $number .' ч';
+  if ($string_id == 'tt--days-short') $what = $number .' (дз,дн,дн)';
+  if ($string_id == 'tt--months-short') $what = $number .' мес';
+  if ($string_id == 'tt--years-short') $what = $number .' (год,гады,гад)';
 
   return e2_decline_for_number ($what);
 

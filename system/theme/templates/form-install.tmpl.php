@@ -4,8 +4,10 @@
 
 <div class="flag">
 
+<div class="header-content">
 <div class="title">
 <h1><?= _S ('e2--default-blog-title') ?></h1>
+</div>
 </div>
 
 
@@ -51,14 +53,14 @@
 
 <input
   type="hidden"
-  id="gmt-offset"
-  name="gmt-offset"
+  id="browser-offset"
+  name="browser-offset"
   value="unknown"
 />
 
 <script>
 d = new Date ()
-document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
+document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 </script>
 
 <a id="e2-check-db-config-action" href="<?= $content['form-install']['form-check-db-config-action'] ?>"></a>
@@ -96,7 +98,8 @@ document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
       class="text input-editable e2-livecheckable db-user-password-ok db-database-ok db-everything-ok width-2"
       value="<?= @$content['form-install']['db-user'] ?>"
     />
-    <br />
+  </div>
+  <div class="form-element">
     <input type="text"
       name="db-password"
       id="db-password"
@@ -118,7 +121,7 @@ document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
       value="<?= @$content['form-install']['db-database'] ?>"
     />
     <select id="db-database-list" name="db-database-selected"
-      class="e2-livecheckable e2-verified db-database-ok db-everything-ok width-2"
+      class="e2-select e2-livecheckable e2-verified db-database-ok db-everything-ok width-2"
       style="display: none" size="1">
     </select>
     <div class="form-control-sublabel">
