@@ -1,16 +1,26 @@
 <?php _LIB ('ajaxupload') ?>
 <?php _LIB ('goodyear') ?>
-
+<?php _LIB ('textarea-caret-position') ?>
+<?php _JS ('form-note-local-copy') ?>
+<?php _LIB ('chosen') ?>
 <?php _JS ('form-note') ?>
+<?php _JS ('text-with-file-upload') ?>
 
 <form
   id="form-note"
   action="<?=$content['form-note']['form-action']?>"
-  enctype="multipart/form-data" 
+  enctype="multipart/form-data"
   method="post"
   accept-charset="utf-8"
   autocomplete="off"
 >
+
+<input
+  type="hidden"
+  id="note-timestamp"
+  name="note-timestamp"
+  value="<?=@$content['form-note']['note']['last-modified'][0]?>"
+/>
 
 <input
   type="hidden"
@@ -28,6 +38,13 @@
 
 <input
   type="hidden"
+  id="is-note-published"
+  name="is-note-published"
+  value="<?= @$content['form-note']['note']['published?'] ? 'true' : 'false' ?>"
+/>
+
+<input
+  type="hidden"
   name="from"
   value="<?= @$content['form-note']['.from'] ?>"
 />
@@ -41,7 +58,13 @@
 <input
   type="hidden"
   name="old-stamp"
-  value="<?= @$content['form-note']['stamp-formatted'] ?>" 
+  value="<?= @$content['form-note']['stamp-formatted'] ?>"
+/>
+
+<input
+  type="hidden"
+  name="preserved-uploads"
+  value="<?= @$content['form-note']['.preserved-uploads'] ?>"
 />
 
 <input
@@ -84,7 +107,6 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
     <input type="text"
       class="text big required unedited width-4 e2-smart-title"
       autocomplete="off"
-      autofocus="autofocus"
       tabindex="1"
       id="title"
       name="title"
@@ -92,55 +114,59 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
     />
   </div>
 </div>
-  
+
 <div class="form-control">
   <div class="form-subcontrol">
 
-    <div class="form-label input-label">
-      <label><?= _S ('ff--text') ?></label>
-
-      <div class="form-label-help e2-help">
-        <a href="http://blogengine.ru/help/text/" target="_blank"><?= _S ('ff--text-formatting') ?></a>&nbsp;<span class="e2-svgi help"><?= _SVG ('blank-window') ?></span>
-      </div>
+    <div class="form-label form-label-sticky input-label">
+      <label>
+        <?= _S ('ff--text') ?>
+        <a href="http://blogengine.ru/help/text/" target="_blank" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('help') ?></span></a>
+      </label>
 
       <div class="form-label-saveinfo">
-        <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>... <span class="i-loading"></span></span>
+        <span id="livesaving" style="display: none"><?= _S ('ff--saving') ?>... <span class="e2-svgi"><?= _SVG ('spin') ?></span></span>
         <span id="livesave-button" class="keyboard-shortcut e2-admin-link e2-clickable-keyboard-shortcut" style="display: none"><?= _SHORTCUT ('livesave')? _SHORTCUT ('livesave') : _S ('ff--save') ?></span>
-        <span id="livesave-error" style="color: #f00; font-weight: bold; display: none; padding: 0 .33em">!</span><br />
+        <span class="e2-unsaved-led" style="display: none"></span>
+        <span id="livesave-error" class="e2-save-error" style="display: none;">!</span><br />
       </div>
 
     </div>
-    
+
     <div class="form-element">
-    <textarea name="text"
-      class="required e2-note-text-textarea e2-textarea-autosize e2-external-drop-target e2-external-drop-target-altable full-width"
-      id="text"
-      autocomplete="off"
-      tabindex="2"
-      style="height: 25.2em; min-height: 25.2em"
-    ><?=$content['form-note']['text']?></textarea>
+      <textarea name="text"
+        class="required e2-text-textarea e2-textarea-autosize e2-external-drop-target e2-external-drop-target-textarea e2-external-drop-target-altable full-width"
+        id="text"
+        autocomplete="off"
+        tabindex="2"
+        style="height: 25.2em; min-height: 25.2em"
+      ><?=$content['form-note']['text']?></textarea>
+    </div>
 
-     <div id="e2-uploaded-image-prototype" class="e2-uploaded-image" style="display: none">
-      <div style="position: relative">
-        <a class="e2-uploaded-image-remover nu" href=""><span class="e2-svgi"><?= _SVG ('remove-pic') ?></span></a>
-        <a class="e2-uploaded-image-preview" href="javascript:return(false)"><img src="" alt="" /></a>
+  </div>
+  <div class="form-subcontrol">
+
+    <div class="form-element">
+
+      <div id="e2-uploaded-image-prototype" class="e2-uploaded-image" style="display: none">
+        <div style="position: relative">
+          <a class="e2-uploaded-image-remover nu" href=""><span class="e2-svgi"><?= _SVG ('remove-pic') ?></span></a>
+          <a class="e2-uploaded-image-preview" href="javascript:return(false)"><img src="" alt="" /></a>
+        </div>
       </div>
-    </div>
-    
-    <div id="e2-uploaded-images">
-    <?php foreach ($content['form-note']['images'] as $image) { ?>
-      <div class="e2-uploaded-image"><span class="e2-uploaded-image-preview"><img src="<?= $image['thumb'] ?>" alt="<?= $image['name'] ?>" width="<?= $image['width'] ?>" height="<?= $image['height'] ?>" /></span></div>
-    <?php } ?>
-    </div>
-    
-    <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a><span id="e2-uploading" class="i-loading" style="display: none"></span><br /></p>
 
-    <p class="e2-upload-error" id="e2-upload-error-images-only" style="clear: left; display: none"><?= _S ('er--images-only-supported') ?></p>
-    <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
-    <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
+      <div id="e2-uploaded-images">
+      <?php foreach ($content['form-note']['uploads'] as $image) { ?><div class="e2-uploaded-image"><span class="e2-uploaded-image-preview"><img src="<?= $image['href'] ?>" alt="<?= $image['original-filename'] ?>" width="<?= $image['width'] ?>" height="<?= $image['height'] ?>" /></span></div><?php } ?>
+      </div>
+
+      <p id="e2-upload-controls" class="e2-upload-controls admin-links" style="display: none"><a href="javascript:" id="e2-upload-button" class="nu"><span class="e2-svgi"><?= _SVG ('attach') ?></span></a></span><span id="e2-uploading" style="display: none"><?= _SVG ('spin-progress') ?></span><br /></p>
+
+      <p class="e2-upload-error" id="e2-upload-error-unsupported-file" style="clear: left; display: none"><?= _S ('er--unsupported-file') ?></p>
+      <p class="e2-upload-error" id="e2-upload-error-cannot-create-thumbnail" style="clear: left; display: none"><?= _S ('er--cannot-create-thumbnail') ?></p>
+      <p class="e2-upload-error" id="e2-upload-error-cannot-upload" style="clear: left; display: none"><?= _S ('er--cannot-upload') ?></p>
 
     </div>
-    
+
   </div>
 </div>
 
@@ -156,8 +182,6 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
         <option <?= $tag['selected?']? 'selected' : '' ?>><?= $tag['name'] ?></option>
       <?php } ?>
     </select><br />
-    <?php _LIB ('chosen') ?>
-    <?php _CSS ('chosen') ?>
   </div>
 </div>
 
@@ -165,7 +189,7 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
 <?php if (@$content['form-note']['time'] or @$content['form-note']['alias']) { ?>
 
 <div class="form-control">
-  
+
   <div class="form-element">
 
     <div class="e2-note-time-and-url">
@@ -175,11 +199,11 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
       <?php if (@$content['form-note']['time']) { ?>
       <span title="<?=_DT ('j {month-g} Y, H:i, {zone}', $content['form-note']['time'])?>"><?= _DT ('j {month-g} Y, H:i,', $content['form-note']['time']) ?></span>
       <?php } ?>
-      </a> 
+      </a>
     </div>
-    
+
     <div class="e2-note-time-and-url" style="display: none">
-  
+
       <div class="form-subcontrol">
         <input type="text"
           class="text required unedited width-2"
@@ -191,9 +215,9 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
           value="<?= @$content['form-note']['alias'] ?>"
         />
       </div>
-  
+
       <?php if (@$content['form-note']['time']) { ?>
-  
+
       <div class="form-subcontrol">
         <input type="text"
           tabindex="6"
@@ -201,45 +225,36 @@ document.getElementById ('browser-offset').value = - d.getTimezoneOffset()
           name="stamp"
           id="stamp"
           placeholder="<?= @$content['form-note']['stamp-formatted'] ?>"
+          data-goodyear-language="<?= $content['blog']['language'] ?>"
           data-goodyear-format="DD.MM.YYYY HH:mm:ss"
           data-goodyear-min-year="1970"
           data-goodyear-max-year="2035"
           data-goodyear-min-date="01-01-1970"
           data-goodyear-hour-picker="true"
-          data-goodyear-minute-picker="true" 
+          data-goodyear-minute-picker="true"
           data-goodyear-minute-picker="true"
           data-goodyear-minutes-step="1"
           value="<?= @$content['form-note']['stamp-formatted'] ?>"
         />
       </div>
-      
+
       <?php } ?>
-  
+
     </div>
   </div>
 </div>
 
 <?php } ?>
 
-<div class="form-control submit-box">
+<div class="form-control">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="button submit-button"  tabindex="10">
+    <button type="submit" id="submit-button" class="e2-submit-button"  tabindex="10">
       <?= @$content['form-note']['submit-text'] ?>
     </button>
-    <span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
-  </div>
-</div>
-
-
-
-<div class="form-control">
-  <div class="form-element e2-toolbar">
-    <?php if (array_key_exists ('delete-href', $content['form-note'])) { ?>
-      <a href="<?= @$content['form-note']['delete-href'] ?>" class="nu"><button type="button" class="button">
-        <span class="e2-svgi"><?= _SVG ('remove') ?></span>
-        <?= _S ('ff--delete') ?>...
-      </button></a>
-    <?php } ?>
+    <span id="note-save-error" class="e2-save-error" style="display: none;">!</span>
+    <span class="e2-keyboard-shortcut" id="submit-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
+    &nbsp;&nbsp;&nbsp;
+    <span class="e2-svgi" id="note-saving" style="display: none"><?= _SVG ('spin') ?></span><span id="note-saved" class="e2-svgi" style="display: none"><?= _SVG ('tick') ?></span>
   </div>
 </div>
 

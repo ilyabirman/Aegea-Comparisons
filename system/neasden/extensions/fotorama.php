@@ -85,7 +85,7 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
             $result .= '</div>' . "\n";
             $div_opened = false;
           }
-          $result .= '<p>' . $line['content'];
+          $result .= '<div class="e2-text-caption">' . $line['content'];
         } else {
           $result .= '<br />' . "\n" . $line['content'];
         }
@@ -94,7 +94,7 @@ class NeasdenGroup_fotorama implements NeasdenGroup {
     }
     
     if ($p_opened) {
-      $result .= '</p>'."\n";
+      $result .= '</div>'."\n";
       $p_opened = false;
     }
     

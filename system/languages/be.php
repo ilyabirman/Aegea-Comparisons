@@ -11,6 +11,7 @@ function e2l_load_strings () {
   'e2--powered-by' => 'Двіжок —',
   'e2--default-blog-title' => 'Мой блог',
   'e2--default-blog-author' => 'Аўтар блогу',
+  'e2--website-host' => 'blogengine.ru',
 
   // installer
   'pt--install' => 'Усталяванне Эгеі',
@@ -58,18 +59,18 @@ function e2l_load_strings () {
   'er--error-deleting-post-tag-info' => 'Памылка пры выдаленні дадзеных аб тэгах нататкі',
   'er--wrong-datetime-format' => 'Няправільны фармат даты-часу. Павінен быць: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
   'er--cannot-get-post-from-db' => 'Не атрымалася выцягнуць нататку з базы',
-  'er--images-only-supported' => 'Падтрымліваюцца толькі выявы',
+  'er--unsupported-file' => 'Падтрымлiваюцца толькi выявы PNG, JPG, GIF, SVG i аудыёфайлы MP3.',
   'er--cannot-create-thumbnail' => 'Не атрымалася стварыць паменшаную выяву',
   'er--cannot-upload' => 'Не атрымалася запампаваць файл',
   'ff--title' => 'Назва',
   'ff--text' => 'Тэкст',
-  'ff--text-formatting' => 'Фарматаванне тэксту',
   'ff--saving' => 'Захаванне...',
   'ff--save' => 'Захаваць',
   'ff--tags' => 'Тэгі',
   'ff--alias' => 'Спасылка',
   'ff--change-time' => 'Змяніць час',
   'ff--delete' => 'Выдаліць',
+  'fb--withdraw' => 'Вярнуць у чарнавікі',
   'ff--will-get-address' => 'Атрымаць адрас',
   'ff--is-at-address' => 'Апублікавана па адрасу',
   'gs--no-notes' => 'Нататак няма.',
@@ -86,6 +87,7 @@ function e2l_load_strings () {
   'nm--posts' => 'Нататкі',
   'gs--next-posts' => 'наступныя',
   'gs--prev-posts' => 'папярэднія',
+  'gs--unsaved-changes' => 'Змены не захаваны:',
 
   // drafts
   'ln--drafts' => 'Чарнавікі',
@@ -94,6 +96,8 @@ function e2l_load_strings () {
   'pt--draft-deletion' => 'Выдаленне чарнавіка',
   'pt--edit-draft' => 'Рэдагаванне чарнавіка',
   'gs--no-drafts' => 'Чарнавікоў няма.',
+  'gs--not-published' => 'Не апублікавана',
+  'gs--secret-link' => 'Сакрэтная спасылка',
   'gs--draft-will-be-deleted' => 'Чарнавік «$[draft]» будзе выдалены.',
 
   // comments
@@ -219,10 +223,11 @@ function e2l_load_strings () {
   'ff--items-per-page-after' => 'на старонцы',
   'ff--show-sharing-buttons' => 'Паказваць кнопкі адсылання ў соцсеткі',
   'ff--comments' => 'каментары',
-  'ff--comments-enable' => 'Дазваляць',
+  'ff--comments-enable-by-default' => 'дазваляць па змаўчанні',
   'ff--only-for-recent-posts' => 'толькі да новых нататак',
   'ff--send-to-address' => 'дасылаць па пошце на адрас:',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
+  'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Адміністраванне:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'злучэнне з базай',
@@ -250,20 +255,8 @@ function e2l_load_strings () {
   'pt--welcome-text-post' => '.',
 
   // need for password
-  'gs--need-password' => 'Трэба ўвайсці пад сваім паролем',
+  'gs--need-password' => 'Ваш пароль',
   'ff--public-computer' => 'Чужы кампутар',
-  'gs--need-password-for-action' => 'Каб $[action], трэба ўвайсці пад сваім паролем',
-  'gs--np-action-write' => 'напісаць нататку',
-  'gs--np-action-note-edit' => 'рэдагаваць нататку',
-  'gs--np-action-comment-edit' => 'рэдагаваць гэты каментар',
-  'gs--np-action-comment-reply' => 'адказаць на гэты каментар',
-  'gs--np-action-drafts' => 'адкрыць чарнавікі',
-  'gs--np-action-draft' => 'адкрыць гэты чарнавік',
-  'gs--np-action-tag-edit' => 'рэдагаваць гэты тэг',
-  'gs--np-action-settings' => 'наладоўваць блог',
-  'gs--np-action-password' => 'змяніць пароль',
-  'gs--np-action-database' => 'змяняць параметры базы звестак',
-  'gs--np-action-sessions' => 'праглядаць сесіі',
   'gs--frontpage' => 'Галоўная старонка',
 
   // form buttons
@@ -284,7 +277,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'Пры публікацыі часавы паяс звычайна вызначаецца аўтаматычна. А ў выпадку няўдачы выкарыстоўваецца абраны тут гадзінны паяс.',
 
   'tt--from-the-future' => 'З будучыні',
-  'tt--just-published' => 'Толькі што',
+  'tt--just-now' => 'Толькі што',
   'tt--one-minute-ago' => 'Хвіліну таму',
   'tt--minutes-ago' => '$[minutes.cardinal] таму',
   'tt--one-hour-ago' => 'Гадзіну таму',
@@ -324,9 +317,12 @@ function e2l_load_strings () {
   'gs--posts-tagged' => 'нататкі з тэгам',
   'gs--search-results' => 'вынікі пошуку',
 
+  'gs--subscribe-to-blog' => 'Падпісацца на блог',
+  
   // social networks
   'sn--twitter-verb' => 'Твітнуць',
   'sn--facebook-verb' => 'Падзяліцца',
+  'sn--linkedin-verb' => 'Падзяліцца',
   'sn--gplus-verb' => 'Плюсануць',
   'sn--vkontakte-verb' => 'Падзяліцца',
   'sn--telegram-verb' => 'Адаслаць',
@@ -338,6 +334,8 @@ function e2l_load_strings () {
   'um--month-g' => '$[month.monthname.genitive]',
 
   // more strings
+  'gs--subscribe' => 'Падпіска на блог',
+
   'gs--no-such-notes' => 'Такіх нататак няма.',
   'pt--page-not-found' => 'Старонка не знойдзена',
   'gs--page-not-found' => 'Старонка не знойдзена.',

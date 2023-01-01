@@ -20,7 +20,6 @@ class NeasdenGroup_audio implements NeasdenGroup {
   function render ($group, $myconf) {
 
     $this->neasden->require_link (@$this->neasden->config['library']. 'jquery/jquery.js');
-    $this->neasden->require_link (@$this->neasden->config['library']. 'jouele/jquery.jplayer.min.js');
     $this->neasden->require_link (@$this->neasden->config['library']. 'jouele/jouele.css');
     $this->neasden->require_link (@$this->neasden->config['library']. 'jouele/jouele.js');
     
@@ -29,8 +28,6 @@ class NeasdenGroup_audio implements NeasdenGroup {
     
     $downloadstr = 'Download';
     if ($this->neasden->config['language'] == 'ru') $downloadstr = 'Скачать';
-  
-    $p = false;
   
     $result = (
       '<div class="'. $css_class .'">'."\n"
@@ -65,8 +62,6 @@ class NeasdenGroup_audio implements NeasdenGroup {
       }
       
     }
-  
-    if ($p) $result .= '</p>'."\n";
   
     $result .= '</div>'."\n";
   

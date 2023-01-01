@@ -34,7 +34,7 @@
       </span>
     
       <span class="e2-comment-actions admin-links">
-        <?php if (array_key_exists ('important-toggle-href', $comment)): ?><a href="<?= $comment['important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a><?php endif ?>
+        <?php if (array_key_exists ('important-toggle-href', $comment)): ?><a href="<?= $comment['important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a><?php endif ?>
         <!--<?php if (array_key_exists ('ip-href', $comment)) { ?><small><a href="<?=$comment['ip-href']?>" class="e2-admin-link"><?=$comment['ip']?></small></a><?php } ?>-->
       </span>
       
@@ -44,7 +44,7 @@
   
       <span class="e2-comment-actions-removed admin-links" style="display: none">  
         <?php if (array_key_exists ('removed-toggle-href', $comment)): ?>
-        <a href="<?= $comment['removed-toggle-href'] ?>" class="nu e2-removed-toggle e2-toggle-on e2-pseudolink"><span class="e2-svgi"><span class="e2-toggle-state-on"><?= _SVG ('replace') ?></span></span></a>
+        <a href="<?= $comment['removed-toggle-href'] ?>" class="nu e2-removed-toggle e2-toggle-on e2-pseudolink"><span class="e2-svgi"><span class="e2-toggle-state-on"><?= _SVG ('replace') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a>
         <?php endif; ?>
       </span>
       
@@ -59,7 +59,7 @@
       <span class="e2-comment-secondary-controls e2-comment-actions admin-links">
         <?php if ($comment['visible?'] and !$comment['replying?'] and array_key_exists ('reply-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['reply-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('reply') ?></span></a></span><?php endif; ?>
         <?php if (array_key_exists ('edit-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['edit-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span><?php endif ?>
-        <?php if (array_key_exists ('removed-toggle-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['removed-toggle-href'] ?>" class="e2-removed-toggle nu"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('trash') ?></span></span></a></span><?php endif ?>
+        <?php if (array_key_exists ('removed-toggle-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['removed-toggle-href'] ?>" class="e2-removed-toggle nu"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('trash') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a></span><?php endif ?>
       </span>
 
     </div>
@@ -82,7 +82,7 @@
       </span>
   
       <span class="e2-comment-actions admin-links">
-        <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['reply-important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a><?php endif ?>
+        <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['reply-important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a><?php endif ?>
         <!--<?php if (array_key_exists ('ip-href', $comment)) { ?><small><a href="<?=$comment['ip-href']?>" class="e2-admin-link"><?=$comment['ip']?></small></a><?php } ?>-->
       </span>
 
@@ -96,7 +96,7 @@
 
       <span class="e2-comment-actions-removed admin-links" style="display: none">  
         <?php if (array_key_exists ('removed-reply-toggle-href', $comment)): ?>
-        <a href="<?= $comment['removed-reply-toggle-href'] ?>" class="nu e2-removed-toggle e2-toggle-on e2-pseudolink"><span class="e2-svgi"><span class="e2-toggle-state-on"><?= _SVG ('replace') ?></span></span></a>
+        <a href="<?= $comment['removed-reply-toggle-href'] ?>" class="nu e2-removed-toggle e2-toggle-on e2-pseudolink"><span class="e2-svgi"><span class="e2-toggle-state-on"><?= _SVG ('replace') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a>
         <?php endif; ?>
       </span>
 
@@ -110,7 +110,7 @@
     <div class="e2-comment-control-area">
       <span class="e2-comment-secondary-controls e2-comment-actions admin-links">
         <?php if (array_key_exists ('edit-reply-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['edit-reply-href'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span><?php endif; ?>
-        <?php if (array_key_exists ('removed-reply-toggle-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['removed-reply-toggle-href'] ?>" class="e2-removed-toggle nu"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('trash') ?></span></span></a></span><?php endif; ?>
+        <?php if (array_key_exists ('removed-reply-toggle-href', $comment)): ?><span class="admin-icon"><a href="<?= $comment['removed-reply-toggle-href'] ?>" class="e2-removed-toggle nu"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('trash') ?></span><span class="e2-toggle-state-thinking"><?= _SVG ('spin') ?></span></span></a></span><?php endif; ?>
       </span>
     </div>
     <?php endif ?>
@@ -125,7 +125,7 @@
 
 <?php endforeach ?>
 
-</div>
+</div> <!-- e2-comments -->
 
 <?php } ?>
 
@@ -135,26 +135,24 @@
 <?php # OPEN / CLOSE # ?>
 
 <?php if (array_key_exists ('comments-toggle', $content)) { ?>
-<div class="e2-toolbar">
-<a href="<?=$content['comments-toggle']['href']?>">
-<button class="button"><?= $content['comments-toggle']['text'] ?></button>
-</a>
+<div class="e2-comment-toggle">
+<a class="e2-button" href="<?=$content['comments-toggle']['href']?>"><?= $content['comments-toggle']['text'] ?></button></a>
 </div>
 <?php } ?>
 
 
 
 
+
+
 <?php if (array_key_exists ('notes', $content)) { ?>
 <?php if (array_key_exists ('only', $content['notes'])) { ?>
-<?php if ($content['notes']['only']['can-be-commentable?']) { ?>
 <?php if ($content['notes']['only']['commentable-now?']) { ?>
 
   <div class="e2-section-heading"><?= _S ('gs--your-comment') ?></div>
 
   <?php _T_FOR ('form-comment') ?>
 
-<?php } ?>
 <?php } ?>
 <?php } ?>
 <?php } ?>

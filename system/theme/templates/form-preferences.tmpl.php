@@ -37,7 +37,7 @@
       name="blog-title"
       value="<?= $content['form-preferences']['blog-title'] ?>"
     />
-    <?php if (!@$content['blog']['userpic-set']) { ?>
+    <?php if (!@$content['blog']['userpic-set?']) { ?>
     <div class="form-control-sublabel e2-set-userpic-by-dragging">
       <?= _S ('ff--set-userpic-by-dragging') ?>
     </div>
@@ -148,69 +148,82 @@
 
   <div class="form-element">
 
-    <div class="form-subcontrol-master">
-      <label class="checkbox">
-      <input
-        type="checkbox"
-        id="comments-on"
-        name="comments-on"
-        class="checkbox"
-        <?= @$content['form-preferences']['comments-on?']? ' checked="checked"' : ''?>
-      /> <?= _S ('ff--comments-enable') ?>
-      </label><br />
-    </div>
-    
-    <div id="comments-on-slaves">
-      <div class="form-subcontrol-slave">
-        <label class="checkbox">
-        <input
-          type="checkbox"
-          id="comments-fresh-only"
-          name="comments-fresh-only"
-          class="checkbox"
-          <?= @$content['form-preferences']['comments-fresh-only?']? ' checked="checked"' : ''?>
-        /> <?= _S ('ff--only-for-recent-posts') ?>
-        </label><br />
-      </div>
-      <div class="form-subcontrol-slave">
-        <label class="checkbox">
-        <input
-          type="checkbox"
-          id="email-notify"
-          name="email-notify"
-          class="checkbox"
-          <?= @$content['form-preferences']['email-notify?']? ' checked="checked"' : ''?>
-        /> <?= _S ('ff--send-to-address') ?>
-        </label><br />
-        <input type="text"
-          class="text width-2"
-          id="email"
-          name="email"
-          value="<?= $content['form-preferences']['email'] ?>"
-        /><br />
-      </div>
-    </div>
+    <label class="checkbox">
+    <input
+      type="checkbox"
+      id="comments-default-on"
+      name="comments-default-on"
+      class="checkbox"
+      <?= @$content['form-preferences']['comments-default-on?']? ' checked="checked"' : ''?>
+    /> <?= _S ('ff--comments-enable-by-default') ?>
+    </label><br />
+
+  </div>
+
+  <div class="form-element">
+
+    <label class="checkbox">
+    <input
+      type="checkbox"
+      id="comments-fresh-only"
+      name="comments-fresh-only"
+      class="checkbox"
+      <?= @$content['form-preferences']['comments-fresh-only?']? ' checked="checked"' : ''?>
+    /> <?= _S ('ff--only-for-recent-posts') ?>
+    </label><br />
+
+  </div>
+
+  <div class="form-element">
+
+    <label class="checkbox">
+    <input
+      type="checkbox"
+      id="email-notify"
+      name="email-notify"
+      class="checkbox"
+      <?= @$content['form-preferences']['email-notify?']? ' checked="checked"' : ''?>
+    /> <?= _S ('ff--send-to-address') ?>
+    </label><br />
+    <input type="text"
+      class="text width-2"
+      id="email"
+      name="email"
+      value="<?= $content['form-preferences']['email'] ?>"
+    /><br />
+
   </div>
   
 </div>
 
-<?php if (E2_EDITION) { ?>
+<?php if (@$content['form-preferences']['includes-yandex-metrika?']) { ?>
 <div class="form-control">
   <div class="form-label input-label"><label><?= _S ('ff--yandex-metrika') ?></label></div>
   <div class="form-element">
-    <input type="text"
-      class="text width-4"
+    <textarea
+      class="width-4 e2-textarea-autosize"
+      style="height: 6.66em; min-height: 6.66em; overflow-x: hidden; overflow-y: visible"
       id="yandex-metrika"
       name="yandex-metrika"
-      value="<?= $content['form-preferences']['yandex-metrika'] ?>"
-    />
+    ><?= $content['form-preferences']['yandex-metrika'] ?></textarea>
+  </div>
+</div>
+<div class="form-control">
+  <div class="form-label input-label"><label><?= _S ('ff--google-analytics') ?></label></div>
+  <div class="form-element">
+    <textarea
+      class="width-4 e2-textarea-autosize"
+      style="height: 6.66em; min-height: 6.66em; overflow-x: hidden; overflow-y: visible"
+      id="google-analytics"
+      name="google-analytics"
+    ><?= $content['form-preferences']['google-analytics'] ?></textarea>
   </div>
 </div>
 <?php } ?>
 
-<div class="form-control submit-box">
+<div class="form-control">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="button submit-button">
+    <button type="submit" id="submit-button" class="e2-submit-button">
       <?= @$content['form-preferences']['submit-text'] ?>
     </button>
     <span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
@@ -228,5 +241,5 @@
 <br />
 
 <?php if (array_key_exists ('logout', $content['admin-hrefs'])): ?>
-  <form action="<?= $content['admin-hrefs']['logout'] ?>" method="post" style="display: inline-block"><button type="submit" class="button"><?= _S ('fb--sign-out') ?></button></form>
+  <form action="<?= $content['admin-hrefs']['logout'] ?>" method="post" style="display: inline-block"><button type="submit"><?= _S ('fb--sign-out') ?></button></form>
 <?php endif ?>

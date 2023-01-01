@@ -30,14 +30,14 @@
 <?php $comment = $content['comments']['only'] ?>
 
 <div class="form-control e2-comment-control-group">
-  <div class="form-label input-label">
+  <div class="form-label form-label-sticky input-label">
     <label>
       <span>
         <span class="e2-markable <?php if (@$comment['reply-important?']) echo 'e2-marked' ?>"><?= _S ('ff--text') ?></span>
       </span>
   
       <span class="e2-comment-actions admin-links">
-        <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a><?php endif ?>
+        <?php if (array_key_exists ('reply-important-toggle-href', $comment)): ?><a href="<?= $comment['reply-important-toggle-href'] ?>" class="nu e2-important-toggle <?= ($comment['reply-important?']? 'e2-toggle-on' : '') ?>"><span class="e2-svgi"><span class="e2-toggle-state-off"><?= _SVG ('favourite-off') ?></span><span class="e2-toggle-state-on"><?= _SVG ('favourite-on') ?></span></span></a><?php endif ?>
         <!--<?php if (array_key_exists ('ip-href', $comment)) { ?><small><a href="<?=$comment['ip-href']?>" class="e2-admin-link"><?=$comment['ip']?></small></a><?php } ?>-->
       </span>
 
@@ -68,9 +68,9 @@
 </div>
 
 
-<div class="form-control submit-box">
+<div class="form-control">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="button submit-button">
+    <button type="submit" id="submit-button" class="e2-submit-button">
       <?= @$content['form-comment-reply']['submit-text'] ?>
     </button>
     <span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>

@@ -7,7 +7,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
   function __construct ($neasden) {
     $this->neasden = $neasden;
 
-    $neasden->define_line_class ('picture', '.*\.(jpe?g|gif|png)(?: +(.+))?');
+    $neasden->define_line_class ('picture', '.*\.(jpe?g|gif|png|svg)(?: +(.+))?');
     $neasden->define_group ('picture', '(-picture-)(-p-)*');
   }
     
@@ -36,14 +36,25 @@ class NeasdenGroup_picture implements NeasdenGroup {
         $this->neasden->resource_detected ($filebasename);
         
         $filename = $myconf['folder'] . $filebasename;
-        $size = getimagesize ($filename);
-        list ($width, $height) = $size;
+        $pathinfo = pathinfo ($filename);
+        
+        $width = $height = $ratio = 0;
+
+        // this will not work with SVGs
+        if ($pathinfo['extension'] == 'svg') {
+          // echo $filename;
+          $xmlget = simplexml_load_string (file_get_contents ($filename));
+          if ($xmlget) {
+            $xmlattributes = $xmlget->attributes ();
+            list ($width, $height) = array ((string) $xmlattributes -> width, (string) $xmlattributes -> height);
+          }
+        } elseif ($size = @getimagesize ($filename)) {
+          list ($width, $height) = $size;
+        }
 
         if (substr ($filebasename, strrpos ($filebasename, '.') - 3, 3) == '@2x') {
-          if (! ($width%2 or $height%2)) {
-            $width /= 2;
-            $height /= 2;
-          }
+          $width /= 2;
+          $height /= 2;
         }
   
         $filename_original = $filename;
@@ -53,6 +64,8 @@ class NeasdenGroup_picture implements NeasdenGroup {
           $height = $height * ($myconf['max-width'] / $width);
           $width = $myconf['max-width'];  
         }
+
+        if ($width) $ratio = $height / $width;
         
         $image_html = (
           '<img src="'. $myconf['src-prefix'] . $filename .'" '.
@@ -65,7 +78,7 @@ class NeasdenGroup_picture implements NeasdenGroup {
           $image_html = (
             '<div style="width: '. $width .'px; max-width: 100%">'.
             '<div class="e2-text-picture-imgwrapper" style="'.
-            'padding-bottom: '. round ($height / $width * 100, 2).'%'.
+            'padding-bottom: '. @round ($ratio * 100, 2).'%'.
             '">'.
             $image_html.
             '</div>'.
@@ -77,7 +90,9 @@ class NeasdenGroup_picture implements NeasdenGroup {
         $cssc_link = $myconf['css-class'] .'-link';
         if ($link) {
           $image_html = (
-            '<a href="'. $link .'" width="'. $width_original .'" class="'. $cssc_link .'">' ."\n".
+            // width="'. $width_original .'"
+            // style="width: '. $width_original .'px"
+            '<a href="'. $link .'" class="'. $cssc_link .'">' ."\n".
             $image_html .
             '</a>'
           );
@@ -88,14 +103,14 @@ class NeasdenGroup_picture implements NeasdenGroup {
       } else {
         if (!$p) {
           $p = true;
-          $result .= '<p>' . $line['content'];
+          $result .= '<div class="e2-text-caption">' . $line['content'];
         } else {
           $result .= '<br />' . "\n" . $line['content'];
         }
       }
     }
   
-    if ($p) $result .= '</p>'."\n";
+    if ($p) $result .= '</div>'."\n";
   
     $result .= '</div>'."\n";
     

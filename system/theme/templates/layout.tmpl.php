@@ -10,7 +10,6 @@
 
 
 <?php _X ('header-pre') ?>
-<?php _X ('sidebar-pre') ?>
 <?php _T ('user-picture') ?>
 
 <h1>
@@ -24,7 +23,6 @@
 <?php _T_FOR ('search') ?>
 <a class="e2-rss" href="<?=@$content['blog']['rss-href']?>"><?= _S ('gs--rss') ?></a>
 
-<?php _X ('sidebar-post') ?>
 <?php _X ('header-post') ?>
 
 
@@ -78,7 +76,7 @@
 
 <?php _X ('footer-post') ?>
 
-
+<?php _T ('login-element'); ?>
 
 
 </div>

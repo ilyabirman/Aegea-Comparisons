@@ -6,6 +6,7 @@
   <?php if (array_key_exists ('userpic-href', $content['blog'])) { ?>
     <?= _A ('<a href="'. $content['blog']['href']. '" class="nu"><img src="'. $content['blog']['userpic-href'] .'" alt="" title="'. _S ('gs--drag-userpic-here') .'" /></a>') ?> 
   <?php } ?>
+  <span class="e2-user-picture-uploading" id="e2-user-picture-uploading"><?= _SVG ('spin-progress') ?></span>
 </div>
 
 <?php } else { ?>

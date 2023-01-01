@@ -3,7 +3,7 @@
   method="post"
 >
 
-<button type="submit" id="submit-button" class="button">
+<button type="submit" id="submit-button">
   <?= @$content['form-sessions']['submit-text'] ?>
 </button>
 

@@ -20,9 +20,6 @@ $_config['popular_period'] = 'month'; /* 'day', 'week', 'month', 'year', 'ever' 
 // default text formatter (make sure you know why you change it)
 $_config['default_formatter'] = 'neasden'; /* 'raw', 'calliope', 'neasden' */
 
-// when publishing a post, enable comments for it by default
-$_config['publish_with_comments_on'] = true;
-
 
 // THEMES
 
@@ -56,6 +53,9 @@ $_config['url_composition'] = 'auto'; /* 'auto', 'real', 'synthetic' */
 
 // too hard to explain
 $_config['note_url_slidedown'] = true;
+
+// add “all/” in front of urls in case of 404
+$_config['try_redirect_to_all'] = false;
   
 
 
@@ -73,14 +73,20 @@ $_config['uploaded_files_mode'] = 0777;
 // whois service (URL to append IP address to)
 $_config['whois_service'] = 'https://www.nic.ru/whois/?ip=';
 
-// access rights to use for uploaded files
+// database table prefix for storing multiple blogs in one database
 $_config['db_table_prefix'] = 'e2Blog';
+
+// by default, Aegea reindexes databases for search on switch
+$_config['retain_search_indexes_on_db_switch'] = false;
+
+// read response from remote server
+$_config['fgets_broadcast'] = true;
 
 
 
 // SOCIAL NETWORKS
 
-// which networks to share to
+// which networks to share to (also supported: linkedin)
 $_config['share_to'] = 'twitter, facebook, vkontakte, telegram, pinterest';
 
 // via whom to share to Twitter
@@ -99,15 +105,24 @@ $_config['comment_freshness_days'] = 14;
 // number of items in RSS feeds
 $_config['rss_items'] = 10;
 
+// number of items in RSS feeds
+$_config['search_favourites_boost'] = 2;
+
 
 
 // DEBUG
 
-// write a log to user/log.txt? (it will get very large soon)
-$_config['write_log'] = false;
+// write a log to user/log.txt? (it may get very large soon)
+$_config['write_log'] = true;
 
-// reset a log sometimes
+// if user/log.txt is not there, create it?
+$_config['write_log_create'] = false;
+
+// reset a log in the beginning of page generation
 $_config['write_log_reset'] = false;
+
+// keep log under this limit
+$_config['write_log_limit'] = 0; /* bytes */
 
 // show call stack when displaying error?
 $_config['show_call_stack'] = 0; /* 0 - no; 1 - when logged in; 2 - always */
@@ -121,6 +136,9 @@ $_config['debug_slow_ajax'] = false;
 // write HTTP request log?
 $_config['request_logging'] = false;
 
-  
+// output rose debug info
+$_config['rose_debug_info'] = false;
+
+ 
 
 ?>

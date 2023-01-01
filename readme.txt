@@ -1,8 +1,10 @@
-License: http://blogengine.ru/license/
+License: http://blogengine.ru/get/
 
-To each copy of E2 applies the license which is the latest at the moment of installation or update.
+To each copy of Aegea applies the license which is the latest at the moment of installation or update.
 
 Thanks to
+Igor Adamenko for local autosaving, https://igoradamenko.com/
+Romam Parpalak for “Rose” search engine, https://written.ru/
 Ilya Straykov for help with version 2.5 development, http://straykov.ru/
 Artem Polikarpov for brilliant Fotorama, http://fotorama.io/
 Ivan Sagalaev for Highlight.js, http://highlightjs.org/
@@ -16,9 +18,11 @@ Alexander Karpinsky, Artem Sapegin, Maxim Ilyahov, Dmitry Kirsanov, Evgeny Stepa
 
 Лицензия: http://blogengine.ru/license/
 
-К каждой инсталляции Е2 применима та лицензия, которая была самой свежей на момент установки или последнего обновления.
+К каждой инсталляции Эгеи применима та лицензия, которая была самой свежей на момент установки или последнего обновления.
 
 Спасибо
+Игорю Адаменко за локальное автосохранение, https://igoradamenko.com/
+Роману Парпалаку за движок поиска «Роза», https://written.ru/
 Илье Страйкову за помощь в разработке версии 2.5, http://straykov.ru/
 Артёму Поликарпову за прекрасную Фотораму, http://fotorama.io/
 Ивану Сагалаеву за Хайлайт, http://highlightjs.org/

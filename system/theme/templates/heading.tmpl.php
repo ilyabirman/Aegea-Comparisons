@@ -17,9 +17,15 @@
   <div class="e2-heading">
 
     <span class="admin-links admin-links-floating admin-links-sticky">
-        <?php if (array_key_exists ('related-edit-href', $content)): ?>
-        <span class="admin-icon"><a href="<?= $content['related-edit-href'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span>
-        <?php endif ?>
+
+      <?php if (array_key_exists ('related-edit-href', $content)): ?>
+      <span class="admin-icon"><a href="<?= $content['related-edit-href'] ?>" class="nu e2-edit-link e2-admin-link"><span class="e2-svgi"><?= _SVG ('edit') ?></span></a></span>
+      <?php endif ?>
+
+      <?php if (array_key_exists ('related-delete-href', $content)) { ?>
+      <span class="admin-icon"><a href="<?= @$content['related-delete-href'] ?>" class="nu e2-admin-link"><span class="e2-svgi"><?= _SVG ('trash') ?></span></a></span>
+      <?php } ?>
+
     </span>
 
     <?php if (array_key_exists ('superheading', $content)): ?>

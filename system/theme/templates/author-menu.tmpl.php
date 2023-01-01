@@ -17,26 +17,26 @@ if (
     <a class="nu admin-menu-comments-count" href="<?= @$content['new-comments']['href'] ?>"><?= (int) $content['new-comments']['count'] ?></a>
   </span>
   <?php } ?>
-  
+
 
   <?php # NEW # ?>
   <?php if (_AT ($content['admin-hrefs']['new-note'])) { ?>
-    
+
   <span class="admin-icon e2-admin-menu-new-selected" title="<?= _S ('ln--new-post') ?>"><span class="e2-svgi"><?= _SVG ('new') ?></span></span>
-  
+
   <span class="admin-icon e2-admin-menu-new" style="display: none" title="<?= _S ('ln--new-post') ?>"><a href="<?= $content['admin-hrefs']['new-note'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?></span></a></span>
-      
-  
+
+
   <?php } else { ?>
-    
-  <span class="admin-icon" title="<?= _S ('ln--new-post') ?>"><a href="<?= $content['admin-hrefs']['new-note'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?></span></a></span>
-      
+
+  <span class="admin-icon e2-new-note-item" title="<?= _S ('ln--new-post') ?>" id="e2-new-note-item"><a href="<?= $content['admin-hrefs']['new-note'] ?>" class="nu"><span class="e2-svgi"><?= _SVG ('new') ?><span class="e2-unsaved-led" style="display: none"></span></span></a></span>
+
   <?php } ?>
 
 
   <?php # DRAFTS # ?>
   <?php if (array_key_exists ('drafts', $content['admin-hrefs'])) { ?>
-    
+
   <span class="admin-icon" id="e2-drafts-item"
      <?= ((
        array_key_exists ('drafts-count', $content['blog']) and
@@ -48,12 +48,12 @@ if (
         _A (
           '<a href="'. $content['admin-hrefs']['drafts'] .'" class="nu"><span class="e2-svgi">'.
           _SVG ('drafts').
-          '</span></a>'
+          '<span class="e2-unsaved-led" style="display: none"></span></span></a>'
         )
       ?>
     </span>
   </span>
-  
+
   <?php } ?>
 
 
@@ -69,8 +69,8 @@ if (
     ?>
     </span>
   <?php } ?>
-  
-    
+
+
 </span>
 
 <?php endif ?>

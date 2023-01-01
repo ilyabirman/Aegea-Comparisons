@@ -11,6 +11,7 @@ function e2l_load_strings () {
   'e2--powered-by' => 'Рушій —',
   'e2--default-blog-title' => 'Мій блог',
   'e2--default-blog-author' => 'Автор блогу',
+  'e2--website-host' => 'blogengine.ru',
   
   // installer
   'pt--install' => 'Встановлення Егеї',
@@ -58,18 +59,18 @@ function e2l_load_strings () {
   'er--error-deleting-post-tag-info' => 'Не вдалося видалити дані про теги допису',
   'er--wrong-datetime-format' => 'Неправильний формат дати й часу. Має бути: «ДД.ММ.РРРР ГГ:ХХ:СС»',
   'er--cannot-get-post-from-db' => 'Не вдалось отримати допис із бази',
-  'er--images-only-supported' => 'Підтримуються лише зображення',
+  'er--unsupported-file' => 'Підтримуються лише зображення PNG, JPG, GIF, SVG і аудіофайли MP3',
   'er--cannot-create-thumbnail' => 'Не вдалося створити ескіз зображення',
   'er--cannot-upload' => 'Не вдалося завантажити файл',
   'ff--title' => 'Назва',
   'ff--text' => 'Текст',
-  'ff--text-formatting' => 'Форматування тексту',
   'ff--saving' => 'Збереження...',
   'ff--save' => 'Зберегти',
   'ff--tags' => 'Теги',
   'ff--alias' => 'Посилання',
   'ff--change-time' => 'Змінити час',
   'ff--delete' => 'Видалити',
+  'fb--withdraw' => 'Повернути в чернетки',
   'ff--will-get-address' => 'Отримає адресу',
   'ff--is-at-address' => 'Опублікований за адресою',
   'gs--no-notes' => 'Дописів немає.',
@@ -86,6 +87,7 @@ function e2l_load_strings () {
   'nm--posts' => 'Дописи',
   'gs--next-posts' => 'наступні',
   'gs--prev-posts' => 'попередні',
+  'gs--unsaved-changes' => 'Не збережено зміни:',
   
   // drafts
   'ln--drafts' => 'Чернетки',
@@ -94,6 +96,8 @@ function e2l_load_strings () {
   'pt--draft-deletion' => 'Видалення чернетки',
   'pt--edit-draft' => 'Редагування чернетки',
   'gs--no-drafts' => 'Чернеток немає.',
+  'gs--not-published' => 'Не опубліковано',
+  'gs--secret-link' => 'Таємне посилання',
   'gs--draft-will-be-deleted' => 'Чернетку «$[draft]» буде видалено.',
   
   // comments
@@ -219,10 +223,11 @@ function e2l_load_strings () {
   'ff--items-per-page-after' => 'на сторінку',
   'ff--show-sharing-buttons' => 'Показувати кнопки поширення в соцмережах',
   'ff--comments' => 'Коментарі',
-  'ff--comments-enable' => 'Дозволяти',
+  'ff--comments-enable-by-default' => 'дозволяти за замовчуванням',
   'ff--only-for-recent-posts' => 'тільки до нових дописів',
   'ff--send-to-address' => 'надсилати на ел. адресу:',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
+  'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Адміністрування:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'з’єднання з базою',
@@ -250,20 +255,8 @@ function e2l_load_strings () {
   'pt--welcome-text-post' => '.',
 
   // need for password
-  'gs--need-password' => 'Увійдіть зі своїм паролем',
+  'gs--need-password' => 'Ваш пароль',
   'ff--public-computer' => 'Чужий компʼютер',
-  'gs--need-password-for-action' => 'Щоб $[action], увійдіть зі своїм паролем',
-  'gs--np-action-write' => 'створити допис',
-  'gs--np-action-note-edit' => 'редагувати допис',
-  'gs--np-action-comment-edit' => 'редагувати цей коментар',
-  'gs--np-action-comment-reply' => 'відповісти на цей коментар',
-  'gs--np-action-drafts' => 'відкрити чернетки',
-  'gs--np-action-draft' => 'відкрити цю чернетку',
-  'gs--np-action-tag-edit' => 'редагувати цей тег',
-  'gs--np-action-settings' => 'налаштовувати блог',
-  'gs--np-action-password' => 'змінювати пароль',
-  'gs--np-action-database' => 'змінювати параметри бази даних',
-  'gs--np-action-sessions' => 'переглядати сесії',
   'gs--frontpage' => 'Головна сторінка',
   
   // form buttons
@@ -284,7 +277,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'Під час публікації часовий пояс має визначитись автоматично, але якщо не вдасться, буде використано пояс за замовчуванням.',
 
   'tt--from-the-future' => 'Із майбутнього',
-  'tt--just-published' => 'Щойно',
+  'tt--just-now' => 'Щойно',
   'tt--one-minute-ago' => 'Хвилину тому',
   'tt--minutes-ago' => '$[minutes.cardinal] тому',
   'tt--one-hour-ago' => 'Годину тому',
@@ -323,10 +316,13 @@ function e2l_load_strings () {
   'gs--comment-on-post' => 'коментар до допису',
   'gs--posts-tagged' => 'дописи з тегом',
   'gs--search-results' => 'результати пошуку',
+
+  'gs--subscribe-to-blog' => 'Підписатися на блог',
   
   // social networks
   'sn--twitter-verb' => 'Твітнути',
   'sn--facebook-verb' => 'Поділитись',
+  'sn--linkedin-verb' => 'Поділитись',
   'sn--gplus-verb' => 'Плюсанути',
   'sn--vkontakte-verb' => 'Поділитись',
   'sn--telegram-verb' => 'Надіслати',
@@ -338,6 +334,8 @@ function e2l_load_strings () {
   'um--month-g' => '$[month.monthname.genitive]',
   
   // more strings
+  'gs--subscribe' => 'Підписка на блозі',
+
   'gs--no-such-notes' => 'Таких дописів немає.',
   'pt--page-not-found' => 'Сторінку не знайдено',
   'gs--page-not-found' => 'Сторінку не знайдено.',

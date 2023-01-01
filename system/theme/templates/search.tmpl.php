@@ -24,7 +24,7 @@
     <?php } else { ?>
     <a class="nu" href="<?= $content['hrefs']['tags'] ?>" title="<?= _S ('gs--tags') ?>"><span class="e2-svgi"><?= _SVG ('tags') ?></span></a>
     <?php } ?>
-  <span>
+  </span>
   <?php } ?>
   <?php } ?>
 </form>

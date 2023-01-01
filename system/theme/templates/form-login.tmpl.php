@@ -12,77 +12,50 @@
   <?php //= $content['sign-in']['necessary?']? '' : 'style="visibility: hidden"' ?>
 >
 
-<div class="e2-glass"></div>
+<!-- <div class="e2-glass"></div> -->
 
-<div class="e2-login-sheet-guts">
+<div class="e2-login-window" id="e2-login-window">
+  <div class="e2-login-window-col">
+    <form
+      action="<?= $content['form-login']['form-action'] ?>"
+      method="post"
+      class="form-login e2-enterable"
+      id="form-login"
+    >
 
-<form
-  action="<?= $content['form-login']['form-action'] ?>"
-  method="post"
-  class="form-login e2-enterable"
-  id="form-login"
->
+      <input type="text" name="login" value="<?= $content['form-login']['login-name'] ?>" style="display: none" />
 
-<input type="text" name="login" value="<?= $content['form-login']['login-name'] ?>" style="display: none" />
+      <?php if (array_key_exists ('sign-in-prompt', $content)) { ?>
+        <!-- <h1><?= $content['sign-in-prompt'] ?></h1> -->
+        <h2><?= _S ('gs--need-password') ?></h2>
+      <?php } ?>
+      <?php if ($content['sign-in']['necessary?']): ?>
+          <!--
+          <p><?= _A ('<a href="'. $content['blog']['href']. '">'. _S ('gs--frontpage') .'</a>') ?></p>
+          -->
+      <?php endif ?>
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-
-<tr height="4">
-	<td width="40" rowspan="7">&nbsp;</td><td></td>
-	<td width="10" rowspan="7">&nbsp;</td><td></td>
-	<td width="80" rowspan="7">&nbsp;</td>
-</tr>
-
-<tr height="10">
-	<td></td>
-	<td>
-    <?php _T ('message') ?>
-    <?php if (array_key_exists ('sign-in-prompt', $content)) { ?>
-      <h1><?= $content['sign-in-prompt'] ?></h1>
-    <?php } ?>
-    <?php if ($content['sign-in']['necessary?']): ?>
-        <!--
-        <p><?= _A ('<a href="'. $content['blog']['href']. '">'. _S ('gs--frontpage') .'</a>') ?></p>
-        -->
-    <?php endif ?>
-  </td>
-</tr>
-
-</div>
-
-<tr valign="middle">
-	<td style="padding: 4px"><span class="e2-svgi e2-svgi-double"><?= _SVG ('lock') ?></span></td>
-	<td class="form-control">
-    <div>
-      <input type="password" name="password" id="e2-password" class="text big input-disableable" autofocus="autofocus" style="width: 100%" />
-    </div>
-    <div>
+      <div class="e2-login-window-input-wrapper">
+        <span class="e2-svgi e2-svgi-double e2-login-window-icon"><?= _SVG ('lock') ?></span>
+        <input type="password" name="password" id="e2-password" class="text big input-disableable e2-login-window-input" autofocus="autofocus"/>
+      </div>
+        
       <label><input type="checkbox"
         class="checkbox input-disableable"
         name="is_public_pc"
         id="is_public_pc"
         <?= $content['form-login']['public-pc?']? ' checked="checked"' : '' ?>
       />&nbsp;<?= _S ('ff--public-computer') ?></label>
-    </div>
-  </td>
-</tr>
 
-<tr height="8"></tr>
-
-<tr>
-	<td>&nbsp;</td>
-	<td>
-	  <button type="submit" id="login-button" class="button submit-button input-disableable">
-      <?= _S ('fb--sign-in') ?>
-    </button>
-    &nbsp;&nbsp;&nbsp;
-    <span id="password-checking" class="i-loading" style="display: none"></span><span id="password-correct" class="e2-svgi" style="display: none"><?= _SVG ('tick') ?></span>
-	</td>
-</tr>
-
-</table>
-</form>
-
+      <div class="e2-login-window-button">
+        <button type="submit" id="login-button" class="e2-submit-button input-disableable">
+          <?= _S ('fb--sign-in') ?>
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <span class="e2-svgi" id="password-checking" style="display: none"><?= _SVG ('spin') ?></span><span id="password-correct" class="e2-svgi" style="display: none"><?= _SVG ('tick') ?></span>
+      </div>
+    </form>
+  </div>
 </div>
 
 </div>

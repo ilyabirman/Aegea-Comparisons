@@ -1,9 +1,10 @@
 $(function() {
-  $("p#chosen-sample span").bind("click", function(){
-    var t = $(this).text();
-    $(".chzn-select").chosen().create_virtual(false, t);
-  });
-  $ ('.chzn-select').chosen ()
+  $('.chzn-select').chosen();
+});
+
+$(window).bind('resize', function () { 
+  $('.chzn-select').chosen('destroy');
+  $('.chzn-select').chosen();
 });
 
 // Chosen, a Select Box Enhancer for jQuery and Protoype
@@ -397,10 +398,17 @@ Copyright (c) 2011 by Harvest
   $.fn.extend({
     chosen: function(options) {
       return this.each(function(input_field) {
-        var $this;
+        var $this, chosen;
         $this = $(this);
-        if (!$this.hasClass("chzn-done")) {
-          return $this.data('chosen', new Chosen(this, options));
+        chosen = $this.data('chosen');
+        if (options === 'destroy') {
+          if (chosen instanceof Chosen) {
+            chosen.destroy();
+          }
+          return;
+        }
+        if (!(chosen instanceof Chosen)) {
+          $this.data('chosen', new Chosen(this, options));
         }
       });
     }
@@ -733,6 +741,16 @@ Copyright (c) 2011 by Harvest
           return this.search_field.attr("tabindex", -1);
         }
       }
+    };
+
+    Chosen.prototype.destroy = function() {
+      $(this.container[0].ownerDocument).unbind("click.chosen", this.click_test_action);
+      if (this.search_field[0].tabIndex) {
+        this.form_field_jq[0].tabIndex = this.search_field[0].tabIndex;
+      }
+      this.container.remove();
+      this.form_field_jq.removeData('chosen');
+      return this.form_field_jq.show();
     };
 
     Chosen.prototype.show_search_field_default = function() {

@@ -2,27 +2,34 @@ var gulp = require ('gulp')
 
 var postcss = require ('gulp-postcss')
 var sass = require ('gulp-sass')
+var autoprefixer = require ('autoprefixer')
+var assets = require ('postcss-assets')
+var svgmin = require ('gulp-svgmin')
+
+gulp.task ('svg', function () {
+  return gulp.src (['src/images/*'])
+    .pipe (svgmin ({
+      plugins: [{cleanupIDs: false}]
+    }))
+    .pipe (gulp.dest ('images/'))
+})
 
 gulp.task ('sass', function () {
-  gulp.src (['sass/*.scss', '!sass/_*.scss'])
+  gulp.src (['src/styles/*.scss', '!src/styles/_*.scss'])
     .pipe (sass ({
       outputStyle: 'compressed',
     }))
     .pipe (postcss ([
-      require ('autoprefixer') ({
+      autoprefixer ({
         browsers: ['last 1 version', 'last 2 Explorer versions']
-      }),
-      require ('postcss-assets') ({
-        basePath: 'images/',
-        baseUrl: '/system/theme/',
-        inline: { maxSize: '52K' }
       })
     ]))
-    .pipe (gulp.dest ('styles/'))
+    .pipe(gulp.dest('styles/'))
 });
 
-gulp.task ('watch', function () {
-  gulp.watch ('sass/**/*.scss', ['sass'])
+gulp.task ('watch', ['svg', 'sass'], function () {
+  gulp.watch ('src/images/*', ['svg'])
+  gulp.watch ('src/styles/**/*.scss', ['sass'])
 });
 
-gulp.task ('default', ['sass'])
+gulp.task ('default', ['svg', 'sass'])

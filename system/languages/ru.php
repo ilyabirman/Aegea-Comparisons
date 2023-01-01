@@ -11,6 +11,7 @@ function e2l_load_strings () {
   'e2--powered-by' => 'Движок —',
   'e2--default-blog-title' => 'Мой блог',
   'e2--default-blog-author' => 'Автор блога',
+  'e2--website-host' => 'blogengine.ru',
   
   // installer
   'pt--install' => 'Установка Эгеи',
@@ -58,18 +59,18 @@ function e2l_load_strings () {
   'er--error-deleting-post-tag-info' => 'Ошибка при удалении данных о тегах заметки',
   'er--wrong-datetime-format' => 'Неправильный формат даты-времени. Должен быть: «ДД.ММ.ГГГГ ЧЧ:ММ:СС»',
   'er--cannot-get-post-from-db' => 'Не удалось извлечь заметку из базы',
-  'er--images-only-supported' => 'Поддерживаются только изображения',
+  'er--unsupported-file' => 'Поддерживаются только изображения PNG, JPG, GIF, SVG и аудиофайлы MP3',
   'er--cannot-create-thumbnail' => 'Не удалось создать уменьшенное изображение',
   'er--cannot-upload' => 'Не удалось загрузить файл',
   'ff--title' => 'Название',
   'ff--text' => 'Текст',
-  'ff--text-formatting' => 'Форматирование текста',
   'ff--saving' => 'Сохранение...',
   'ff--save' => 'Сохранить',
   'ff--tags' => 'Теги',
   'ff--alias' => 'Ссылка',
   'ff--change-time' => 'Изменить время',
   'ff--delete' => 'Удалить',
+  'fb--withdraw' => 'Вернуть в черновики',
   'ff--will-get-address' => 'Получит адрес',
   'ff--is-at-address' => 'Опубликована по адресу',
   'gs--no-notes' => 'Заметок нет.',
@@ -86,6 +87,7 @@ function e2l_load_strings () {
   'nm--posts' => 'Заметки',
   'gs--next-posts' => 'следующие',
   'gs--prev-posts' => 'предыдущие',
+  'gs--unsaved-changes' => 'Не сохранены изменения:',
   
   // drafts
   'ln--drafts' => 'Черновики',
@@ -94,8 +96,10 @@ function e2l_load_strings () {
   'pt--draft-deletion' => 'Удаление черновика',
   'pt--edit-draft' => 'Правка черновика',
   'gs--no-drafts' => 'Черновиков нет.',
+  'gs--not-published' => 'Не опубликовано',
+  'gs--secret-link' => 'Секретная ссылка',
   'gs--draft-will-be-deleted' => 'Черновик «$[draft]» будет удалён.',
-  
+
   // comments
   'pt--new-comment' => 'Новый комментарий',
   'pt--edit-comment' => 'Правка комментария',
@@ -220,10 +224,11 @@ function e2l_load_strings () {
   'ff--items-per-page-after' => 'на странице',
   'ff--show-sharing-buttons' => 'Показывать кнопки отправки в соцсети',
   'ff--comments' => 'Комментарии',
-  'ff--comments-enable' => 'Разрешать',
+  'ff--comments-enable-by-default' => 'включать по умолчанию',
   'ff--only-for-recent-posts' => 'только к свежим заметкам',
   'ff--send-to-address' => 'присылать по почте на адрес:',
   'ff--yandex-metrika' => 'Яндекс.Метрика',
+  'ff--google-analytics' => 'Гугль-Аналитика',
   'ff--administration' => 'Администрирование:',
   'gs--password' => 'пароль',
   'gs--db-connection' => 'соединение с базой',
@@ -251,20 +256,8 @@ function e2l_load_strings () {
   'pt--welcome-text-post' => '.',
 
   // need for password
-  'gs--need-password' => 'Зайдите под своим паролем',
+  'gs--need-password' => 'Ваш пароль',
   'ff--public-computer' => 'Чужой компьютер',
-  'gs--need-password-for-action' => 'Чтобы $[action], зайдите под своим паролем',
-  'gs--np-action-write' => 'написать заметку',
-  'gs--np-action-note-edit' => 'править заметку',
-  'gs--np-action-comment-edit' => 'править этот комментарий',
-  'gs--np-action-comment-reply' => 'ответить на этот комментарий',
-  'gs--np-action-drafts' => 'открыть черновики',
-  'gs--np-action-draft' => 'открыть этот черновик',
-  'gs--np-action-tag-edit' => 'править этот тег',
-  'gs--np-action-settings' => 'настраивать блог',
-  'gs--np-action-password' => 'изменять пароль',
-  'gs--np-action-database' => 'изменять параметры базы данных',
-  'gs--np-action-sessions' => 'просматривать сессии',
   'gs--frontpage' => 'Главная страница',
   
   // form buttons
@@ -285,7 +278,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'При публикации часовой пояс обычно определяется автоматически. А в случае неудачи используется выбранный здесь часовой пояс.',
 
   'tt--from-the-future' => 'Из будущего',
-  'tt--just-published' => 'Только что',
+  'tt--just-now' => 'Только что',
   'tt--one-minute-ago' => 'Минуту назад',
   'tt--minutes-ago' => '$[minutes.cardinal] назад',
   'tt--one-hour-ago' => 'Час назад',
@@ -325,9 +318,12 @@ function e2l_load_strings () {
   'gs--posts-tagged' => 'заметки с тегом',
   'gs--search-results' => 'результаты поиска',
   
+  'gs--subscribe-to-blog' => 'Подписаться на блог',
+
   // social networks
   'sn--twitter-verb' => 'Твитнуть',
   'sn--facebook-verb' => 'Поделиться',
+  'sn--linkedin-verb' => 'Поделиться',
   'sn--gplus-verb' => 'Плюсануть',
   'sn--vkontakte-verb' => 'Поделиться',
   'sn--telegram-verb' => 'Отправить',
@@ -339,6 +335,8 @@ function e2l_load_strings () {
   'um--month-g' => '$[month.monthname.genitive]',
   
   // more strings
+  'gs--subscribe' => 'Подписка на блог',
+  
   'gs--no-such-notes' => 'Таких заметок нет.',
   'pt--page-not-found' => 'Страница не найдена',
   'gs--page-not-found' => 'Страница не найдена.',

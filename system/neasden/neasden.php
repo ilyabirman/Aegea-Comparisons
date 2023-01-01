@@ -1,6 +1,6 @@
 <?php
 
-// Neasden v2.20
+// Neasden v2.41
 
 interface NeasdenGroup {
   function render ($group, $myconf);
@@ -237,37 +237,44 @@ class Neasden {
       $dumb[0], $quotes[0], $quotes[3], $text
       /*   " “ ”   or   " « »   */
     );
-  
+
     // guess remaining replacements
     if ($this->language_data['quotes-auto-depth']) {
+      $text_remaining = $text;
+      $text = '';
       $qdepth = 0;
-      for ($i = 0; $i < mb_strlen ($text)-1; ++ $i) {
+      while (1) {
 
-        $scan = mb_substr ($text, $i, 1);
+        // this wirdness is needed for optimization:
+        $scan = substr ($text_remaining, 0, 10);
+        $scan = mb_substr ($scan, 0, 1);
+        if ($scan === false or $scan === '') break;
 
         if ($scan == $quotes[0]) {
           ++ $qdepth;
-          if ($qdepth > 1) $text = mb_substr ($text, 0, $i) . $quotes[1] . mb_substr ($text, $i + 1);
-        }
-        if ($scan == $quotes[3]) {
-          if ($qdepth > 1) $text = mb_substr ($text, 0, $i) . $quotes[2] . mb_substr ($text, $i + 1);
+          if ($qdepth > 1) $text .= $quotes[1];
+          else $text .= $quotes[0];
+        } elseif ($scan == $quotes[3]) {
+          if ($qdepth > 1) $text .= $quotes[2];
+          else $text .= $quotes[3];
           -- $qdepth;
-        }
-        if ($i > mb_strlen ($text)-1) break;
-
-        // replace outer quotes with inner ones
-        if ($scan == $dumb[0]) {
+        } elseif ($scan == $dumb[0]) {
           if ($qdepth > 0) {
             if ($qdepth > 1)
-              $text = mb_substr ($text, 0, $i) . $quotes[2] . mb_substr ($text, $i + 1);
+              $text .= $quotes[2];
             else
-              $text = mb_substr ($text, 0, $i) . $quotes[3] . mb_substr ($text, $i + 1);
+              $text .= $quotes[3];
             -- $qdepth;
           } else {
-            $text = mb_substr ($text, 0, $i) . $quotes[0] . mb_substr ($text, $i + 1);
+            $text .= $quotes[0];
             ++ $qdepth;
           }
+        } else {
+          $text .= $scan;
         }
+        
+        $text_remaining = substr ($text_remaining, strlen ($scan));
+        if ($text_remaining === false or $text_remaining === '') break;
 
       }
     }
@@ -413,9 +420,11 @@ class Neasden {
         );
       }
     }
-  
+
     // quotes
-    $text = $this->smart_quotes ($text);
+    if (@$this->config['typography.quotes']) {
+      $text = $this->smart_quotes ($text);
+    }
   
     // replacements
     if (1) {
@@ -865,7 +874,7 @@ class Neasden {
           $r = substr ($r, 0, -7); // remove the closing </code> tag from here
           $r = trim ($r);
           $thisfrag['content'] = $r;
-          if ($thisfrag['content']) {
+          if ($thisfrag['content'] !== '') {
             $fragments[] = $thisfrag;
           }
           $thisfrag = array ('content' => '', 'strength' => -1);
@@ -894,9 +903,24 @@ class Neasden {
 
           $tagname = $this->element_name ($r);
 
-          if (substr ($tagname, 0, 1) != '/') { // usafe
-  
-            // open tag
+          $is_open_tag = (substr ($tagname, 0, 1) != '/');
+
+          if (!$is_open_tag) {
+            $tagname = substr ($tagname, 1);
+          }
+
+          if (strstr (' '. $this->config['html.elements.ignore'] .' ', ' '. $tagname .' ')) {
+
+            if ($thisfrag['content'] !== '') {
+              $fragments[] = $thisfrag;
+            }
+            $prev_strength = $thisfrag['strength'];
+            $thisfrag = array ('content' => $r, 'strength' => self::FRAG_STRENGTH_SACRED);
+            $fragments[] = $thisfrag;
+            $thisfrag = array ('content' => '', 'strength' => $prev_strength);
+            $r = '';
+
+          } elseif ($is_open_tag) {
   
             if (
               $this->element_strength ($tagname) > $thisfrag['strength']
@@ -910,7 +934,7 @@ class Neasden {
               $thisfrag = array ('content' => $r, 'strength' => -1);
   
             } else {
-  
+
               if ($tagname == 'img') {
                 if ($this->config['html.img.detect']) {
                   if (preg_match (
@@ -942,8 +966,7 @@ class Neasden {
           } else {
   
             // close tag
-            $tagname = substr ($tagname, 1); // usafe
-            
+                          
             if (in_array ($tagname, $tagstack)) {
 
               // so tag is in stack, so we force close it
@@ -981,7 +1004,7 @@ class Neasden {
                 // closing tag makes no sense, it wasn’t open
   
                 // so end whatever fragments we have
-                if ($thisfrag['content']) {
+                if ($thisfrag['content'] !== '') {
                   $fragments[] = $thisfrag;
                 }
   

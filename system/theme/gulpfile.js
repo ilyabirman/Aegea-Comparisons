@@ -6,15 +6,19 @@ var sass = require ('gulp-sass')
 var autoprefixer = require ('autoprefixer')
 var assets = require ('postcss-assets')
 var svgmin = require ('gulp-svgmin')
+var uglify = require('gulp-uglify');
+var pump = require('pump')
 
 gulp.task ('svg', function () {
-  return gulp.src (['images__src/*'])
-    .pipe (svgmin ())
+  return gulp.src (['src/images/*'])
+    .pipe (svgmin ({
+      plugins: [{cleanupIDs: false}]
+    }))
     .pipe (gulp.dest ('images/'))
 })
 
 gulp.task ('sass', function () {
-  gulp.src (['sass/*.scss', '!sass/_*.scss'])
+  gulp.src (['src/styles/*.scss', '!styles/_*.scss'])
     .pipe (sass ({
       outputStyle: 'compressed'
     }))
@@ -35,7 +39,20 @@ gulp.task ('sass', function () {
     .pipe(gulp.dest('styles/'))
 });
 
-gulp.task ('default', ['svg', 'sass'], function () {
-  gulp.watch ('images__src/*', ['svg'])
-  gulp.watch ('sass/*', ['sass'])
+gulp.task('scripts', function(cb) { 
+  pump([
+      gulp.src('src/js/*.js'),
+      uglify(),
+      gulp.dest('js/')
+    ],
+    cb
+  );
 });
+
+gulp.task ('watch', ['svg', 'sass', 'scripts'], function () {
+  gulp.watch ('src/images/*', ['svg'])
+  gulp.watch ('src/styles/**/*.scss', ['sass'])
+  gulp.watch ('src/js/*', ['scripts'])
+});
+
+gulp.task ('default', ['svg', 'sass', 'scripts']);

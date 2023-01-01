@@ -150,13 +150,13 @@ document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
   </div>
 </div>
 
-<div class="form-control submit-box">
+<div class="form-control">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="button submit-button">
+    <button type="submit" id="submit-button" class="e2-submit-button">
       <?= @$content['form-install']['submit-text'] ?>
     </button>
     <span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
-    <span class="i-loading e2-ajax-loading" style="display: none"></span>
+    <span class="e2-ajax-loading e2-svgi" style="display: none"><?= _SVG ('spin') ?></span>
   </div>
 </div>
 
@@ -177,7 +177,7 @@ document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
   
 <div class="form-control submit-box">
   <div class="form-element">
-    <button type="submit" id="submit-button" class="button submit-button">
+    <button type="submit" id="submit-button" class="e2-submit-button">
       <?= @$content['form-install']['retry-text'] ?>
     </button>
   </div>

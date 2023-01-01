@@ -83,7 +83,7 @@
 </div>
 
 <div class="form-control">
-  <div class="form-label input-label">
+  <div class="form-label form-label-sticky input-label">
     <p><label><?= _S ('ff--text') ?></label></p>
   </div>
   <div class="form-element">
@@ -124,9 +124,9 @@
 <?php } ?>
 
 
-<div class="form-control submit-box">
+<div class="form-control">
   <div class="form-element">
-  <button type="submit" id="submit-button" class="button submit-button" tabindex="5">
+  <button type="submit" id="submit-button" class="e2-submit-button" tabindex="5">
     <?= @$content['form-comment']['submit-text'] ?>
   </button><span class="e2-keyboard-shortcut"><?= _SHORTCUT ('submit') ?></span>
   </div>

@@ -1,0 +1,1 @@
+$&&$(function(){function e(){for(var e=0;e<o.length;e++){var n=o[e].id.replace("e2-note-","");document.e2.localCopies.doesCopyExist(n)&&$("#e2-note-"+n+" .e2-unsaved-led").show()}}var o=$(".e2-note");document.e2.isLocalStorageAvailable&&e()});

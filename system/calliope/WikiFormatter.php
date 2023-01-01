@@ -29,6 +29,10 @@
   class WikiFormatter extends WikiModifiers                                
   {
 
+     function __construct($settings = NULL) {
+       return $this -> WikiFormatter ($settings);
+     }
+
      function WikiFormatter($settings = NULL)
      {
        if ($settings) $this->configure($settings);
@@ -45,7 +49,6 @@
      function imageInfo($href)
      {
 
-       ##BUGBUG how this works?
        if (preg_match('/^([^\\\\\/]*)\.(?:'.$this->imgExtensions.')((\@(\d+)x(\d+))?(\@(\w+))?)?$/is', $href, $found)) 
        {
           /*
@@ -152,7 +155,7 @@
 
        if (method_exists($this, 'm_'.$found[1])) 
        {
-         return(@call_user_method('m_'.$found[1], $this, $found));
+         return(@call_user_func(array ($this, 'm_'.$found[1]), $found));
        };
 
        # AI

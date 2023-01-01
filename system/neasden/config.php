@@ -1,6 +1,6 @@
 <?php
 
-global $settings, $full_blog_url, $_lang;
+global $settings, $full_blog_url, $_lang, $_template;
 
 return array (
 
@@ -55,15 +55,16 @@ return array (
   'language' => $_lang,
   
   'html.on' => true,
-  'html.elements.opaque' => 'div p ul ol li blockquote table pre textarea',
-  'html.elements.sacred' => 'object embed iframe head link script style code',
+  'html.elements.opaque' => 'p ul ol li pre',
+  'html.elements.ignore' => 'div blockquote table tr td th thead tbody tfoot caption colgroup col',
+  'html.elements.sacred' => 'object embed iframe head link script style code textarea',
   'html.basic' => false,
 
   'html.code.on' => true,
   'html.code.wrap' => array ('<pre class="e2-text-code"><code>', '</code></pre>'),  
   'html.code.highlightjs' => true,
 
-  'html.img.prefix' => PICTURES_FOLDER,
+  'html.img.prefix' => $full_blog_url .'/'. PICTURES_FOLDER,
   'html.img.detect' => true,
 
   'groups.on' => true,
@@ -77,20 +78,20 @@ return array (
       'src-prefix' => $full_blog_url .'/',
       'folder' => PICTURES_FOLDER,
       'css-class' => 'e2-text-picture', 
-      'max-width' => $settings['max-image-width'],
+      'max-width' => $_template['max_image_width'],
     ),
     'fotorama' => array (
       'src-prefix' => $full_blog_url .'/',
       'folder' => PICTURES_FOLDER,
       'css-class' => 'e2-text-picture',
-      'max-width' => $settings['max-image-width'],
+      'max-width' => $_template['max_image_width'],
     ),
     'table' => array (
       'css-class' => 'e2-text-table',
     ),
     'onlinevideo' => array (
       'css-class' => 'e2-text-video',
-      'max-width' => $settings['max-image-width'],
+      'max-width' => $_template['max_image_width'],
       'ratio' => 16/9,
     ),
     'audio' => array (
@@ -101,6 +102,7 @@ return array (
   ),
   
   'typography.on' => true,
+  'typography.quotes' => true,
   'typography.markup' => true,
   'typography.autohref' => true,
   'typography.cleanup' => array (

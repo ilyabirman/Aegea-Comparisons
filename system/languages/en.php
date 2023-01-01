@@ -11,6 +11,7 @@ function e2l_load_strings () {
   'e2--powered-by' => 'Powered by',
   'e2--default-blog-title' => 'My blog',
   'e2--default-blog-author' => 'Blog author',
+  'e2--website-host' => 'blogengine.me',
   
   // installer
   'pt--install' => 'Install Aegea',
@@ -58,18 +59,18 @@ function e2l_load_strings () {
   'er--error-deleting-post-tag-info' => 'Error deleting this post’s tag information',
   'er--wrong-datetime-format' => 'Wrong date & time format. Must be “dd.mm.yyyy hh:mm:ss”',
   'er--cannot-get-post-from-db' => 'Couldn’t get the post from the database',
-  'er--images-only-supported' => 'Only images are supported',
+  'er--unsupported-file' => 'Only PNG, JPG, GIF & SVG images and MP3 audio files are supported',
   'er--cannot-create-thumbnail' => 'Can’t create thumbnail',
   'er--cannot-upload' => 'Can’t upload file',
   'ff--title' => 'Title',
   'ff--text' => 'Text',
-  'ff--text-formatting' => 'Formatting text',
   'ff--saving' => 'Saving',
   'ff--save' => 'Save',
   'ff--tags' => 'Tags',
   'ff--alias' => 'Alias',
   'ff--change-time' => 'Change time',
   'ff--delete' => 'Delete',
+  'fb--withdraw' => 'Convert back into draft',
   'ff--will-get-address' => 'Will get address',
   'ff--is-at-address' => 'Published at address',
   'gs--no-notes' => 'There are no posts.',
@@ -86,6 +87,7 @@ function e2l_load_strings () {
   'nm--posts' => 'Posts',
   'gs--next-posts' => 'next',
   'gs--prev-posts' => 'previous',
+  'gs--unsaved-changes' => 'Changes not saved:',
   
   // drafts
   'ln--drafts' => 'Drafts',
@@ -94,6 +96,8 @@ function e2l_load_strings () {
   'pt--draft-deletion' => 'Draft deletion',
   'pt--edit-draft' => 'Edit draft',
   'gs--no-drafts' => 'There are no drafts.',
+  'gs--not-published' => 'Not published',
+  'gs--secret-link' => 'Secret link',
   'gs--draft-will-be-deleted' => 'The draft «$[draft]» will be deleted.',
   
   // comments
@@ -220,10 +224,11 @@ function e2l_load_strings () {
   'ff--items-per-page-after' => 'per page',
   'ff--show-sharing-buttons' => 'Show social sharing buttons',
   'ff--comments' => 'Comments',
-  'ff--comments-enable' => 'Enable',
+  'ff--comments-enable-by-default' => 'allow by default',
   'ff--only-for-recent-posts' => 'only for recent posts',
   'ff--send-to-address' => 'send by email to',
   'ff--yandex-metrika' => 'Yandex.Metrika',
+  'ff--google-analytics' => 'Google Analytics',
   'ff--administration' => 'Administration:',
   'gs--password' => 'password',
   'gs--db-connection' => 'database connection',
@@ -251,20 +256,8 @@ function e2l_load_strings () {
   'pt--welcome-text-post' => '.',
 
   // need for password
-  'gs--need-password' => 'Please enter your password',
+  'gs--need-password' => 'Your password',
   'ff--public-computer' => 'Public computer',
-  'gs--need-password-for-action' => 'To $[action], please enter your password',
-  'gs--np-action-write' => 'write a note',
-  'gs--np-action-note-edit' => 'edit the note',
-  'gs--np-action-comment-edit' => 'edit the comment',
-  'gs--np-action-comment-reply' => 'reply to the comment',
-  'gs--np-action-drafts' => 'open drafts',
-  'gs--np-action-draft' => 'open the draft',
-  'gs--np-action-tag-edit' => 'edit the tag',
-  'gs--np-action-settings' => 'change settings',
-  'gs--np-action-password' => 'change password',
-  'gs--np-action-database' => 'change database data',
-  'gs--np-action-sessions' => 'view session list',
   'gs--frontpage' => 'Home',
   
   // form buttons
@@ -296,9 +289,12 @@ function e2l_load_strings () {
   'gs--posts-tagged' => 'posts tagged',
   'gs--search-results' => 'search results',
   
+  'gs--subscribe-to-blog' => 'Subscribe to this blog',
+
   // social networks
   'sn--twitter-verb' => 'Tweet',
   'sn--facebook-verb' => 'Share',
+  'sn--linkedin-verb' => 'Share',
   'sn--gplus-verb' => 'Plus',
   'sn--vkontakte-verb' => 'Share',
   'sn--telegram-verb' => 'Send',
@@ -310,7 +306,7 @@ function e2l_load_strings () {
   'gs--e2-autodetects-timezone' => 'When publishing a post, the timezone will usually be detected automatically. In case of failure the timezone selected here will be used.',
 
   'tt--from-the-future' => 'From the future',
-  'tt--just-published' => 'Just published',
+  'tt--just-now' => 'Just now',
   'tt--one-minute-ago' => 'A minute ago',
   'tt--minutes-ago' => '$[minutes.cardinal] ago',
   'tt--one-hour-ago' => 'An hour ago',
@@ -339,6 +335,8 @@ function e2l_load_strings () {
   'um--month-g' => '$[month.monthname]',
   
   // more strings
+  'gs--subscribe' => 'Subscribe to this blog',
+  
   'gs--no-such-notes' => 'There are no such posts.',
   'pt--page-not-found' => 'Page not found',
   'gs--page-not-found' => 'Page not found.',

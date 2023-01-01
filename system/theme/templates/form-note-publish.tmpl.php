@@ -23,13 +23,18 @@ document.getElementById ('gmt-offset').value = - d.getTimezoneOffset()
 
 <div class="form">
 
-<div class="form-control submit-box">
-  <button type="submit" id="submit-button" class="button submit-button">
+<div class="form-control">
+  <button type="submit" id="submit-button" class="e2-submit-button">
     <?= @$content['form-note-publish']['submit-text'] ?>
   </button>
 </div>
 
 </div>
 
-
 </form>
+
+<?php if (array_key_exists ('only', $content['notes'])) { ?>
+<?php if (array_key_exists ('preview-href', $content['notes']['only'])) { ?>
+<p class="admin-links"><a href="<?= $content['notes']['only']['preview-href'] ?>"><?= _S ('gs--secret-link') ?></a></p>
+<?php } ?>
+<?php } ?>
