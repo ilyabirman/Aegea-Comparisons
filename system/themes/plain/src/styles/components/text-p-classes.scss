@@ -1,16 +1,8 @@
 .e2-text .lead {
-  transition-property: (font-size, line-height, margin-bottom);
-  transition-duration: var(--time);
-  transition-timing-function: ease-out;
-  font-size: var(--noteTextFontSize);
-  line-height: var(--noteTextLineHeight);
   margin: 0 0 20px 0;
   max-width: 720px;
-}
-
-.e2-note-favourite .e2-text .lead {
-  font-size: 26px;
-  line-height: 30px;
+  font-size: var(--noteLeadFontSize);
+  line-height: var(--noteLeadLineHeight);
 }
 
 .e2-text .loud {

@@ -27,7 +27,7 @@
   --markedTextBackground:        rgb( 255, 242, 128);
   --markedImageBorderColor:      rgb( 255, 242, 128);
 
-  --inputBackgroundColor: #d5fffd;
+  --inputBackgroundColor:      rgb(213, 255, 253);
   --inputTextColor:              var(--foregroundColor);
   --offSwitchColor:              var(--foregroundColor);
   --onSwitchColor:               var(--headingsColor);
@@ -36,13 +36,14 @@
   /* --disabledColor */
   --activeColor: rgb(3, 199, 206);
   /* --errorColor */
+  /* --verifiedColor */
   /* --currentItemBackgroundColor */
   --windowBackgroundColor:             rgb( 255, 255, 255);
-  /* --unsavedIndicatorColor */
+  --unsavedIndicatorColor: var(--activeColor);
   
   /* to match .likely */
-  --followButtonBackground: rgb(148, 212, 64);
-  --followButtonHoverBackground: rgb(151, 238, 37);
+  --followButtonBackground: #ef10a0;
+  --followButtonHoverBackground: #ff20b0;
   --followButtonTextColor: #fff;
 
   /* to match .likely-light */
@@ -68,18 +69,19 @@
   --blogTitleLineHeight: 32px;
   --pageHeadingFontSize: 36px;
   --pageHeadingLineHeight: 42px;
-  --noteTitleFontSize: 36px;
-  --noteTitleLineHeight: 42px;
-  --noteTitleFavouriteFontSize: 36px;
-  --noteTitleFavouriteLineHeight: 42px;
-  --noteTextFontSize: 20px;
-  --noteTextLineHeight: 28px;
+  /* --noteTitleFontSize */
+  /* --noteTitleLineHeight */
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
 
-  /* --mainFontFamily: "Helvetica Neue", "Helvetica", "Arial", sans-serif; */
-  /* --noteMainFontFamily: Georgia, serif; */
+  /* --mainFontFamily */
+  /* --noteMainFontFamily */
   /* --smallFontFamily */
 
   --time: 1.333s;
+  /* --timeLong */
 
 }
 
@@ -91,7 +93,7 @@
     --backgroundTransparentColor: rgba(0, 0, 0, 0.8);
     --sheetBackgroundColor:       rgba(24, 47, 42, 0.8);
 
-    --foregroundColor:             rgb(234, 200, 234);
+    --foregroundColor:             rgb(239, 220, 239);
     --thinRuleColor:              rgba(234, 200, 234, .25);
     
     --headingsColor:               rgb(255, 64, 185);
@@ -119,9 +121,9 @@
     --offSwitchColor:                var(--foregroundColor);
     --onSwitchColor:                 var(--activeColor);
 
-    --activeColor:                 rgb(31, 233, 240);
+    --activeColor:                 rgb(  31, 233, 240);
     --errorColor:                  rgb( 240,  40,  32);
-    --verifiedColor:               rgb(   40, 192, 32);
+    --verifiedColor:               rgb(  40, 192,  32);
 
     --windowBackgroundColor:       rgba(61, 82, 77);
 
@@ -129,14 +131,13 @@
 }
 
 .e2-text .lead {
-  color: var(--tagColor);
   color: #8e33f5;
   font-weight: bold;
 }
 
 .e2-text .loud {
   background-color: #d9ff00;
-  color: #000;
+  color: rgb(120, 48, 144);
   font-family: var(--mainFontFamily);
   font-weight: bold;
   font-size: 54px;
@@ -144,18 +145,31 @@
   max-width: 720px;  
   padding: .4em 0 .8em;
   border: none;
-  border-radius: 0.4em;
+  border-radius: 0.33em;
   box-shadow: -0.4em 0 0 #d9ff00, 0.4em 0 0 #d9ff00;
   margin: 20px 0 40px;
 }
 
-.e2-text .foot {
-  color: #fff;
-  font-weight: bold;
+@media screen and (max-width: 1023px) {
+  .e2-text .loud {
+    padding: .4em .4em .8em;
+    box-shadow: none;
+    font-size: 40px;
+    line-height: 44px;
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  .e2-text .loud {
-    color: var(--backgroundColor);
-  }
+.e2-button {
+  background: #f3ecf0;
+  background: linear-gradient(to bottom, #f7f0f4 0%, #efe8ed 100%);
+}
+
+.e2-submit-button {
+  background: #ef10a0;
+  background: linear-gradient(to bottom, #ff20b0 0%, #df0090 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
 }

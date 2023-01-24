@@ -52,6 +52,8 @@ function initSearchHotKeys () {
     if ($input.is (":focus")) return
     if (!isInputEventApplicable (e)) return
     if (!char || !char.length) return
+    if ($ ('#e2-follow-sheet').hasClass('e2-show')) return
+    if ($ ('#e2-login-sheet').hasClass('e2-show')) return
 
     if (probeWidth > 0 && !e.metaKey && !e.ctrlKey && !e.altKey) {
       e.preventDefault ()

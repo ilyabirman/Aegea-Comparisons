@@ -71,8 +71,6 @@
   --pageHeadingLineHeight: 40px;
   --noteTitleFontSize: 36px;
   --noteTitleLineHeight: 40px;
-  --noteTitleFavouriteFontSize: 36px;
-  --noteTitleFavouriteLineHeight: 40px;
   --noteTextFontSize: 20px;
   --noteTextLineHeight: 28px;
 
@@ -84,18 +82,17 @@
 
 }
 
-.e2-text .lead {
-  font-family: var(--mainFontFamily);
-}
-  
 .e2-text .loud {
+  background-color: #0040cc;
   color: var(--headingsColor);
   font-family: var(--mainFontFamily);
+  font-size: 40px;
+  line-height: 44px;
+  max-width: 720px;  
   border: none;
-  padding: .4em 0.4em .8em;
-  background: var(--windowBackgroundColor);
+  padding: .4em .4em .8em;
+  margin: 20px 0 40px;
 }
-
 
 
 /* Style: Tomorrow Night Eighties (https://highlightjs.org/static/demo/) */

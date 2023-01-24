@@ -71,6 +71,16 @@ mark img {
   box-shadow: 0 0 0 4px var(--markedImageBorderColor);
 }
 
+kbd {
+  padding: .1em .33em;
+  text-decoration: none;
+  font-family: var(--smallFontFamily);
+  font-size: 80%;
+  font-weight: bold;
+  border: 1px var(--thinRuleColor) solid;
+  border-radius: 3px;
+}
+
 img {
   border: 0;
 }

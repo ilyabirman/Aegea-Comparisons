@@ -151,34 +151,28 @@
 	background-color: var(--followButtonBackground);
   color: var(--followButtonTextColor);
   transition: background var(--time) ease-out, color var(--time) ease-out, fill var(--time) ease-out;
+  border: none;
 	border-radius: 4px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .band-follow-button:hover,
 .band-follow-button.hover {
-	white-space: nowrap;
-	padding: 0 6px;
-	margin-bottom: 3px;
-	font-size: 12px;
-	line-height: 22px;
   background: var(--followButtonHoverBackground);
   color: var(--followButtonTextColor);
   transition: none;
-	border-radius: 4px;
 }
 
-.band-follow-button a {
+.band-follow-button span {
+	color: var(--followButtonTextColor);
 	position: relative;
 	top: -1px;
-	border-bottom: none;
-	color: var(--headingsColor);
-	touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 /* Integrate with sortable module */
 .band-item.e2-js-menu-reorderable-item-chosen a {
-	color: var(--headingsColor);
+	color: var(--followButtonTextColor);
 }
 
 .band-item.e2-js-menu-reorderable-item-chosen a::after {

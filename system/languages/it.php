@@ -308,9 +308,9 @@ function e2l_load_strings () {
   // welcome
   'pt--welcome' => 'Creato!',
   'pt--welcome-text-pre' => 'Suo blog è stato creato. ',
-  'pt--welcome-text-href-write' => 'Scrivere un post',
+  'pt--welcome-text-href-write' => 'Scriva un post',
   'pt--welcome-text-or' => ' o ',
-  'pt--welcome-text-href-settings' => 'impostare le cose',
+  'pt--welcome-text-href-settings' => 'imposti le preferenze',
   'pt--welcome-text-post' => '.',
 
   // need for password

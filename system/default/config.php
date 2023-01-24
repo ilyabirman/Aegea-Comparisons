@@ -107,8 +107,11 @@ $_config['allow_underhood_access'] = true;
 // sender address for outgoing mail (if ends with @, domain name will be added)
 $_config['mail_from'] = 'blog@';
   
-// use 'index, follow' everywhere (otherwise will be only where necessary)
-$_config['index_follow_everything'] = false;
+// add link rel="nofollow" to all hrefs in posts
+$_config['nofollow_hrefs_in_posts'] = false;
+
+// add link rel="nofollow" to all hrefs in comments
+$_config['nofollow_hrefs_in_comments'] = true;
 
 // accept holborn notifications
 $_config['holborn'] = false;

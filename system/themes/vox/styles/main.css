@@ -5,30 +5,30 @@
   --sheetBackgroundColor:       rgba( 215, 224, 221, .8  );
 
   --foregroundColor:             rgb(  76,  78,  77      );
-  --thinRuleColor:              rgba(  76,  78,  77, .3  );
+  --thinRuleColor:              rgba(  76,  78,  77, .2  );
 
   --headingsColor:               rgb(  76,  78,  77      );
-  --headingsUnderlineColor:     rgba(  76,  78,  77, .3  );
+  --headingsUnderlineColor:     rgba(  76,  78,  77, .2  );
   --boldColor:                     var(--headingsColor);
   --boldUnderlineColor:            var(--headingsUnderlineColor);
   --linkColor:                   rgb(  79, 113, 119      );
-  --linkUnderlineColor:         rgba(  79, 113, 119, .3  );
+  --linkUnderlineColor:         rgba(  79, 113, 119, .2  );
   --linkColorVisited:            rgb( 135, 129, 128      );
-  --linkUnderlineColorVisited:  rgba( 135, 129, 128, .3  );
+  --linkUnderlineColorVisited:  rgba( 135, 129, 128, .2  );
   --hoverColor:                  rgb( 135,  23,  25      );
-  --hoverUnderlineColor:        rgba( 135,  23,  25, .3  );
+  --hoverUnderlineColor:        rgba( 135,  23,  25, .2  );
   /* --tagColor */
   /* --tagUnderlineColor */
   --adminColor:                  rgb( 112, 192,  32);
   --adminUnderlineColor:        rgba( 112, 192,  32, .12 );
   --engineTextColor:             rgb(  86,  85, 103      );
-  --engineTextUnderlineColor:   rgba(  86,  85, 103, .3 );
+  --engineTextUnderlineColor:   rgba(  86,  85, 103, .2 );
 
   --markedTextBackground:        rgb( 255, 242,   0);
   --markedImageBorderColor:      rgb( 255, 242,   0);
 
   --inputBackgroundColor:        rgb( 255, 255, 255);
-  --inputTextColor:               black;
+  --inputTextColor:              black;
   --offSwitchColor:              var(--foregroundColor);
   --onSwitchColor:               var(--activeColor);
 
@@ -36,6 +36,7 @@
   /* --disabledColor */
   --activeColor:                    #d66335;
   /* --errorColor */
+  /* --verifiedColor */
   /* --currentItemBackgroundColor */
   --windowBackgroundColor:       rgb( 233, 239, 237      );
   /* --unsavedIndicatorColor */
@@ -67,25 +68,21 @@
   --blogTitleFontSize: 28px;
   --blogTitleLineHeight: 32px;
   --pageHeadingFontSize: 36px;
-  --pageHeadingLineHeight: 40px;
-  --noteTitleFontSize: 36px;
-  --noteTitleLineHeight: 40px;
-  --noteTitleFavouriteFontSize: 36px;
-  --noteTitleFavouriteLineHeight: 40px;
-  --noteTextFontSize: 20px;
-  --noteTextLineHeight: 28px;
+  --pageHeadingLineHeight: 42px;
+  /* --noteTitleFontSize */
+  /* --noteTitleLineHeight */
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
 
-  --mainFontFamily: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  --noteMainFontFamily: Georgia, serif;
+  /* --mainFontFamily */
+  /* --noteMainFontFamily */
   /* --smallFontFamily */
 
   /* --time */
+  /* --timeLong */
 
-}
-
-.e2-text .lead {
-  font-family: var(--mainFontFamily);
-  margin: 0 0 28px;
 }
 
 .e2-text .loud {
@@ -99,4 +96,26 @@
   border: none;
   box-shadow: -0.4em 0 0 #fff200, 0.4em 0 0 #fff200;  
   margin: 20px 0 40px;
+}
+
+@media screen and (max-width: 1023px) {
+  .e2-text .loud {
+    padding: .4em .4em .8em;
+    box-shadow: none;
+  }
+}
+
+.e2-button {
+  background: #e5e7e6;
+  background: linear-gradient(to bottom, #e9ebea 0%, #e1e3e2 100%);
+}
+
+.e2-submit-button {
+  background: #e87840;
+  background: linear-gradient(to bottom, #f88850 0%, #d86830 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
 }

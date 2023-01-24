@@ -27,8 +27,10 @@
   --markedTextBackground:        rgb( 255, 242, 128);
   --markedImageBorderColor:      rgb( 255, 242, 128);
 
-  --inputBackgroundColor: rgb(224, 232, 230);
-  --inputTextColor: #000;
+  --inputBackgroundColor:        rgb(224, 232, 230);
+  --inputTextColor:              black;
+  /* --offSwitchColor */
+  /* --onSwitchColor */
 
   /* --imageBorderColor */
   /* --disabledColor */
@@ -39,6 +41,7 @@
   /* --windowBackgroundColor */
   /* --unsavedIndicatorColor */
   
+  /* to match .likely */
   --followButtonBackground: rgb(224, 232, 230);
   --followButtonHoverBackground: rgba(212, 220, 218,.8);
   /* --followButtonTextColor: #000; */
@@ -66,22 +69,19 @@
   --blogTitleLineHeight: 32px;
   --pageHeadingFontSize: 36px;
   --pageHeadingLineHeight: 42px;
-  /* --noteTitleFontSize: 28px;
-  --noteTitleLineHeight: 32px;
-  --noteTitleFavouriteFontSize: 40px;
-  --noteTitleFavouriteLineHeight: 48px; */
-  --noteTitleFontSize: 36px;
-  --noteTitleLineHeight: 42px;
-  --noteTitleFavouriteFontSize: 36px;
-  --noteTitleFavouriteLineHeight: 42px;
-  --noteTextFontSize: 20px;
-  --noteTextLineHeight: 28px;
+  /* --noteTitleFontSize */
+  /* --noteTitleLineHeight */
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
 
-  /* --mainFontFamily: "Helvetica Neue", "Helvetica", "Arial", sans-serif; */
-  /* --noteMainFontFamily: Georgia, serif; */
+  /* --mainFontFamily */
+  /* --noteMainFontFamily */
   /* --smallFontFamily */
 
   /* --time */
+  /* --timeLong */
 
 }
 
@@ -124,24 +124,23 @@
   }
 }
 
-.e2-text .lead,
-.e2-note-favourite .e2-text .lead {
-  font-family: var(--mainFontFamily);
-  font-size: var(--noteTextFontSize);
-  line-height: var(--noteTextLineHeight);
-  padding: 0 0 12px;
-  border-bottom: 1px var(--thinRuleColor) solid;
-  margin: 0 0 24px;
+.e2-text .loud {
+  font-weight: bold;
+  color: rgb(0, 217, 255); /* light + dark */
 }
 
-.e2-text .loud {
-  font-family: var(--mainFontFamily);
-  font-weight: bold;
-  font-size: 40px;
-  color: rgb(0, 217, 255);
-  line-height: 44px;
-  max-width: 720px;  
-  border: none;
-  padding: 0;
-  margin: 20px 0 40px;
+
+.e2-button {
+  background: #e5e7e6;
+  background: linear-gradient(to bottom, #e9ebea 0%, #e1e3e2 100%);
+}
+
+.e2-submit-button {
+  background: #1088b4;
+  background: linear-gradient(to bottom, #2098c4 0%, #0078a4 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
 }

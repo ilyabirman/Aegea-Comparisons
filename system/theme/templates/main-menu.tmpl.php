@@ -77,9 +77,9 @@
     
     <?php if (@$content['blog']['show-follow-button?']) { ?>
     <div class="band-right-section">
-      <div class="band-follow-button">
-        <a class="e2-follow-button" href="<?= @$content['blog']['rss-href'] ?>"><?= _S ('gs--follow-this-blog') ?></a>
-      </div>
+      <a class="band-follow-button e2-follow-button" href="<?= @$content['blog']['rss-href'] ?>">
+        <span>Follow this blog</span>
+      </a>
     </div>
     <?php } ?>
 
@@ -94,7 +94,7 @@
         class="e2-search-box-banded e2-enterable"
         action="<?= @$content['form-search']['form-action'] ?>"
         method="post"
-        <?php if (array_key_exists ('form', $content)) { ?>
+        <?php if (array_key_exists ('form', $content) and $content['form'] !== 'form-comment') { ?>
         target="_blank"
         <?php } ?>
         accept-charset="utf-8"

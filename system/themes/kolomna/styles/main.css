@@ -29,11 +29,14 @@
 
   --inputBackgroundColor:           #bdf0ea;
   --inputTextColor:                 black;
+  /* --offSwitchColor */
+  /* --onSwitchColor */
 
   /* --imageBorderColor */
   /* --disabledColor */
   --activeColor:                    #20bdaa;
   /* --errorColor */
+  /* --verifiedColor */
   /* --currentItemBackgroundColor */
   /* --windowBackgroundColor */
   /* --unsavedIndicatorColor */
@@ -61,35 +64,47 @@
 
   /* --columnSpacing */
 
-  --logoTop: -16px;
-  --blogTitleFontSize: 20px;
-  --blogTitleLineHeight: 26px;
+  /* --logoTop */
+  /* --blogTitleFontSize */
+  /* --blogTitleLineHeight */
   /* --pageHeadingFontSize */
   /* --pageHeadingLineHeight */
   /* --noteTitleFontSize */
   /* --noteTitleLineHeight */
-  /* --noteTitleFavouriteFontSize */
-  /* --noteTitleFavouriteLineHeight */
-  --noteTextFontSize: 20px;
-  --noteTextLineHeight: 26px;
+  /* --noteLeadFontSize */
+  /* --noteLeadLineHeight */
+  /* --noteTextFontSize */
+  /* --noteTextLineHeight */
 
-  --mainFontFamily: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  /* --mainFontFamily */
   --noteMainFontFamily: Georgia, serif;
   /* --smallFontFamily */
 
- /* --time */
+  /* --time */
+  /* --timeLong */
 
 }
 
 .e2-text .lead {
-  color: #2EBBAA;
-  font-family: var(--mainFontFamily);
-  font-weight: bold;
+  color: #2ebbaa;
 }
 
 .e2-text .loud {
-  color: #2EBBAA;
-  border-color: #2EBBAA;
-  font-family: var(--mainFontFamily);
-  font-weight: bold;
-}  
+  color: #2ebbaa;
+  border-color: #2ebbaa;
+}
+
+.e2-button {
+  background: #f2eee0;
+  background: linear-gradient(to bottom, #f6f2e4 0%, #eeeadc 100%);
+}
+
+.e2-submit-button {
+  background: #20bdaa;
+  background: linear-gradient(to bottom, #30cdba 0%, #10ad9a 100%);
+}
+
+.e2-delete-button {
+  background: #eaded8;
+  background: linear-gradient(to bottom, #f4ece8 0%, #e0d0c8 100%);
+}

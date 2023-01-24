@@ -13,6 +13,7 @@ return array (
       'groups.on' => true,
       'typography.markup' => true,
       'typography.autohref' => true,
+      'typography.nofollowhrefs' => $_config['nofollow_hrefs_in_posts'],
       'banned-groups' => array (),
     ),
     'full' => array (
@@ -20,6 +21,7 @@ return array (
       'groups.on' => true,
       'typography.markup' => true,
       'typography.autohref' => true,
+      'typography.nofollowhrefs' => $_config['nofollow_hrefs_in_posts'],
       'banned-groups' => array (),
     ),
     'simple-rss' => array (
@@ -28,6 +30,7 @@ return array (
       'groups.on' => true,
       'typography.markup' => true,
       'typography.autohref' => true,
+      'typography.nofollowhrefs' => $_config['nofollow_hrefs_in_comments'],
       'banned-groups' => array (
         'picture', 'video', 'fotorama', 'audio', 'youtube', 'vimeo'
       ),
@@ -37,6 +40,7 @@ return array (
       'groups.on' => true,
       'typography.markup' => true,
       'typography.autohref' => true,
+      'typography.nofollowhrefs' => $_config['nofollow_hrefs_in_comments'],
       'banned-groups' => array (
         'picture', 'video', 'fotorama', 'audio', 'youtube', 'vimeo'
       ),

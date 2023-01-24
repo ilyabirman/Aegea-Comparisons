@@ -71,8 +71,6 @@
   /* --pageHeadingLineHeight */
   /* --noteTitleFontSize */
   /* --noteTitleLineHeight */
-  /* --noteTitleFavouriteFontSize */
-  /* --noteTitleFavouriteLineHeight */
   /* --noteTextFontSize */
   /* --noteTextLineHeight */
 
@@ -81,6 +79,7 @@
   /* --smallFontFamily */
 
   /* --time */
+  /* --timeLong */
 
 }
 

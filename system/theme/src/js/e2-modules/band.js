@@ -4,6 +4,9 @@ class ScrollingModule {
     this.$scroll = $el.find('.js-band-scrollable-inner')
     this.$window = $(window)
 
+    this.hasItems = this.$scroll.find('.band-item').length
+    if (!this.hasItems) return
+    
     this.scrollResize = new ResizeObserver((entries, observer) => {
       this.checkScrollStartIsHide()
       this.checkScrollEndIsHide()

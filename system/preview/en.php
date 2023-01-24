@@ -32,72 +32,72 @@
     $return['theme-preview']['no-themes'] .= '<p>The main menu display the different states of the items: '.
       'regular link, parent page link, and selected title of the current page.</p>';
 
-    $return['main-menu'] = array (
+    $return['main-menu'] = [
       'each' => 
-      array (
-        array (
+      [
+        [
           'href' => $self_href,
           'svg-id' => 'favourite-on',
           'title' => 'Main menu',
           'current?' => false,
           'parent?' => false,
           'visible?' => true,
-        ),
-        array (
+        ],
+        [
           'href' => $settings_href,
           'svg-id' => 'settings',
           'title' => 'Preferences',
           'visible?' => true,
           'parent?' => true,
           'current?' => false,
-        ),
-        array (
+        ],
+        [
           'href' => $self_href,
           'svg-id' => 'tags',
           'title' => 'Tags',
           'current?' => false,
           'parent?' => false,
           'visible?' => true,
-        ),
-        array (
+        ],
+        [
           'tag' => 'movies',
           'title' => 'Movies',
           'href' => $self_href,
           'visible?' => true,
           'parent?' => false,
           'current?' => false,
-        ),
-        array (
+        ],
+        [
           'tag' => 'music',
           'title' => 'Music',
           'href' => $self_href,
           'visible?' => true,
           'parent?' => false,
           'current?' => false,
-        ),
-        array (
+        ],
+        [
           'tag' => 'books',
           'title' => 'Books',
           'href' => $self_href,
           'visible?' => true,
           'parent?' => false,
           'current?' => false,
-        ),
-        array (
+        ],
+        [
           'href' => $self_href,
           'title' => 'Theme preview',
           'visible?' => true,
           'parent?' => false,
           'current?' => true,
-        ),
-      ),
+        ],
+      ],
       'reorderable?' => false,
-    );
+    ];
 
   }
 
-  $return['notes'] = array (
-    array (
+  $return['notes'] = [
+    [
       'id' => 1,
       'title' => 'A sample post',
       'text' => '
@@ -111,6 +111,8 @@
       </div></div>
       <div class="e2-text-caption">La creazione di Adamo. Michelangelo Buonarroti, c. 1511</div>
       </div>
+      <p>Let’s say we have a quote about this image:</p>
+      <p class="loud">God created man in his own image</p>
       <p>A table follows this paragraph. This paragraph has just a filler text. The theory of empathy is free. The rhythm has an elegant factographic chthonic myth. Artistic mediation is a catharsis. The liturgical drama has psychological parallelism.</p>      
       <div class="e2-text-table">
         <table cellpadding="0" cellspacing="0" border="0">
@@ -123,12 +125,13 @@
         </table>
       </div>
       <p>Some text may be separated with a horisontal rule:</p>
-      <hr />
+      <h3>Third-level heading</h3>
       <p>Ordered list:</p>
       <ol>
         <li>This is a long list item so that you see what it looks like spanning several lines. Make sure the spacing between the items is bigger than the line height.</li>
         <li>This is a short element.</li>
       </ol>
+      <hr />
       <p>Unordered list:</p>
       <ul>
         <li>This is a long list item so that you see what it looks like spanning several lines. Make sure the spacing between the items is bigger than the line height.</li>
@@ -144,27 +147,27 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'favourite?' => true,
-      'tags' => array (
-        array (
+      'favourite?' => false,
+      'tags' => [
+        [
           'name' => 'a tag',
           'href' => $self_href,
           'current?' => false,
           'visible?' => true,
-        ),
-        array (
+        ],
+        [
           'name' => 'another one',
           'href' => $self_href,
           'current?' => false,
           'visible?' => true,
-        ),
-        array (
+        ],
+        [
           'name' => 'hidden one',
           'href' => $self_href,
           'current?' => false,
           'visible?' => false,
-        ),
-      ),
+        ],
+      ],
       'read-count' => 42,
       'comments-count' => 0,
       // 'comments-count-text' => '1 comment',
@@ -176,13 +179,15 @@
       'new-comments-count-text' => '0 new',
       // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
-      // 'og-images' => array (),
-    ),
-    array (
+      // 'og-images' => [],
+    ],
+    [
       'id' => 2,
-      'title' => 'Another sample post',
+      'title' => 'A sample favourite post',
       'text' => '
-      <p>This is a second example to help you adjust the distance between the posts in a feed. This post is also not starred unlike the previous one. The title is not a link here — as if we were on the posts’ page. It also has a highlighed tag — as if we were on that tag’s page.</p>
+      <p class="lead">This post has a lead paragraph.</p>
+      <p>This is a second example¹ to help you adjust the distance between the posts in a feed. The title is not a link here — as if we were on the posts’ page. It also has a highlighed tag — as if we were on that tag’s page.</p>
+      <p class="foot">¹ By the way, this is an example of a footnote. It’s remarkable.</p>
       ',
       // 'summary' => '',
       // 'format-info' => array 2
@@ -193,27 +198,27 @@
       'scheduled?' => false,
       'public?' => true,
       'hidden?' => false,
-      'favourite?' => false,
-      'tags' => array (
-        array (
+      'favourite?' => true,
+      'tags' => [
+        [
           'name' => 'first tag',
           'href' => $self_href,
           'current?' => false,
           'visible?' => true,
-        ),
-        array (
+        ],
+        [
           'name' => 'the current one',
           'href' => $self_href,
           'current?' => true,
           'visible?' => true,
-        ),
-        array (
+        ],
+        [
           'name' => 'and one more',
           'href' => $self_href,
           'current?' => false,
           'visible?' => true,
-        ),
-      ),
+        ],
+      ],
       'read-count' => 147,
       // 'comments-count' => 5,
       // 'comments-count-text' => '5 comments',
@@ -224,9 +229,9 @@
       // 'new-comments-count-text' => '2 new',
       // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
-      // 'og-images' => array (),
-    ),
-    array (
+      // 'og-images' => [],
+    ],
+    [
       'id' => 3,
       'title' => 'A sample post in the <mark>search</mark> results',
       'text' => '',
@@ -277,11 +282,11 @@
       // 'new-comments-count-text' => '2 new',
       // 'favourite-toggle-action' => '',
       // 'edit-href' => 'http://e2/all/muzlo/edit/',
-      // 'og-images' => array (),
-    ),
-  );
+      // 'og-images' => [],
+    ],
+  ];
 
-  $return['pages'] = array (
+  $return['pages'] = [
     'timeline?' => true,
     'count' => 2,
     'this' => 1,
@@ -293,11 +298,11 @@
     // 'prev-title' => 'Настраиваем HTTPS на хостинге TimeWeb для Эгеи',
     // 'title' => 'Posts',
     // 'this-title' => 'Музло',
-  );
+  ];
 
-  $return['comments'] = array (
-    'each' => array (
-      array (
+  $return['comments'] = [
+    'each' => [
+      [
         'gip-used?' => true,
         'gip' => 'facebook',
         'userpic-set?' => true,
@@ -305,27 +310,27 @@
         'important?' => false,
         'name' => 'John Smith',
         'text' => '<p>This is a sample comment. Some meaningless text follows. This text is put here so that you see what a multiline comment looks.</p><p>And one more paragraph, just in case.</p>',
-        'time' => array (
+        'time' => [
           0 => strtotime ('21 May 2019, 11:21 +0300'),
-          1 => array (
+          1 => [
             'offset' => 10800,
             'is_dst' => false,
-          ),
-        ),
+          ],
+        ],
         'replied?' => true,
         'reply-visible?' => true,
         'reply-important?' => true,
         'author-name' => 'William Sheakspeare',
         'reply' => '<p>Author’s succinct response</p>',
-        'reply-time' => array (
+        'reply-time' => [
           0 => strtotime ('15 Jun 2019, 22:13 +0300'),
-          1 => array (
+          1 => [
             'offset' => 10800,
             'is_dst' => false,
-          ),
-        ),
-      ),
-      array (
+          ],
+        ],
+      ],
+      [
         'gip-used?' => true,
         'gip' => 'twitter',
         'userpic-set?' => true,
@@ -333,24 +338,28 @@
         'important?' => false,
         'name' => 'Sabrina Irmgard Krankenschwarzdrossel',
         'text' => '<p>A surprisingly short comment.</p>',
-        'time' => array (
+        'time' => [
           0 => strtotime ('29 May 2019, 11:21 +0300'),
-          1 => array (
+          1 => [
             'offset' => 10800,
             'is_dst' => false,
-          ),
-        ),
-      ),
-    ),
+          ],
+        ],
+      ],
+    ],
+    'toggle' => [
+      // 'form-action' => '',
+      'submit-text' => 'Disallow comments to this post',
+    ],
     // 'rss-href' => 'http://e2/all/muzlo/comments-rss/',
     'count' => 2,
     'count-text' => '2 comments',
     // 'new-count' => 0,
     // 'new-count-text' => '0 new',
     'display-form?' => true,
-  );
+  ];
 
-  $return['form-comment'] = array (
+  $return['form-comment'] = [
     // '.note-id' => '4114',
     // '.comment-id' => 'new',
     // '.already-subscribed?' => false,
@@ -367,97 +376,8 @@
     'name' => 'John Smith',
     'email' => '',
     'text' => 'This is a sample comment form',
-  );
-
-  // $return['popular'] = array (
-  //   'title' => 'Popular',
-  //   'each' => array (
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'These links appear under posts on their pages',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'A popular post',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Another post that everyone talks about',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Lorem ipsum dolor',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Short',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'These links appear under posts on their pages',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'A popular post',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Another post that everyone talks about',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Lorem ipsum dolor',
-  //       'current?' => false,
-  //     ),
-  //     array (
-  //       'href' => $self_href,
-  //       // 'time' = array 2,
-  //       'title' => 'Short',
-  //       'current?' => false,
-  //     ),
-  //   ),
-  // );
+  ];
   
   return $return;
-
-  // $return['message']['each'] = array (
-  //   array (
-  //     'title' => 'No error, actually',
-  //     'description' => 'Error message with a title',
-  //   ),
-  //   array (
-  //     'description' => 'Error message without a title',
-  //   ),
-  //   array (
-  //     'class' => 'serious',
-  //     'description' => 'Serious error',
-  //   ),
-  //   array (
-  //     'class' => 'info',
-  //     'description' => 'Generic message',
-  //   ),
-  // );
-
-  // <div class="e2-text-picture">
-  //   <div style="width: 80%; height: 200px; background: #eee"></div>
-  //   <div class="e2-text-caption">An image or video may have a caption</div>
-  // </div>
 
 ?>

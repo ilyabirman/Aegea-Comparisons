@@ -17,7 +17,6 @@
         <?php _T ('comment') ?>
         <?php endforeach ?>
       </div>
-
     <?php } ?>
   <?php  } ?>
 <?php } ?>

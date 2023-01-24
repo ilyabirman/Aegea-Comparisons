@@ -25,7 +25,16 @@ initTextWithFileUpload()
 initFormNotePublish()
 initFormPreferences()
 initFormTag()
-initSortable()
+
+function initSortableModule () {
+  var isTouchDevice = (('ontouchstart' in window) ||
+  (navigator.maxTouchPoints > 0) ||
+  (navigator.msMaxTouchPoints > 0))
+
+  if (!isTouchDevice) initSortable()
+}
+
+initSortableModule()
 
 /* Second init obsolete functions */
 function initObsoleteFunction () {

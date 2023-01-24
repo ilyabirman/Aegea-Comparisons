@@ -4,7 +4,7 @@
   class="e2-search-box-nano e2-enterable"
   action="<?= @$content['form-search']['form-action'] ?>"
   method="post"
-  <?php if (array_key_exists ('form', $content)) { ?>
+  <?php if (array_key_exists ('form', $content) and $content['form'] !== 'form-comment') { ?>
   target="_blank"
   <?php } ?>
   accept-charset="utf-8"
